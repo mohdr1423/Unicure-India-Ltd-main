@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <circle cx="60" cy="60" r="56" fill="#003366" stroke="#DAA520" stroke-width="4"/>
+  <circle cx="60" cy="60" r="48" fill="#ffffff"/>
+  <!-- AIIMS Emblem: Caduceus & Lamp -->
+  <path d="M60 22 L60 85" stroke="#003366" stroke-width="4" stroke-linecap="round"/>
+  <path d="M50 34 C44 26, 76 26, 70 34 C64 42, 56 42, 50 50 C44 58, 76 58, 70 66" fill="none" stroke="#DAA520" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="60" cy="22" r="5" fill="#DAA520"/>
+  <!-- Shield outline -->
+  <path d="M40 38 Q60 30 80 38 Q80 72 60 92 Q40 72 40 38 Z" fill="none" stroke="#003366" stroke-width="2.5"/>
+  <text x="60" y="104" font-family="Arial, sans-serif" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1.5">AIIMS</text>
+  <path d="M22 60 A38 38 0 0 1 98 60" fill="none" stroke="#DAA520" stroke-width="1.5" stroke-dasharray="2,2"/>
+</svg>

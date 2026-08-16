@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <circle cx="60" cy="60" r="56" fill="#8B0000" stroke="#DAA520" stroke-width="4"/>
+  <circle cx="60" cy="60" r="48" fill="#ffffff"/>
+  <!-- Red Cross with Gold Sun Rays & Tomb Motif -->
+  <path d="M52 30 H68 V48 H86 V64 H68 V82 H52 V64 H34 V48 H52 Z" fill="#C8102E"/>
+  <circle cx="60" cy="56" r="6" fill="#DAA520"/>
+  <path d="M46 76 Q60 68 74 76" stroke="#DAA520" stroke-width="3" fill="none"/>
+  <text x="60" y="102" font-family="Arial, sans-serif" font-size="9" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">SAFDARJUNG</text>
+  <text x="60" y="112" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">HOSPITAL</text>
+</svg>

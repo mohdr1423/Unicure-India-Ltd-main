@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+  <!-- Blue top band -->
+  <rect width="600" height="150" fill="#0038a8"/>
+  <!-- Red bottom band -->
+  <rect y="150" width="600" height="150" fill="#ce1126"/>
+  <!-- White triangle -->
+  <polygon points="0,0 260,150 0,300" fill="#ffffff"/>
+  <!-- Golden Sun in center -->
+  <g transform="translate(85, 150)" fill="#fcd116">
+    <circle cx="0" cy="0" r="24"/>
+    <!-- 8 major rays -->
+    <g id="ray">
+      <polygon points="0,-48 -5,-26 5,-26"/>
+      <polygon points="0,-42 -2,-26 2,-26"/>
+    </g>
+    <use href="#ray" transform="rotate(45)"/>
+    <use href="#ray" transform="rotate(90)"/>
+    <use href="#ray" transform="rotate(135)"/>
+    <use href="#ray" transform="rotate(180)"/>
+    <use href="#ray" transform="rotate(225)"/>
+    <use href="#ray" transform="rotate(270)"/>
+    <use href="#ray" transform="rotate(315)"/>
+    <!-- 3 Stars -->
+    <polygon points="-55,-85 -52,-77 -44,-77 -50,-72 -48,-64 -55,-69 -62,-64 -60,-72 -66,-77 -58,-77"/>
+    <polygon points="-55,85 -52,77 -44,77 -50,72 -48,64 -55,69 -62,64 -60,72 -66,77 -58,77"/>
+    <polygon points="120,0 123,8 131,8 125,13 127,21 120,16 113,21 115,13 109,8 117,8"/>
+  </g>
+</svg>
