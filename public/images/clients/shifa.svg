@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="100%" height="100%">
+  <!-- Shifa Laboratories Logo -->
+  <g transform="translate(10, 10)">
+    <!-- Crescent & Leaf Emblem -->
+    <rect x="2" y="6" width="48" height="48" rx="12" fill="#0D9488"/>
+    <path d="M26 16 C34 16 40 22 40 30 C40 38 34 44 26 44 C22 44 18 42 16 38 C20 40 26 38 28 32 C30 26 26 20 18 18 C20 17 23 16 26 16 Z" fill="#ffffff"/>
+    
+    <!-- Text -->
+    <text x="64" y="35" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="28" font-weight="800" fill="#0D9488" letter-spacing="-0.3">SHIFA</text>
+    <text x="65" y="49" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#14B8A6" letter-spacing="2.4">LABORATORIES</text>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <circle cx="60" cy="60" r="56" fill="#800000" stroke="#008080" stroke-width="4"/>
+  <circle cx="60" cy="60" r="48" fill="#ffffff"/>
+  <!-- Odisha Konark Wheel & Health Motif -->
+  <circle cx="60" cy="50" r="18" fill="none" stroke="#800000" stroke-width="3"/>
+  <circle cx="60" cy="50" r="6" fill="#008080"/>
+  <line x1="60" y1="32" x2="60" y2="68" stroke="#800000" stroke-width="2"/>
+  <line x1="42" y1="50" x2="78" y2="50" stroke="#800000" stroke-width="2"/>
+  <line x1="47" y1="37" x2="73" y2="63" stroke="#800000" stroke-width="2"/>
+  <line x1="73" y1="37" x2="47" y2="63" stroke="#800000" stroke-width="2"/>
+  <text x="60" y="104" font-family="Arial, sans-serif" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">OSMCL</text>
+</svg>
