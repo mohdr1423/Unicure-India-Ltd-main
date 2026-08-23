@@ -1,8 +1,9 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
-import { ScrollReveal, StaggerGrid, StaggerItem } from "@/components/site/ScrollReveal";
-import { useState, useEffect } from "react";
+import { StaggerGrid, StaggerItem } from "@/components/site/ScrollReveal";
+import { useState, useEffect, useRef, useId } from "react";
+import { submitCentralInquiry } from "@/lib/inquiry-service";
 import {
   Users,
   Sparkles,
@@ -27,7 +28,13 @@ import {
   CheckCircle2,
   FileText,
   Award,
-  Layers,
+  Upload,
+  Loader2,
+  Send,
+  AlertCircle,
+  Building2,
+  Trash2,
+  Paperclip,
 } from "lucide-react";
 import type { JobOpening } from "./api/careers";
 
@@ -112,7 +119,8 @@ const DEFAULT_OPENINGS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "2-5 Years",
     qualifications: "B.Sc / M.Sc Chemistry or B.Pharma",
-    description: "Responsible for sampling, testing, and analytical validation of raw materials, in-process formulations, and finished dosage forms according to WHO-GMP specifications.",
+    description:
+      "Responsible for sampling, testing, and analytical validation of raw materials, in-process formulations, and finished dosage forms according to WHO-GMP specifications.",
     responsibilities: [
       "Perform HPLC, GC, UV-Vis spectrophotometry, and wet chemical analysis on raw materials and finished goods.",
       "Conduct in-process quality testing during tablet compression, capsule filling, and liquid oral manufacturing.",
@@ -135,7 +143,8 @@ const DEFAULT_OPENINGS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "3-6 Years",
     qualifications: "B.Pharma / Diploma in Pharma Tech",
-    description: "Supervising granulation, compression, and coating lines for tablets and capsules. Ensuring strict batch record documentation and adherence to cGMP safety protocols.",
+    description:
+      "Supervising granulation, compression, and coating lines for tablets and capsules. Ensuring strict batch record documentation and adherence to cGMP safety protocols.",
     responsibilities: [
       "Oversee day-to-day operations in granulation, tablet compression, capsule filling, and coating sections.",
       "Ensure proper execution of Batch Manufacturing Records (BMR) and Batch Packaging Records (BPR).",
@@ -157,7 +166,8 @@ const DEFAULT_OPENINGS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "4-8 Years",
     qualifications: "M.Pharma (Pharmaceutics) / Ph.D.",
-    description: "Formulation development and optimization for novel and generic oral dosage forms, technology transfer to commercial plants, and stability study analysis.",
+    description:
+      "Formulation development and optimization for novel and generic oral dosage forms, technology transfer to commercial plants, and stability study analysis.",
     responsibilities: [
       "Design and execute pre-formulation and formulation development studies for oral solids and liquids.",
       "Conduct pilot-scale trial batches and execute successful technology transfer to commercial manufacturing facilities.",
@@ -178,7 +188,8 @@ const DEFAULT_OPENINGS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "2-4 Years",
     qualifications: "B.Pharma / M.Pharma",
-    description: "Preparation and submission of dossiers (CTD/ACTD format) for domestic and international health authorities across Latin America, Africa, and CIS markets.",
+    description:
+      "Preparation and submission of dossiers (CTD/ACTD format) for domestic and international health authorities across Latin America, Africa, and CIS markets.",
     responsibilities: [
       "Compile and review Common Technical Document (CTD / ACTD) dossiers for international product registrations.",
       "Prepare responses to deficiency letters and regulatory queries from foreign health ministries.",
@@ -199,7 +210,8 @@ const DEFAULT_OPENINGS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "1-3 Years",
     qualifications: "ITI / Diploma / High School",
-    description: "Operation and maintenance of blister packaging machines, cartoners, and labeling lines in high-speed pharmaceutical packaging environments.",
+    description:
+      "Operation and maintenance of blister packaging machines, cartoners, and labeling lines in high-speed pharmaceutical packaging environments.",
     responsibilities: [
       "Operate Alu-Alu and Blister packaging machinery, strip packing units, and automatic cartoners.",
       "Perform machine changeovers and primary leak testing for blister packs.",
@@ -219,7 +231,8 @@ const DEFAULT_OPENINGS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "3-7 Years",
     qualifications: "Graduate / MBA Marketing preferred",
-    description: "Managing institutional hospital tenders, corporate pharmacy supply contracts, and large-scale distributor relationships across North India.",
+    description:
+      "Managing institutional hospital tenders, corporate pharmacy supply contracts, and large-scale distributor relationships across North India.",
     responsibilities: [
       "Identify, bid on, and secure institutional hospital tenders and supply contracts.",
       "Develop strategic partnerships with hospital procurement heads and distributors.",
@@ -254,8 +267,33 @@ function getDepartmentIcon(dept: string) {
 function CareersPage() {
   const [openingsList, setOpeningsList] = useState<JobOpening[]>(DEFAULT_OPENINGS);
   const [selectedDetailsJob, setSelectedDetailsJob] = useState<JobOpening | null>(null);
+  const [applyingJob, setApplyingJob] = useState<JobOpening | null>(null);
   const [activeDeptFilter, setActiveDeptFilter] = useState("all");
-  const navigate = useNavigate();
+
+  // Application Form States
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [experience, setExperience] = useState("1-3 Years");
+  const [qualification, setQualification] = useState("B.Pharma");
+  const [currentCompany, setCurrentCompany] = useState("");
+  const [noticePeriod, setNoticePeriod] = useState("30 Days");
+  const [expectedCtc, setExpectedCtc] = useState("");
+  const [coverNote, setCoverNote] = useState("");
+
+  // Resume File States
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeFileName, setResumeFileName] = useState("");
+  const [resumeFileSize, setResumeFileSize] = useState("");
+  const [resumeDataUrl, setResumeDataUrl] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputId = useId();
 
   // Load live jobs from server API
   useEffect(() => {
@@ -269,6 +307,32 @@ function CareersPage() {
       .catch(() => {});
   }, []);
 
+  // Check URL params on mount to auto-open application if ?job=... or ?apply=... is present
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      const targetJobId = url.searchParams.get("job") || url.searchParams.get("apply");
+      if (targetJobId) {
+        if (targetJobId === "general") {
+          handleOpenApplyModal({
+            id: "general",
+            title: "General Speculative Application",
+            department: "All Departments",
+            location: "Corporate / All Plants",
+            employment_type: "Full-time",
+            description: "General application for current or future pharmaceutical opportunities.",
+            is_open: true,
+          });
+        } else {
+          const match = openingsList.find((j) => j.id === targetJobId);
+          if (match) {
+            handleOpenApplyModal(match);
+          }
+        }
+      }
+    }
+  }, [openingsList]);
+
   const departments = Array.from(
     new Set(openingsList.map((j) => j.department).filter(Boolean))
   );
@@ -278,8 +342,123 @@ function CareersPage() {
     return true;
   });
 
-  const handleApplyClick = (jobId: string) => {
-    navigate({ to: "/careers/apply", search: { job: jobId } as any });
+  // Open Application Form Modal
+  const handleOpenApplyModal = (job: JobOpening) => {
+    setApplyingJob(job);
+    setIsSubmitted(false);
+    setSubmitError(null);
+  };
+
+  // Handle Resume File Selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    const file = files[0];
+
+    // File validation: up to 10MB
+    if (file.size > 10 * 1024 * 1024) {
+      setSubmitError("File size exceeds 10MB limit. Please upload a smaller PDF or Word file.");
+      return;
+    }
+
+    const sizeFormatted =
+      file.size > 1024 * 1024
+        ? `${(file.size / (1024 * 1024)).toFixed(2)} MB`
+        : `${(file.size / 1024).toFixed(0)} KB`;
+
+    setResumeFile(file);
+    setResumeFileName(file.name);
+    setResumeFileSize(sizeFormatted);
+    setSubmitError(null);
+
+    // Convert file to Data URL
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        setResumeDataUrl(reader.result);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveFile = () => {
+    setResumeFile(null);
+    setResumeFileName("");
+    setResumeFileSize("");
+    setResumeDataUrl("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  // Handle Form Submit
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!applyingJob) return;
+
+    if (!fullName.trim()) {
+      setSubmitError("Please enter your full name.");
+      return;
+    }
+    if (!email.trim() || !email.includes("@")) {
+      setSubmitError("Please enter a valid email address.");
+      return;
+    }
+    if (!phone.trim()) {
+      setSubmitError("Please enter your contact phone / WhatsApp number.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const jobRoleTitle = applyingJob.title || "Pharmaceutical Role";
+      const userMessage =
+        coverNote.trim() ||
+        `Candidate Application for ${jobRoleTitle}. Experience: ${experience}, Qualification: ${qualification}, Location: ${city || "Not specified"}, Notice Period: ${noticePeriod}, Expected CTC: ${expectedCtc || "Negotiable"}.`;
+
+      const result = await submitCentralInquiry({
+        name: fullName.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        company: currentCompany.trim() || "Job Applicant",
+        country: "India",
+        inquiryType: `Job Application — ${jobRoleTitle}`,
+        source: "Careers Application Form",
+        message: userMessage,
+        metadata: {
+          jobId: applyingJob.id,
+          jobTitle: jobRoleTitle,
+          department: applyingJob.department,
+          jobLocation: applyingJob.location,
+          candidateCity: city.trim(),
+          experience,
+          qualification,
+          currentCompany: currentCompany.trim(),
+          noticePeriod,
+          expectedCtc: expectedCtc.trim(),
+          resumeFileName: resumeFileName || "No CV attached",
+          resumeFileSize: resumeFileSize || "N/A",
+          resumeDataUrl: resumeDataUrl || "", // Enables 1-click CV download in Admin Leads Portal
+          submittedAt: new Date().toISOString(),
+        },
+      });
+
+      if (result.success) {
+        setIsSubmitted(true);
+      } else {
+        setSubmitError(
+          result.message ||
+            "Unable to submit application at this time. You can email your CV directly to careers@unicureindia.com."
+        );
+      }
+    } catch (err) {
+      console.error("[Careers Form] Submission error:", err);
+      setSubmitError(
+        "Network connection error. Please try again or email careers@unicureindia.com."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -326,7 +505,10 @@ function CareersPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {growthStats.map((s) => (
-              <div key={s.label} className="text-center glass-dark rounded-3xl p-8 border border-white/10">
+              <div
+                key={s.label}
+                className="text-center glass-dark rounded-3xl p-8 border border-white/10"
+              >
                 <div className="text-4xl md:text-5xl font-bold bg-[linear-gradient(90deg,#7dd3fc,#a7f3d0)] bg-clip-text text-transparent">
                   {s.value}
                 </div>
@@ -351,7 +533,7 @@ function CareersPage() {
               Current Opportunities
             </h2>
             <p className="mt-3 text-muted-foreground text-base sm:text-lg">
-              Click on any position to review detailed responsibilities, qualifications, and submit your application with CV.
+              Click on any position to review detailed responsibilities and submit your candidate application with CV.
             </p>
           </div>
 
@@ -444,16 +626,16 @@ function CareersPage() {
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleApplyClick(job.id);
+                          handleOpenApplyModal(job);
                         }}
-                        className="inline-flex items-center gap-1.5 rounded-xl bg-primary hover:bg-primary/90 text-white px-5 py-2.5 text-xs font-bold shadow transition"
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-primary hover:bg-primary/90 text-white px-5 py-2.5 text-xs font-bold shadow transition cursor-pointer"
                       >
                         Apply Now <ArrowRight className="h-3.5 w-3.5" />
                       </button>
                       <button
                         type="button"
                         onClick={() => setSelectedDetailsJob(job)}
-                        className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-border bg-secondary/40 text-muted-foreground group-hover:text-primary group-hover:bg-primary/10 transition"
+                        className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-border bg-secondary/40 text-muted-foreground group-hover:text-primary group-hover:bg-primary/10 transition cursor-pointer"
                         title="View Full Job Details"
                       >
                         <ChevronRight className="h-4 w-4" />
@@ -478,13 +660,22 @@ function CareersPage() {
                 Submit a general profile and upload your CV to our talent database. We regularly recruit across technical, formulation, quality, and commercial disciplines.
               </p>
             </div>
-            <Link
-              to="/careers/apply"
-              search={{ job: "general" } as any}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-brand text-white px-6 py-3 text-xs font-bold shadow-glow hover:opacity-95 transition shrink-0"
+            <button
+              onClick={() =>
+                handleOpenApplyModal({
+                  id: "general",
+                  title: "General Speculative Application",
+                  department: "General / All Departments",
+                  location: "Corporate Office & Plants",
+                  employment_type: "Full-time",
+                  description: "General candidate registration for upcoming pharmaceutical openings.",
+                  is_open: true,
+                })
+              }
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-brand text-white px-6 py-3 text-xs font-bold shadow-glow hover:opacity-95 transition shrink-0 cursor-pointer"
             >
               <FileText className="h-4 w-4" /> Submit CV Online
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -543,12 +734,22 @@ function CareersPage() {
                 >
                   <Mail className="h-4 w-4" /> careers@unicureindia.com
                 </a>
-                <Link
-                  to="/careers/apply"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3.5 text-xs sm:text-sm font-bold text-white hover:bg-white/10 transition"
+                <button
+                  onClick={() =>
+                    handleOpenApplyModal({
+                      id: "general",
+                      title: "General Talent Application",
+                      department: "General Application",
+                      location: "Noida / Greater Noida / Roorkee",
+                      employment_type: "Full-time",
+                      description: "Talent application for upcoming pharmaceutical openings.",
+                      is_open: true,
+                    })
+                  }
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3.5 text-xs sm:text-sm font-bold text-white hover:bg-white/10 transition cursor-pointer"
                 >
                   <FileText className="h-4 w-4" /> Submit Application Form
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -556,7 +757,7 @@ function CareersPage() {
       </section>
 
       {/* ==========================================
-          JOB DETAILS MODAL (Pop-up on click)
+          1. JOB DETAILS MODAL
       ========================================== */}
       {selectedDetailsJob && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
@@ -564,7 +765,7 @@ function CareersPage() {
             {/* Close Button */}
             <button
               onClick={() => setSelectedDetailsJob(null)}
-              className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground transition"
+              className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground transition cursor-pointer"
             >
               <X className="h-4 w-4" />
             </button>
@@ -667,22 +868,368 @@ function CareersPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setSelectedDetailsJob(null)}
-                  className="rounded-xl border border-border px-4 py-2.5 text-xs font-bold text-muted-foreground hover:bg-secondary transition"
+                  className="rounded-xl border border-border px-4 py-2.5 text-xs font-bold text-muted-foreground hover:bg-secondary transition cursor-pointer"
                 >
                   Close
                 </button>
                 <button
                   onClick={() => {
-                    const id = selectedDetailsJob.id;
+                    const job = selectedDetailsJob;
                     setSelectedDetailsJob(null);
-                    handleApplyClick(id);
+                    handleOpenApplyModal(job);
                   }}
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-brand text-white px-6 py-2.5 text-xs font-bold shadow-glow hover:opacity-95 transition"
+                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-brand text-white px-6 py-2.5 text-xs font-bold shadow-glow hover:opacity-95 transition cursor-pointer"
                 >
                   Apply for this Role <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ==========================================
+          2. CANDIDATE JOB APPLICATION MODAL (WITH CV UPLOAD)
+      ========================================== */}
+      {applyingJob && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in overflow-y-auto">
+          <div className="relative w-full max-w-2xl rounded-3xl bg-white p-6 sm:p-8 shadow-2xl border border-border my-8 animate-in zoom-in-95 max-h-[92vh] overflow-y-auto">
+            {/* Close Modal Button */}
+            <button
+              onClick={() => setApplyingJob(null)}
+              className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground transition cursor-pointer"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            {/* State: SUCCESS CONFIRMATION */}
+            {isSubmitted ? (
+              <div className="py-8 text-center space-y-6">
+                <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-emerald-100 text-emerald-600 shadow-glow">
+                  <CheckCircle2 className="h-10 w-10" />
+                </div>
+
+                <div className="space-y-2 max-w-md mx-auto">
+                  <h3 className="text-2xl font-bold text-foreground">
+                    Application Submitted Successfully!
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Thank you, <strong>{fullName}</strong>! Your application and CV for{" "}
+                    <strong>{applyingJob.title}</strong> have been securely delivered directly to our Human Resources team.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-secondary/50 border border-border text-xs text-muted-foreground max-w-md mx-auto space-y-1">
+                  <div><strong>Application ID:</strong> UNICURE-APP-{Date.now().toString().slice(-6)}</div>
+                  <div><strong>Confirmation Email:</strong> {email}</div>
+                  <div><strong>Resume File:</strong> {resumeFileName || "Profile Recorded"}</div>
+                </div>
+
+                <div className="pt-4 flex justify-center">
+                  <button
+                    onClick={() => {
+                      setApplyingJob(null);
+                      setIsSubmitted(false);
+                    }}
+                    className="rounded-2xl bg-gradient-brand text-white px-8 py-3 text-xs font-bold shadow-glow hover:opacity-95 transition cursor-pointer"
+                  >
+                    Done / Browse More Openings
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* State: APPLICATION FORM */
+              <form onSubmit={handleFormSubmit} className="space-y-6">
+                {/* Form Header */}
+                <div>
+                  <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full mb-2">
+                    <Sparkles className="h-3.5 w-3.5" /> Candidate Job Application
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground">
+                    Apply for: {applyingJob.title}
+                  </h2>
+                  <div className="mt-1 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                    <span className="font-semibold text-foreground">{applyingJob.department}</span>
+                    <span>•</span>
+                    <span>{applyingJob.location}</span>
+                    {applyingJob.experience && (
+                      <>
+                        <span>•</span>
+                        <span>Exp: {applyingJob.experience}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Error Banner */}
+                {submitError && (
+                  <div className="flex items-start gap-2.5 rounded-2xl border border-red-200 bg-red-50 p-4 text-xs text-red-700 animate-in fade-in">
+                    <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
+
+                {/* Candidate Personal Details */}
+                <div className="space-y-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground border-b border-border pb-1">
+                    1. Personal Information
+                  </h4>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        placeholder="e.g. Rahul Sharma"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="rahul.sharma@example.com"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Phone / WhatsApp Number <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+91 98765 43210"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Current City / Location <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="e.g. Noida / New Delhi / Roorkee"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Professional & Qualifications */}
+                <div className="space-y-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground border-b border-border pb-1">
+                    2. Professional Qualifications
+                  </h4>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Total Pharma Experience
+                      </label>
+                      <select
+                        value={experience}
+                        onChange={(e) => setExperience(e.target.value)}
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      >
+                        <option value="Fresher (0-1 yr)">Fresher (0 - 1 Year)</option>
+                        <option value="1-3 Years">1 - 3 Years</option>
+                        <option value="3-5 Years">3 - 5 Years</option>
+                        <option value="5-8 Years">5 - 8 Years</option>
+                        <option value="8-12 Years">8 - 12 Years</option>
+                        <option value="12+ Years">12+ Years (Senior Lead)</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Highest Qualification
+                      </label>
+                      <select
+                        value={qualification}
+                        onChange={(e) => setQualification(e.target.value)}
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      >
+                        <option value="B.Pharma">B.Pharma (Bachelor of Pharmacy)</option>
+                        <option value="M.Pharma">M.Pharma (Master of Pharmacy)</option>
+                        <option value="B.Sc Chemistry">B.Sc (Chemistry / Life Sciences)</option>
+                        <option value="M.Sc Chemistry / Analytical">M.Sc (Chemistry / Analytical)</option>
+                        <option value="Diploma in Pharma Tech">Diploma in Pharma Tech / D.Pharma</option>
+                        <option value="ITI / Technical">ITI / Technical Certificate</option>
+                        <option value="B.Tech / Engineering">B.Tech / Chemical / Biotech</option>
+                        <option value="Graduate / MBA">Graduate / MBA / Commercial</option>
+                        <option value="Ph.D.">Ph.D. / Doctorate</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Current / Previous Employer & Role
+                      </label>
+                      <input
+                        type="text"
+                        value={currentCompany}
+                        onChange={(e) => setCurrentCompany(e.target.value)}
+                        placeholder="e.g. ABC Pharma Ltd — Quality Officer"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Notice Period
+                      </label>
+                      <select
+                        value={noticePeriod}
+                        onChange={(e) => setNoticePeriod(e.target.value)}
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      >
+                        <option value="Immediate Joiner">Immediate Joiner (0 - 7 Days)</option>
+                        <option value="15 Days">15 Days</option>
+                        <option value="30 Days">30 Days (1 Month)</option>
+                        <option value="45 Days">45 Days</option>
+                        <option value="60 Days">60 Days (2 Months)</option>
+                        <option value="90 Days">90 Days (3 Months)</option>
+                      </select>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-foreground mb-1">
+                        Expected Annual CTC (₹ INR / Annum)
+                      </label>
+                      <input
+                        type="text"
+                        value={expectedCtc}
+                        onChange={(e) => setExpectedCtc(e.target.value)}
+                        placeholder="e.g. ₹ 4.5 LPA / Negotiable"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Resume / CV Upload Section */}
+                <div className="space-y-2">
+                  <label htmlFor={fileInputId} className="block text-xs font-bold uppercase tracking-wider text-muted-foreground border-b border-border pb-1">
+                    3. Upload CV / Resume (PDF / Word)
+                  </label>
+
+                  <input
+                    id={fileInputId}
+                    type="file"
+                    ref={fileInputRef}
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+
+                  {resumeFileName ? (
+                    <div className="flex items-center justify-between p-3.5 rounded-2xl border border-emerald-300 bg-emerald-50/70 text-xs">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-600 text-white font-bold">
+                          <FileText className="h-5 w-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="font-bold text-foreground truncate">{resumeFileName}</div>
+                          <div className="text-[11px] text-emerald-700 flex items-center gap-1.5 font-medium">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                            {resumeFileSize} • Attached and ready to submit
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={handleRemoveFile}
+                        className="inline-flex items-center gap-1 text-xs text-red-600 hover:text-red-700 bg-white border border-red-200 px-3 py-1.5 rounded-xl hover:bg-red-50 transition cursor-pointer shrink-0"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" /> Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => fileInputRef.current?.click()}
+                      className="group border-2 border-dashed border-border hover:border-primary bg-secondary/30 hover:bg-primary/5 rounded-2xl p-6 text-center cursor-pointer transition flex flex-col items-center justify-center space-y-2"
+                    >
+                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white border border-border shadow-sm text-primary group-hover:scale-110 transition">
+                        <Upload className="h-6 w-6" />
+                      </div>
+                      <div className="text-xs font-bold text-foreground group-hover:text-primary transition">
+                        Click here to browse or drag & drop your Resume / CV
+                      </div>
+                      <div className="text-[11px] text-muted-foreground">
+                        Supports PDF, DOC, DOCX files up to 10MB
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Candidate Message / Cover Note */}
+                <div className="space-y-1">
+                  <label className="block text-xs font-bold text-foreground">
+                    Cover Note / Message for HR (Optional)
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={coverNote}
+                    onChange={(e) => setCoverNote(e.target.value)}
+                    placeholder="Briefly highlight your key technical skills, formulation expertise, or reason for applying..."
+                    className="w-full rounded-xl border border-border bg-white p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                  />
+                </div>
+
+                {/* Submit Actions */}
+                <div className="pt-4 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="text-[11px] text-muted-foreground flex items-center gap-1.5">
+                    <Shield className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Your information will be securely reviewed by Unicure HR.</span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setApplyingJob(null)}
+                      className="rounded-xl border border-border px-5 py-2.5 text-xs font-bold text-muted-foreground hover:bg-secondary transition cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-brand text-white px-7 py-2.5 text-xs font-bold shadow-glow hover:opacity-95 disabled:opacity-50 transition cursor-pointer"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" /> Submitting Application...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-3.5 w-3.5" /> Submit Application & CV
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       )}
