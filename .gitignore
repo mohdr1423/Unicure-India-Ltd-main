@@ -21,6 +21,11 @@ dist-ssr
 extracted_offline_site/
 *.zip
 
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars

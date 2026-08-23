@@ -267,12 +267,16 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
           <p>© {new Date().getFullYear()} {footer?.copyright ?? "Unicure India. All rights reserved."}</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap items-center gap-6">
             {legal.map((l, i) => (
               <a key={i} href={l.url} className="hover:text-white transition-colors">
                 {l.label}
               </a>
             ))}
+            <Link to="/leads-portal" className="hover:text-emerald-400 text-white/40 transition-colors inline-flex items-center gap-1">
+              <Lock className="h-3 w-3" />
+              <span>Admin Leads</span>
+            </Link>
           </div>
         </div>
       </div>

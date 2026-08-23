@@ -20,6 +20,16 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Temporary archives & extraction folders
+extracted_offline_site/
+*.zip
+
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+data/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

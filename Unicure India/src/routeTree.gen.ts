@@ -22,6 +22,7 @@ import { Route as DosageFormsRouteImport } from './routes/dosage-forms'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as ExportsRouteImport } from './routes/exports'
 import { Route as LeadershipRouteImport } from './routes/leadership'
+import { Route as LeadsPortalRouteImport } from './routes/leads-portal'
 import { Route as ManufacturingRouteImport } from './routes/manufacturing'
 import { Route as MdMessageRouteImport } from './routes/md-message'
 import { Route as NewsRouteImport } from './routes/news'
@@ -34,6 +35,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiInquiriesRouteImport } from './routes/api/inquiries'
 import { Route as ApiInquiryRouteImport } from './routes/api/inquiry'
+import { Route as ApiLeadsAdminRouteImport } from './routes/api/leads-admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminAboutRouteImport } from './routes/_authenticated/admin.about'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
@@ -118,6 +120,11 @@ const LeadershipRoute = LeadershipRouteImport.update({
   path: '/leadership',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeadsPortalRoute = LeadsPortalRouteImport.update({
+  id: '/leads-portal',
+  path: '/leads-portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ManufacturingRoute = ManufacturingRouteImport.update({
   id: '/manufacturing',
   path: '/manufacturing',
@@ -176,6 +183,11 @@ const ApiInquiriesRoute = ApiInquiriesRouteImport.update({
 const ApiInquiryRoute = ApiInquiryRouteImport.update({
   id: '/api/inquiry',
   path: '/api/inquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiLeadsAdminRoute = ApiLeadsAdminRouteImport.update({
+  id: '/api/leads-admin',
+  path: '/api/leads-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
@@ -300,6 +312,7 @@ export interface FileRoutesByFullPath {
   '/downloads': typeof DownloadsRoute
   '/exports': typeof ExportsRoute
   '/leadership': typeof LeadershipRoute
+  '/leads-portal': typeof LeadsPortalRoute
   '/manufacturing': typeof ManufacturingRoute
   '/md-message': typeof MdMessageRoute
   '/news': typeof NewsRoute
@@ -312,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
+  '/api/leads-admin': typeof ApiLeadsAdminRoute
   '/admin/about': typeof AuthenticatedAdminAboutRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -345,6 +359,7 @@ export interface FileRoutesByTo {
   '/downloads': typeof DownloadsRoute
   '/exports': typeof ExportsRoute
   '/leadership': typeof LeadershipRoute
+  '/leads-portal': typeof LeadsPortalRoute
   '/manufacturing': typeof ManufacturingRoute
   '/md-message': typeof MdMessageRoute
   '/news': typeof NewsRoute
@@ -356,6 +371,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
+  '/api/leads-admin': typeof ApiLeadsAdminRoute
   '/admin/about': typeof AuthenticatedAdminAboutRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -391,6 +407,7 @@ export interface FileRoutesById {
   '/downloads': typeof DownloadsRoute
   '/exports': typeof ExportsRoute
   '/leadership': typeof LeadershipRoute
+  '/leads-portal': typeof LeadsPortalRoute
   '/manufacturing': typeof ManufacturingRoute
   '/md-message': typeof MdMessageRoute
   '/news': typeof NewsRoute
@@ -403,6 +420,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
+  '/api/leads-admin': typeof ApiLeadsAdminRoute
   '/_authenticated/admin/about': typeof AuthenticatedAdminAboutRoute
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -438,6 +456,7 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/exports'
     | '/leadership'
+    | '/leads-portal'
     | '/manufacturing'
     | '/md-message'
     | '/news'
@@ -450,6 +469,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/inquiries'
     | '/api/inquiry'
+    | '/api/leads-admin'
     | '/admin/about'
     | '/admin/audit'
     | '/admin/branding'
@@ -483,6 +503,7 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/exports'
     | '/leadership'
+    | '/leads-portal'
     | '/manufacturing'
     | '/md-message'
     | '/news'
@@ -494,6 +515,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/inquiries'
     | '/api/inquiry'
+    | '/api/leads-admin'
     | '/admin/about'
     | '/admin/audit'
     | '/admin/branding'
@@ -528,6 +550,7 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/exports'
     | '/leadership'
+    | '/leads-portal'
     | '/manufacturing'
     | '/md-message'
     | '/news'
@@ -540,6 +563,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/inquiries'
     | '/api/inquiry'
+    | '/api/leads-admin'
     | '/_authenticated/admin/about'
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/branding'
@@ -575,6 +599,7 @@ export interface RootRouteChildren {
   DownloadsRoute: typeof DownloadsRoute
   ExportsRoute: typeof ExportsRoute
   LeadershipRoute: typeof LeadershipRoute
+  LeadsPortalRoute: typeof LeadsPortalRoute
   ManufacturingRoute: typeof ManufacturingRoute
   MdMessageRoute: typeof MdMessageRoute
   NewsRoute: typeof NewsRoute
@@ -586,6 +611,7 @@ export interface RootRouteChildren {
   ApiChatRoute: typeof ApiChatRoute
   ApiInquiriesRoute: typeof ApiInquiriesRoute
   ApiInquiryRoute: typeof ApiInquiryRoute
+  ApiLeadsAdminRoute: typeof ApiLeadsAdminRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -681,6 +707,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeadershipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leads-portal': {
+      id: '/leads-portal'
+      path: '/leads-portal'
+      fullPath: '/leads-portal'
+      preLoaderRoute: typeof LeadsPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/manufacturing': {
       id: '/manufacturing'
       path: '/manufacturing'
@@ -763,6 +796,13 @@ declare module '@tanstack/react-router' {
       path: '/api/inquiry'
       fullPath: '/api/inquiry'
       preLoaderRoute: typeof ApiInquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/leads-admin': {
+      id: '/api/leads-admin'
+      path: '/api/leads-admin'
+      fullPath: '/api/leads-admin'
+      preLoaderRoute: typeof ApiLeadsAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/': {
@@ -973,6 +1013,7 @@ const rootRouteChildren: RootRouteChildren = {
   DownloadsRoute: DownloadsRoute,
   ExportsRoute: ExportsRoute,
   LeadershipRoute: LeadershipRoute,
+  LeadsPortalRoute: LeadsPortalRoute,
   ManufacturingRoute: ManufacturingRoute,
   MdMessageRoute: MdMessageRoute,
   NewsRoute: NewsRoute,
@@ -984,6 +1025,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiChatRoute: ApiChatRoute,
   ApiInquiriesRoute: ApiInquiriesRoute,
   ApiInquiryRoute: ApiInquiryRoute,
+  ApiLeadsAdminRoute: ApiLeadsAdminRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
