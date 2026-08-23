@@ -37,7 +37,7 @@ export function saveLocalJobOpenings(jobs: JobOpening[]): void {
   fs.writeFileSync(filePath, JSON.stringify(jobs, null, 2), "utf-8");
 }
 
-export const Route = createFileRoute("/api/careers" as any)({
+export const Route = createFileRoute("/api/careers")({
   server: {
     handlers: {
       GET: async ({ request }) => {
