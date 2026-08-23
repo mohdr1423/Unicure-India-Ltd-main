@@ -92,11 +92,11 @@ export function Header() {
         <TopBanner />
         <div className="container-x flex h-18 items-center justify-between py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <Link to="/" className="flex items-center gap-2 sm:gap-2.5 shrink-0 max-w-[calc(100%-3.5rem)] lg:max-w-none">
             <HeaderLogo scrolled={scrolled} />
-            <div className="flex flex-col leading-none">
+            <div className="flex flex-col leading-none min-w-0">
               <span
-                className={`font-bold text-lg tracking-tight transition-colors ${
+                className={`font-bold text-base sm:text-lg tracking-tight transition-colors truncate ${
                   scrolled
                     ? "text-[color:var(--brand-blue)]"
                     : "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
@@ -105,7 +105,7 @@ export function Header() {
                 {branding?.site_name ?? "Unicure India"}
               </span>
               <span
-                className={`text-[10px] uppercase tracking-[0.2em] transition-colors ${
+                className={`text-[9px] sm:text-[10px] uppercase tracking-[0.2em] transition-colors truncate ${
                   scrolled
                     ? "text-muted-foreground"
                     : "text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
@@ -243,7 +243,11 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: -20 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-x-0 top-[72px] z-[49] max-h-[calc(100vh-72px)] overflow-y-auto bg-white/98 backdrop-blur-xl border-b border-border shadow-elegant lg:hidden"
+              className="fixed inset-x-0 z-[49] overflow-y-auto overflow-x-hidden bg-white/98 backdrop-blur-xl border-b border-border shadow-elegant lg:hidden"
+              style={{
+                top: "var(--header-height, 72px)",
+                maxHeight: "calc(100dvh - var(--header-height, 72px))",
+              }}
             >
               <div className="container-x py-5 flex flex-col gap-1">
                 {nav.map((n) =>

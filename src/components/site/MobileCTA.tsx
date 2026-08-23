@@ -40,9 +40,9 @@ export function MobileCTA({ phone = "8882674843" }: { phone?: string }) {
           animate={{ y: 0 }}
           exit={{ y: 80 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
-          className="fixed bottom-0 inset-x-0 z-40 lg:hidden"
+          className="fixed bottom-0 inset-x-0 z-40 lg:hidden w-full max-w-full overflow-hidden"
         >
-          <div className="flex border-t border-border bg-white/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+          <div className="flex border-t border-border bg-white/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.08)] pb-[env(safe-area-inset-bottom,0px)]">
             <a
               href={`tel:${cleanPhone}`}
               className="flex flex-1 items-center justify-center gap-2 py-3.5 text-sm font-semibold text-[color:var(--brand-blue-dark)] active:bg-secondary transition"

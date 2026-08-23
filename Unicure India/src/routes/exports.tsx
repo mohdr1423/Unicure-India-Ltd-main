@@ -280,7 +280,7 @@ function ExportsPage() {
       </section>
 
       {/* Export CTA Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 overflow-hidden">
         <div className="container-x">
           <ScrollReveal variant="scale">
             <div className="rounded-3xl bg-[color:var(--brand-blue-dark)] p-8 sm:p-12 md:p-16 text-white shadow-elegant text-center relative overflow-hidden">

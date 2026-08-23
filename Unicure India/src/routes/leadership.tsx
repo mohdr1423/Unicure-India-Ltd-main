@@ -100,8 +100,11 @@ function LeadershipPage() {
       />
 
       {/* Quick Executive Navigation Pills */}
-      <section className="py-8 bg-secondary/50 border-b border-border sticky top-18 z-20 backdrop-blur-md">
-        <div className="container-x flex flex-wrap items-center justify-center gap-3">
+      <section
+        className="py-4 sm:py-6 bg-secondary/80 border-b border-border sticky z-20 backdrop-blur-md overflow-hidden"
+        style={{ top: "var(--header-height, 72px)" }}
+      >
+        <div className="container-x flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           <button
             onClick={() => {
               setActiveLeader("all");
@@ -154,7 +157,7 @@ function LeadershipPage() {
                         <img
                           src={mateen.photo}
                           alt={mateen.altText}
-                          className="h-full w-full object-cover object-top"
+                          className="h-full w-full object-cover object-center"
                           loading="eager"
                         />
                       </div>
@@ -250,7 +253,7 @@ function LeadershipPage() {
                         <img
                           src={amin.photo}
                           alt={amin.altText}
-                          className="h-full w-full object-cover object-top"
+                          className="h-full w-full object-cover object-center"
                           loading="lazy"
                         />
                       </div>
@@ -352,7 +355,7 @@ function LeadershipPage() {
                         <img
                           src={kashish.photo}
                           alt={kashish.altText}
-                          className="h-full w-full object-cover object-top"
+                          className="h-full w-full object-cover object-center"
                           loading="lazy"
                         />
                       </div>

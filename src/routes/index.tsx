@@ -277,23 +277,23 @@ function HomePage() {
                 "Unicure India Ltd. is a leading pharmaceutical manufacturer committed to delivering high-quality healthcare solutions, advanced dosage formulations, and trusted medications worldwide."}
             </p>
 
-            <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="mt-8 sm:mt-9 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
               <Link
                 to="/manufacturing"
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-6 sm:px-7 py-3.5 sm:py-4 text-sm font-semibold text-[color:var(--brand-blue-dark)] shadow-elegant hover:shadow-glow transition hover:scale-[1.02]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 sm:px-7 py-3.5 sm:py-4 text-sm font-semibold text-[color:var(--brand-blue-dark)] shadow-elegant hover:shadow-glow transition hover:scale-[1.02] text-center"
               >
                 {heroC?.cta_primary_label ?? "Explore Manufacturing"}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/dosage-forms"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 glass-dark px-6 sm:px-7 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/10 transition"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 glass-dark px-6 sm:px-7 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/10 transition text-center"
               >
                 Dosage Forms & Capacities
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 glass-dark px-6 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/10 transition"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 glass-dark px-6 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/10 transition text-center"
               >
                 {heroC?.cta_secondary_label ?? "Contact Us"}
               </Link>
@@ -389,7 +389,7 @@ function HomePage() {
       </section>
 
       {/* ABOUT UNICURE INDIA SECTION */}
-      <section className="py-24 md:py-32 bg-gradient-soft">
+      <section className="py-24 md:py-32 bg-gradient-soft overflow-hidden">
         <div className="container-x grid gap-16 lg:grid-cols-2 items-center">
           <ScrollReveal variant="slide-left">
             <div className="relative">
@@ -709,7 +709,7 @@ function HomePage() {
       </section>
 
       {/* THREE MANUFACTURING PLANTS SPOTLIGHT */}
-      <section className="py-24 md:py-32">
+      <section className="py-24 md:py-32 overflow-hidden">
         <div className="container-x grid gap-14 lg:grid-cols-2 items-center">
           <ScrollReveal variant="slide-left">
             <div>
@@ -721,13 +721,13 @@ function HomePage() {
                 Today, Unicure India Ltd. operates three manufacturing plants across Noida, Roorkee, and Greater Noida,
                 employing more than 600 professionals with approximately 100 highly qualified technical personnel.
               </p>
-              <div className="mt-8 grid grid-cols-3 gap-4">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 {[
                   { k: "3 Plants", v: "Noida & Roorkee" },
                   { k: "600+", v: "Professionals" },
                   { k: "6,000M", v: "Tablets / Year" },
                 ].map((s) => (
-                  <div key={s.v} className="rounded-2xl bg-secondary p-5 border border-border/50">
+                  <div key={s.v} className="rounded-2xl bg-secondary p-4 sm:p-5 border border-border/50">
                     <div className="text-xl font-bold text-primary">{s.k}</div>
                     <div className="text-xs text-muted-foreground mt-1">{s.v}</div>
                   </div>
@@ -786,7 +786,7 @@ function HomePage() {
                       <img
                         src={leader.photo}
                         alt={leader.altText}
-                        className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                        className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
                     </div>

@@ -5,7 +5,7 @@ type Variant = "fade-up" | "fade-in" | "slide-left" | "slide-right" | "scale";
 
 const variants: Record<Variant, { hidden: TargetAndTransition; visible: TargetAndTransition }> = {
   "fade-up": {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 28 },
     visible: { opacity: 1, y: 0 },
   },
   "fade-in": {
@@ -13,15 +13,15 @@ const variants: Record<Variant, { hidden: TargetAndTransition; visible: TargetAn
     visible: { opacity: 1 },
   },
   "slide-left": {
-    hidden: { opacity: 0, x: -60 },
+    hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
   },
   "slide-right": {
-    hidden: { opacity: 0, x: 60 },
+    hidden: { opacity: 0, x: 20 },
     visible: { opacity: 1, x: 0 },
   },
   scale: {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.96 },
     visible: { opacity: 1, scale: 1 },
   },
 };

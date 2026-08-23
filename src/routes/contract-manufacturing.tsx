@@ -269,7 +269,7 @@ function CoMfgPage() {
       {/* ============================================================ */}
       {/* 5. PROFESSIONAL CTA SECTION                                  */}
       {/* ============================================================ */}
-      <section className="pb-20 md:pb-28">
+      <section className="pb-20 md:pb-28 overflow-hidden">
         <div className="container-x">
           <ScrollReveal variant="scale">
             <div className="rounded-3xl bg-[color:var(--brand-blue-dark)] p-8 sm:p-12 md:p-16 text-white shadow-elegant text-center relative overflow-hidden">

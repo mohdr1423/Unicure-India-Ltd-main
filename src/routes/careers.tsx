@@ -367,7 +367,7 @@ ${appForm.message || "No cover note provided."}
       </section>
 
       {/* CTA */}
-      <section className="pb-24">
+      <section className="pb-24 overflow-hidden">
         <div className="container-x">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-brand p-10 md:p-14 text-white shadow-elegant text-center">
             <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />

@@ -60,36 +60,36 @@ export function FacilityMap() {
   const activeUnit = LOCATIONS.find((l) => l.id === selectedId) ?? LOCATIONS[0];
 
   return (
-    <section className="py-24 bg-gradient-soft">
+    <section className="py-20 md:py-24 bg-gradient-soft overflow-hidden">
       <div className="container-x">
         <ScrollReveal>
-          <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
               <span className="h-px w-8 bg-primary/40" />
               Locations & Facilities
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="mt-3 text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
               Interactive Facility Map
             </h2>
-            <p className="mt-4 text-muted-foreground text-lg">
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg">
               Explore our three WHO-GMP certified manufacturing sites across Noida, Roorkee, and Greater Noida.
             </p>
           </div>
         </ScrollReveal>
 
         {/* Location Selector Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
           {LOCATIONS.map((loc) => (
             <button
               key={loc.id}
               onClick={() => setSelectedId(loc.id)}
-              className={`flex items-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold transition-all shadow-card ${
+              className={`flex items-center gap-1.5 sm:gap-2.5 rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-all shadow-card ${
                 selectedId === loc.id
                   ? "bg-primary text-white shadow-glow"
                   : "bg-white text-foreground hover:bg-secondary border border-border"
               }`}
             >
-              <Navigation className="h-4 w-4" />
+              <Navigation className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span>{loc.unit}</span>
               <span className="opacity-75 font-normal">({loc.name.split(" ")[0]})</span>
             </button>

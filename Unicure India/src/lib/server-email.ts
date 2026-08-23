@@ -222,7 +222,7 @@ ${record.email}
   const resendKey = getEnv("RESEND_API_KEY") || getEnv("EMAIL_API_KEY");
   if (resendKey) {
     try {
-      const res = await fetch("https://api.resend.com/emails", {
+      let res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -238,16 +238,35 @@ ${record.email}
         }),
       });
 
+      // If failed due to unverified domain in fromAddress, auto-fallback to onboarding@resend.dev
+      if (!res.ok && fromAddress !== "Unicure India Inquiries <onboarding@resend.dev>") {
+        const errText = await res.text();
+        console.warn("[ServerInquiry] Resend custom fromAddress failed, retrying with onboarding@resend.dev:", errText);
+        res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${resendKey}`,
+          },
+          body: JSON.stringify({
+            from: "Unicure India Inquiries <onboarding@resend.dev>",
+            to: [targetEmail],
+            reply_to: record.email,
+            subject: emailSubject,
+            text: textBody,
+            html: htmlBody,
+          }),
+        });
+      }
+
       if (res.ok) {
         const json = await res.json();
         return { success: true, provider: `Resend (ID: ${json.id || "ok"})` };
       }
       const errText = await res.text();
-      console.warn("[ServerInquiry] Resend API Error:", res.status, errText);
-      return { success: false, provider: "Resend", error: `HTTP ${res.status}: ${errText}` };
+      console.warn("[ServerInquiry] Resend API Error, proceeding to fallback:", res.status, errText);
     } catch (err: any) {
-      console.warn("[ServerInquiry] Resend fetch exception:", err);
-      return { success: false, provider: "Resend", error: err.message || String(err) };
+      console.warn("[ServerInquiry] Resend fetch exception, proceeding to fallback:", err);
     }
   }
 
@@ -277,8 +296,7 @@ ${record.email}
 
       return { success: true, provider: `SMTP (${smtpHost}, MessageId: ${info.messageId})` };
     } catch (err: any) {
-      console.warn("[ServerInquiry] SMTP dispatch exception:", err);
-      return { success: false, provider: `SMTP (${smtpHost})`, error: err.message || String(err) };
+      console.warn("[ServerInquiry] SMTP dispatch exception, proceeding to fallback:", err);
     }
   }
 
@@ -307,10 +325,9 @@ ${record.email}
         return { success: true, provider: `Brevo (MessageId: ${json.messageId || "ok"})` };
       }
       const errText = await res.text();
-      return { success: false, provider: "Brevo", error: `HTTP ${res.status}: ${errText}` };
+      console.warn("[ServerInquiry] Brevo API Error:", res.status, errText);
     } catch (err: any) {
       console.warn("[ServerInquiry] Brevo exception:", err);
-      return { success: false, provider: "Brevo", error: err.message || String(err) };
     }
   }
 

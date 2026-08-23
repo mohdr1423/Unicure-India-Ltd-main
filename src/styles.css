@@ -150,27 +150,70 @@
 }
 
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
     border-color: var(--color-border);
   }
 
+  html {
+    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: pan-y;
+  }
+
   body {
+    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    touch-action: pan-y;
   }
+
+  #root,
+  #main-content {
+    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  img,
+  video,
+  iframe,
+  embed,
+  object {
+    max-width: 100%;
+  }
+
   h1, h2, h3, h4, h5 {
     font-family: 'Sora', 'Inter', system-ui, sans-serif;
     letter-spacing: -0.02em;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 }
 
 @utility container-x {
   width: 100%;
-  margin-inline: auto;
-  padding-inline: 1.25rem;
   max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+  @media (min-width: 640px) { padding-inline: 1.5rem; }
   @media (min-width: 768px) { padding-inline: 2rem; }
 }
 

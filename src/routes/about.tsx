@@ -416,7 +416,7 @@ function AboutPage() {
                     <img
                       src={leader.photo}
                       alt={leader.altText}
-                      className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -456,7 +456,7 @@ function AboutPage() {
       </section>
 
       {/* 6. CTA Section */}
-      <section className="pb-24 pt-8">
+      <section className="pb-24 pt-8 overflow-hidden">
         <div className="container-x">
           <div className="relative overflow-hidden rounded-3xl bg-[color:var(--brand-blue-dark)] p-10 md:p-16 text-white shadow-2xl text-center border border-white/10">
             <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#C8102E]/30 blur-3xl" />

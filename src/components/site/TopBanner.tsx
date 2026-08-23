@@ -31,15 +31,15 @@ export function TopBanner() {
   return (
     <aside
       aria-label="Announcement"
-      className="relative z-10 bg-[color:var(--brand-blue-dark)] text-white text-center text-xs sm:text-sm border-b border-white/10 shadow-sm"
+      className="relative z-10 bg-[color:var(--brand-blue-dark)] text-white text-center text-xs sm:text-sm border-b border-white/10 shadow-sm overflow-hidden"
     >
-      <div className="container-x flex items-center justify-center gap-2 py-2 sm:py-2.5 pr-10 text-xs sm:text-sm">
-        <Factory className="h-3.5 w-3.5 shrink-0 text-white/70" />
-        <span className="leading-tight">
-          <strong>Now operational:</strong> Unit-III Greater Noida — PIC/S compliant OSD facility{" "}
+      <div className="container-x flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 pr-8 sm:pr-10 text-xs sm:text-sm">
+        <Factory className="h-3.5 w-3.5 shrink-0 text-white/70 hidden sm:inline-block" />
+        <span className="leading-tight text-[11px] sm:text-xs md:text-sm">
+          <strong>Now operational:</strong> Unit-III Greater Noida — PIC/S compliant facility{" "}
           <Link
             to="/manufacturing"
-            className="underline underline-offset-2 hover:text-white/80 font-medium whitespace-nowrap ml-1"
+            className="underline underline-offset-2 hover:text-white/80 font-medium inline-block ml-1"
           >
             Learn more →
           </Link>
@@ -48,7 +48,7 @@ export function TopBanner() {
       <button
         onClick={dismiss}
         aria-label="Dismiss banner"
-        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-md hover:bg-white/10 text-white/80 hover:text-white transition cursor-pointer"
+        className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 min-h-[32px] min-w-[32px] sm:min-h-[36px] sm:min-w-[36px] flex items-center justify-center rounded-md hover:bg-white/10 text-white/80 hover:text-white transition cursor-pointer"
       >
         <X className="h-3.5 w-3.5" />
       </button>

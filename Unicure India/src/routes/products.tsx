@@ -120,25 +120,25 @@ function ProductsPage() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="mt-10 flex items-center justify-center gap-2">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 max-w-full">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-border bg-white text-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-secondary transition shadow-card"
+                className="inline-flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 rounded-full border border-border bg-white text-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-secondary transition shadow-card text-xs sm:text-sm"
                 aria-label="Previous page"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </button>
               {getPageNumbers(page, totalPages).map((p, i) =>
                 p === "..." ? (
-                  <span key={`dots-${i}`} className="px-2 text-muted-foreground">
+                  <span key={`dots-${i}`} className="px-1 sm:px-2 text-xs sm:text-sm text-muted-foreground">
                     …
                   </span>
                 ) : (
                   <button
                     key={p}
                     onClick={() => setPage(p as number)}
-                    className={`inline-flex items-center justify-center h-10 w-10 rounded-full text-sm font-semibold transition shadow-card ${
+                    className={`inline-flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 rounded-full text-xs sm:text-sm font-semibold transition shadow-card ${
                       page === p
                         ? "bg-primary text-white shadow-glow"
                         : "border border-border bg-white text-foreground hover:bg-secondary"
@@ -151,10 +151,10 @@ function ProductsPage() {
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-border bg-white text-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-secondary transition shadow-card"
+                className="inline-flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 rounded-full border border-border bg-white text-foreground disabled:opacity-40 disabled:cursor-not-allowed hover:bg-secondary transition shadow-card text-xs sm:text-sm"
                 aria-label="Next page"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </button>
             </div>
           )}
@@ -166,11 +166,13 @@ function ProductsPage() {
 
 /** Generate pagination numbers: 1 2 ... 5 6 7 ... 20 */
 function getPageNumbers(current: number, total: number): (number | "...")[] {
-  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
   const pages: (number | "...")[] = [];
   pages.push(1);
   if (current > 3) pages.push("...");
-  for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  for (let i = start; i <= end; i++) {
     pages.push(i);
   }
   if (current < total - 2) pages.push("...");
