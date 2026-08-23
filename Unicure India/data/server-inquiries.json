@@ -1,5 +1,20 @@
 [
   {
+    "id": "inq_1787494277132_jodifz",
+    "created_at": "8/23/2026, 7:41:17 PM",
+    "name": "jack",
+    "email": "xyz@gmail.com",
+    "company": "nick johnson",
+    "phone": "00000000000",
+    "country": "Argentina",
+    "message": "hello, how are you?",
+    "inquiry_type": "Contact Form / Quotation Request",
+    "source": "Contact Page — Send an Inquiry Form",
+    "page_url": "/contact",
+    "email_status": "recorded",
+    "email_provider": "Leads Portal Direct Intake"
+  },
+  {
     "id": "inq_1787494113371_vib9s2",
     "created_at": "8/23/2026, 7:38:33 PM",
     "name": "Riyaz Test Buyer",
