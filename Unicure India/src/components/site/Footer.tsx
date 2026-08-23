@@ -22,34 +22,38 @@ const SPEC_COLUMNS = [
   {
     title: "About Unicure India",
     links: [
-      { label: "Our Mission", to: "/about" },
-      { label: "Our Founder", to: "/leadership" },
-      { label: "Our History", to: "/about" },
+      { label: "Home", to: "/" },
+      { label: "About Company", to: "/about" },
+      { label: "Executive Leadership", to: "/leadership" },
+      { label: "Director's Message", to: "/md-message" },
+      { label: "Certifications", to: "/certifications" },
     ],
   },
   {
     title: "Manufacturing",
     links: [
       { label: "Operational Units", to: "/manufacturing" },
-      { label: "Our Accreditations", to: "/certifications" },
-      { label: "Dosage Form", to: "/dosage-forms" },
-      { label: "QA & QC", to: "/quality" },
+      { label: "Dosage Forms", to: "/dosage-forms" },
+      { label: "Contract Manufacturing", to: "/contract-manufacturing" },
+      { label: "QA & QC Lab", to: "/quality" },
     ],
   },
   {
-    title: "Corporate Sales",
+    title: "Commercial & Business",
     links: [
-      { label: "Institutional Sales", to: "/contract-manufacturing" },
       { label: "Co-Manufacturing", to: "/contract-manufacturing" },
-      { label: "Export Sales", to: "/exports" },
+      { label: "Institutional Sales", to: "/contract-manufacturing" },
+      { label: "Global Exports", to: "/exports" },
+      { label: "Careers & Jobs", to: "/careers" },
     ],
   },
   {
-    title: "Others",
+    title: "Regulatory & Support",
     links: [
-      { label: "Product List", to: "/products" },
+      { label: "Pharmacovigilance (Safety)", to: "/pharmacovigilance" },
+      { label: "Product Portfolio", to: "/products" },
+      { label: "Downloads & Profile", to: "/downloads" },
       { label: "Contact Us", to: "/contact" },
-      { label: "Director's Message", to: "/md-message" },
     ],
   },
 ];

@@ -43,7 +43,6 @@ type NavItem = NavLinkItem | NavGroupItem;
 
 // Complete comprehensive navigation definition
 const COMPREHENSIVE_NAV: NavItem[] = [
-  { to: "/", label: "Home", icon: Home },
   {
     label: "About Us",
     children: [
@@ -65,8 +64,6 @@ const COMPREHENSIVE_NAV: NavItem[] = [
   { to: "/products", label: "Products", icon: ShoppingBag },
   { to: "/quality", label: "Quality & R&D", icon: ShieldCheck },
   { to: "/exports", label: "Exports", icon: Globe },
-  { to: "/contract-manufacturing", label: "Co-Manufacturing", icon: Handshake },
-  { to: "/pharmacovigilance", label: "Pharmacovigilance", icon: HeartHandshake },
   { to: "/careers", label: "Careers", icon: Briefcase },
   { to: "/contact", label: "Contact", icon: Mail },
 ];
