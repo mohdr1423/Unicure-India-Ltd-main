@@ -179,23 +179,16 @@ export const Route = createFileRoute("/api/inquiries")({
           inquiry_type: cleanType,
           source: cleanSource,
           page_url: cleanPageUrl,
-          email_status: "pending",
+          email_status: "recorded",
+          email_provider: "Leads Portal Direct Intake",
           metadata: body.metadata,
         };
 
-        // 1. Dispatch Email to humanrealityofficial@gmail.com
-        const emailResult = await dispatchInquiryEmail(record);
-        record.email_status = emailResult.success ? "sent" : "failed";
-        record.email_provider = emailResult.provider;
-        if (emailResult.error) record.error_log = emailResult.error;
-
-        // 2. Persist to local JSON ledger (Audit Trail)
+        // Persist directly to local JSON ledger & Supabase (Visible immediately in /leads-portal)
         saveInquiryToLocalLedger(record);
-
-        // 3. Persist to Supabase database if connected
         await saveInquiryToSupabase(record);
 
-        console.log(`[Central Inquiry Routed] ID: ${inquiryId} -> ${PRIMARY_ADMIN_EMAIL} (Status: ${record.email_status})`);
+        console.log(`[Lead Intake] New Lead Captured: ${inquiryId} (${cleanName} - ${cleanType}) -> Leads Portal`);
 
         return new Response(
           JSON.stringify({

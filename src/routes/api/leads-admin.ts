@@ -5,10 +5,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   getLocalInquiriesLedger,
   saveInquiryToLocalLedger,
-  dispatchInquiryEmail,
   PRIMARY_ADMIN_EMAIL,
   type ServerInquiryRecord,
 } from "@/lib/server-email";
+import {
+  getLocalJobOpenings,
+  saveLocalJobOpenings,
+  type JobOpening,
+} from "./careers";
 
 function getEnv(key: string): string | undefined {
   if (process.env[key]) return process.env[key];
@@ -144,38 +148,7 @@ export const Route = createFileRoute("/api/leads-admin")({
         }
 
         // ==========================================
-        // 4. ACTION: RETRY EMAIL DISPATCH
-        // ==========================================
-        if (action === "retry-email" && body.id) {
-          const inquiries = getLocalInquiriesLedger();
-          const record = inquiries.find((r) => r.id === body.id);
-          if (!record) {
-            return new Response(
-              JSON.stringify({ success: false, message: "Inquiry not found" }),
-              { status: 404, headers: { "Content-Type": "application/json" } }
-            );
-          }
-
-          const result = await dispatchInquiryEmail(record);
-          record.email_status = result.success ? "sent" : "failed";
-          record.email_provider = result.provider;
-          if (result.error) record.error_log = result.error;
-          saveInquiryToLocalLedger(record);
-
-          return new Response(
-            JSON.stringify({
-              success: result.success,
-              message: result.success
-                ? `Email delivered via ${result.provider}`
-                : `Delivery error: ${result.error}`,
-              record,
-            }),
-            { status: 200, headers: { "Content-Type": "application/json" } }
-          );
-        }
-
-        // ==========================================
-        // 5. ACTION: DELETE LEAD
+        // 4. ACTION: DELETE LEAD
         // ==========================================
         if (action === "delete-lead" && body.id) {
           const dataDir = path.resolve(process.cwd(), "data");
@@ -192,6 +165,143 @@ export const Route = createFileRoute("/api/leads-admin")({
               success: true,
               message: "Lead deleted successfully",
               remainingCount: updated.length,
+            }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+          );
+        }
+
+        // ==========================================
+        // 5. ACTION: GET JOBS / CAREERS
+        // ==========================================
+        if (action === "get-jobs") {
+          const jobs = getLocalJobOpenings();
+          return new Response(
+            JSON.stringify({
+              success: true,
+              jobs,
+              totalCount: jobs.length,
+            }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+          );
+        }
+
+        // ==========================================
+        // 6. ACTION: CREATE / ADD JOB
+        // ==========================================
+        if (action === "create-job" && body.job) {
+          const jobs = getLocalJobOpenings();
+          const newJob: JobOpening = {
+            id: `job_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+            title: (body.job.title || "").trim(),
+            department: (body.job.department || "General").trim(),
+            location: (body.job.location || "Noida, UP").trim(),
+            employment_type: body.job.employment_type || "Full-time",
+            experience: body.job.experience || "",
+            qualifications: body.job.qualifications || "",
+            description: (body.job.description || "").trim(),
+            is_open: body.job.is_open !== undefined ? !!body.job.is_open : true,
+            created_at: new Date().toISOString().slice(0, 10),
+          };
+
+          if (!newJob.title) {
+            return new Response(
+              JSON.stringify({ success: false, message: "Job title is required." }),
+              { status: 400, headers: { "Content-Type": "application/json" } }
+            );
+          }
+
+          jobs.unshift(newJob);
+          saveLocalJobOpenings(jobs);
+
+          return new Response(
+            JSON.stringify({
+              success: true,
+              message: "Job opening created successfully.",
+              job: newJob,
+              jobs,
+            }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+          );
+        }
+
+        // ==========================================
+        // 7. ACTION: UPDATE / EDIT JOB
+        // ==========================================
+        if (action === "update-job" && body.job && body.job.id) {
+          const jobs = getLocalJobOpenings();
+          const index = jobs.findIndex((j) => j.id === body.job.id);
+          if (index === -1) {
+            return new Response(
+              JSON.stringify({ success: false, message: "Job not found." }),
+              { status: 404, headers: { "Content-Type": "application/json" } }
+            );
+          }
+
+          jobs[index] = {
+            ...jobs[index],
+            title: (body.job.title || jobs[index].title).trim(),
+            department: (body.job.department || jobs[index].department).trim(),
+            location: (body.job.location || jobs[index].location).trim(),
+            employment_type: body.job.employment_type || jobs[index].employment_type,
+            experience: body.job.experience !== undefined ? body.job.experience : jobs[index].experience,
+            qualifications: body.job.qualifications !== undefined ? body.job.qualifications : jobs[index].qualifications,
+            description: (body.job.description || jobs[index].description).trim(),
+            is_open: body.job.is_open !== undefined ? !!body.job.is_open : jobs[index].is_open,
+          };
+
+          saveLocalJobOpenings(jobs);
+
+          return new Response(
+            JSON.stringify({
+              success: true,
+              message: "Job opening updated successfully.",
+              job: jobs[index],
+              jobs,
+            }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+          );
+        }
+
+        // ==========================================
+        // 8. ACTION: TOGGLE JOB STATUS
+        // ==========================================
+        if (action === "toggle-job" && body.id) {
+          const jobs = getLocalJobOpenings();
+          const job = jobs.find((j) => j.id === body.id);
+          if (!job) {
+            return new Response(
+              JSON.stringify({ success: false, message: "Job not found." }),
+              { status: 404, headers: { "Content-Type": "application/json" } }
+            );
+          }
+
+          job.is_open = !job.is_open;
+          saveLocalJobOpenings(jobs);
+
+          return new Response(
+            JSON.stringify({
+              success: true,
+              message: `Job status changed to ${job.is_open ? "Active" : "Closed"}.`,
+              job,
+              jobs,
+            }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+          );
+        }
+
+        // ==========================================
+        // 9. ACTION: DELETE JOB
+        // ==========================================
+        if (action === "delete-job" && body.id) {
+          let jobs = getLocalJobOpenings();
+          jobs = jobs.filter((j) => j.id !== body.id);
+          saveLocalJobOpenings(jobs);
+
+          return new Response(
+            JSON.stringify({
+              success: true,
+              message: "Job opening deleted successfully.",
+              jobs,
             }),
             { status: 200, headers: { "Content-Type": "application/json" } }
           );

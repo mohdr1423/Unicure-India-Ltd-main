@@ -32,6 +32,7 @@ import { Route as QualityRouteImport } from './routes/quality'
 import { Route as RequestAdminRouteImport } from './routes/request-admin'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ApiCareersRouteImport } from './routes/api/careers'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiInquiriesRouteImport } from './routes/api/inquiries'
 import { Route as ApiInquiryRouteImport } from './routes/api/inquiry'
@@ -169,6 +170,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiCareersRoute = ApiCareersRouteImport.update({
+  id: '/api/careers',
+  path: '/api/careers',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
@@ -322,6 +328,7 @@ export interface FileRoutesByFullPath {
   '/request-admin': typeof RequestAdminRoute
   '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/api/careers': typeof ApiCareersRoute
   '/api/chat': typeof ApiChatRoute
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
@@ -368,6 +375,7 @@ export interface FileRoutesByTo {
   '/quality': typeof QualityRoute
   '/request-admin': typeof RequestAdminRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/api/careers': typeof ApiCareersRoute
   '/api/chat': typeof ApiChatRoute
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
@@ -417,6 +425,7 @@ export interface FileRoutesById {
   '/request-admin': typeof RequestAdminRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/api/careers': typeof ApiCareersRoute
   '/api/chat': typeof ApiChatRoute
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
@@ -466,6 +475,7 @@ export interface FileRouteTypes {
     | '/request-admin'
     | '/reset-password'
     | '/admin'
+    | '/api/careers'
     | '/api/chat'
     | '/api/inquiries'
     | '/api/inquiry'
@@ -512,6 +522,7 @@ export interface FileRouteTypes {
     | '/quality'
     | '/request-admin'
     | '/reset-password'
+    | '/api/careers'
     | '/api/chat'
     | '/api/inquiries'
     | '/api/inquiry'
@@ -560,6 +571,7 @@ export interface FileRouteTypes {
     | '/request-admin'
     | '/reset-password'
     | '/_authenticated/admin'
+    | '/api/careers'
     | '/api/chat'
     | '/api/inquiries'
     | '/api/inquiry'
@@ -608,6 +620,7 @@ export interface RootRouteChildren {
   QualityRoute: typeof QualityRoute
   RequestAdminRoute: typeof RequestAdminRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ApiCareersRoute: typeof ApiCareersRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiInquiriesRoute: typeof ApiInquiriesRoute
   ApiInquiryRoute: typeof ApiInquiryRoute
@@ -776,6 +789,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/careers': {
+      id: '/api/careers'
+      path: '/api/careers'
+      fullPath: '/api/careers'
+      preLoaderRoute: typeof ApiCareersRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
       id: '/api/chat'
@@ -1022,6 +1042,7 @@ const rootRouteChildren: RootRouteChildren = {
   QualityRoute: QualityRoute,
   RequestAdminRoute: RequestAdminRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  ApiCareersRoute: ApiCareersRoute,
   ApiChatRoute: ApiChatRoute,
   ApiInquiriesRoute: ApiInquiriesRoute,
   ApiInquiryRoute: ApiInquiryRoute,

@@ -103,47 +103,71 @@ const benefits = [
   },
 ];
 
-const openings = [
+const DEFAULT_OPENINGS = [
   {
+    id: "job_qc_analyst",
     title: "Quality Control Analyst",
     department: "Quality Assurance",
     location: "Greater Noida, UP",
     type: "Full-time",
+    experience: "2-5 Years",
+    qualifications: "B.Sc / M.Sc Chemistry or B.Pharma",
+    description: "Responsible for analytical testing of raw materials, in-process samples, and finished dosage forms.",
     icon: FlaskConical,
   },
   {
+    id: "job_prod_supervisor",
     title: "Production Supervisor",
     department: "Manufacturing",
     location: "Roorkee, Uttarakhand",
     type: "Full-time",
+    experience: "3-6 Years",
+    qualifications: "B.Pharma / Diploma in Pharma Tech",
+    description: "Supervising granulation, compression, and coating lines for tablets and capsules.",
     icon: Factory,
   },
   {
+    id: "job_formulation_scientist",
     title: "Formulation Scientist",
     department: "R&D",
     location: "Noida, UP",
     type: "Full-time",
+    experience: "4-8 Years",
+    qualifications: "M.Pharma / Ph.D.",
+    description: "Formulation development and optimization for oral dosage forms and tech transfer.",
     icon: Microscope,
   },
   {
+    id: "job_regulatory_exec",
     title: "Regulatory Affairs Executive",
     department: "Regulatory",
     location: "Noida, UP",
     type: "Full-time",
+    experience: "2-4 Years",
+    qualifications: "B.Pharma / M.Pharma",
+    description: "Preparation of dossiers for domestic and international health authorities.",
     icon: BadgeCheck,
   },
   {
+    id: "job_packaging_operator",
     title: "Packaging Line Operator",
     department: "Manufacturing",
     location: "Greater Noida, UP",
     type: "Full-time",
+    experience: "1-3 Years",
+    qualifications: "ITI / Diploma / High School",
+    description: "Operation and maintenance of blister packaging machines and cartoners.",
     icon: Package,
   },
   {
+    id: "job_medical_sales_rep",
     title: "Medical Sales Representative",
     department: "Commercial",
     location: "Pan India",
     type: "Full-time",
+    experience: "2-5 Years",
+    qualifications: "Graduate / MBA",
+    description: "Managing institutional hospital tenders and distribution networks.",
     icon: Briefcase,
   },
 ];
@@ -156,7 +180,8 @@ const growthStats = [
 ];
 
 function CareersPage() {
-  const [selectedJob, setSelectedJob] = useState<string | null>(null);
+  const [openingsList, setOpeningsList] = useState<any[]>(DEFAULT_OPENINGS);
+  const [selectedJob, setSelectedJob] = useState<any | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [appForm, setAppForm] = useState({
     name: "",
@@ -165,6 +190,20 @@ function CareersPage() {
     experience: "",
     qualifications: "",
     message: "",
+  });
+
+  // Load live jobs from server API
+  useState(() => {
+    if (typeof window !== "undefined") {
+      fetch("/api/careers")
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.success && data.jobs?.length) {
+            setOpeningsList(data.jobs);
+          }
+        })
+        .catch(() => {});
+    }
   });
 
   const handleApplySubmit = async (e: React.FormEvent) => {
@@ -326,42 +365,64 @@ ${appForm.message || "No cover note provided."}
             </p>
           </div>
           <div className="grid gap-4 max-w-4xl mx-auto">
-            {openings.map((job) => (
-              <div
-                key={job.title}
-                onClick={() => setSelectedJob(job.title)}
-                className="group flex items-center gap-5 rounded-2xl border border-border bg-white p-6 shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
-              >
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-brand text-white shadow-glow">
-                  <job.icon className="h-5 w-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className="text-base font-semibold group-hover:text-primary transition-colors">
-                      {job.title}
-                    </h3>
-                    <span className="text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition">
-                      Apply Now
-                    </span>
+            {openingsList.map((job) => {
+              const JobIcon = job.icon || Briefcase;
+              return (
+                <div
+                  key={job.id || job.title}
+                  onClick={() => setSelectedJob(job.title || job)}
+                  className="group rounded-2xl border border-border bg-white p-6 shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-brand text-white shadow-glow mt-0.5">
+                      <JobIcon className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                          {job.title}
+                        </h3>
+                        <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition shrink-0">
+                          Apply Now
+                        </span>
+                      </div>
+                      {job.description && (
+                        <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                          {job.description}
+                        </p>
+                      )}
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-1.5 font-medium text-foreground/80">
+                          <Briefcase className="h-3.5 w-3.5 text-primary" />
+                          {job.department}
+                        </span>
+                        <span className="flex items-center gap-1.5 font-medium text-foreground/80">
+                          <MapPin className="h-3.5 w-3.5 text-primary" />
+                          {job.location}
+                        </span>
+                        {job.employment_type && (
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="h-3.5 w-3.5 text-primary" />
+                            {job.employment_type}
+                          </span>
+                        )}
+                        {job.experience && (
+                          <span className="flex items-center gap-1.5 bg-secondary/80 px-2 py-0.5 rounded text-[11px] font-medium text-foreground">
+                            Exp: {job.experience}
+                          </span>
+                        )}
+                        {job.qualifications && (
+                          <span className="flex items-center gap-1.5 bg-secondary/80 px-2 py-0.5 rounded text-[11px] font-medium text-foreground">
+                            {job.qualifications}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0 mt-1" />
                   </div>
-                  <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Briefcase className="h-3.5 w-3.5" />
-                      {job.department}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5" />
-                      {job.location}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
-                      {job.type}
-                    </span>
-                  </div>
                 </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

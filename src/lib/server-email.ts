@@ -18,7 +18,7 @@ export interface ServerInquiryRecord {
   inquiry_type: string;
   source: string;
   page_url?: string;
-  email_status: "sent" | "failed" | "logged" | "pending";
+  email_status: "sent" | "failed" | "logged" | "pending" | "recorded" | "received";
   email_provider?: string;
   error_log?: string;
   metadata?: Record<string, string | number | boolean | null>;

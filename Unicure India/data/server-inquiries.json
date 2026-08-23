@@ -1,5 +1,35 @@
 [
   {
+    "id": "inq_1787494113371_vib9s2",
+    "created_at": "8/23/2026, 7:38:33 PM",
+    "name": "Riyaz Test Buyer",
+    "email": "buyer.test@example.com",
+    "company": "Pharma Retail Ltd",
+    "phone": "+91 9988776655",
+    "country": "India",
+    "message": "Need 100,000 packs of Paracetamol 650mg tablets contract manufactured.",
+    "inquiry_type": "Contract Manufacturing Quotation",
+    "source": "Contact Page Live Test",
+    "page_url": "/",
+    "email_status": "recorded",
+    "email_provider": "Leads Portal Direct Intake"
+  },
+  {
+    "id": "inq_1787493604330_tzntp8",
+    "created_at": "8/23/2026, 7:30:04 PM",
+    "name": "jack",
+    "email": "xyz@gmail.com",
+    "company": "nick johnson",
+    "phone": "00000000000",
+    "country": "Nigeria",
+    "message": "hello how are you ?",
+    "inquiry_type": "Contact Form / Quotation Request",
+    "source": "Contact Page — Send an Inquiry Form",
+    "page_url": "/contact",
+    "email_status": "sent",
+    "email_provider": "Resend (ID: aa47369e-51b5-4218-8ad6-b9353ba433c0)"
+  },
+  {
     "id": "inq_1786898621349_zfb1oh",
     "created_at": "8/16/2026, 10:13:41 PM",
     "name": "Dr. Ananya Sharma (Hospital Medical Lead)",
