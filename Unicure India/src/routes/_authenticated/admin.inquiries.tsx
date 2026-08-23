@@ -16,6 +16,8 @@ import {
   Building2,
   AlertTriangle,
   RotateCw,
+  Download,
+  FileText,
 } from "lucide-react";
 import type { ServerInquiryRecord } from "@/lib/server-email";
 
@@ -254,6 +256,28 @@ function AdminInquiriesPage() {
                 <div className="text-xs text-muted-foreground flex items-center gap-1.5">
                   <Building2 className="h-3.5 w-3.5" /> Company:{" "}
                   <strong className="text-foreground font-medium">{inq.company}</strong>
+                </div>
+              )}
+
+              {/* Resume Attachment Card if attached */}
+              {(inq.metadata?.resumeFileName || inq.metadata?.resumeDataUrl) && (
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border border-emerald-300 bg-emerald-50/70 p-3 text-xs">
+                  <div className="flex items-center gap-2 text-emerald-900 font-medium">
+                    <FileText className="h-4 w-4 text-emerald-600 shrink-0" />
+                    <span>Attached CV: <strong>{String(inq.metadata?.resumeFileName || "Resume.pdf")}</strong></span>
+                    {inq.metadata?.resumeFileSize && (
+                      <span className="text-emerald-700 font-mono">({inq.metadata.resumeFileSize})</span>
+                    )}
+                  </div>
+                  {inq.metadata?.resumeDataUrl && (
+                    <a
+                      href={String(inq.metadata.resumeDataUrl)}
+                      download={String(inq.metadata?.resumeFileName || "Candidate_CV.pdf")}
+                      className="inline-flex items-center gap-1.5 rounded bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 font-semibold text-xs transition"
+                    >
+                      <Download className="h-3.5 w-3.5" /> Download CV
+                    </a>
+                  )}
                 </div>
               )}
 

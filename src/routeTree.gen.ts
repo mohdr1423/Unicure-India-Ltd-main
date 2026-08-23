@@ -37,6 +37,7 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiInquiriesRouteImport } from './routes/api/inquiries'
 import { Route as ApiInquiryRouteImport } from './routes/api/inquiry'
 import { Route as ApiLeadsAdminRouteImport } from './routes/api/leads-admin'
+import { Route as CareersApplyRouteImport } from './routes/careers.apply'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminAboutRouteImport } from './routes/_authenticated/admin.about'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
@@ -196,6 +197,11 @@ const ApiLeadsAdminRoute = ApiLeadsAdminRouteImport.update({
   path: '/api/leads-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersApplyRoute = CareersApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => CareersRoute,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -309,7 +315,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
   '/certifications': typeof CertificationsRoute
   '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
@@ -333,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
   '/api/leads-admin': typeof ApiLeadsAdminRoute
+  '/careers/apply': typeof CareersApplyRoute
   '/admin/about': typeof AuthenticatedAdminAboutRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -357,7 +364,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
   '/certifications': typeof CertificationsRoute
   '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
@@ -380,6 +387,7 @@ export interface FileRoutesByTo {
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
   '/api/leads-admin': typeof ApiLeadsAdminRoute
+  '/careers/apply': typeof CareersApplyRoute
   '/admin/about': typeof AuthenticatedAdminAboutRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -406,7 +414,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
   '/certifications': typeof CertificationsRoute
   '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
@@ -430,6 +438,7 @@ export interface FileRoutesById {
   '/api/inquiries': typeof ApiInquiriesRoute
   '/api/inquiry': typeof ApiInquiryRoute
   '/api/leads-admin': typeof ApiLeadsAdminRoute
+  '/careers/apply': typeof CareersApplyRoute
   '/_authenticated/admin/about': typeof AuthenticatedAdminAboutRoute
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -480,6 +489,7 @@ export interface FileRouteTypes {
     | '/api/inquiries'
     | '/api/inquiry'
     | '/api/leads-admin'
+    | '/careers/apply'
     | '/admin/about'
     | '/admin/audit'
     | '/admin/branding'
@@ -527,6 +537,7 @@ export interface FileRouteTypes {
     | '/api/inquiries'
     | '/api/inquiry'
     | '/api/leads-admin'
+    | '/careers/apply'
     | '/admin/about'
     | '/admin/audit'
     | '/admin/branding'
@@ -576,6 +587,7 @@ export interface FileRouteTypes {
     | '/api/inquiries'
     | '/api/inquiry'
     | '/api/leads-admin'
+    | '/careers/apply'
     | '/_authenticated/admin/about'
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/branding'
@@ -602,7 +614,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
-  CareersRoute: typeof CareersRoute
+  CareersRoute: typeof CareersRouteWithChildren
   CertificationsRoute: typeof CertificationsRoute
   ClientsRoute: typeof ClientsRoute
   ContactRoute: typeof ContactRoute
@@ -825,6 +837,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiLeadsAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/apply': {
+      id: '/careers/apply'
+      path: '/apply'
+      fullPath: '/careers/apply'
+      preLoaderRoute: typeof CareersApplyRouteImport
+      parentRoute: typeof CareersRoute
+    }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
       path: '/'
@@ -1019,12 +1038,23 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface CareersRouteChildren {
+  CareersApplyRoute: typeof CareersApplyRoute
+}
+
+const CareersRouteChildren: CareersRouteChildren = {
+  CareersApplyRoute: CareersApplyRoute,
+}
+
+const CareersRouteWithChildren =
+  CareersRoute._addFileChildren(CareersRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
-  CareersRoute: CareersRoute,
+  CareersRoute: CareersRouteWithChildren,
   CertificationsRoute: CertificationsRoute,
   ClientsRoute: ClientsRoute,
   ContactRoute: ContactRoute,
