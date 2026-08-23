@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Linkedin, Youtube, Globe, ShoppingBag, Star, ChevronDown } from "lucide-react";
+import { Mail, MapPin, Phone, Linkedin, Youtube, Globe, ShoppingBag, Star, ChevronDown, Lock } from "lucide-react";
 import { useSiteChrome } from "./SiteChromeContext";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -273,7 +273,7 @@ export function Footer() {
                 {l.label}
               </a>
             ))}
-            <Link to="/leads-portal" className="hover:text-emerald-400 text-white/40 transition-colors inline-flex items-center gap-1">
+            <Link to={"/leads-portal" as any} className="hover:text-emerald-400 text-white/40 transition-colors inline-flex items-center gap-1">
               <Lock className="h-3 w-3" />
               <span>Admin Leads</span>
             </Link>
