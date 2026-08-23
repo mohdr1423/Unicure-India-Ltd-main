@@ -12,6 +12,7 @@ import {
   saveLocalJobOpenings,
   type JobOpening,
 } from "./careers";
+import { safeWriteJsonFile } from "@/lib/storage-helper";
 
 function getEnv(key: string): string | undefined {
   if (process.env[key]) return process.env[key];
@@ -159,14 +160,9 @@ export const Route = createFileRoute("/api/leads-admin")({
           // 4. ACTION: DELETE LEAD
           // ==========================================
           if (action === "delete-lead" && body.id) {
-            const dataDir = path.resolve(process.cwd(), "data");
-            const inquiriesFile = path.resolve(dataDir, "server-inquiries.json");
-            let list: ServerInquiryRecord[] = [];
-            if (fs.existsSync(inquiriesFile)) {
-              list = JSON.parse(fs.readFileSync(inquiriesFile, "utf-8"));
-            }
+            const list = getLocalInquiriesLedger();
             const updated = list.filter((r) => r.id !== body.id);
-            fs.writeFileSync(inquiriesFile, JSON.stringify(updated, null, 2), "utf-8");
+            safeWriteJsonFile("server-inquiries.json", updated);
 
             return new Response(
               JSON.stringify({

@@ -24,9 +24,10 @@ export interface ServerInquiryRecord {
   metadata?: Record<string, string | number | boolean | null>;
 }
 
-// Local filesystem persistent storage path
-const DATA_DIR = path.resolve(process.cwd(), "data");
-const INQUIRIES_FILE = path.resolve(DATA_DIR, "server-inquiries.json");
+import { safeReadJsonFile, safeWriteJsonFile } from "./storage-helper";
+
+// In-memory fallback list to ensure zero failure on serverless
+let inMemoryInquiries: ServerInquiryRecord[] = [];
 
 function getEnv(key: string): string | undefined {
   if (process.env[key]) return process.env[key];
@@ -46,36 +47,18 @@ function getEnv(key: string): string | undefined {
   return undefined;
 }
 
-function ensureDataDir(): void {
-  try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    if (!fs.existsSync(INQUIRIES_FILE)) {
-      fs.writeFileSync(INQUIRIES_FILE, JSON.stringify([], null, 2), "utf-8");
-    }
-  } catch (err) {
-    console.warn("[ServerInquiry] Failed to initialize local data directory:", err);
-  }
-}
-
 export function saveInquiryToLocalLedger(record: ServerInquiryRecord): void {
   try {
-    ensureDataDir();
-    let list: ServerInquiryRecord[] = [];
-    if (fs.existsSync(INQUIRIES_FILE)) {
-      const raw = fs.readFileSync(INQUIRIES_FILE, "utf-8");
-      list = JSON.parse(raw);
-    }
-    // Check if record exists, update or prepend
+    let list = safeReadJsonFile<ServerInquiryRecord[]>("server-inquiries.json", inMemoryInquiries);
     const idx = list.findIndex((r) => r.id === record.id);
     if (idx >= 0) {
       list[idx] = record;
     } else {
-      list.unshift(record);
+      list = [record, ...list];
     }
     if (list.length > 1000) list = list.slice(0, 1000);
-    fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(list, null, 2), "utf-8");
+    inMemoryInquiries = list;
+    safeWriteJsonFile("server-inquiries.json", list);
   } catch (err) {
     console.error("[ServerInquiry] Error saving to local ledger:", err);
   }
@@ -83,15 +66,13 @@ export function saveInquiryToLocalLedger(record: ServerInquiryRecord): void {
 
 export function getLocalInquiriesLedger(): ServerInquiryRecord[] {
   try {
-    ensureDataDir();
-    if (fs.existsSync(INQUIRIES_FILE)) {
-      const raw = fs.readFileSync(INQUIRIES_FILE, "utf-8");
-      return JSON.parse(raw);
-    }
+    const list = safeReadJsonFile<ServerInquiryRecord[]>("server-inquiries.json", inMemoryInquiries);
+    if (list.length > 0) inMemoryInquiries = list;
+    return inMemoryInquiries;
   } catch (err) {
     console.error("[ServerInquiry] Error reading local ledger:", err);
   }
-  return [];
+  return inMemoryInquiries;
 }
 
 /**

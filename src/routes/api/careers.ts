@@ -176,34 +176,30 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
   },
 ];
 
+import { safeReadJsonFile, safeWriteJsonFile } from "@/lib/storage-helper";
+
+let inMemoryJobs: JobOpening[] = DEFAULT_SAMPLE_JOBS;
+
 export function getLocalJobOpenings(): JobOpening[] {
-  const dataDir = path.resolve(process.cwd(), "data");
-  const filePath = path.resolve(dataDir, "job-openings.json");
   try {
-    if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath, "utf-8");
-      const list = JSON.parse(raw);
-      if (Array.isArray(list) && list.length > 0) {
-        return list;
-      }
+    const list = safeReadJsonFile<JobOpening[]>("job-openings.json", inMemoryJobs);
+    if (Array.isArray(list) && list.length > 0) {
+      inMemoryJobs = list;
+      return list;
     }
   } catch (err) {
     console.error("[Careers API] Error reading job-openings.json:", err);
   }
-  // Initialize with sample jobs if empty
-  try {
-    saveLocalJobOpenings(DEFAULT_SAMPLE_JOBS);
-  } catch {}
-  return DEFAULT_SAMPLE_JOBS;
+  return inMemoryJobs;
 }
 
 export function saveLocalJobOpenings(jobs: JobOpening[]): void {
-  const dataDir = path.resolve(process.cwd(), "data");
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
+  try {
+    inMemoryJobs = jobs;
+    safeWriteJsonFile("job-openings.json", jobs);
+  } catch (err) {
+    console.warn("[Careers API] Non-critical save error:", err);
   }
-  const filePath = path.resolve(dataDir, "job-openings.json");
-  fs.writeFileSync(filePath, JSON.stringify(jobs, null, 2), "utf-8");
 }
 
 export const Route = createFileRoute("/api/careers")({
