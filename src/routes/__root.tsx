@@ -221,16 +221,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               contactPoint: [
                 {
                   "@type": "ContactPoint",
-                  telephone: "+91-8882674843",
-                  email: "humanrealityofficial@gmail.com",
+                  telephone: "+91-120-4786786",
+                  email: "inquiries@unicureindia.com",
                   contactType: "sales",
                   areaServed: "Worldwide",
                   availableLanguage: ["English", "Hindi"],
                 },
                 {
                   "@type": "ContactPoint",
-                  telephone: "+91-8882674843",
-                  email: "humanrealityofficial@gmail.com",
+                  telephone: "+91-120-4786786",
+                  email: "unicure@unicureindia.com",
                   contactType: "customer support",
                   areaServed: "IN",
                   availableLanguage: ["English", "Hindi"],

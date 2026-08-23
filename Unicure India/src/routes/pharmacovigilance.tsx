@@ -523,27 +523,27 @@ function PharmacovigilancePage() {
 
                 <div className="mt-6 space-y-4">
                   <a
-                    href="mailto:humanrealityofficial@gmail.com"
+                    href="mailto:pharmacovigilance@unicureindia.com"
                     className="flex items-center gap-3.5 p-4 rounded-2xl bg-muted/50 border border-border hover:border-primary/50 transition group"
                   >
                     <Mail className="h-5 w-5 text-primary shrink-0" />
                     <div>
                       <div className="text-xs text-muted-foreground font-medium">Official Safety Email</div>
                       <div className="text-sm font-semibold text-foreground group-hover:text-primary transition">
-                        humanrealityofficial@gmail.com
+                        pharmacovigilance@unicureindia.com
                       </div>
                     </div>
                   </a>
 
                   <a
-                    href="tel:8882674843"
+                    href="tel:01204786786"
                     className="flex items-center gap-3.5 p-4 rounded-2xl bg-muted/50 border border-border hover:border-primary/50 transition group"
                   >
                     <PhoneCall className="h-5 w-5 text-primary shrink-0" />
                     <div>
-                      <div className="text-xs text-muted-foreground font-medium">Helpline Phone</div>
+                      <div className="text-xs text-muted-foreground font-medium">Safety Helpline Phone</div>
                       <div className="text-sm font-semibold text-foreground group-hover:text-primary transition">
-                        +91 8882674843
+                        0120-4786786 / +91 120 4786786
                       </div>
                     </div>
                   </a>

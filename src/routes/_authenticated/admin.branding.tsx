@@ -19,8 +19,8 @@ const DEFAULTS: Branding = {
   company_name: "Unicure India Ltd",
   primary_color: "#0b3b8f",
   accent_color: "#2b8ac9",
-  phone: "8882674843",
-  email: "humanrealityofficial@gmail.com",
+  phone: "0120-4786786",
+  email: "unicure@unicureindia.com",
   address: "C-21, 22 & 23 Sector-3, Noida-201301, U.P., India",
 };
 

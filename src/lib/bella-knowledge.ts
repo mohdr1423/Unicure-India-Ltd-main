@@ -66,11 +66,11 @@ Unicure India operates 3 modern manufacturing facilities in North India:
   Analgesics & Antipyretics, Antibiotics & Antibacterials, Cardiovascular Drugs, Gastrointestinal (Antacids, PPIs), Respiratory & Antiallergic, Central Nervous System / Neuro-Psychiatry, Dermatology & Topical Ointments, Anti-diabetics, and Multivitamins & Nutraceuticals.
 
 9. CONTACT & LOCATION DETAILS:
-- Registered Office & Unit-I: C-22, Phase-II, Noida, Gautam Buddha Nagar, Uttar Pradesh 201305, India.
+- Registered Office & Unit-I: C-21, 22 & 23 Sector-3, Noida-201301, Gautam Buddha Nagar, Uttar Pradesh, India.
 - Unit-II: Roorkee, Uttarakhand.
 - Unit-III: Greater Noida, Uttar Pradesh.
-- Email: humanrealityofficial@gmail.com
-- Phone: +91 8882674843 / 8882674843
+- Email: unicure@unicureindia.com (Quotations: inquiries@unicureindia.com)
+- Phone: 0120-4786786 / +91 120 4786786
 - Official YouTube Channel: https://youtube.com/@unicureindialtd9851?si=iPi8Tic09i2XwITk
 - Website: https://unicureindia.com
 
@@ -82,7 +82,7 @@ BELLA'S CONVERSATIONAL RULES:
 4. UNKNOWN QUESTIONS: If a question is outside the verified information above, say:
 "I don't have enough verified information to answer that accurately." then provide the closest relevant company information from the website.
 5. EXPLICIT QUOTE / ORDER REQUESTS: Only if the visitor explicitly asks for a quotation, pricing, contract manufacturing proposal, or business contact, say:
-"For formal quotations, manufacturing proposals, and business enquiries, you can reach our team via our [Contact Page](/contact) or email us directly at humanrealityofficial@gmail.com."`;
+"For formal quotations, manufacturing proposals, and business enquiries, you can reach our team via our [Contact Page](/contact) or email us directly at unicure@unicureindia.com."`;
 
 /**
  * Natural offline fallback knowledge matcher for Bella.
@@ -347,7 +347,7 @@ export function getLocalBellaResponse(userMessage: string): { reply: string } {
   ) {
     return {
       reply:
-        "Unicure India employs over 600 professionals. We regularly recruit across production, quality control, R&D, regulatory affairs, and commercial operations. You can view open positions and submit your application on our [Careers page](/careers) or email humanrealityofficial@gmail.com.",
+        "Unicure India employs over 600 professionals. We regularly recruit across production, quality control, R&D, regulatory affairs, and commercial operations. You can view open positions and submit your application on our [Careers page](/careers) or email careers@unicureindia.com.",
     };
   }
 
@@ -365,7 +365,7 @@ export function getLocalBellaResponse(userMessage: string): { reply: string } {
   ) {
     return {
       reply:
-        "You can connect with our team through the following channels:\n\n- **Email:** humanrealityofficial@gmail.com\n- **Phone:** +91 8882674843 / 8882674843\n- **Corporate Office:** C-22, Phase-II, Noida, UP 201305, India\n- **Online Inquiry:** You can submit your requirements on our [Contact page](/contact).",
+        "You can connect with our team through the following channels:\n\n- **Corporate Email:** unicure@unicureindia.com\n- **Sales & Quotes:** inquiries@unicureindia.com\n- **Phone:** 0120-4786786 / +91 120 4786786\n- **Head Office:** C-21, 22 & 23 Sector-3, Noida-201301, U.P., India\n- **Online Inquiry:** You can submit your requirements on our [Contact page](/contact).",
     };
   }
 

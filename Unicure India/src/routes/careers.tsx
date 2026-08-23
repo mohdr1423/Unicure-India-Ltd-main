@@ -210,7 +210,7 @@ ${appForm.message || "No cover note provided."}
       }
     } catch {
       setSubmitting(false);
-      toast.error("Network error. Please email humanrealityofficial@gmail.com directly.");
+      toast.error("Network error. Please email careers@unicureindia.com directly.");
     }
   };
 
@@ -382,10 +382,10 @@ ${appForm.message || "No cover note provided."}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <a
-                  href="mailto:humanrealityofficial@gmail.com"
+                  href="mailto:careers@unicureindia.com"
                   className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[color:var(--brand-blue-dark)] shadow-elegant hover:shadow-glow transition"
                 >
-                  <Mail className="h-4 w-4" /> humanrealityofficial@gmail.com
+                  <Mail className="h-4 w-4" /> careers@unicureindia.com
                 </a>
                 <Link
                   to="/contact"
@@ -414,7 +414,7 @@ ${appForm.message || "No cover note provided."}
               <span className="text-xs font-bold uppercase tracking-wider text-primary">Apply Online</span>
               <h3 className="text-xl font-bold text-foreground mt-0.5">{selectedJob}</h3>
               <p className="text-xs text-muted-foreground mt-1">
-                Your application will be delivered directly to our HR leadership at <strong>humanrealityofficial@gmail.com</strong>.
+                Your application will be delivered directly to our HR leadership at <strong>careers@unicureindia.com</strong>.
               </p>
             </div>
 

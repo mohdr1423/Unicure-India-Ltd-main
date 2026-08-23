@@ -23,17 +23,17 @@ const DEFAULTS: ContactContent = {
     subtitle: "Three manufacturing units across North India. Reach our sales, export or contract-manufacturing teams.",
   },
   units: [
-    { name: "Unit-I", heading: "Manufacturing Unit", address: "C-21, 22 & 23 Sector-3, Noida-201301, Distt. Gautam Buddha Nagar (U.P.)", email: "humanrealityofficial@gmail.com", phone: "8882674843" },
-    { name: "Unit-II", heading: "Manufacturing Unit", address: "Plot No. 46(B)/49B, Village Raipur, Bhagwanpur, Roorkee, Distt. Haridwar-247662, Uttarakhand", email: "humanrealityofficial@gmail.com", phone: "8882674843" },
-    { name: "Unit-III", heading: "Manufacturing Unit", address: "Plot No. 112 & 113, Ecotech-12, Behind Greater Noida (West), Bishrakh, Gautam Buddha Nagar, Uttar Pradesh-201310", email: "humanrealityofficial@gmail.com", phone: "8882674843" },
+    { name: "Unit-I", heading: "Manufacturing Unit", address: "C-21, 22 & 23 Sector-3, Noida-201301, Distt. Gautam Buddha Nagar (U.P.)", email: "unicure@unicureindia.com", phone: "0120-4786786" },
+    { name: "Unit-II", heading: "Manufacturing Unit", address: "Plot No. 46(B)/49B, Village Raipur, Bhagwanpur, Roorkee, Distt. Haridwar-247662, Uttarakhand", email: "unicure@unicureindia.com", phone: "0120-4786786" },
+    { name: "Unit-III", heading: "Manufacturing Unit", address: "Plot No. 112 & 113, Ecotech-12, Behind Greater Noida (West), Bishrakh, Gautam Buddha Nagar, Uttar Pradesh-201310", email: "unicure@unicureindia.com", phone: "0120-4786786" },
   ],
   form_title: "Talk to our team",
   form_intro:
     "Whether you're an institutional buyer, an international distributor, or exploring a contract-manufacturing partnership — we'd love to hear from you.",
   channels: [
-    { icon: "phone", title: "Sales & Quotes", value: "+91 8882674843" },
-    { icon: "email", title: "General & Inquiries", value: "humanrealityofficial@gmail.com" },
-    { icon: "email", title: "Direct Inquiries", value: "humanrealityofficial@gmail.com" },
+    { icon: "phone", title: "Corporate Sales & Inquiries", value: "+91 120 4786786" },
+    { icon: "email", title: "General & Corporate", value: "unicure@unicureindia.com" },
+    { icon: "email", title: "Quotations & Exports", value: "inquiries@unicureindia.com" },
   ],
 };
 

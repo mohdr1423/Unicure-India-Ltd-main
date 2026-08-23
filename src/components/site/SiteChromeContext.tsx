@@ -10,8 +10,8 @@ const FALLBACK: PublicSiteContent = {
     company_name: "Unicure India Ltd",
     primary_color: "#C8102E",
     accent_color: "#D4451A",
-    phone: "8882674843",
-    email: "humanrealityofficial@gmail.com",
+    phone: "0120-4786786",
+    email: "unicure@unicureindia.com",
     address: "C-21, 22 & 23 Sector-3, Noida-201301, U.P., India",
   },
   nav: {

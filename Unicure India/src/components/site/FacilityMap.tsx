@@ -20,8 +20,8 @@ const LOCATIONS: UnitLocation[] = [
     unit: "Unit-I",
     name: "Noida Manufacturing Unit",
     address: "C-21, 22 & 23 Sector-3, Noida-201301, Distt. Gautam Buddha Nagar (U.P.)",
-    email: "humanrealityofficial@gmail.com",
-    phone: "8882674843",
+    email: "unicure@unicureindia.com",
+    phone: "0120-4786786",
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.748293708571!2d77.31422737626922!3d28.584799075691065!2m3!1f0!f0!f0!m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce4598d9ef673%3A0xb36efebae8f0bf19!2sUnicure%20India%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
     mapLink: "https://maps.google.com/?q=Unicure+India+Sector+3+Noida",
@@ -33,8 +33,8 @@ const LOCATIONS: UnitLocation[] = [
     name: "Roorkee Manufacturing Unit",
     address:
       "Plot No. 46(B)/49B, Village Raipur, Bhagwanpur, Roorkee, Distt. Haridwar-247662, Uttarakhand",
-    email: "humanrealityofficial@gmail.com",
-    phone: "8882674843",
+    email: "unicure@unicureindia.com",
+    phone: "0120-4786786",
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13809.5218764121!2d77.7950!3d29.9320!2m3!1f0!f0!f0!m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390eb3b76426cf1d%3A0x6b44a2c5a2c2c0a1!2sBhagwanpur%2C%20Roorkee%2C%20Uttarakhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
     mapLink: "https://maps.google.com/?q=Bhagwanpur+Roorkee+Uttarakhand",
@@ -46,8 +46,8 @@ const LOCATIONS: UnitLocation[] = [
     name: "Greater Noida Manufacturing Unit",
     address:
       "Plot No. 112 & 113, Ecotech-12, Behind Greater Noida (West), Bishrakh, Gautam Buddha Nagar, UP-201310",
-    email: "humanrealityofficial@gmail.com",
-    phone: "8882674843",
+    email: "unicure@unicureindia.com",
+    phone: "0120-4786786",
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14012.38573194098!2d77.4250!3d28.5950!2m3!1f0!f0!f0!m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee0504bf1a35%3A0x7d819972322301c2!2sEcotech%2012%2C%20Greater%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
     mapLink: "https://maps.google.com/?q=Ecotech+12+Greater+Noida+West",

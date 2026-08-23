@@ -83,7 +83,7 @@ export function Header() {
 
   const ctaLabel: string = navCfg?.cta_label ?? "Get a Quote";
   const ctaTo: string = navCfg?.cta_to ?? "/contact";
-  const phoneNum: string = branding?.phone ?? "8882674843";
+  const phoneNum: string = branding?.phone ?? "0120-4786786";
 
   const headerRef = useRef<HTMLElement>(null);
 

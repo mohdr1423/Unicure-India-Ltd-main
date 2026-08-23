@@ -73,14 +73,14 @@ export async function submitCentralInquiry(
       success: false,
       message:
         data.message ||
-        "We couldn't complete your enquiry right now. Please try again or contact us directly at humanrealityofficial@gmail.com.",
+        "We couldn't complete your enquiry right now. Please try again or contact us directly at unicure@unicureindia.com.",
     };
   } catch (err) {
     console.error("[CentralInquiry] Network error:", err);
     return {
       success: false,
       message:
-        "Network connection error. Please try again or email humanrealityofficial@gmail.com directly.",
+        "Network connection error. Please try again or email unicure@unicureindia.com directly.",
     };
   }
 }

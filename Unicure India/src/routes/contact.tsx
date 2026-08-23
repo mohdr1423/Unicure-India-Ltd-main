@@ -174,24 +174,24 @@ function ContactPage() {
       heading: "Manufacturing Unit",
       address:
         "C-21, 22 & 23 Sector-3, Noida-201301, Distt. Gautam Buddha Nagar (U.P.)",
-      email: "humanrealityofficial@gmail.com",
-      phone: "8882674843",
+      email: "unicure@unicureindia.com",
+      phone: "0120-4786786",
     },
     {
       name: "Unit-II",
       heading: "Manufacturing Unit",
       address:
         "Plot No. 46(B)/49B, Village Raipur, Bhagwanpur, Roorkee, Distt. Haridwar-247662, Uttarakhand",
-      email: "humanrealityofficial@gmail.com",
-      phone: "8882674843",
+      email: "unicure@unicureindia.com",
+      phone: "0120-4786786",
     },
     {
       name: "Unit-III",
       heading: "Manufacturing Unit",
       address:
         "Plot No. 112 & 113, Ecotech-12, Behind Greater Noida (West), Bishrakh, Gautam Buddha Nagar, Uttar Pradesh-201310",
-      email: "humanrealityofficial@gmail.com",
-      phone: "8882674843",
+      email: "unicure@unicureindia.com",
+      phone: "0120-4786786",
     },
   ];
   const units = c?.units?.length ? c.units : defaultUnits;
@@ -200,12 +200,12 @@ function ContactPage() {
     title: string;
     value: string;
   }[] = [
-    { icon: "phone", title: "Sales & Inquiries", value: "+91 8882674843" },
-    { icon: "email", title: "General & Quotes", value: "humanrealityofficial@gmail.com" },
+    { icon: "phone", title: "Corporate Sales & Inquiries", value: "+91 120 4786786" },
+    { icon: "email", title: "General & Corporate", value: "unicure@unicureindia.com" },
     {
       icon: "email",
-      title: "Direct Inquiries",
-      value: "humanrealityofficial@gmail.com",
+      title: "Quotations & Exports",
+      value: "inquiries@unicureindia.com",
     },
   ];
   const channels = c?.channels?.length ? c.channels : defaultChannels;
@@ -261,7 +261,7 @@ function ContactPage() {
       }
     } catch {
       setServerError(
-        "We couldn't complete your enquiry right now. Please try again or email us directly at humanrealityofficial@gmail.com.",
+        "We couldn't complete your enquiry right now. Please try again or email us directly at unicure@unicureindia.com.",
       );
       setSubmitState("error");
     }
