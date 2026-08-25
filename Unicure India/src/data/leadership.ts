@@ -21,7 +21,7 @@ export const EXECUTIVE_LEADERS: ExecutiveLeader[] = [
     id: "abdul-mateen",
     name: "Mr. Abdul Mateen",
     designation: "Managing Director",
-    photo: "/images/executives/abdul-mateen.jpg",
+    photo: "/images/executives/abdul-mateen.webp",
     altText: "Mr. Abdul Mateen — Managing Director",
     href: "/md-message",
     shortBio:
@@ -35,7 +35,7 @@ export const EXECUTIVE_LEADERS: ExecutiveLeader[] = [
     id: "amin-ul-aziz",
     name: "Mr. Amin Ul Aziz",
     designation: "Vice President of Business Development",
-    photo: "/images/executives/amin-ul-aziz.jpg",
+    photo: "/images/executives/amin-ul-aziz.webp",
     altText: "Mr. Amin Ul Aziz — Vice President of Business Development",
     href: "/leadership#amin",
     shortBio:
@@ -49,7 +49,7 @@ export const EXECUTIVE_LEADERS: ExecutiveLeader[] = [
     id: "kashish-aziz",
     name: "Dr. Kashish Aziz",
     designation: "Vice President of Quality Assurance",
-    photo: "/images/executives/kashish-aziz.jpg",
+    photo: "/images/executives/kashish-aziz.webp",
     altText: "Dr. Kashish Aziz — Vice President of Quality Assurance",
     href: "/leadership#kashish",
     shortBio:

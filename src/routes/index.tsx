@@ -32,7 +32,7 @@ import { SafeImage } from "@/components/site/SafeImage";
 import { useSiteSetting } from "@/hooks/use-site-setting";
 import { useSiteContent } from "@/hooks/use-site-content";
 import { RichContent } from "@/components/site/RichContent";
-const hero = "/images/dron-pic-unit3.png";
+const hero = "/images/dron-pic-unit3.webp";
 import lab from "@/assets/lab-research.jpg";
 import products from "@/assets/products.jpg";
 
@@ -49,10 +49,10 @@ const clientLogos = [
 ];
 
 const facilityImages = [
-  { src: "/images/dron-pic-unit3.png", alt: "Unicure India Ltd – Greater Noida plant" },
-  { src: "/images/plant.png", alt: "Unicure India Ltd – Noida facility" },
-  { src: "/images/admin-office.png", alt: "Unicure India Ltd – Corporate Office" },
-  { src: "/images/plant-2.png", alt: "Unicure India Ltd – Roorkee unit" },
+  { src: "/images/dron-pic-unit3.webp", alt: "Unicure India Ltd – Greater Noida plant" },
+  { src: "/images/plant.webp", alt: "Unicure India Ltd – Noida facility" },
+  { src: "/images/admin-office.webp", alt: "Unicure India Ltd – Corporate Office" },
+  { src: "/images/plant-2.webp", alt: "Unicure India Ltd – Roorkee unit" },
 ];
 
 import { EXECUTIVE_LEADERS } from "@/data/leadership";
@@ -395,10 +395,12 @@ function HomePage() {
             <div className="relative">
               <div className="absolute -inset-4 rounded-3xl bg-gradient-brand opacity-20 blur-2xl" />
               <img
-                src="/images/mfg-machine.png"
+                src="/images/mfg-machine.webp"
                 alt="Unicure India High-speed manufacturing facility"
                 className="relative rounded-3xl shadow-elegant w-full object-cover aspect-[4/3]"
                 loading="lazy"
+                width={800}
+                height={600}
               />
               <div className="absolute -bottom-6 -right-6 hidden md:block glass rounded-2xl p-5 shadow-card max-w-[240px]">
                 <div className="flex items-center gap-3">

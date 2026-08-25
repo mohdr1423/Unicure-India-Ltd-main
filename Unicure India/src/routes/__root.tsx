@@ -18,7 +18,6 @@ import {
   markTabAlive,
   shouldDropEphemeralSession,
 } from "@/lib/remember-me";
-import { SplashIntro } from "@/components/site/SplashIntro";
 
 function NotFoundComponent() {
   return (
@@ -106,6 +105,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/images/dron-pic-unit3.webp",
+        type: "image/webp",
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
@@ -340,7 +345,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SplashIntro />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

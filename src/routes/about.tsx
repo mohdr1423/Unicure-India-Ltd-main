@@ -137,7 +137,7 @@ function AboutPage() {
               <ScrollReveal variant="slide-left">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-border group">
                   <img
-                    src="/images/admin-office.png"
+                    src="/images/admin-office.webp"
                     alt="Unicure India Corporate & Manufacturing Facilities"
                     className="w-full h-auto aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="eager"
@@ -320,7 +320,7 @@ function AboutPage() {
               <ScrollReveal variant="slide-left">
                 <div className="relative rounded-3xl overflow-hidden border border-border shadow-2xl group">
                   <img
-                    src="/images/production-pic.png"
+                    src="/images/production-pic.webp"
                     alt="Unicure India Pharmaceutical Production & Quality"
                     className="w-full h-auto aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"

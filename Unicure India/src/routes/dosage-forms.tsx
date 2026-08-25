@@ -59,7 +59,7 @@ const dosageFormsData: DosageItem[] = [
     capacity: "6,000 Million Units / Year",
     icon: Pill,
     category: "Oral Solid Dosage",
-    image: "/images/mfg-machine.png",
+    image: "/images/mfg-machine.webp",
     description:
       "State-of-the-art high-speed compression and automated coating technologies operating in Class 100,000 controlled environments across our Noida and Roorkee plants.",
     variants: [
@@ -89,7 +89,7 @@ const dosageFormsData: DosageItem[] = [
     capacity: "1,200 Million Units / Year",
     icon: Package,
     category: "Oral Solid Dosage",
-    image: "/images/plant-2.png",
+    image: "/images/plant-2.webp",
     description:
       "Fully automated capsule filling machines engineered to handle powder formulations, time-release pellets, and combination drug deliveries with stringent weight variation control.",
     variants: [
@@ -111,7 +111,7 @@ const dosageFormsData: DosageItem[] = [
     capacity: "35.28 Million Bottles / Year",
     icon: Droplets,
     category: "Liquid Formulations",
-    image: "/images/production-pic.png",
+    image: "/images/production-pic.webp",
     description:
       "Complete closed-loop manufacturing for cough syrups, tonics, suspensions, and antacids with sanitary SS 316L mixing tanks and automatic linear filling lines.",
     variants: [
@@ -134,7 +134,7 @@ const dosageFormsData: DosageItem[] = [
     capacity: "3.6 Million Units / Year",
     icon: Droplets,
     category: "Antibiotics & Pediatrics",
-    image: "/images/plant.png",
+    image: "/images/plant.webp",
     description:
       "Dedicated airlocks and dehumidified cleanrooms specifically constructed for moisture-sensitive antibiotic suspensions (Beta-Lactam and Non-Beta-Lactam).",
     variants: [
@@ -156,7 +156,7 @@ const dosageFormsData: DosageItem[] = [
     capacity: "23 Million Sachets & 4,000 MT Powders",
     icon: Sparkles,
     category: "Powders & Granules",
-    image: "/images/qc-lab.png",
+    image: "/images/qc-lab.webp",
     description:
       "High-speed form-fill-seal (FFS) multi-lane sachet packaging for electrolyte salts, probiotics, and effervescent formulations with airtight four-side sealing.",
     variants: [
@@ -177,7 +177,7 @@ const dosageFormsData: DosageItem[] = [
     capacity: "500 Metric Tons / Year",
     icon: FlaskConical,
     category: "Topical Formulations",
-    image: "/images/wet-lab.png",
+    image: "/images/wet-lab.webp",
     description:
       "Advanced planetary vacuum mixer emulsifiers for topical medications, providing smooth rheology, uniform drug dispersion, and sterile packaging.",
     variants: [
@@ -198,7 +198,7 @@ const dosageFormsData: DosageItem[] = [
     capacity: "3 to 5 Million Bottles / Year",
     icon: Droplets,
     category: "External Preparations",
-    image: "/images/hplc.png",
+    image: "/images/hplc.webp",
     description:
       "Scalp and skin therapeutic formulations processed in dedicated suites with micro-filtration systems and precision liquid nozzles.",
     variants: [

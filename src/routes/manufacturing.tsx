@@ -145,7 +145,7 @@ function ManufacturingPage() {
 
           <ScrollReveal delay={0.1}>
             <div className="mt-10 relative overflow-hidden rounded-3xl shadow-elegant">
-              <img src="/images/dron-pic-unit3.png" alt="Unicure India Ltd — Greater Noida facility" className="w-full h-[420px] md:h-[560px] object-cover" loading="lazy" />
+              <img src="/images/dron-pic-unit3.webp" alt="Unicure India Ltd — Greater Noida facility" className="w-full h-[420px] md:h-[560px] object-cover" loading="lazy" width={1200} height={560} />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-6 md:p-8">
                 <div className="text-white font-bold text-xl md:text-2xl">Unit-III · Greater Noida</div>
                 <div className="text-white/85 text-sm">State-of-the-art OSD facility built to PIC/S, EU and USFDA standards.</div>
@@ -155,13 +155,13 @@ function ManufacturingPage() {
 
           <StaggerGrid className="mt-6 grid gap-6 md:grid-cols-3">
             {[
-              { src: "/images/plant.png", title: "Unit-I · Noida, Sector-3", desc: "Plant C-21, 22 & 23 — established 1984." },
-              { src: "/images/admin-office.png", title: "Corporate Admin Office", desc: "Long-standing manufacturing presence in Noida." },
-              { src: "/images/plant-2.png", title: "Unit-II · Roorkee", desc: "Uttarakhand facility — established 2006." },
+              { src: "/images/plant.webp", title: "Unit-I · Noida, Sector-3", desc: "Plant C-21, 22 & 23 — established 1984." },
+              { src: "/images/admin-office.webp", title: "Corporate Admin Office", desc: "Long-standing manufacturing presence in Noida." },
+              { src: "/images/plant-2.webp", title: "Unit-II · Roorkee", desc: "Uttarakhand facility — established 2006." },
             ].map((p) => (
               <StaggerItem key={p.title}>
                 <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-elegant transition h-full">
-                  <img src={p.src} alt={p.title} className="h-56 w-full object-cover" loading="lazy" />
+                  <img src={p.src} alt={p.title} className="h-56 w-full object-cover" loading="lazy" width={400} height={224} />
                   <figcaption className="p-5">
                     <div className="font-semibold">{p.title}</div>
                     <div className="mt-1 text-sm text-muted-foreground">{p.desc}</div>
@@ -173,7 +173,7 @@ function ManufacturingPage() {
 
           <ScrollReveal delay={0.1}>
             <div className="mt-10 overflow-hidden rounded-3xl shadow-elegant">
-              <img src="/images/mfg-machine.png" alt="Technician operating pharmaceutical equipment on the manufacturing floor" className="w-full h-[360px] md:h-[500px] object-cover" loading="lazy" />
+              <img src="/images/mfg-machine.webp" alt="Technician operating pharmaceutical equipment on the manufacturing floor" className="w-full h-[360px] md:h-[500px] object-cover" loading="lazy" width={1200} height={500} />
             </div>
           </ScrollReveal>
         </div>

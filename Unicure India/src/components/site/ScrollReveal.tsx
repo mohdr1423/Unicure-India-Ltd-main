@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView, useReducedMotion, type TargetAndTransition } from "framer-motion";
 
 type Variant = "fade-up" | "fade-in" | "slide-left" | "slide-right" | "scale";
@@ -46,9 +46,18 @@ export function ScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: threshold, once });
   const reduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
 
-  if (reduce) {
-    return <div className={className}>{children}</div>;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (reduce || !mounted) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
   }
 
   const v = variants[variant];
@@ -88,9 +97,18 @@ export function StaggerGrid({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: threshold, once: true });
   const reduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
 
-  if (reduce) {
-    return <div className={className}>{children}</div>;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (reduce || !mounted) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
   }
 
   return (
