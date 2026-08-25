@@ -1,17 +1,33 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { nitro } from "nitro/vite";
+import path from "path";
 
 export default defineConfig({
-  nitro: {
-    preset: "vercel",
-  },
-  vite: {
-    ssr: {
-      noExternal: [
-        "@tanstack/react-start",
-        "@tanstack/start-client-core",
-        "@tanstack/start-server-core",
-        "@tanstack/start-fn-stubs",
-      ],
+  plugins: [
+    tsconfigPaths(),
+    tailwindcss(),
+    tanstackStart(),
+    nitro({
+      preset: "vercel",
+    }),
+    react(),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
+    dedupe: [
+      "react",
+      "react-dom",
+      "@tanstack/react-router",
+      "@tanstack/react-query",
+    ],
+  },
+  ssr: {
+    noExternal: true,
   },
 });
