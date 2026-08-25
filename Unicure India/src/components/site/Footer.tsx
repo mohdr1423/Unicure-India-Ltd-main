@@ -97,22 +97,20 @@ function FooterLogo() {
   if (failed) {
     // Graceful fallback: styled text initials instead of broken image
     return (
-      <div className="grid h-12 w-12 place-items-center rounded-xl bg-white text-[color:var(--brand-blue)] font-bold text-lg select-none">
+      <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/10 text-white font-bold text-lg select-none shrink-0">
         UI
       </div>
     );
   }
 
   return (
-    <div className="grid h-12 w-12 place-items-center rounded-xl bg-white p-1.5">
-      <img
-        src="/images/logo.svg"
-        alt="Unicure India Ltd logo"
-        className="h-full w-full object-contain"
-        onError={() => setFailed(true)}
-        loading="lazy"
-      />
-    </div>
+    <img
+      src="/images/logo.svg"
+      alt="Unicure India Ltd logo"
+      className="h-12 w-12 object-contain shrink-0"
+      onError={() => setFailed(true)}
+      loading="lazy"
+    />
   );
 }
 
