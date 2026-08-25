@@ -65,11 +65,11 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("Please enter a message.", { status: 400 });
         }
 
-        // Support standard keys without leaking names
+        // Support standard keys
         const key =
           process.env.AI_API_KEY ||
-          process.env.LOVABLE_API_KEY ||
           process.env.OPENAI_API_KEY ||
+          process.env.GROQ_API_KEY ||
           process.env.GEMINI_API_KEY;
 
         if (!key) {
@@ -78,16 +78,14 @@ export const Route = createFileRoute("/api/chat")({
         }
 
         try {
-          // If OpenAI/Gemini/Lovable is configured
-          const endpoint = process.env.AI_API_ENDPOINT || "https://ai.gateway.lovable.dev/v1/chat/completions";
-          const model = process.env.AI_MODEL || "google/gemini-2.5-flash";
+          const endpoint = process.env.AI_API_ENDPOINT || "https://api.openai.com/v1/chat/completions";
+          const model = process.env.AI_MODEL || "gpt-4o-mini";
 
           const upstream = await fetch(endpoint, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${key}`,
-              "Lovable-API-Key": key,
             },
             body: JSON.stringify({
               model,
