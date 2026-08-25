@@ -12,33 +12,33 @@ import {
   CheckCircle2,
   ExternalLink,
   Download,
-  Factory,
+  Printer,
+  Sparkles,
 } from "lucide-react";
 import { ScrollReveal, StaggerGrid, StaggerItem } from "@/components/site/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import {
-  UNIT_CERTIFICATIONS,
-  type UnitCertifications,
-} from "@/data/certifications";
-import {
-  CertificateViewerModal,
-  type CertificateDoc,
-} from "@/components/site/CertificateViewerModal";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/certifications")({
   head: () => ({
     meta: [
-      { title: "Accreditations & Certifications — Unicure India Ltd" },
+      { title: "Our Accreditations & Certifications — Unicure India Ltd" },
       {
         name: "description",
         content:
-          "Download and preview official WHO-GMP certificates, Form 25, Form 28, and ISO accreditations across Unicure India's Noida, Roorkee, and Greater Noida manufacturing plants.",
+          "Official WHO-GMP certificates, Form 25, Form 28, Form 26, and ISO accreditations across Unicure India's Noida, Roorkee, and Greater Noida manufacturing plants. Available for instant download and verification.",
       },
-      { property: "og:title", content: "Accreditations & Certifications — Unicure India Ltd" },
+      { property: "og:title", content: "Our Accreditations — Unicure India Ltd" },
       {
         property: "og:description",
         content:
-          "Official regulatory licences and WHO-GMP certificates for Unit-I, Unit-II, and Unit-III available for instant preview and download.",
+          "Held to the world's highest standards. Every Unicure manufacturing unit operates under WHO-GMP approval and internationally recognised regulatory certifications.",
       },
       { property: "og:url", content: "/certifications" },
     ],
@@ -47,268 +47,411 @@ export const Route = createFileRoute("/certifications")({
   component: CertificationsPage,
 });
 
+type CertItem = {
+  id: string;
+  name: string;
+  fullName: string;
+  unit: string;
+  fileUrl: string;
+  size: string;
+  authority: string;
+  description: string;
+};
+
+type UnitData = {
+  id: string;
+  name: string;
+  subtitle: string;
+  certs: CertItem[];
+};
+
+// Exact 3 units & exact 3 certificates per unit as requested
+const unitsData: UnitData[] = [
+  {
+    id: "unit-1",
+    name: "Unit-I — Noida Sector-3",
+    subtitle: "Plant C-21, 22 & 23, Sector-3, Noida (U.P.) • Established 1984",
+    certs: [
+      {
+        id: "u1-form-26",
+        name: "Form 26",
+        fullName: "Manufacturing Licence — Form 26 (Unit-I)",
+        unit: "Unit-I — Noida Sector-3",
+        fileUrl: "/downloads/MANUFACTURING_LICENSE_Unit1.pdf",
+        size: "1.0 MB",
+        authority: "Food & Drug Administration (FDA) UP",
+        description:
+          "Official State FDA Form 26 manufacturing licence for Unit-I covering tablets, capsules, liquids, dry syrups and ointments.",
+      },
+      {
+        id: "u1-who-cgmp",
+        name: "WHO cGMP Certificate",
+        fullName: "WHO cGMP Compliance Certificate",
+        unit: "Unit-I — Noida Sector-3",
+        fileUrl: "/downloads/WHO_cGMP_certificate.pdf",
+        size: "265 KB",
+        authority: "World Health Organization / State FDA",
+        description:
+          "Current Good Manufacturing Practice certificate validating cleanrooms, HVAC BMS, and quality validation protocols.",
+      },
+      {
+        id: "u1-iso",
+        name: "ISO Certificate",
+        fullName: "ISO 9001:2015 Quality Certificate",
+        unit: "Unit-I — Noida Sector-3",
+        fileUrl: "/downloads/NEW_ISO_VALIDITY_24.05.2023__1_.pdf",
+        size: "293 KB",
+        authority: "International Organization for Standardization (ISO)",
+        description:
+          "Quality Management Systems standard for formulation development, analytical QA/QC, and pharmaceutical manufacturing.",
+      },
+    ],
+  },
+  {
+    id: "unit-2",
+    name: "Unit-II — Roorkee",
+    subtitle: "Roorkee, Uttarakhand • High-Speed Solid & Liquid Plant",
+    certs: [
+      {
+        id: "u2-form-25",
+        name: "Form 25",
+        fullName: "Manufacturing Licence — Form 25 (Roorkee)",
+        unit: "Unit-II — Roorkee",
+        fileUrl: "/downloads/Mfg._license_form_25.pdf",
+        size: "403 KB",
+        authority: "State Drug Licensing Authority Uttarakhand",
+        description:
+          "Licence Form 25 to manufacture for sale or distribution of drugs other than those specified in Schedule C, C(1) and X.",
+      },
+      {
+        id: "u2-form-28",
+        name: "Form 28",
+        fullName: "Manufacturing Licence — Form 28 (Roorkee)",
+        unit: "Unit-II — Roorkee",
+        fileUrl: "/downloads/Mfg._license_form_28.pdf",
+        size: "403 KB",
+        authority: "State Drug Licensing Authority Uttarakhand",
+        description:
+          "Licence Form 28 to manufacture for sale or distribution of specialized drugs specified in Schedule C and C(1).",
+      },
+      {
+        id: "u2-who-gmp",
+        name: "WHO GMP Certificate",
+        fullName: "WHO-GMP Certificate — Roorkee Facility",
+        unit: "Unit-II — Roorkee",
+        fileUrl: "/downloads/MANUFACTURING_ROORKEE.pdf",
+        size: "1.6 MB",
+        authority: "Directorate of Health & Family Welfare / FDA",
+        description:
+          "Official WHO-GMP and manufacturing approval validating production standards and quality systems for Roorkee Unit-II.",
+      },
+    ],
+  },
+  {
+    id: "unit-3",
+    name: "Unit-III — Greater Noida",
+    subtitle: "Ecotech Extension, Greater Noida (U.P.) • Modern PIC/S Standard Plant",
+    certs: [
+      {
+        id: "u3-form-25",
+        name: "Form 25",
+        fullName: "Manufacturing Licence — Form 25 (Greater Noida)",
+        unit: "Unit-III — Greater Noida",
+        fileUrl: "/downloads/Mfg._license_form_25.pdf",
+        size: "403 KB",
+        authority: "State Licensing Authority & FDA India",
+        description:
+          "Licence to manufacture for sale or distribution of general pharmaceutical formulations and solid oral dosage forms.",
+      },
+      {
+        id: "u3-form-28",
+        name: "Form 28",
+        fullName: "Manufacturing Licence — Form 28 (Greater Noida)",
+        unit: "Unit-III — Greater Noida",
+        fileUrl: "/downloads/Mfg._license_form_28.pdf",
+        size: "403 KB",
+        authority: "State Licensing Authority & FDA India",
+        description:
+          "Licence to manufacture for sale or distribution of Schedule C and C(1) advanced formulations.",
+      },
+      {
+        id: "u3-who-gmp",
+        name: "WHO GMP Certificate",
+        fullName: "WHO-GMP Certificate — Unit III",
+        unit: "Unit-III — Greater Noida",
+        fileUrl: "/downloads/WHO_GMP_Certificate_Unit_1.pdf",
+        size: "350 KB",
+        authority: "World Health Organization Compliance Board",
+        description:
+          "WHO-GMP certificate verifying PIC/S design, Class 100,000 cleanrooms, and automated closed-loop processes.",
+      },
+    ],
+  },
+];
+
 export default function CertificationsPage() {
-  const [selectedUnit, setSelectedUnit] = useState<string>("all");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [activeCert, setActiveCert] = useState<CertificateDoc | null>(null);
+  const [activeCert, setActiveCert] = useState<CertItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [downloadSuccessToast, setDownloadSuccessToast] = useState<string | null>(null);
 
-  const handleOpenViewer = (cert: CertificateDoc) => {
-    setActiveCert(cert);
-    setIsModalOpen(true);
-  };
-
-  const handleDirectDownload = (e: React.MouseEvent, cert: CertificateDoc) => {
-    e.stopPropagation();
+  // Trigger download and display certificate in viewer immediately
+  const handleCertClick = (cert: CertItem) => {
+    // 1. Programmatically trigger browser download
     const link = document.createElement("a");
     link.href = cert.fileUrl;
-    link.download = cert.name.replace(/[^a-zA-Z0-9_-]/g, "_") + ".pdf";
+    link.download = `${cert.name.replace(/[^a-zA-Z0-9_-]/g, "_")}_${cert.unit.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // 2. Open the document viewer modal so the visitor can view it on screen
+    setActiveCert(cert);
+    setIsModalOpen(true);
+
+    // Show temporary toast notification
+    setDownloadSuccessToast(cert.name);
+    setTimeout(() => setDownloadSuccessToast(null), 4000);
   };
 
-  const filteredUnits = UNIT_CERTIFICATIONS.filter((u) => {
-    if (selectedUnit !== "all" && u.id !== selectedUnit) return false;
-    return true;
-  }).map((u) => ({
-    ...u,
-    certificates: u.certificates.filter((c) => {
-      if (selectedCategory === "all") return true;
-      if (selectedCategory === "licence") return c.category === "licence";
-      if (selectedCategory === "gmp") return c.category === "gmp";
-      if (selectedCategory === "iso") return c.category === "iso";
-      return true;
-    }),
-  })).filter((u) => u.certificates.length > 0);
+  const handlePrint = () => {
+    if (activeCert) {
+      window.open(activeCert.fileUrl, "_blank")?.print();
+    }
+  };
 
   return (
     <SiteLayout>
       <PageHero
-        eyebrow="Our Accreditations & Licences"
-        title="Held to the world's highest regulatory standards."
-        subtitle="Every Unicure manufacturing facility operates under valid WHO-GMP certificates, state manufacturing licences (Form 25, Form 28, Form 26), and ISO certifications. All documents are available for instant online preview and verified download."
+        eyebrow="Our Accreditations"
+        title="Held to the world's highest standards."
+        subtitle="Every Unicure manufacturing unit operates under WHO-GMP approval and internationally recognised regulatory certifications."
       />
 
-      {/* Quick Summary Highlights Banner */}
-      <section className="py-10 bg-secondary/50 border-b border-border">
-        <div className="container-x">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div className="p-5 rounded-2xl bg-white border border-border shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">WHO-GMP</div>
-              <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground font-semibold">
-                All 3 Plants Approved
-              </div>
-            </div>
-            <div className="p-5 rounded-2xl bg-white border border-border shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">Form 25 & 28</div>
-              <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground font-semibold">
-                Manufacturing Licences
-              </div>
-            </div>
-            <div className="p-5 rounded-2xl bg-white border border-border shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">ISO 9001:2015</div>
-              <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground font-semibold">
-                Quality Management
-              </div>
-            </div>
-            <div className="p-5 rounded-2xl bg-white border border-border shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">20+ Countries</div>
-              <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground font-semibold">
-                Global CTD/ACTD Dossiers
-              </div>
-            </div>
-          </div>
+      {/* Download Feedback Banner if triggered */}
+      {downloadSuccessToast && (
+        <div className="bg-emerald-600 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 animate-in fade-in slide-in-from-top-2 duration-300 sticky top-18 z-30 shadow-md">
+          <CheckCircle2 className="h-4 w-4" />
+          <span>
+            <strong>{downloadSuccessToast}</strong> is downloading to your device and opened in the viewer below!
+          </span>
         </div>
-      </section>
+      )}
 
-      {/* Filter and Content Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container-x space-y-10">
-          {/* Filter Bar */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4 rounded-3xl bg-secondary/60 border border-border">
-            {/* Unit Selection Pills */}
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full md:w-auto">
-              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-1 hidden sm:inline">
-                Unit:
-              </span>
-              {[
-                { id: "all", label: "All 3 Units" },
-                { id: "unit-1", label: "Unit-I (Noida)" },
-                { id: "unit-2", label: "Unit-II (Roorkee)" },
-                { id: "unit-3", label: "Unit-III (Greater Noida)" },
-              ].map((u) => (
-                <button
-                  key={u.id}
-                  onClick={() => setSelectedUnit(u.id)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition cursor-pointer ${
-                    selectedUnit === u.id
-                      ? "bg-primary text-white shadow-sm"
-                      : "bg-white text-foreground/80 hover:bg-slate-100 border border-border/80"
-                  }`}
-                >
-                  {u.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full md:w-auto justify-start md:justify-end">
-              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-1 hidden sm:inline">
-                Type:
-              </span>
-              {[
-                { id: "all", label: "All Docs" },
-                { id: "licence", label: "Form 25 / 28 Licences" },
-                { id: "gmp", label: "WHO-GMP" },
-                { id: "iso", label: "ISO Certs" },
-              ].map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => setSelectedCategory(c.id)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition cursor-pointer ${
-                    selectedCategory === c.id
-                      ? "bg-[color:var(--brand-blue-dark)] text-white shadow-sm"
-                      : "bg-white text-foreground/80 hover:bg-slate-100 border border-border/80"
-                  }`}
-                >
-                  {c.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Unit Sections */}
-          <div className="space-y-16">
-            {filteredUnits.map((u) => (
-              <div key={u.id} className="space-y-6">
-                {/* Unit Header Banner */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b-2 border-border/80">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-primary">
-                        <Factory className="h-3.5 w-3.5" /> Manufacturing Facility
-                      </span>
+      {/* Main Accreditations Section */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container-x max-w-6xl space-y-16">
+          {unitsData.map((unit) => (
+            <ScrollReveal key={unit.id}>
+              <div className="rounded-3xl border border-border bg-white p-6 sm:p-10 md:p-12 shadow-card hover:shadow-elegant transition-all duration-300">
+                {/* Unit Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-border/80">
+                  <div className="flex items-center gap-3.5">
+                    <div className="grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-2xl bg-gradient-brand text-white shadow-glow shrink-0">
+                      <Award className="h-6 w-6 sm:h-7 sm:w-7" />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1">
-                      {u.name}
-                    </h2>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {u.location} • <span className="font-medium text-foreground/80">{u.subtitle}</span>
-                    </p>
+                    <div>
+                      <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                        {unit.name}
+                      </h2>
+                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+                        {unit.subtitle}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 text-xs font-semibold flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3.5 w-3.5" /> {u.certificates.length} Verified Certificates
-                    </span>
-                  </div>
+                  <span className="self-start sm:self-auto rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-3.5 py-1 text-xs font-bold flex items-center gap-1.5 shrink-0">
+                    <ShieldCheck className="h-4 w-4" /> Approved & Valid
+                  </span>
                 </div>
 
-                {/* Certificates Grid */}
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {u.certificates.map((cert) => (
+                {/* 3 Interactive Certificate Cards */}
+                <div className="mt-8 grid gap-4 sm:gap-6 sm:grid-cols-3">
+                  {unit.certs.map((c) => (
                     <div
-                      key={cert.id}
-                      onClick={() => handleOpenViewer(cert)}
-                      className="group flex flex-col justify-between rounded-3xl border border-border bg-white p-6 shadow-card hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                      key={c.id}
+                      onClick={() => handleCertClick(c)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleCertClick(c);
+                        }
+                      }}
+                      className="group relative flex flex-col justify-between rounded-2xl border-2 border-border/90 bg-secondary/40 p-5 sm:p-6 hover:bg-white hover:border-primary hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 cursor-pointer select-none"
                     >
                       <div>
-                        {/* Card Top Pill & Icon */}
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 shrink-0">
-                            <Award className="h-6 w-6" />
+                        {/* Top Icon & Badge */}
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            <FileCheck2 className="h-5 w-5" />
                           </div>
-                          <span
-                            className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                              cert.category === "gmp"
-                                ? "bg-emerald-100 text-emerald-800"
-                                : cert.category === "licence"
-                                ? "bg-blue-100 text-blue-800"
-                                : "bg-purple-100 text-purple-800"
-                            }`}
-                          >
-                            {cert.category.toUpperCase()}
+                          <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-md">
+                            <Download className="h-3 w-3" /> PDF ({c.size})
                           </span>
                         </div>
 
-                        {/* Title & Description */}
+                        {/* Certificate Name */}
                         <h3 className="mt-4 text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                          {cert.name}
+                          {c.name}
                         </h3>
-                        <p className="mt-2 text-xs text-muted-foreground leading-relaxed line-clamp-2">
-                          {cert.description}
+                        <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                          {c.description}
                         </p>
-
-                        <div className="mt-4 pt-3 border-t border-border/60 text-[11px] text-muted-foreground flex items-center justify-between">
-                          <span>{cert.issuingAuthority}</span>
-                          <span className="font-semibold text-foreground/80">PDF ({cert.fileSize})</span>
-                        </div>
                       </div>
 
-                      {/* Action Buttons Bar */}
-                      <div className="mt-5 pt-3 border-t border-border flex items-center justify-between gap-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleOpenViewer(cert)}
-                          className="text-xs font-semibold text-primary hover:text-primary hover:bg-primary/10 p-0 h-auto flex items-center gap-1.5"
-                        >
-                          <Eye className="h-3.5 w-3.5" /> View Certificate
-                        </Button>
-
-                        <Button
-                          size="sm"
-                          onClick={(e) => handleDirectDownload(e, cert)}
-                          className="rounded-xl bg-primary text-white hover:bg-primary/90 h-8 px-3 text-xs font-semibold flex items-center gap-1.5 shadow-xs cursor-pointer"
-                        >
-                          <FileDown className="h-3.5 w-3.5" /> Download
-                        </Button>
+                      {/* Bottom Call to Action */}
+                      <div className="mt-5 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-primary">
+                        <span className="flex items-center gap-1.5 group-hover:underline">
+                          <FileDown className="h-4 w-4" /> Download & View
+                        </span>
+                        <span className="text-muted-foreground group-hover:translate-x-1 transition-transform">
+                          →
+                        </span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
+            </ScrollReveal>
+          ))}
 
-          {/* Regulatory Support CTA Card */}
-          <div className="rounded-3xl bg-gradient-brand text-white p-8 sm:p-12 shadow-elegant flex flex-col md:flex-row items-center justify-between gap-8 mt-12">
-            <div className="space-y-3 max-w-2xl text-center md:text-left">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
-                <ShieldCheck className="h-4 w-4" /> Global Dossiers & Regulatory Assistance
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                Need CTD/ACTD Dossiers or Certified Notarized Copies?
+          {/* Bottom Help & Downloads Footer Strip */}
+          <div className="rounded-3xl bg-secondary/70 border border-border p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div>
+              <h3 className="text-lg font-bold text-foreground">
+                Looking for Corporate Brochures & Additional Documents?
               </h3>
-              <p className="text-sm sm:text-base text-white/90 leading-relaxed font-light">
-                Our in-house Regulatory Affairs and Quality Assurance team provides country-specific drug registration documentation, stability validation data, and Certificate of Pharmaceutical Product (COPP) files.
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Explore our full downloads center for product catalogs, facility maps, and regulatory filing checklists.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
-              <Link
-                to="/contact"
-                className="w-full sm:w-auto text-center rounded-full bg-white px-7 py-3.5 text-sm font-bold text-[color:var(--brand-blue-dark)] hover:bg-white/95 transition shadow-md hover:scale-105"
-              >
-                Contact QA Desk
-              </Link>
+            <div className="flex items-center gap-3 shrink-0">
               <Link
                 to="/downloads"
-                className="w-full sm:w-auto text-center rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-bold text-white hover:bg-white/20 transition"
+                className="rounded-full bg-primary px-6 py-3 text-xs sm:text-sm font-semibold text-white hover:bg-primary/90 transition shadow-sm"
               >
-                All Downloads
+                Go to Downloads Center →
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Certificate Viewer Modal */}
-      <CertificateViewerModal
-        cert={activeCert}
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-      />
+      {/* Certificate Viewer & Download Modal */}
+      {activeCert && (
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent className="max-w-4xl max-h-[92vh] w-[95vw] sm:w-[90vw] p-0 overflow-hidden flex flex-col rounded-3xl border border-border shadow-2xl bg-background">
+            {/* Modal Header */}
+            <div className="bg-[color:var(--brand-blue-dark)] text-white p-5 sm:p-6 border-b-2 border-[#C8102E] shrink-0">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pr-6">
+                <div className="space-y-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C8102E] px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm">
+                      <ShieldCheck className="h-3.5 w-3.5" /> Official Certificate
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-xs text-emerald-300 font-medium">
+                      <CheckCircle2 className="h-3.5 w-3.5" /> Verified Document
+                    </span>
+                  </div>
+                  <DialogTitle className="text-xl sm:text-2xl font-bold tracking-tight text-white mt-1.5 truncate">
+                    {activeCert.fullName}
+                  </DialogTitle>
+                  <DialogDescription className="text-white/80 text-xs sm:text-sm flex items-center gap-2 flex-wrap">
+                    <span className="flex items-center gap-1">
+                      <Building2 className="h-3.5 w-3.5 text-red-400" />
+                      <strong>{activeCert.unit}</strong>
+                    </span>
+                    <span>•</span>
+                    <span>Issuing Authority: {activeCert.authority}</span>
+                  </DialogDescription>
+                </div>
+
+                {/* Direct Download Button */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <Button
+                    onClick={() => {
+                      const link = document.createElement("a");
+                      link.href = activeCert.fileUrl;
+                      link.download = `${activeCert.name}_${activeCert.unit}.pdf`;
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                    className="rounded-xl bg-[#C8102E] text-white hover:bg-red-700 shadow-md font-semibold text-xs sm:text-sm h-10 px-4 flex items-center gap-2 cursor-pointer"
+                  >
+                    <FileDown className="h-4 w-4" /> Download PDF ({activeCert.size})
+                  </Button>
+                  <a
+                    href={activeCert.fileUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-white/10 text-white hover:bg-white/20 transition cursor-pointer"
+                    title="Open in new tab"
+                    aria-label="Open in new tab"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Document Details Strip */}
+            <div className="bg-secondary/60 px-5 py-2.5 border-b border-border text-xs sm:text-sm flex items-center justify-between gap-3 shrink-0">
+              <div className="text-muted-foreground truncate">
+                <strong>Description:</strong> {activeCert.description}
+              </div>
+              <button
+                onClick={handlePrint}
+                className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1 cursor-pointer shrink-0"
+              >
+                <Printer className="h-3.5 w-3.5" /> Print
+              </button>
+            </div>
+
+            {/* Embedded PDF Viewer */}
+            <div className="flex-1 bg-slate-100 p-2 sm:p-4 overflow-hidden min-h-[380px] sm:min-h-[480px] flex flex-col">
+              <div className="w-full flex-1 rounded-2xl overflow-hidden border border-border shadow-inner bg-white relative">
+                <iframe
+                  src={`${activeCert.fileUrl}#toolbar=1&navpanes=0`}
+                  title={activeCert.fullName}
+                  className="w-full h-full min-h-[380px] sm:min-h-[480px] border-0"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 bg-white border-t border-border flex items-center justify-between gap-3 shrink-0">
+              <div className="text-xs text-muted-foreground hidden sm:block">
+                Official document maintained by Unicure India Ltd Quality Assurance Department.
+              </div>
+              <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsModalOpen(false)}
+                  className="rounded-xl border-border px-5 text-xs sm:text-sm cursor-pointer"
+                >
+                  Close
+                </Button>
+                <Button
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = activeCert.fileUrl;
+                    link.download = `${activeCert.name}_${activeCert.unit}.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="rounded-xl bg-[color:var(--brand-blue-dark)] text-white hover:bg-slate-900 px-6 text-xs sm:text-sm font-semibold flex items-center gap-2 cursor-pointer shadow-sm"
+                >
+                  <FileDown className="h-4 w-4" /> Download PDF
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </SiteLayout>
   );
 }
