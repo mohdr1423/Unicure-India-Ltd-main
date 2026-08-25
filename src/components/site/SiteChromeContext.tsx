@@ -100,6 +100,7 @@ export function SiteChromeProvider({ children }: { children: ReactNode }) {
     queryFn: () => fetchChrome(),
     staleTime: 60_000,
     placeholderData: FALLBACK,
+    enabled: typeof window !== "undefined",
   });
   return (
     <SiteChromeContext.Provider value={data ?? FALLBACK}>{children}</SiteChromeContext.Provider>
