@@ -107,7 +107,7 @@ function FooterLogo() {
     <img
       src="/images/logo.svg"
       alt="Unicure India Ltd logo"
-      className="h-12 w-12 object-contain shrink-0"
+      className="h-12 w-12 object-contain shrink-0 bg-transparent"
       onError={() => setFailed(true)}
       loading="lazy"
     />
