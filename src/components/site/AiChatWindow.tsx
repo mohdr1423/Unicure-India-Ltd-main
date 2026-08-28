@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import {
-  X,
-  Send,
-  Loader2,
-  Bot,
-  User,
-  RefreshCw,
-} from "lucide-react";
+import { X, Send, Loader2, Bot, User, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getLocalBellaResponse } from "@/lib/bella-knowledge";
@@ -22,8 +15,7 @@ type ChatMessage = {
 const INITIAL_GREETING: ChatMessage = {
   id: "greeting",
   role: "assistant",
-  content:
-    "Hi! I'm Bella, the Unicure India Assistant. How can I help you today?",
+  content: "Hi! I'm Bella, the Unicure India Assistant. How can I help you today?",
   timestamp: "Just now",
 };
 
@@ -182,9 +174,7 @@ export default function AiChatWindow({ onClose }: { onClose: () => void }) {
                 AI
               </span>
             </div>
-            <div className="text-[11px] text-white/80 mt-0.5 truncate">
-              Unicure India Assistant
-            </div>
+            <div className="text-[11px] text-white/80 mt-0.5 truncate">Unicure India Assistant</div>
             <div className="text-[10px] text-emerald-300 font-medium mt-0.5 flex items-center gap-1 truncate">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <span className="truncate">Ask me anything about Unicure India</span>

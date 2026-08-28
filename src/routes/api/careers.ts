@@ -29,7 +29,8 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "2-5 Years",
     qualifications: "B.Sc / M.Sc Chemistry or B.Pharma",
-    description: "Responsible for sampling, testing, and analytical validation of raw materials, in-process formulations, and finished dosage forms according to WHO-GMP and pharmacopoeial specifications.",
+    description:
+      "Responsible for sampling, testing, and analytical validation of raw materials, in-process formulations, and finished dosage forms according to WHO-GMP and pharmacopoeial specifications.",
     responsibilities: [
       "Perform HPLC, GC, UV-Vis spectrophotometry, and wet chemical analysis on raw materials and finished goods.",
       "Conduct in-process quality testing during tablet compression, capsule filling, and liquid oral manufacturing.",
@@ -56,7 +57,8 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "3-6 Years",
     qualifications: "B.Pharma / Diploma in Pharma Tech",
-    description: "Supervising granulation, compression, and coating lines for tablets and capsules. Ensuring strict batch record documentation and adherence to cGMP safety protocols.",
+    description:
+      "Supervising granulation, compression, and coating lines for tablets and capsules. Ensuring strict batch record documentation and adherence to cGMP safety protocols.",
     responsibilities: [
       "Oversee day-to-day operations in granulation, tablet compression, capsule filling, and coating sections.",
       "Ensure proper execution of Batch Manufacturing Records (BMR) and Batch Packaging Records (BPR).",
@@ -69,7 +71,14 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
       "3-6 years of experience in solid oral dosage form manufacturing under cGMP / WHO-GMP compliance.",
       "Demonstrated team leadership and shop-floor management skills.",
     ],
-    skills: ["Granulation", "Compression", "Auto-Coater", "BMR Documentation", "cGMP", "Yield Optimization"],
+    skills: [
+      "Granulation",
+      "Compression",
+      "Auto-Coater",
+      "BMR Documentation",
+      "cGMP",
+      "Yield Optimization",
+    ],
     apply_email: "careers@unicureindia.com",
     is_open: true,
     created_at: "2026-08-23",
@@ -82,7 +91,8 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "4-8 Years",
     qualifications: "M.Pharma (Pharmaceutics) / Ph.D.",
-    description: "Formulation development and optimization for novel and generic oral dosage forms, technology transfer to commercial plants, and stability study analysis.",
+    description:
+      "Formulation development and optimization for novel and generic oral dosage forms, technology transfer to commercial plants, and stability study analysis.",
     responsibilities: [
       "Design and execute pre-formulation, formulation development, and process optimization studies for oral solids and liquids.",
       "Conduct pilot-scale trial batches and execute successful technology transfer to commercial manufacturing facilities.",
@@ -94,7 +104,14 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
       "4-8 years of proven experience in formulation R&D for oral solid and liquid dosage forms.",
       "Strong understanding of Quality by Design (QbD) principles and scale-up strategies.",
     ],
-    skills: ["Formulation R&D", "QbD", "Tech Transfer", "Scale-up", "Stability Studies", "PDR Preparation"],
+    skills: [
+      "Formulation R&D",
+      "QbD",
+      "Tech Transfer",
+      "Scale-up",
+      "Stability Studies",
+      "PDR Preparation",
+    ],
     apply_email: "careers@unicureindia.com",
     is_open: true,
     created_at: "2026-08-23",
@@ -107,7 +124,8 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "2-4 Years",
     qualifications: "B.Pharma / M.Pharma",
-    description: "Preparation and submission of dossiers (CTD/ACTD format) for domestic and international health authorities across Latin America, Africa, and CIS markets.",
+    description:
+      "Preparation and submission of dossiers (CTD/ACTD format) for domestic and international health authorities across Latin America, Africa, and CIS markets.",
     responsibilities: [
       "Compile and review Common Technical Document (CTD / ACTD) dossiers for international product registrations.",
       "Prepare responses to deficiency letters and regulatory queries from foreign health ministries.",
@@ -119,7 +137,13 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
       "Thorough understanding of CTD/ACTD dossier formats, ASEAN guidelines, and WHO-PQ standards.",
       "Excellent written communication and technical documentation skills.",
     ],
-    skills: ["CTD / ACTD", "Export Registration", "Dossier Compilation", "Query Resolution", "Regulatory Compliance"],
+    skills: [
+      "CTD / ACTD",
+      "Export Registration",
+      "Dossier Compilation",
+      "Query Resolution",
+      "Regulatory Compliance",
+    ],
     apply_email: "careers@unicureindia.com",
     is_open: true,
     created_at: "2026-08-23",
@@ -132,7 +156,8 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "1-3 Years",
     qualifications: "ITI / Diploma / High School",
-    description: "Operation and maintenance of blister packaging machines, cartoners, and labeling lines in high-speed pharmaceutical packaging environments.",
+    description:
+      "Operation and maintenance of blister packaging machines, cartoners, and labeling lines in high-speed pharmaceutical packaging environments.",
     responsibilities: [
       "Operate Alu-Alu and Blister packaging machinery, strip packing units, and automatic cartoners.",
       "Perform machine changeovers, tooling adjustments, and primary leak testing for blisters.",
@@ -157,7 +182,8 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "3-7 Years",
     qualifications: "Graduate / MBA Marketing preferred",
-    description: "Managing institutional hospital tenders, corporate pharmacy supply contracts, and large-scale distributor relationships across North India.",
+    description:
+      "Managing institutional hospital tenders, corporate pharmacy supply contracts, and large-scale distributor relationships across North India.",
     responsibilities: [
       "Identify, bid on, and secure institutional government and private hospital rate contracts & tenders.",
       "Develop and maintain strategic partnerships with super-specialty hospital procurement heads and distributors.",
@@ -169,7 +195,13 @@ const DEFAULT_SAMPLE_JOBS: JobOpening[] = [
       "3-7 years in institutional pharma sales or hospital tender management.",
       "Strong negotiation skills and existing relationships with hospital networks.",
     ],
-    skills: ["Institutional Sales", "Tender Bidding", "Hospital Networks", "Key Account Management", "Negotiation"],
+    skills: [
+      "Institutional Sales",
+      "Tender Bidding",
+      "Hospital Networks",
+      "Key Account Management",
+      "Negotiation",
+    ],
     apply_email: "careers@unicureindia.com",
     is_open: true,
     created_at: "2026-08-23",
@@ -216,28 +248,32 @@ export const Route = createFileRoute("/api/careers")({
           if (jobId) {
             const found = jobs.find((j) => j.id === jobId);
             if (!found) {
-              return new Response(
-                JSON.stringify({ success: false, message: "Job not found" }),
-                { status: 404, headers: { "Content-Type": "application/json" } }
-              );
+              return new Response(JSON.stringify({ success: false, message: "Job not found" }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" },
+              });
             }
-            return new Response(
-              JSON.stringify({ success: true, job: found }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
-            );
+            return new Response(JSON.stringify({ success: true, job: found }), {
+              status: 200,
+              headers: { "Content-Type": "application/json" },
+            });
           }
 
           if (!showAll) {
             jobs = jobs.filter((j) => j.is_open);
           }
-          return new Response(
-            JSON.stringify({ success: true, count: jobs.length, jobs }),
-            { status: 200, headers: { "Content-Type": "application/json" } }
-          );
+          return new Response(JSON.stringify({ success: true, count: jobs.length, jobs }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          });
         } catch (err: any) {
           return new Response(
-            JSON.stringify({ success: false, message: err.message || "Failed to fetch jobs", jobs: [] }),
-            { status: 500, headers: { "Content-Type": "application/json" } }
+            JSON.stringify({
+              success: false,
+              message: err.message || "Failed to fetch jobs",
+              jobs: [],
+            }),
+            { status: 500, headers: { "Content-Type": "application/json" } },
           );
         }
       },
@@ -247,10 +283,10 @@ export const Route = createFileRoute("/api/careers")({
           try {
             body = await request.json();
           } catch {
-            return new Response(
-              JSON.stringify({ success: false, message: "Invalid JSON body" }),
-              { status: 400, headers: { "Content-Type": "application/json" } }
-            );
+            return new Response(JSON.stringify({ success: false, message: "Invalid JSON body" }), {
+              status: 400,
+              headers: { "Content-Type": "application/json" },
+            });
           }
 
           const action = body.action || (body.id ? "update" : "create");
@@ -261,7 +297,7 @@ export const Route = createFileRoute("/api/careers")({
             if (!rawJob.title?.trim()) {
               return new Response(
                 JSON.stringify({ success: false, message: "Job title is required." }),
-                { status: 400, headers: { "Content-Type": "application/json" } }
+                { status: 400, headers: { "Content-Type": "application/json" } },
               );
             }
 
@@ -274,7 +310,9 @@ export const Route = createFileRoute("/api/careers")({
               experience: rawJob.experience || "2-5 Years",
               qualifications: rawJob.qualifications || "B.Pharma / Chemistry Graduate",
               description: (rawJob.description || "").trim(),
-              responsibilities: Array.isArray(rawJob.responsibilities) ? rawJob.responsibilities : undefined,
+              responsibilities: Array.isArray(rawJob.responsibilities)
+                ? rawJob.responsibilities
+                : undefined,
               requirements: Array.isArray(rawJob.requirements) ? rawJob.requirements : undefined,
               skills: Array.isArray(rawJob.skills) ? rawJob.skills : undefined,
               apply_email: rawJob.apply_email || "careers@unicureindia.com",
@@ -292,7 +330,7 @@ export const Route = createFileRoute("/api/careers")({
                 job: newJob,
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -301,10 +339,10 @@ export const Route = createFileRoute("/api/careers")({
             const targetId = rawJob.id || body.id;
             const idx = jobs.findIndex((j) => j.id === targetId);
             if (idx === -1) {
-              return new Response(
-                JSON.stringify({ success: false, message: "Job not found" }),
-                { status: 404, headers: { "Content-Type": "application/json" } }
-              );
+              return new Response(JSON.stringify({ success: false, message: "Job not found" }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" },
+              });
             }
 
             jobs[idx] = {
@@ -313,11 +351,19 @@ export const Route = createFileRoute("/api/careers")({
               department: (rawJob.department || jobs[idx].department).trim(),
               location: (rawJob.location || jobs[idx].location).trim(),
               employment_type: rawJob.employment_type || jobs[idx].employment_type,
-              experience: rawJob.experience !== undefined ? rawJob.experience : jobs[idx].experience,
-              qualifications: rawJob.qualifications !== undefined ? rawJob.qualifications : jobs[idx].qualifications,
+              experience:
+                rawJob.experience !== undefined ? rawJob.experience : jobs[idx].experience,
+              qualifications:
+                rawJob.qualifications !== undefined
+                  ? rawJob.qualifications
+                  : jobs[idx].qualifications,
               description: (rawJob.description || jobs[idx].description).trim(),
-              responsibilities: Array.isArray(rawJob.responsibilities) ? rawJob.responsibilities : jobs[idx].responsibilities,
-              requirements: Array.isArray(rawJob.requirements) ? rawJob.requirements : jobs[idx].requirements,
+              responsibilities: Array.isArray(rawJob.responsibilities)
+                ? rawJob.responsibilities
+                : jobs[idx].responsibilities,
+              requirements: Array.isArray(rawJob.requirements)
+                ? rawJob.requirements
+                : jobs[idx].requirements,
               skills: Array.isArray(rawJob.skills) ? rawJob.skills : jobs[idx].skills,
               apply_email: rawJob.apply_email || jobs[idx].apply_email,
               is_open: rawJob.is_open !== undefined ? !!rawJob.is_open : jobs[idx].is_open,
@@ -332,7 +378,7 @@ export const Route = createFileRoute("/api/careers")({
                 job: jobs[idx],
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -340,10 +386,10 @@ export const Route = createFileRoute("/api/careers")({
             const targetId = body.id || (body.job && body.job.id);
             const job = jobs.find((j) => j.id === targetId);
             if (!job) {
-              return new Response(
-                JSON.stringify({ success: false, message: "Job not found" }),
-                { status: 404, headers: { "Content-Type": "application/json" } }
-              );
+              return new Response(JSON.stringify({ success: false, message: "Job not found" }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" },
+              });
             }
 
             job.is_open = !job.is_open;
@@ -356,7 +402,7 @@ export const Route = createFileRoute("/api/careers")({
                 job,
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -371,18 +417,21 @@ export const Route = createFileRoute("/api/careers")({
                 message: "Job opening deleted.",
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
-          return new Response(
-            JSON.stringify({ success: false, message: "Unrecognized action." }),
-            { status: 400, headers: { "Content-Type": "application/json" } }
-          );
+          return new Response(JSON.stringify({ success: false, message: "Unrecognized action." }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          });
         } catch (err: any) {
           return new Response(
-            JSON.stringify({ success: false, message: err.message || "Failed to process job request" }),
-            { status: 500, headers: { "Content-Type": "application/json" } }
+            JSON.stringify({
+              success: false,
+              message: err.message || "Failed to process job request",
+            }),
+            { status: 500, headers: { "Content-Type": "application/json" } },
           );
         }
       },

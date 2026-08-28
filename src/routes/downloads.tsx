@@ -91,7 +91,8 @@ const DOWNLOAD_ITEMS: DownloadItem[] = [
       fileUrl: "/downloads/Mfg._license_form_25.pdf",
       fileSize: "403 KB",
       issuingAuthority: "State Licensing Authority & FDA India",
-      description: "Form 25 licence for commercial production of general pharmaceutical formulations.",
+      description:
+        "Form 25 licence for commercial production of general pharmaceutical formulations.",
     },
   },
   {
@@ -328,9 +329,7 @@ export default function DownloadsPage() {
 
                   {/* Footer Actions */}
                   <div className="mt-6 pt-4 border-t border-border flex items-center justify-between gap-3">
-                    <span className="text-xs font-semibold text-muted-foreground">
-                      {item.size}
-                    </span>
+                    <span className="text-xs font-semibold text-muted-foreground">{item.size}</span>
 
                     <div className="flex items-center gap-2">
                       {item.certDoc && (
@@ -365,7 +364,8 @@ export default function DownloadsPage() {
                 Looking for Unit-specific Compliance Overviews?
               </h4>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Explore our full accreditations page featuring unit-by-unit regulatory approvals for Noida, Roorkee, and Greater Noida.
+                Explore our full accreditations page featuring unit-by-unit regulatory approvals for
+                Noida, Roorkee, and Greater Noida.
               </p>
             </div>
             <Link
@@ -379,11 +379,7 @@ export default function DownloadsPage() {
       </section>
 
       {/* Interactive Certificate Viewer Modal */}
-      <CertificateViewerModal
-        cert={activeCert}
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-      />
+      <CertificateViewerModal cert={activeCert} open={isModalOpen} onOpenChange={setIsModalOpen} />
     </SiteLayout>
   );
 }

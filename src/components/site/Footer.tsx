@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Linkedin, Youtube, Globe, ShoppingBag, Star, ChevronDown, Lock } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Linkedin,
+  Youtube,
+  Globe,
+  ShoppingBag,
+  Star,
+  ChevronDown,
+  Lock,
+} from "lucide-react";
 import { useSiteChrome } from "./SiteChromeContext";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -117,7 +128,13 @@ function FooterLogo() {
 /* ------------------------------------------------------------------ */
 /*  Collapsible nav group for mobile                                   */
 /* ------------------------------------------------------------------ */
-function FooterAccordion({ title, links }: { title: string; links: { label: string; to: string }[] }) {
+function FooterAccordion({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; to: string }[];
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -159,7 +176,10 @@ function FooterAccordion({ title, links }: { title: string; links: { label: stri
             <ul className="space-y-2.5 text-sm pb-3">
               {links.map((l, i) => (
                 <li key={i}>
-                  <Link to={l.to as any} className="text-white/70 hover:text-white transition-colors">
+                  <Link
+                    to={l.to as any}
+                    className="text-white/70 hover:text-white transition-colors"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -250,13 +270,19 @@ export function Footer() {
               </div>
             )}
             {branding?.phone && (
-              <a href={`tel:${branding.phone.replace(/[^+\d]/g, "")}`} className="flex gap-3 items-center hover:text-white transition-colors">
+              <a
+                href={`tel:${branding.phone.replace(/[^+\d]/g, "")}`}
+                className="flex gap-3 items-center hover:text-white transition-colors"
+              >
                 <Phone className="h-4 w-4 shrink-0 text-white/50" />
                 <span className="text-white/70">{branding.phone}</span>
               </a>
             )}
             {branding?.email && (
-              <a href={`mailto:${branding.email}`} className="flex gap-3 items-center hover:text-white transition-colors">
+              <a
+                href={`mailto:${branding.email}`}
+                className="flex gap-3 items-center hover:text-white transition-colors"
+              >
                 <Mail className="h-4 w-4 shrink-0 text-white/50" />
                 <span className="text-white/70">{branding.email}</span>
               </a>
@@ -268,14 +294,20 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container-x py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
-          <p>© {new Date().getFullYear()} {footer?.copyright ?? "Unicure India. All rights reserved."}</p>
+          <p>
+            © {new Date().getFullYear()}{" "}
+            {footer?.copyright ?? "Unicure India. All rights reserved."}
+          </p>
           <div className="flex flex-wrap items-center gap-6">
             {legal.map((l, i) => (
               <a key={i} href={l.url} className="hover:text-white transition-colors">
                 {l.label}
               </a>
             ))}
-            <Link to={"/leads-portal" as any} className="hover:text-emerald-400 text-white/40 transition-colors inline-flex items-center gap-1">
+            <Link
+              to={"/leads-portal" as any}
+              className="hover:text-emerald-400 text-white/40 transition-colors inline-flex items-center gap-1"
+            >
               <Lock className="h-3 w-3" />
               <span>Admin Leads</span>
             </Link>

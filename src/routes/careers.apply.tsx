@@ -56,7 +56,8 @@ const DEFAULT_FALLBACK_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "2-5 Years",
     qualifications: "B.Sc / M.Sc Chemistry or B.Pharma",
-    description: "Responsible for sampling, testing, and analytical validation of raw materials, in-process formulations, and finished dosage forms according to WHO-GMP specifications.",
+    description:
+      "Responsible for sampling, testing, and analytical validation of raw materials, in-process formulations, and finished dosage forms according to WHO-GMP specifications.",
     is_open: true,
   },
   {
@@ -67,7 +68,8 @@ const DEFAULT_FALLBACK_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "3-6 Years",
     qualifications: "B.Pharma / Diploma in Pharma Tech",
-    description: "Supervising granulation, compression, and coating lines for tablets and capsules. Ensuring strict batch record documentation.",
+    description:
+      "Supervising granulation, compression, and coating lines for tablets and capsules. Ensuring strict batch record documentation.",
     is_open: true,
   },
   {
@@ -78,7 +80,8 @@ const DEFAULT_FALLBACK_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "4-8 Years",
     qualifications: "M.Pharma (Pharmaceutics) / Ph.D.",
-    description: "Formulation development and optimization for novel and generic oral dosage forms, technology transfer, and stability analysis.",
+    description:
+      "Formulation development and optimization for novel and generic oral dosage forms, technology transfer, and stability analysis.",
     is_open: true,
   },
   {
@@ -89,7 +92,8 @@ const DEFAULT_FALLBACK_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "2-4 Years",
     qualifications: "B.Pharma / M.Pharma",
-    description: "Preparation and submission of dossiers (CTD/ACTD format) for international health authorities.",
+    description:
+      "Preparation and submission of dossiers (CTD/ACTD format) for international health authorities.",
     is_open: true,
   },
   {
@@ -100,7 +104,8 @@ const DEFAULT_FALLBACK_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "1-3 Years",
     qualifications: "ITI / Diploma / High School",
-    description: "Operation and maintenance of blister packaging machines, cartoners, and labeling lines.",
+    description:
+      "Operation and maintenance of blister packaging machines, cartoners, and labeling lines.",
     is_open: true,
   },
   {
@@ -111,7 +116,8 @@ const DEFAULT_FALLBACK_JOBS: JobOpening[] = [
     employment_type: "Full-time",
     experience: "3-7 Years",
     qualifications: "Graduate / MBA Marketing preferred",
-    description: "Managing institutional hospital tenders, corporate pharmacy supply contracts, and distributor relationships.",
+    description:
+      "Managing institutional hospital tenders, corporate pharmacy supply contracts, and distributor relationships.",
     is_open: true,
   },
 ];
@@ -171,7 +177,7 @@ function CareersApplyPage() {
   useEffect(() => {
     if (selectedJobId && selectedJobId !== "general") {
       const found = jobs.find(
-        (j) => j.id === selectedJobId || j.title?.toLowerCase() === selectedJobId?.toLowerCase()
+        (j) => j.id === selectedJobId || j.title?.toLowerCase() === selectedJobId?.toLowerCase(),
       );
       setSelectedJob(found || null);
     } else {
@@ -344,7 +350,11 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                   Thank you, {formData.fullName}!
                 </h2>
                 <p className="text-sm text-muted-foreground mt-2 max-w-md mx-auto leading-relaxed">
-                  Your application for <strong>{selectedJob ? selectedJob.title : "General Pharma Opportunities"}</strong> has been delivered directly to our Human Resources leadership team.
+                  Your application for{" "}
+                  <strong>
+                    {selectedJob ? selectedJob.title : "General Pharma Opportunities"}
+                  </strong>{" "}
+                  has been delivered directly to our Human Resources leadership team.
                 </p>
               </div>
 
@@ -360,7 +370,9 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
               </div>
 
               <div className="pt-2 text-xs text-muted-foreground leading-relaxed max-w-md mx-auto">
-                Our HR department reviews applications weekly. If your profile matches our requirements, we will contact you directly via phone or email for technical interviews.
+                Our HR department reviews applications weekly. If your profile matches our
+                requirements, we will contact you directly via phone or email for technical
+                interviews.
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
@@ -447,7 +459,8 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                             Experience Required
                           </span>
                           <span className="font-bold text-foreground mt-0.5 flex items-center gap-1">
-                            <Clock className="h-3 w-3 text-primary" /> {selectedJob.experience || "2+ Years"}
+                            <Clock className="h-3 w-3 text-primary" />{" "}
+                            {selectedJob.experience || "2+ Years"}
                           </span>
                         </div>
                         <div className="rounded-xl bg-secondary/40 p-3 border border-border/60">
@@ -455,7 +468,8 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                             Qualifications
                           </span>
                           <span className="font-bold text-foreground mt-0.5 flex items-center gap-1 truncate">
-                            <GraduationCap className="h-3 w-3 text-primary" /> {selectedJob.qualifications || "Degree / Diploma"}
+                            <GraduationCap className="h-3 w-3 text-primary" />{" "}
+                            {selectedJob.qualifications || "Degree / Diploma"}
                           </span>
                         </div>
                       </div>
@@ -483,7 +497,9 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                         <Sparkles className="h-4 w-4 text-primary" /> General Profile Submission
                       </div>
                       <p className="text-xs text-muted-foreground leading-relaxed">
-                        Don't see an exact matching position? Submit your CV to our talent database. We regularly recruit across Quality Control, Production, Regulatory Affairs, R&D, and Commercial divisions.
+                        Don't see an exact matching position? Submit your CV to our talent database.
+                        We regularly recruit across Quality Control, Production, Regulatory Affairs,
+                        R&D, and Commercial divisions.
                       </p>
                     </div>
                   )}
@@ -497,15 +513,31 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                   <div className="space-y-3 text-xs text-muted-foreground">
                     <div className="flex items-start gap-2.5">
                       <Shield className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span><strong>40+ Years of Pharma Leadership:</strong> Stable, recession-resilient career with continuous career mobility.</span>
+                      <span>
+                        <strong>40+ Years of Pharma Leadership:</strong> Stable, recession-resilient
+                        career with continuous career mobility.
+                      </span>
                     </div>
                     <div className="flex items-start gap-2.5">
                       <Building2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                      <span><strong>WHO-GMP Certified Facilities:</strong> Work with advanced analytical equipment (HPLC, GC) and automated manufacturing lines.</span>
+                      <span>
+                        <strong>WHO-GMP Certified Facilities:</strong> Work with advanced analytical
+                        equipment (HPLC, GC) and automated manufacturing lines.
+                      </span>
                     </div>
                     <div className="flex items-start gap-2.5">
                       <Mail className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                      <span><strong>Direct HR Helpline:</strong> Questions? Reach our recruitment team directly at <a href="mailto:careers@unicureindia.com" className="text-primary font-semibold underline">careers@unicureindia.com</a>.</span>
+                      <span>
+                        <strong>Direct HR Helpline:</strong> Questions? Reach our recruitment team
+                        directly at{" "}
+                        <a
+                          href="mailto:careers@unicureindia.com"
+                          className="text-primary font-semibold underline"
+                        >
+                          careers@unicureindia.com
+                        </a>
+                        .
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -518,9 +550,7 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                     <span className="text-xs font-bold uppercase tracking-widest text-primary">
                       Candidate Details
                     </span>
-                    <h3 className="text-2xl font-bold text-foreground mt-0.5">
-                      Application Form
-                    </h3>
+                    <h3 className="text-2xl font-bold text-foreground mt-0.5">Application Form</h3>
                     <p className="text-xs text-muted-foreground mt-1">
                       Please complete the form below and attach your latest CV / Resume.
                     </p>
@@ -591,7 +621,9 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                           required
                           placeholder="e.g. Noida / Delhi / Haridwar"
                           value={formData.currentCity}
-                          onChange={(e) => setFormData({ ...formData, currentCity: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, currentCity: e.target.value })
+                          }
                           className="w-full rounded-2xl border border-border bg-secondary/20 px-4 py-3 text-sm text-foreground focus:border-primary focus:bg-white focus:outline-none transition"
                         />
                       </div>
@@ -602,15 +634,21 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                         </label>
                         <select
                           value={formData.qualification}
-                          onChange={(e) => setFormData({ ...formData, qualification: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, qualification: e.target.value })
+                          }
                           className="w-full rounded-2xl border border-border bg-secondary/20 px-4 py-3 text-sm text-foreground focus:border-primary focus:bg-white focus:outline-none transition cursor-pointer"
                         >
                           <option value="B.Pharma">B.Pharma</option>
                           <option value="M.Pharma (Pharmaceutics/QA/RA)">M.Pharma</option>
                           <option value="B.Sc Chemistry / Bio">B.Sc Chemistry / Biology</option>
                           <option value="M.Sc Chemistry / Organic">M.Sc Chemistry</option>
-                          <option value="Diploma in Pharmacy / Pharma Tech">Diploma in Pharmacy</option>
-                          <option value="ITI / Technical Diploma">ITI / Technical Certificate</option>
+                          <option value="Diploma in Pharmacy / Pharma Tech">
+                            Diploma in Pharmacy
+                          </option>
+                          <option value="ITI / Technical Diploma">
+                            ITI / Technical Certificate
+                          </option>
                           <option value="MBA / BBA / Graduate">MBA / Graduate</option>
                           <option value="Ph.D / Doctorate">Ph.D in Pharmaceutical Sciences</option>
                           <option value="Other">Other Qualification</option>
@@ -629,7 +667,9 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                           onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
                           className="w-full rounded-2xl border border-border bg-secondary/20 px-4 py-3 text-sm text-foreground focus:border-primary focus:bg-white focus:outline-none transition cursor-pointer"
                         >
-                          <option value="Fresher / Entry Level">Fresher / Entry Level (0-1 Year)</option>
+                          <option value="Fresher / Entry Level">
+                            Fresher / Entry Level (0-1 Year)
+                          </option>
                           <option value="1-3 Years">1 - 3 Years</option>
                           <option value="3-5 Years">3 - 5 Years</option>
                           <option value="5-8 Years">5 - 8 Years</option>
@@ -644,7 +684,9 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                         </label>
                         <select
                           value={formData.noticePeriod}
-                          onChange={(e) => setFormData({ ...formData, noticePeriod: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, noticePeriod: e.target.value })
+                          }
                           className="w-full rounded-2xl border border-border bg-secondary/20 px-4 py-3 text-sm text-foreground focus:border-primary focus:bg-white focus:outline-none transition cursor-pointer"
                         >
                           <option value="Immediate Joiner">Immediate Joiner</option>
@@ -665,7 +707,9 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                         type="text"
                         placeholder="e.g. Senior QC Chemist at ABC Pharma Ltd"
                         value={formData.currentCompany}
-                        onChange={(e) => setFormData({ ...formData, currentCompany: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, currentCompany: e.target.value })
+                        }
                         className="w-full rounded-2xl border border-border bg-secondary/20 px-4 py-3 text-sm text-foreground focus:border-primary focus:bg-white focus:outline-none transition"
                       />
                     </div>
@@ -764,7 +808,8 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                       >
                         {isSubmitting ? (
                           <>
-                            <Loader2 className="h-4 w-4 animate-spin" /> Submitting Application & CV...
+                            <Loader2 className="h-4 w-4 animate-spin" /> Submitting Application &
+                            CV...
                           </>
                         ) : (
                           <>
@@ -773,7 +818,8 @@ ${formData.coverNote.trim() || "Candidate submitted profile for consideration ac
                         )}
                       </button>
                       <p className="text-[11px] text-muted-foreground text-center mt-2.5">
-                        Your personal details and CV are treated with strict confidentiality under pharmaceutical recruitment standards.
+                        Your personal details and CV are treated with strict confidentiality under
+                        pharmaceutical recruitment standards.
                       </p>
                     </div>
                   </form>

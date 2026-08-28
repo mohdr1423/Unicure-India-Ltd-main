@@ -40,10 +40,7 @@ export function Breadcrumbs({ theme = "light", className }: BreadcrumbsProps) {
   const isDark = theme === "dark";
 
   return (
-    <nav
-      aria-label="Breadcrumb"
-      className={cn("text-xs font-medium select-none", className)}
-    >
+    <nav aria-label="Breadcrumb" className={cn("text-xs font-medium select-none", className)}>
       <ol className="flex items-center gap-1.5 flex-wrap">
         <li>
           <Link
@@ -66,10 +63,7 @@ export function Breadcrumbs({ theme = "light", className }: BreadcrumbsProps) {
         </li>
         <li>
           <span
-            className={cn(
-              "font-semibold capitalize",
-              isDark ? "text-white" : "text-foreground",
-            )}
+            className={cn("font-semibold capitalize", isDark ? "text-white" : "text-foreground")}
           >
             {label}
           </span>

@@ -47,7 +47,10 @@ const ALL_CLIENTS: ClientPartner[] = [
   { name: "Iressia Life Sciences", logo: "/images/clients/iressia.svg" },
   { name: "Shifa Laboratories", logo: "/images/clients/shifa.svg" },
   { name: "Ravenbhel Healthcare", logo: "/images/clients/ravenbhel.svg" },
-  { name: "Quality Innovations & Pharmaceuticals", logo: "/images/clients/quality-innovations.svg" },
+  {
+    name: "Quality Innovations & Pharmaceuticals",
+    logo: "/images/clients/quality-innovations.svg",
+  },
   { name: "Cradel Pharmaceuticals", logo: "/images/clients/cradel.svg" },
   { name: "Adips Dermatek", logo: "/images/clients/adips-dermatek.svg" },
 ];
@@ -83,7 +86,8 @@ function CoMfgPage() {
               <Breadcrumbs theme="dark" />
             </div>
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 border border-white/15">
-              <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Contract & Third-Party Manufacturing
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Contract & Third-Party
+              Manufacturing
             </span>
             <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
               Co-Manufacturing
@@ -197,7 +201,8 @@ function CoMfgPage() {
               </h2>
               <div className="mt-4 mx-auto h-1 w-16 rounded-full bg-gradient-brand" />
               <p className="mt-4 text-sm sm:text-base text-muted-foreground">
-                Decades of contract manufacturing excellence serving India's top pharmaceutical innovators.
+                Decades of contract manufacturing excellence serving India's top pharmaceutical
+                innovators.
               </p>
             </div>
           </ScrollReveal>
@@ -278,7 +283,8 @@ function CoMfgPage() {
 
               <div className="relative max-w-2xl mx-auto space-y-4">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold text-white/90 backdrop-blur">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Loan Licence & Third-Party Manufacturing
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Loan Licence &
+                  Third-Party Manufacturing
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
                   Ready to build your next pharmaceutical partnership?

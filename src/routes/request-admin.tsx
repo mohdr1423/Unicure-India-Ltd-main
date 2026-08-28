@@ -38,7 +38,8 @@ function RequestAdminPage() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    setBusy(true); setError(null);
+    setBusy(true);
+    setError(null);
     try {
       const res = await call({ data: { email } });
       setResult(res.status);
@@ -64,22 +65,30 @@ function RequestAdminPage() {
           ) : !sessionEmail ? (
             <div className="space-y-3">
               <p className="text-sm">You need to be signed in with a confirmed email first.</p>
-              <Button onClick={() => navigate({ to: "/auth" })} className="w-full">Go to sign in</Button>
+              <Button onClick={() => navigate({ to: "/auth" })} className="w-full">
+                Go to sign in
+              </Button>
             </div>
           ) : result === "granted" ? (
             <div className="space-y-3">
-              <p className="text-sm text-green-600">Admin role granted. You can now open the admin panel.</p>
-              <Button onClick={() => navigate({ to: "/admin" })} className="w-full">Open /admin</Button>
+              <p className="text-sm text-green-600">
+                Admin role granted. You can now open the admin panel.
+              </p>
+              <Button onClick={() => navigate({ to: "/admin" })} className="w-full">
+                Open /admin
+              </Button>
             </div>
           ) : result === "already_admin" ? (
             <div className="space-y-3">
               <p className="text-sm text-green-600">You already have the admin role.</p>
-              <Button onClick={() => navigate({ to: "/admin" })} className="w-full">Open /admin</Button>
+              <Button onClick={() => navigate({ to: "/admin" })} className="w-full">
+                Open /admin
+              </Button>
             </div>
           ) : result === "pending_review" ? (
             <p className="text-sm">
-              An admin already exists for this project, so new requests require approval from an existing admin.
-              Ask a current admin to grant your account the role.
+              An admin already exists for this project, so new requests require approval from an
+              existing admin. Ask a current admin to grant your account the role.
             </p>
           ) : (
             <form className="space-y-3" onSubmit={submit}>
@@ -97,14 +106,19 @@ function RequestAdminPage() {
                 />
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
-              <Button className="w-full" disabled={busy}>{busy ? "…" : "Request admin role"}</Button>
+              <Button className="w-full" disabled={busy}>
+                {busy ? "…" : "Request admin role"}
+              </Button>
               <p className="text-xs text-muted-foreground">
-                Self-service promotion works only while no admin exists yet. After that, an existing admin must approve new requests.
+                Self-service promotion works only while no admin exists yet. After that, an existing
+                admin must approve new requests.
               </p>
             </form>
           )}
           <div className="mt-6 text-center text-sm">
-            <Link to="/" className="text-muted-foreground hover:text-foreground">← Back to site</Link>
+            <Link to="/" className="text-muted-foreground hover:text-foreground">
+              ← Back to site
+            </Link>
           </div>
         </CardContent>
       </Card>

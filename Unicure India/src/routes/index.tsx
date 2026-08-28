@@ -92,10 +92,9 @@ function StatsRow({ stats }: { stats: HomeStat[] }) {
   const [active, setActive] = useState(false);
   useEffect(() => {
     if (!ref.current) return;
-    const io = new IntersectionObserver(
-      ([e]) => e.isIntersecting && setActive(true),
-      { threshold: 0.3 }
-    );
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setActive(true), {
+      threshold: 0.3,
+    });
     io.observe(ref.current);
     return () => io.disconnect();
   }, []);
@@ -108,7 +107,17 @@ function StatsRow({ stats }: { stats: HomeStat[] }) {
   );
 }
 
-function Stat({ value, suffix, label, active }: { value: number; suffix: string; label: string; active: boolean }) {
+function Stat({
+  value,
+  suffix,
+  label,
+  active,
+}: {
+  value: number;
+  suffix: string;
+  label: string;
+  active: boolean;
+}) {
   const n = useCounter(value, active);
   return (
     <div className="text-center">
@@ -116,41 +125,100 @@ function Stat({ value, suffix, label, active }: { value: number; suffix: string;
         {n}
         {suffix}
       </div>
-      <div className="mt-2 text-xs md:text-sm uppercase tracking-widest text-muted-foreground">{label}</div>
+      <div className="mt-2 text-xs md:text-sm uppercase tracking-widest text-muted-foreground">
+        {label}
+      </div>
     </div>
   );
 }
 
 const capabilityIcons = [Pill, Package, Droplets, FlaskConical, Sparkles, Droplets];
 const capabilitiesDefault = [
-  { icon: Pill, title: "Tablets (6,000M/yr)", desc: "High-speed compression, film, sugar & enteric coating." },
-  { icon: Package, title: "Capsules (1,200M/yr)", desc: "Hard gelatin & vegetarian capsule filling with pellets/powders." },
-  { icon: Droplets, title: "Liquid Orals (35.28M/yr)", desc: "Closed-loop syrup mixing, suspension & liquid filling." },
-  { icon: Droplets, title: "Dry Syrups (3.6M/yr)", desc: "Beta-Lactam and pediatric antibiotic dry powders." },
-  { icon: FlaskConical, title: "Ointments & Gels (500 MT)", desc: "Planetary vacuum homogenizer semi-solid manufacturing." },
-  { icon: Sparkles, title: "Sachets & Powders (4,000 MT)", desc: "Precision granulation & high-speed form-fill-seal." },
+  {
+    icon: Pill,
+    title: "Tablets (6,000M/yr)",
+    desc: "High-speed compression, film, sugar & enteric coating.",
+  },
+  {
+    icon: Package,
+    title: "Capsules (1,200M/yr)",
+    desc: "Hard gelatin & vegetarian capsule filling with pellets/powders.",
+  },
+  {
+    icon: Droplets,
+    title: "Liquid Orals (35.28M/yr)",
+    desc: "Closed-loop syrup mixing, suspension & liquid filling.",
+  },
+  {
+    icon: Droplets,
+    title: "Dry Syrups (3.6M/yr)",
+    desc: "Beta-Lactam and pediatric antibiotic dry powders.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Ointments & Gels (500 MT)",
+    desc: "Planetary vacuum homogenizer semi-solid manufacturing.",
+  },
+  {
+    icon: Sparkles,
+    title: "Sachets & Powders (4,000 MT)",
+    desc: "Precision granulation & high-speed form-fill-seal.",
+  },
 ];
 
 const whyIcons = [ShieldCheck, Microscope, Award, Globe2, Truck, CheckCircle2];
 const why = [
-  { icon: ShieldCheck, title: "WHO-GMP Certified", desc: "Approved across Noida, Roorkee and Greater Noida units." },
-  { icon: Microscope, title: "R&D Excellence", desc: "In-house formulation and analytical development laboratories." },
-  { icon: Award, title: "Rigorous QA/QC", desc: "Multi-stage analytical testing at every raw material and batch stage." },
-  { icon: Globe2, title: "Global Reach", desc: "Exporting high quality formulations to 20+ countries worldwide." },
-  { icon: Truck, title: "Reliable Supply Chain", desc: "High volume production with on-time domestic and global delivery." },
-  { icon: CheckCircle2, title: "Regulatory Compliance", desc: "CTD/eCTD dossiers ready for international drug registration." },
+  {
+    icon: ShieldCheck,
+    title: "WHO-GMP Certified",
+    desc: "Approved across Noida, Roorkee and Greater Noida units.",
+  },
+  {
+    icon: Microscope,
+    title: "R&D Excellence",
+    desc: "In-house formulation and analytical development laboratories.",
+  },
+  {
+    icon: Award,
+    title: "Rigorous QA/QC",
+    desc: "Multi-stage analytical testing at every raw material and batch stage.",
+  },
+  {
+    icon: Globe2,
+    title: "Global Reach",
+    desc: "Exporting high quality formulations to 20+ countries worldwide.",
+  },
+  {
+    icon: Truck,
+    title: "Reliable Supply Chain",
+    desc: "High volume production with on-time domestic and global delivery.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Regulatory Compliance",
+    desc: "CTD/eCTD dossiers ready for international drug registration.",
+  },
 ];
 
-const certs = ["WHO-GMP", "ISO 9001:2015", "Schedule M", "GLP Compliant", "ISO 14001", "Form 25 / 26 / 28"];
+const certs = [
+  "WHO-GMP",
+  "ISO 9001:2015",
+  "Schedule M",
+  "GLP Compliant",
+  "ISO 14001",
+  "Form 25 / 26 / 28",
+];
 
 const testimonials = [
   {
-    quote: "Unicure's manufacturing precision and documentation quality make them our first-choice partner in South Asia.",
+    quote:
+      "Unicure's manufacturing precision and documentation quality make them our first-choice partner in South Asia.",
     name: "Dr. R. Mehta",
     role: "Head of Procurement, MedCorp Africa",
   },
   {
-    quote: "Consistent batches, on-time shipments, and world-class QA. Exactly what a global distributor needs.",
+    quote:
+      "Consistent batches, on-time shipments, and world-class QA. Exactly what a global distributor needs.",
     name: "James O'Neill",
     role: "Managing Director, PharmaLink EU",
   },
@@ -266,7 +334,8 @@ function HomePage() {
             </span>
 
             <h1 className="mt-6 text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight">
-              {heroC?.headline_line1 ?? "Pursuing Excellence"}<br />
+              {heroC?.headline_line1 ?? "Pursuing Excellence"}
+              <br />
               <span className="text-gradient bg-[linear-gradient(90deg,#38bdf8,#34d399)] bg-clip-text text-transparent">
                 {heroC?.headline_highlight ?? "In Healthcare"}
               </span>
@@ -420,13 +489,14 @@ function HomePage() {
                 Welcome To Unicure India
               </h2>
               <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
-                Unicure, established by <strong>Mr. Abdul Mateen</strong>, is a leading manufacturer of tablets,
-                capsules, dry syrups, sachets, syringes, and gels. Our aim is to bring healthcare supplies to every
-                sector of society.
+                Unicure, established by <strong>Mr. Abdul Mateen</strong>, is a leading manufacturer
+                of tablets, capsules, dry syrups, sachets, syringes, and gels. Our aim is to bring
+                healthcare supplies to every sector of society.
               </p>
               <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                With decades of experience in the pharmaceutical industry, we combine traditional values with modern
-                technology to deliver safe, effective, and affordable medications to patients worldwide.
+                With decades of experience in the pharmaceutical industry, we combine traditional
+                values with modern technology to deliver safe, effective, and affordable medications
+                to patients worldwide.
               </p>
               <div className="mt-8 grid sm:grid-cols-2 gap-4">
                 {[
@@ -470,7 +540,8 @@ function HomePage() {
                 Innovative solutions for better health outcomes
               </h2>
               <p className="mt-4 text-muted-foreground text-lg">
-                Engineered for zero-contamination, precise batch reproducibility, and uncompromising quality.
+                Engineered for zero-contamination, precise batch reproducibility, and uncompromising
+                quality.
               </p>
             </div>
           </ScrollReveal>
@@ -482,10 +553,13 @@ function HomePage() {
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <FlaskConical className="h-7 w-7" />
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-foreground">A Leading Healthcare Manufacturer</h3>
+                  <h3 className="mt-6 text-xl font-bold text-foreground">
+                    A Leading Healthcare Manufacturer
+                  </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    Unicure prides itself on harnessing technological processes and utilizing them for new prospects and
-                    clients. We use new-age science and technology to constantly evolve and fulfil our vision.
+                    Unicure prides itself on harnessing technological processes and utilizing them
+                    for new prospects and clients. We use new-age science and technology to
+                    constantly evolve and fulfil our vision.
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-border/60 flex items-center text-xs font-semibold text-primary">
@@ -500,10 +574,13 @@ function HomePage() {
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <Building2 className="h-7 w-7" />
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-foreground">Safe Manufacturing Units</h3>
+                  <h3 className="mt-6 text-xl font-bold text-foreground">
+                    Safe Manufacturing Units
+                  </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    Unicure's manufacturing units are designed to prevent contamination. Their false ceilings and
-                    concealed lighting structure ensure that the entire process is conducted safely at all times.
+                    Unicure's manufacturing units are designed to prevent contamination. Their false
+                    ceilings and concealed lighting structure ensure that the entire process is
+                    conducted safely at all times.
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-border/60 flex items-center text-xs font-semibold text-primary">
@@ -518,10 +595,13 @@ function HomePage() {
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <ShieldAlert className="h-7 w-7" />
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-foreground">Separate Space for Sensitive Materials</h3>
+                  <h3 className="mt-6 text-xl font-bold text-foreground">
+                    Separate Space for Sensitive Materials
+                  </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    Hazardous, Beta-Lactam, and sensitive materials are handled and stored in separate designated areas.
-                    Hence, no compromise with quality and safety of healthcare supplies and sensitive drugs.
+                    Hazardous, Beta-Lactam, and sensitive materials are handled and stored in
+                    separate designated areas. Hence, no compromise with quality and safety of
+                    healthcare supplies and sensitive drugs.
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-border/60 flex items-center text-xs font-semibold text-primary">
@@ -542,14 +622,15 @@ function HomePage() {
               <HeartHandshake className="h-4 w-4" /> Our Vision & Commitment
             </span>
             <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight">
-              “To be a commercially viable leading pharmaceutical company in providing quality products affordable to all
-              sections in the society.”
+              “To be a commercially viable leading pharmaceutical company in providing quality
+              products affordable to all sections in the society.”
             </h2>
             <p className="mt-6 text-white/85 text-lg leading-relaxed font-light">
-              Unicure India Ltd. aims to be the leading pharmaceutical company that provides trusted healthcare products
-              at affordable rates. Our vision is to cater to all sections of society and become a front player in the
-              INNOVATION pharma community. We consistently strive to target every sector of the market by manufacturing
-              high quality products through rigorous Research and Development.
+              Unicure India Ltd. aims to be the leading pharmaceutical company that provides trusted
+              healthcare products at affordable rates. Our vision is to cater to all sections of
+              society and become a front player in the INNOVATION pharma community. We consistently
+              strive to target every sector of the market by manufacturing high quality products
+              through rigorous Research and Development.
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -576,12 +657,15 @@ function HomePage() {
           <ScrollReveal>
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">
-                <SectionEyebrow>{home?.capabilities?.eyebrow ?? "Dosage Form Capacities"}</SectionEyebrow>
+                <SectionEyebrow>
+                  {home?.capabilities?.eyebrow ?? "Dosage Form Capacities"}
+                </SectionEyebrow>
                 <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
                   {home?.capabilities?.title ?? "High-volume dosage form manufacturing"}
                 </h2>
                 <p className="mt-4 text-muted-foreground text-lg">
-                  Purpose-built facilities and validated processes across every major pharmaceutical dosage form.
+                  Purpose-built facilities and validated processes across every major pharmaceutical
+                  dosage form.
                 </p>
               </div>
               <Link
@@ -624,11 +708,14 @@ function HomePage() {
             <div>
               <SectionEyebrow light>Products Portfolio</SectionEyebrow>
               <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
-                1,200+ formulations across<br />every therapeutic area
+                1,200+ formulations across
+                <br />
+                every therapeutic area
               </h2>
               <p className="mt-5 text-white/80 text-lg">
-                From antibiotics and cardiovascular therapies to nutraceuticals, gastrointestinal care, and specialty
-                pediatrics — browse our full formulation list or request co-manufacturing.
+                From antibiotics and cardiovascular therapies to nutraceuticals, gastrointestinal
+                care, and specialty pediatrics — browse our full formulation list or request
+                co-manufacturing.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -692,7 +779,9 @@ function HomePage() {
           <ScrollReveal>
             <div className="text-center mb-10">
               <SectionEyebrow>Accreditations</SectionEyebrow>
-              <h2 className="mt-3 text-2xl md:text-4xl font-bold">Held to the world's highest standards</h2>
+              <h2 className="mt-3 text-2xl md:text-4xl font-bold">
+                Held to the world's highest standards
+              </h2>
             </div>
           </ScrollReveal>
           <StaggerGrid className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
@@ -720,8 +809,9 @@ function HomePage() {
                 Three world-class manufacturing facilities.
               </h2>
               <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
-                Today, Unicure India Ltd. operates three manufacturing plants across Noida, Roorkee, and Greater Noida,
-                employing more than 600 professionals with approximately 100 highly qualified technical personnel.
+                Today, Unicure India Ltd. operates three manufacturing plants across Noida, Roorkee,
+                and Greater Noida, employing more than 600 professionals with approximately 100
+                highly qualified technical personnel.
               </p>
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 {[
@@ -729,7 +819,10 @@ function HomePage() {
                   { k: "600+", v: "Professionals" },
                   { k: "6,000M", v: "Tablets / Year" },
                 ].map((s) => (
-                  <div key={s.v} className="rounded-2xl bg-secondary p-4 sm:p-5 border border-border/50">
+                  <div
+                    key={s.v}
+                    className="rounded-2xl bg-secondary p-4 sm:p-5 border border-border/50"
+                  >
                     <div className="text-xl font-bold text-primary">{s.k}</div>
                     <div className="text-xs text-muted-foreground mt-1">{s.v}</div>
                   </div>
@@ -824,7 +917,9 @@ function HomePage() {
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto mb-14">
               <SectionEyebrow>Partners & Distributors</SectionEyebrow>
-              <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">Trusted worldwide</h2>
+              <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+                Trusted worldwide
+              </h2>
             </div>
           </ScrollReveal>
           <StaggerGrid className="grid gap-6 md:grid-cols-3">
@@ -859,7 +954,8 @@ function HomePage() {
                   Build a career that improves lives
                 </h2>
                 <p className="mt-4 text-muted-foreground text-lg">
-                  Join 600+ professionals across manufacturing, R&D, quality assurance, and commercial teams.
+                  Join 600+ professionals across manufacturing, R&D, quality assurance, and
+                  commercial teams.
                 </p>
                 <Link
                   to="/careers"
@@ -875,7 +971,10 @@ function HomePage() {
                   { icon: Award, value: "40+", label: "Years Legacy" },
                   { icon: Globe2, value: "95%", label: "Retention Rate" },
                 ].map((s) => (
-                  <div key={s.label} className="rounded-2xl bg-white border border-border p-5 text-center shadow-card">
+                  <div
+                    key={s.label}
+                    className="rounded-2xl bg-white border border-border p-5 text-center shadow-card"
+                  >
                     <s.icon className="h-6 w-6 text-primary mx-auto" />
                     <div className="mt-2 text-2xl font-bold text-gradient">{s.value}</div>
                     <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
@@ -900,8 +999,8 @@ function HomePage() {
                     Ready to manufacture with confidence?
                   </h2>
                   <p className="mt-4 text-white/85 text-lg">
-                    Talk to our team for custom formulations, contract manufacturing, institutional supply, and global
-                    export partnerships.
+                    Talk to our team for custom formulations, contract manufacturing, institutional
+                    supply, and global export partnerships.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">

@@ -31,7 +31,9 @@ export const promoteUserToAdmin = createServerFn({ method: "POST" })
     let email: string | null = null;
 
     if (UUID_RE.test(data.identifier)) {
-      const { data: got, error } = await (supabaseAdmin as any).auth.admin.getUserById(data.identifier);
+      const { data: got, error } = await (supabaseAdmin as any).auth.admin.getUserById(
+        data.identifier,
+      );
       if (error || !got?.user) throw new Error("No user found with that ID");
       userId = got.user.id;
       email = got.user.email ?? null;
@@ -42,7 +44,10 @@ export const promoteUserToAdmin = createServerFn({ method: "POST" })
       const perPage = 200;
       // Cap at 20 pages (4000 users) to bound work
       while (page <= 20) {
-        const { data: list, error } = await (supabaseAdmin as any).auth.admin.listUsers({ page, perPage });
+        const { data: list, error } = await (supabaseAdmin as any).auth.admin.listUsers({
+          page,
+          perPage,
+        });
         if (error) throw new Error(error.message);
         const users = list?.users ?? [];
         const found = users.find((u: any) => (u.email ?? "").toLowerCase() === target);

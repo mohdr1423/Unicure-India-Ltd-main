@@ -39,10 +39,7 @@ type Props<T> = {
   title: string;
   description?: string;
   defaultDraft: T;
-  render: (state: {
-    value: T;
-    setValue: (updater: (prev: T) => T) => void;
-  }) => ReactNode;
+  render: (state: { value: T; setValue: (updater: (prev: T) => T) => void }) => ReactNode;
 };
 
 export function ContentBlockShell<T extends object>({
@@ -135,7 +132,6 @@ export function ContentBlockShell<T extends object>({
       }
     }, 1500);
     return () => autosaveRef.current && clearTimeout(autosaveRef.current);
-     
   }, [JSON.stringify(value), isDirty, data?.updated_at]);
 
   const [showPreview, setShowPreview] = useState(false);
@@ -192,8 +188,8 @@ export function ContentBlockShell<T extends object>({
                   <AlertDialogHeader>
                     <AlertDialogTitle>Publish these changes?</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Your draft will replace what visitors see on the live site right away.
-                      You can restore a previous version later from the History menu.
+                      Your draft will replace what visitors see on the live site right away. You can
+                      restore a previous version later from the History menu.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -233,9 +229,7 @@ export function ContentBlockShell<T extends object>({
                         onClick={() => restoreMut.mutate(v.id)}
                         className="flex flex-col items-start gap-0.5"
                       >
-                        <span className="text-sm">
-                          {new Date(v.published_at).toLocaleString()}
-                        </span>
+                        <span className="text-sm">{new Date(v.published_at).toLocaleString()}</span>
                         <span className="text-xs text-muted-foreground">
                           Click to load into the editor
                         </span>
@@ -247,17 +241,25 @@ export function ContentBlockShell<T extends object>({
 
               <Button variant="ghost" onClick={() => setShowPreview((s) => !s)}>
                 {showPreview ? (
-                  <><EyeOff className="h-4 w-4 mr-2" /> Hide preview</>
+                  <>
+                    <EyeOff className="h-4 w-4 mr-2" /> Hide preview
+                  </>
                 ) : (
-                  <><Eye className="h-4 w-4 mr-2" /> Live preview</>
+                  <>
+                    <Eye className="h-4 w-4 mr-2" /> Live preview
+                  </>
                 )}
               </Button>
 
               <div className="ml-auto text-xs text-muted-foreground flex items-center gap-2">
                 {saveMut.isPending ? (
-                  <><Loader2 className="h-3 w-3 animate-spin" /> Saving…</>
+                  <>
+                    <Loader2 className="h-3 w-3 animate-spin" /> Saving…
+                  </>
                 ) : lastSavedAt ? (
-                  <><CheckCircle2 className="h-3 w-3 text-green-600" /> Draft autosaved</>
+                  <>
+                    <CheckCircle2 className="h-3 w-3 text-green-600" /> Draft autosaved
+                  </>
                 ) : isDirty ? (
                   <>Autosaves as you type</>
                 ) : (

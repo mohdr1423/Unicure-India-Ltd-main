@@ -46,19 +46,59 @@ const COMPREHENSIVE_NAV: NavItem[] = [
   {
     label: "About Us",
     children: [
-      { to: "/about", label: "About Unicure India", subLabel: "40+ Years of Excellence", icon: Building2 },
-      { to: "/leadership", label: "Leadership & Directors", subLabel: "Executive Board", icon: Users },
-      { to: "/certifications", label: "Accreditations & Certifications", subLabel: "WHO-GMP, ISO Certified", icon: Award },
-      { to: "/md-message", label: "Director's Message", subLabel: "Vision & Philosophy", icon: MessageSquareText },
-      { to: "/downloads", label: "Downloads & Catalogs", subLabel: "Company Profile & Lists", icon: FileText },
+      {
+        to: "/about",
+        label: "About Unicure India",
+        subLabel: "40+ Years of Excellence",
+        icon: Building2,
+      },
+      {
+        to: "/leadership",
+        label: "Leadership & Directors",
+        subLabel: "Executive Board",
+        icon: Users,
+      },
+      {
+        to: "/certifications",
+        label: "Accreditations & Certifications",
+        subLabel: "WHO-GMP, ISO Certified",
+        icon: Award,
+      },
+      {
+        to: "/md-message",
+        label: "Director's Message",
+        subLabel: "Vision & Philosophy",
+        icon: MessageSquareText,
+      },
+      {
+        to: "/downloads",
+        label: "Downloads & Catalogs",
+        subLabel: "Company Profile & Lists",
+        icon: FileText,
+      },
     ],
   },
   {
     label: "Manufacturing",
     children: [
-      { to: "/manufacturing", label: "Operational Units", subLabel: "State-of-the-art Plants", icon: Factory },
-      { to: "/dosage-forms", label: "Dosage Forms & Capabilities", subLabel: "Tablets, Capsules, Liquids, Injections", icon: Pill },
-      { to: "/contract-manufacturing", label: "Contract & Third-Party Mfg", subLabel: "Loan License & P2P", icon: Handshake },
+      {
+        to: "/manufacturing",
+        label: "Operational Units",
+        subLabel: "State-of-the-art Plants",
+        icon: Factory,
+      },
+      {
+        to: "/dosage-forms",
+        label: "Dosage Forms & Capabilities",
+        subLabel: "Tablets, Capsules, Liquids, Injections",
+        icon: Pill,
+      },
+      {
+        to: "/contract-manufacturing",
+        label: "Contract & Third-Party Mfg",
+        subLabel: "Loan License & P2P",
+        icon: Handshake,
+      },
     ],
   },
   { to: "/products", label: "Products", icon: ShoppingBag },
@@ -148,7 +188,10 @@ export function Header() {
         <TopBanner />
         <div className="container-x flex h-18 items-center justify-between py-3">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-2.5 shrink-0 max-w-[calc(100%-3.5rem)] lg:max-w-none">
+          <Link
+            to="/"
+            className="flex items-center gap-2 sm:gap-2.5 shrink-0 max-w-[calc(100%-3.5rem)] lg:max-w-none"
+          >
             <HeaderLogo scrolled={scrolled} />
             <div className="flex flex-col leading-none min-w-0">
               <span

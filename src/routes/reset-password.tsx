@@ -9,7 +9,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 
 export const Route = createFileRoute("/reset-password")({
   component: ResetPasswordPage,
-  head: () => ({ meta: [{ title: "Reset password — Unicure India Ltd" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({
+    meta: [{ title: "Reset password — Unicure India Ltd" }, { name: "robots", content: "noindex" }],
+  }),
 });
 
 function ResetPasswordPage() {
@@ -33,16 +35,20 @@ function ResetPasswordPage() {
       if (cancelled) return;
       if (roleErr || !isAdmin) {
         const { data: userData } = await supabase.auth.getUser();
-        void logAdminAuthEvent({ data: {
-          event: "password_reset_role_check_failed",
-          email: userData.user?.email ?? null,
-          userId,
-          success: false,
-          reason: roleErr?.message ?? "User is not an admin",
-          userAgent: navigator.userAgent,
-        }}).catch(() => {});
+        void logAdminAuthEvent({
+          data: {
+            event: "password_reset_role_check_failed",
+            email: userData.user?.email ?? null,
+            userId,
+            success: false,
+            reason: roleErr?.message ?? "User is not an admin",
+            userAgent: navigator.userAgent,
+          },
+        }).catch(() => {});
         await supabase.auth.signOut();
-        setLinkError("This password reset link is not for an admin account. Please contact an existing admin if you need access.");
+        setLinkError(
+          "This password reset link is not for an admin account. Please contact an existing admin if you need access.",
+        );
         setReady(false);
         return;
       }
@@ -64,13 +70,21 @@ function ResetPasswordPage() {
       if (cancelled) return;
       setReady((r) => {
         if (!r) {
-          setLinkError((prev) => prev ?? "This reset link is invalid or has expired. Please request a new one from the sign-in page.");
+          setLinkError(
+            (prev) =>
+              prev ??
+              "This reset link is invalid or has expired. Please request a new one from the sign-in page.",
+          );
         }
         return r;
       });
     }, 4000);
 
-    return () => { cancelled = true; clearTimeout(timer); sub.subscription.unsubscribe(); };
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+      sub.subscription.unsubscribe();
+    };
   }, []);
 
   async function submit(e: React.FormEvent) {
@@ -82,8 +96,10 @@ function ResetPasswordPage() {
     const { error } = await supabase.auth.updateUser({ password });
     setBusy(false);
     if (error) {
-      if (/same/i.test(error.message)) return setError("New password must be different from your current password.");
-      if (/weak|short|length/i.test(error.message)) return setError("Please choose a stronger password (at least 8 characters).");
+      if (/same/i.test(error.message))
+        return setError("New password must be different from your current password.");
+      if (/weak|short|length/i.test(error.message))
+        return setError("Please choose a stronger password (at least 8 characters).");
       return setError(error.message);
     }
     setDone(true);
@@ -96,7 +112,11 @@ function ResetPasswordPage() {
         <CardHeader>
           <CardTitle>Set a new password</CardTitle>
           <CardDescription>
-            {linkError ? "We couldn't validate this link." : ready ? "Enter a new password for your admin account." : "Validating your reset link…"}
+            {linkError
+              ? "We couldn't validate this link."
+              : ready
+                ? "Enter a new password for your admin account."
+                : "Validating your reset link…"}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -108,18 +128,36 @@ function ResetPasswordPage() {
             <form className="space-y-3" onSubmit={submit}>
               <div>
                 <Label>New password</Label>
-                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={8} required disabled={!ready} />
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  minLength={8}
+                  required
+                  disabled={!ready}
+                />
               </div>
               <div>
                 <Label>Confirm password</Label>
-                <Input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} minLength={8} required disabled={!ready} />
+                <Input
+                  type="password"
+                  value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
+                  minLength={8}
+                  required
+                  disabled={!ready}
+                />
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
-              <Button className="w-full" disabled={busy || !ready}>{busy ? "…" : "Update password"}</Button>
+              <Button className="w-full" disabled={busy || !ready}>
+                {busy ? "…" : "Update password"}
+              </Button>
             </form>
           )}
           <div className="mt-6 text-center text-sm">
-            <Link to="/auth" className="text-muted-foreground hover:text-foreground">← Back to sign in</Link>
+            <Link to="/auth" className="text-muted-foreground hover:text-foreground">
+              ← Back to sign in
+            </Link>
           </div>
         </CardContent>
       </Card>

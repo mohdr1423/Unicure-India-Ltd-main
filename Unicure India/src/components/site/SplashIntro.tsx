@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-
 const SESSION_KEY = "unicure_splash_seen_v1";
 
 export function SplashIntro() {
@@ -97,8 +96,7 @@ export function SplashIntro() {
               <motion.div
                 className="pointer-events-none absolute -left-24 top-0 h-[140vh] w-40 origin-top-left"
                 style={{
-                  background:
-                    "linear-gradient(180deg, rgba(200,16,46,0.9), rgba(200,16,46,0.15))",
+                  background: "linear-gradient(180deg, rgba(200,16,46,0.9), rgba(200,16,46,0.15))",
                   transform: "rotate(12deg)",
                 }}
                 initial={{ x: "-120%", opacity: 0 }}
@@ -108,8 +106,7 @@ export function SplashIntro() {
               <motion.div
                 className="pointer-events-none absolute -right-24 bottom-0 h-[140vh] w-32 origin-bottom-right"
                 style={{
-                  background:
-                    "linear-gradient(0deg, rgba(200,16,46,0.85), rgba(200,16,46,0.1))",
+                  background: "linear-gradient(0deg, rgba(200,16,46,0.85), rgba(200,16,46,0.1))",
                   transform: "rotate(12deg)",
                 }}
                 initial={{ x: "120%", opacity: 0 }}

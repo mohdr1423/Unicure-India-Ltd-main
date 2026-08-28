@@ -152,7 +152,10 @@ const esteemedClients: { name: string; logo: string }[] = [
   { name: "Iressia Life Sciences", logo: "/images/clients/iressia.svg" },
   { name: "Shifa Laboratories", logo: "/images/clients/shifa.svg" },
   { name: "Ravenbhel Healthcare", logo: "/images/clients/ravenbhel.svg" },
-  { name: "Quality Innovations & Pharmaceuticals", logo: "/images/clients/quality-innovations.svg" },
+  {
+    name: "Quality Innovations & Pharmaceuticals",
+    logo: "/images/clients/quality-innovations.svg",
+  },
   { name: "Cradel Pharmaceuticals", logo: "/images/clients/cradel.svg" },
   { name: "Adips Dermatek", logo: "/images/clients/adips-dermatek.svg" },
 ];

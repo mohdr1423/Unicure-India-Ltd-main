@@ -98,22 +98,20 @@ function MDMessagePage() {
 
                 {/* Paragraph 1 */}
                 <p className="text-base sm:text-lg leading-relaxed text-foreground/85">
-                  "When I look back upon the last 4 decades, I feel proud to observe
-                  the heights Unicure as a Company has achieved in the field of
-                  pharmaceuticals manufacturing and innovations. With joint dedicated
-                  endeavours from our team, we have realized the sole aim with which
-                  the company was established - to serve the country and mankind at
-                  large."
+                  "When I look back upon the last 4 decades, I feel proud to observe the heights
+                  Unicure as a Company has achieved in the field of pharmaceuticals manufacturing
+                  and innovations. With joint dedicated endeavours from our team, we have realized
+                  the sole aim with which the company was established - to serve the country and
+                  mankind at large."
                 </p>
 
                 {/* Paragraph 2 */}
                 <p className="text-base sm:text-lg leading-relaxed text-foreground/85">
-                  "Integrity and ingenuity are the strength and core values of
-                  Unicure. By upholding these principles throughout the decades, we
-                  simultaneously function for the growth and value creation of our
-                  stakeholders. Working aggressively towards exports, Unicure is
-                  marching forward steadfastly into a brighter and wider horizon
-                  beyond the bounds of our Country."
+                  "Integrity and ingenuity are the strength and core values of Unicure. By upholding
+                  these principles throughout the decades, we simultaneously function for the growth
+                  and value creation of our stakeholders. Working aggressively towards exports,
+                  Unicure is marching forward steadfastly into a brighter and wider horizon beyond
+                  the bounds of our Country."
                 </p>
 
                 {/* Visually Separated Robert Frost Quote Card */}

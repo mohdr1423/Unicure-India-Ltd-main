@@ -113,8 +113,12 @@ function PharmacovigilancePage() {
 `;
 
     // Extract email if entered in reporter field, or fallback to default safety email
-    const emailMatch = formData.reporterName.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
-    const reporterEmail = emailMatch ? emailMatch[0] : "pharmacovigilance-reporter@unicureindia.com";
+    const emailMatch = formData.reporterName.match(
+      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/,
+    );
+    const reporterEmail = emailMatch
+      ? emailMatch[0]
+      : "pharmacovigilance-reporter@unicureindia.com";
 
     try {
       const result = await submitCentralInquiry({
@@ -128,7 +132,9 @@ function PharmacovigilancePage() {
 
       setSubmitting(false);
       setSubmitted(true);
-      toast.success("Adverse Event / Pharmacovigilance report submitted and dispatched successfully!");
+      toast.success(
+        "Adverse Event / Pharmacovigilance report submitted and dispatched successfully!",
+      );
     } catch {
       setSubmitting(false);
       setSubmitted(true); // Don't block user confirmation
@@ -174,7 +180,8 @@ function PharmacovigilancePage() {
               <div>
                 <h3 className="font-bold text-foreground">Continuous Monitoring</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Our dedicated safety team reviews all incident reports in full alignment with CDSCO and WHO pharmacovigilance regulations.
+                  Our dedicated safety team reviews all incident reports in full alignment with
+                  CDSCO and WHO pharmacovigilance regulations.
                 </p>
               </div>
             </div>
@@ -186,7 +193,8 @@ function PharmacovigilancePage() {
               <div>
                 <h3 className="font-bold text-foreground">Rapid Investigation</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Every submission is registered with a unique safety tracking ID and immediately investigated by our QA/QC cell.
+                  Every submission is registered with a unique safety tracking ID and immediately
+                  investigated by our QA/QC cell.
                 </p>
               </div>
             </div>
@@ -198,7 +206,8 @@ function PharmacovigilancePage() {
               <div>
                 <h3 className="font-bold text-foreground">Confidential Reporting</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Patient and reporter information is treated with strict medical confidentiality and used solely for safety surveillance.
+                  Patient and reporter information is treated with strict medical confidentiality
+                  and used solely for safety surveillance.
                 </p>
               </div>
             </div>
@@ -232,13 +241,16 @@ function PharmacovigilancePage() {
                     <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-emerald-100 text-emerald-600 shadow-sm">
                       <CheckCircle2 className="h-10 w-10" />
                     </div>
-                    <h3 className="text-2xl font-bold text-foreground">Thank You for Your Report</h3>
+                    <h3 className="text-2xl font-bold text-foreground">
+                      Thank You for Your Report
+                    </h3>
                     <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
                       Your adverse event report has been registered successfully. Reference ID:{" "}
                       <strong className="text-primary font-mono">
                         #UN-PV-{Math.floor(100000 + Math.random() * 900000)}
                       </strong>
-                      . Our Drug Safety & Quality Assurance division will initiate an immediate evaluation.
+                      . Our Drug Safety & Quality Assurance division will initiate an immediate
+                      evaluation.
                     </p>
                     <div className="pt-4">
                       <button
@@ -255,7 +267,9 @@ function PharmacovigilancePage() {
                     <div>
                       <div className="flex items-center gap-2.5 rounded-xl bg-muted/60 px-4 py-3 border border-border/60">
                         <UserCheck className="h-5 w-5 text-primary" />
-                        <h3 className="text-base font-bold text-foreground">1. Reporter Information</h3>
+                        <h3 className="text-base font-bold text-foreground">
+                          1. Reporter Information
+                        </h3>
                       </div>
 
                       <div className="mt-5 space-y-4">
@@ -268,7 +282,9 @@ function PharmacovigilancePage() {
                             type="text"
                             placeholder="Enter full name, email, or telephone number"
                             value={formData.reporterName}
-                            onChange={(e) => setFormData({ ...formData, reporterName: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, reporterName: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
@@ -313,7 +329,9 @@ function PharmacovigilancePage() {
                     <div>
                       <div className="flex items-center gap-2.5 rounded-xl bg-muted/60 px-4 py-3 border border-border/60">
                         <Activity className="h-5 w-5 text-primary" />
-                        <h3 className="text-base font-bold text-foreground">2. Patient Information</h3>
+                        <h3 className="text-base font-bold text-foreground">
+                          2. Patient Information
+                        </h3>
                       </div>
 
                       <div className="mt-5 grid gap-4 sm:grid-cols-12">
@@ -326,7 +344,9 @@ function PharmacovigilancePage() {
                             type="text"
                             placeholder="e.g. A.K. or Patient #104"
                             value={formData.patientInitials}
-                            onChange={(e) => setFormData({ ...formData, patientInitials: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, patientInitials: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
@@ -342,7 +362,9 @@ function PharmacovigilancePage() {
                             max={120}
                             placeholder="e.g. 45"
                             value={formData.patientAge}
-                            onChange={(e) => setFormData({ ...formData, patientAge: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, patientAge: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
@@ -354,7 +376,9 @@ function PharmacovigilancePage() {
                           <select
                             required
                             value={formData.patientGender}
-                            onChange={(e) => setFormData({ ...formData, patientGender: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, patientGender: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           >
                             <option value="">Select</option>
@@ -370,7 +394,9 @@ function PharmacovigilancePage() {
                     <div>
                       <div className="flex items-center gap-2.5 rounded-xl bg-muted/60 px-4 py-3 border border-border/60">
                         <Pill className="h-5 w-5 text-primary" />
-                        <h3 className="text-base font-bold text-foreground">3. Product Information</h3>
+                        <h3 className="text-base font-bold text-foreground">
+                          3. Product Information
+                        </h3>
                       </div>
 
                       <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -383,7 +409,9 @@ function PharmacovigilancePage() {
                             type="text"
                             placeholder="e.g. Paracetamol Tablet IP, Amoxicillin Dry Syrup"
                             value={formData.productName}
-                            onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, productName: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
@@ -397,7 +425,9 @@ function PharmacovigilancePage() {
                             type="text"
                             placeholder="e.g. 500mg Oral Twice Daily (BD)"
                             value={formData.doseRoute}
-                            onChange={(e) => setFormData({ ...formData, doseRoute: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, doseRoute: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
@@ -411,7 +441,9 @@ function PharmacovigilancePage() {
                             type="text"
                             placeholder="e.g. Fever, Respiratory infection, Hypertension"
                             value={formData.indication}
-                            onChange={(e) => setFormData({ ...formData, indication: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, indication: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
@@ -424,14 +456,17 @@ function PharmacovigilancePage() {
                             required
                             type="date"
                             value={formData.startDate}
-                            onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, startDate: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
 
                         <div>
                           <label className="block text-xs font-semibold uppercase tracking-wider text-foreground mb-1.5 flex items-center gap-1.5">
-                            <Calendar className="h-3.5 w-3.5 text-muted-foreground" /> Stop Date (Optional)
+                            <Calendar className="h-3.5 w-3.5 text-muted-foreground" /> Stop Date
+                            (Optional)
                           </label>
                           <input
                             type="date"
@@ -447,7 +482,9 @@ function PharmacovigilancePage() {
                     <div>
                       <div className="flex items-center gap-2.5 rounded-xl bg-muted/60 px-4 py-3 border border-border/60">
                         <HeartPulse className="h-5 w-5 text-primary" />
-                        <h3 className="text-base font-bold text-foreground">4. Event Information</h3>
+                        <h3 className="text-base font-bold text-foreground">
+                          4. Event Information
+                        </h3>
                       </div>
 
                       <div className="mt-5 space-y-4">
@@ -460,7 +497,9 @@ function PharmacovigilancePage() {
                             rows={4}
                             placeholder="Provide details of the adverse reaction or complaint observed (symptoms, time to onset, severity, treatments given)..."
                             value={formData.eventDescription}
-                            onChange={(e) => setFormData({ ...formData, eventDescription: e.target.value })}
+                            onChange={(e) =>
+                              setFormData({ ...formData, eventDescription: e.target.value })
+                            }
                             className="w-full rounded-xl border border-border bg-muted/20 p-4 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                           />
                         </div>
@@ -474,7 +513,9 @@ function PharmacovigilancePage() {
                               required
                               type="date"
                               value={formData.onsetDate}
-                              onChange={(e) => setFormData({ ...formData, onsetDate: e.target.value })}
+                              onChange={(e) =>
+                                setFormData({ ...formData, onsetDate: e.target.value })
+                              }
                               className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                             />
                           </div>
@@ -486,7 +527,9 @@ function PharmacovigilancePage() {
                             <select
                               required
                               value={formData.outcome}
-                              onChange={(e) => setFormData({ ...formData, outcome: e.target.value })}
+                              onChange={(e) =>
+                                setFormData({ ...formData, outcome: e.target.value })
+                              }
                               className="w-full rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none transition"
                             >
                               <option value="">Select Outcome</option>
@@ -518,7 +561,8 @@ function PharmacovigilancePage() {
               <div className="rounded-3xl border border-border bg-card p-8 shadow-card">
                 <h3 className="text-xl font-bold text-foreground">Pharmacovigilance Contacts</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  For immediate safety escalations, adverse event reporting, or drug safety inquiries:
+                  For immediate safety escalations, adverse event reporting, or drug safety
+                  inquiries:
                 </p>
 
                 <div className="mt-6 space-y-4">
@@ -528,7 +572,9 @@ function PharmacovigilancePage() {
                   >
                     <Mail className="h-5 w-5 text-primary shrink-0" />
                     <div>
-                      <div className="text-xs text-muted-foreground font-medium">Official Safety Email</div>
+                      <div className="text-xs text-muted-foreground font-medium">
+                        Official Safety Email
+                      </div>
                       <div className="text-sm font-semibold text-foreground group-hover:text-primary transition">
                         pharmacovigilance@unicureindia.com
                       </div>
@@ -541,7 +587,9 @@ function PharmacovigilancePage() {
                   >
                     <PhoneCall className="h-5 w-5 text-primary shrink-0" />
                     <div>
-                      <div className="text-xs text-muted-foreground font-medium">Safety Helpline Phone</div>
+                      <div className="text-xs text-muted-foreground font-medium">
+                        Safety Helpline Phone
+                      </div>
                       <div className="text-sm font-semibold text-foreground group-hover:text-primary transition">
                         0120-4786786 / +91 120 4786786
                       </div>
@@ -551,7 +599,9 @@ function PharmacovigilancePage() {
                   <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-muted/50 border border-border">
                     <Building2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <div className="text-xs text-muted-foreground font-medium">Head Office & QA Cell</div>
+                      <div className="text-xs text-muted-foreground font-medium">
+                        Head Office & QA Cell
+                      </div>
                       <div className="text-sm font-medium text-foreground leading-relaxed mt-0.5">
                         Unicure India Ltd, C-21, 22 & 23 Sector-3, Noida-201301, U.P., India
                       </div>
@@ -566,7 +616,9 @@ function PharmacovigilancePage() {
                   <ShieldAlert className="h-5 w-5" /> Pharmacovigilance Mandate
                 </h4>
                 <p className="mt-3 text-sm text-foreground/85 leading-relaxed">
-                  In compliance with CDSCO and WHO guidelines, Unicure India Ltd. maintains an active Pharmacovigilance system to monitor, record, and evaluate any adverse drug experiences associated with our products.
+                  In compliance with CDSCO and WHO guidelines, Unicure India Ltd. maintains an
+                  active Pharmacovigilance system to monitor, record, and evaluate any adverse drug
+                  experiences associated with our products.
                 </p>
               </div>
             </div>

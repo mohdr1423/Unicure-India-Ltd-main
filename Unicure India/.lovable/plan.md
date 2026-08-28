@@ -7,6 +7,7 @@ Realistically "every function" can't all be user-editable (auth flows, business 
 ## Scope
 
 **Editable from admin:**
+
 - Site branding: site name, tagline, logo, favicon, primary color, accent color
 - Global nav: header menu items (label + url + order)
 - Footer: columns of links, contact info, social links, copyright
@@ -51,6 +52,7 @@ New sections under `/admin`:
 - `/admin/pages/$key` — per-page editor: hero fields + repeatable content sections (heading, body, image) + SEO fields
 
 Each editor has:
+
 - Form fields per section (as chosen)
 - **Save draft** — writes to `draft`
 - **Preview draft** — opens the page with `?preview=1` to render draft content (admin-only)

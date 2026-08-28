@@ -5,17 +5,37 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import {
-  Upload, Trash2, Copy, FileText, ImageIcon, RefreshCw, Search, Eye,
-  ZoomIn, ZoomOut, ExternalLink, Download, Tag as TagIcon, X, Plus, Check,
+  Upload,
+  Trash2,
+  Copy,
+  FileText,
+  ImageIcon,
+  RefreshCw,
+  Search,
+  Eye,
+  ZoomIn,
+  ZoomOut,
+  ExternalLink,
+  Download,
+  Tag as TagIcon,
+  X,
+  Plus,
+  Check,
 } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 
 export const Route = createFileRoute("/_authenticated/admin/media")({
   component: MediaLibrary,
-  head: () => ({ meta: [{ title: "Media library — Admin" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({
+    meta: [{ title: "Media library — Admin" }, { name: "robots", content: "noindex" }],
+  }),
 });
 
 const BUCKET = "public-uploads";
@@ -50,11 +70,11 @@ type SortKey = "newest" | "oldest" | "name" | "size";
 const TAG_STYLES: Record<string, string> = {
   "product-image": "bg-blue-100 text-blue-800 border-blue-200",
   "news-cover": "bg-purple-100 text-purple-800 border-purple-200",
-  "download": "bg-emerald-100 text-emerald-800 border-emerald-200",
-  "brochure": "bg-amber-100 text-amber-800 border-amber-200",
-  "certificate": "bg-rose-100 text-rose-800 border-rose-200",
-  "logo": "bg-slate-200 text-slate-800 border-slate-300",
-  "banner": "bg-cyan-100 text-cyan-800 border-cyan-200",
+  download: "bg-emerald-100 text-emerald-800 border-emerald-200",
+  brochure: "bg-amber-100 text-amber-800 border-amber-200",
+  certificate: "bg-rose-100 text-rose-800 border-rose-200",
+  logo: "bg-slate-200 text-slate-800 border-slate-300",
+  banner: "bg-cyan-100 text-cyan-800 border-cyan-200",
 };
 function tagClass(t: string) {
   return TAG_STYLES[t] ?? "bg-muted text-foreground border-border";
@@ -104,8 +124,12 @@ function MediaLibrary() {
     ]);
 
     const urlMap = new Map((signedRes.data ?? []).map((s) => [s.path, s.signedUrl]));
-    const tagMap = new Map(((tagsRes.data ?? []) as { storage_path: string; tags: string[] }[])
-      .map((r) => [r.storage_path, r.tags ?? []]));
+    const tagMap = new Map(
+      ((tagsRes.data ?? []) as { storage_path: string; tags: string[] }[]).map((r) => [
+        r.storage_path,
+        r.tags ?? [],
+      ]),
+    );
 
     setItems(
       files.map((f) => ({
@@ -171,7 +195,10 @@ function MediaLibrary() {
     const { error } = await supabase
       .from("media_tags")
       .upsert({ storage_path: path, tags: clean }, { onConflict: "storage_path" });
-    if (error) { toast.error(error.message); return; }
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     setItems((prev) => prev.map((i) => (i.path === path ? { ...i, tags: clean } : i)));
     setPreview((p) => (p?.path === path ? { ...p, tags: clean } : p));
   }
@@ -192,12 +219,14 @@ function MediaLibrary() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     let out = items.filter((i) => {
-      if (q && !i.name.toLowerCase().includes(q) && !i.tags.some((t) => t.includes(q))) return false;
+      if (q && !i.name.toLowerCase().includes(q) && !i.tags.some((t) => t.includes(q)))
+        return false;
       const image = isImage(i.contentType, i.name);
       if (typeFilter === "image" && !image) return false;
       if (typeFilter === "pdf" && image) return false;
       if (activeTag === "untagged" && i.tags.length !== 0) return false;
-      if (activeTag !== "all" && activeTag !== "untagged" && !i.tags.includes(activeTag)) return false;
+      if (activeTag !== "all" && activeTag !== "untagged" && !i.tags.includes(activeTag))
+        return false;
       return true;
     });
     const byName = (a: MediaItem, b: MediaItem) => a.name.localeCompare(b.name);
@@ -215,7 +244,8 @@ function MediaLibrary() {
         <div>
           <h1 className="text-2xl font-semibold">Media library</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Upload images and PDFs, then copy the URL into product images, news covers, or download links.
+            Upload images and PDFs, then copy the URL into product images, news covers, or download
+            links.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -259,7 +289,9 @@ function MediaLibrary() {
             />
           </div>
           <Select value={typeFilter} onValueChange={(v) => setTypeFilter(v as TypeFilter)}>
-            <SelectTrigger className="w-[140px]"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-[140px]">
+              <SelectValue />
+            </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All types</SelectItem>
               <SelectItem value="image">Images</SelectItem>
@@ -267,7 +299,9 @@ function MediaLibrary() {
             </SelectContent>
           </Select>
           <Select value={sort} onValueChange={(v) => setSort(v as SortKey)}>
-            <SelectTrigger className="w-[160px]"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-[160px]">
+              <SelectValue />
+            </SelectTrigger>
             <SelectContent>
               <SelectItem value="newest">Newest first</SelectItem>
               <SelectItem value="oldest">Oldest first</SelectItem>
@@ -278,8 +312,16 @@ function MediaLibrary() {
         </div>
 
         <div className="flex flex-wrap gap-1.5">
-          <FilterChip label={`All (${items.length})`} active={activeTag === "all"} onClick={() => setActiveTag("all")} />
-          <FilterChip label={`Untagged (${untaggedCount})`} active={activeTag === "untagged"} onClick={() => setActiveTag("untagged")} />
+          <FilterChip
+            label={`All (${items.length})`}
+            active={activeTag === "all"}
+            onClick={() => setActiveTag("all")}
+          />
+          <FilterChip
+            label={`Untagged (${untaggedCount})`}
+            active={activeTag === "untagged"}
+            onClick={() => setActiveTag("untagged")}
+          />
           {allTags.map((t) => {
             const count = tagCounts.get(t) ?? 0;
             return (
@@ -296,21 +338,27 @@ function MediaLibrary() {
       </div>
 
       <div className="text-xs text-muted-foreground">
-        Showing <span className="font-semibold text-foreground">{filtered.length}</span> of {items.length}
+        Showing <span className="font-semibold text-foreground">{filtered.length}</span> of{" "}
+        {items.length}
       </div>
 
       {loading ? (
         <div className="py-16 text-center text-muted-foreground">Loading…</div>
       ) : filtered.length === 0 ? (
         <div className="py-16 text-center text-muted-foreground">
-          {items.length === 0 ? "No files yet — upload your first image or PDF." : "No files match your search."}
+          {items.length === 0
+            ? "No files yet — upload your first image or PDF."
+            : "No files match your search."}
         </div>
       ) : (
         <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filtered.map((f) => {
             const image = isImage(f.contentType, f.name);
             return (
-              <div key={f.path} className="rounded-lg border bg-background overflow-hidden flex flex-col">
+              <div
+                key={f.path}
+                className="rounded-lg border bg-background overflow-hidden flex flex-col"
+              >
                 <button
                   type="button"
                   onClick={() => setPreview(f)}
@@ -318,7 +366,12 @@ function MediaLibrary() {
                   aria-label={`Preview ${f.name}`}
                 >
                   {image ? (
-                    <img src={f.url} alt={f.name} className="w-full h-full object-cover" loading="lazy" />
+                    <img
+                      src={f.url}
+                      alt={f.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   ) : (
                     <div className="flex flex-col items-center gap-2 text-muted-foreground">
                       <FileText className="h-10 w-10" />
@@ -332,7 +385,9 @@ function MediaLibrary() {
                   </div>
                 </button>
                 <div className="p-3 space-y-2 flex-1 flex flex-col">
-                  <div className="text-xs font-medium truncate" title={f.name}>{f.name}</div>
+                  <div className="text-xs font-medium truncate" title={f.name}>
+                    {f.name}
+                  </div>
                   <div className="text-[11px] text-muted-foreground flex items-center gap-2">
                     {image ? <ImageIcon className="h-3 w-3" /> : <FileText className="h-3 w-3" />}
                     <span>{fmtSize(f.size)}</span>
@@ -340,18 +395,36 @@ function MediaLibrary() {
                   {f.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1">
                       {f.tags.slice(0, 3).map((t) => (
-                        <span key={t} className={`text-[10px] px-1.5 py-0.5 rounded border ${tagClass(t)}`}>{t}</span>
+                        <span
+                          key={t}
+                          className={`text-[10px] px-1.5 py-0.5 rounded border ${tagClass(t)}`}
+                        >
+                          {t}
+                        </span>
                       ))}
                       {f.tags.length > 3 && (
-                        <span className="text-[10px] text-muted-foreground">+{f.tags.length - 3}</span>
+                        <span className="text-[10px] text-muted-foreground">
+                          +{f.tags.length - 3}
+                        </span>
                       )}
                     </div>
                   )}
                   <div className="flex gap-1 mt-auto">
-                    <Button size="sm" variant="ghost" className="h-8 px-2" onClick={() => setPreview(f)} aria-label="Preview">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-8 px-2"
+                      onClick={() => setPreview(f)}
+                      aria-label="Preview"
+                    >
                       <Eye className="h-3 w-3" />
                     </Button>
-                    <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => copyUrl(f.url)}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 h-8 text-xs"
+                      onClick={() => copyUrl(f.url)}
+                    >
                       <Copy className="h-3 w-3 mr-1" /> Copy URL
                     </Button>
                     <Button
@@ -383,11 +456,36 @@ function MediaLibrary() {
 }
 
 function FilterChip({
-  label, active, onClick, tone,
-}: { label: string; active: boolean; onClick: () => void; tone?: string }) {
+  label,
+  active,
+  onClick,
+  tone,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+  tone?: string;
+}) {
   const base = "text-xs px-2.5 py-1 rounded-full border transition";
-  if (active) return <button type="button" onClick={onClick} className={`${base} bg-primary text-primary-foreground border-primary`}>{label}</button>;
-  return <button type="button" onClick={onClick} className={`${base} ${tone ?? "bg-background text-muted-foreground hover:text-foreground border-border"}`}>{label}</button>;
+  if (active)
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className={`${base} bg-primary text-primary-foreground border-primary`}
+      >
+        {label}
+      </button>
+    );
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`${base} ${tone ?? "bg-background text-muted-foreground hover:text-foreground border-border"}`}
+    >
+      {label}
+    </button>
+  );
 }
 
 function PreviewDialog({
@@ -415,7 +513,8 @@ function PreviewDialog({
 
   if (!item) return null;
   const image = isImage(item.contentType, item.name);
-  const dirty = JSON.stringify([...draftTags].sort()) !== JSON.stringify([...(item.tags ?? [])].sort());
+  const dirty =
+    JSON.stringify([...draftTags].sort()) !== JSON.stringify([...(item.tags ?? [])].sort());
 
   function toggle(t: string) {
     setDraftTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
@@ -452,11 +551,23 @@ function PreviewDialog({
 
           {image && (
             <div className="hidden sm:flex items-center gap-1 border rounded-md">
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setZoom((z) => Math.max(0.25, +(z - 0.25).toFixed(2)))} aria-label="Zoom out">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                onClick={() => setZoom((z) => Math.max(0.25, +(z - 0.25).toFixed(2)))}
+                aria-label="Zoom out"
+              >
                 <ZoomOut className="h-4 w-4" />
               </Button>
               <div className="text-xs tabular-nums w-12 text-center">{Math.round(zoom * 100)}%</div>
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setZoom((z) => Math.min(5, +(z + 0.25).toFixed(2)))} aria-label="Zoom in">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                onClick={() => setZoom((z) => Math.min(5, +(z + 0.25).toFixed(2)))}
+                aria-label="Zoom in"
+              >
                 <ZoomIn className="h-4 w-4" />
               </Button>
             </div>
@@ -477,105 +588,142 @@ function PreviewDialog({
               </a>
             </Button>
           )}
-          <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" onClick={() => onDelete(item.path)}>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-destructive hover:text-destructive"
+            onClick={() => onDelete(item.path)}
+          >
             <Trash2 className="h-3.5 w-3.5 mr-1.5" /> Delete
           </Button>
         </div>
 
         <div className="flex-1 min-h-0 flex overflow-hidden">
-        <div className="flex-1 min-w-0 bg-[repeating-conic-gradient(#f3f4f6_0_25%,#ffffff_0_50%)] bg-[length:24px_24px]">
-          {image ? (
-            <div
-              className="w-full h-full overflow-auto grid place-items-center p-6"
-              onClick={onClose}
-              role="button"
-              aria-label="Close preview"
-            >
-              <img
-                src={item.url}
-                alt={item.name}
-                onClick={(e) => e.stopPropagation()}
-                style={{ transform: `scale(${zoom})`, transformOrigin: "center" }}
-                className="max-w-full max-h-full object-contain shadow-elegant transition-transform cursor-default"
-              />
-            </div>
-          ) : (
-            <iframe
-              src={item.url}
-              title={item.name}
-              className="w-full h-full border-0 bg-white"
-            />
-          )}
-        </div>
-        <aside className="hidden md:flex flex-col w-72 shrink-0 border-l bg-background overflow-y-auto">
-          <div className="p-4 space-y-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                <TagIcon className="h-3.5 w-3.5" /> Tags
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Categorise this file so you can filter it quickly.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-1.5">
-              {PRESET_TAGS.map((t) => {
-                const on = draftTags.includes(t);
-                return (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => toggle(t)}
-                    className={`text-xs px-2 py-1 rounded-full border transition inline-flex items-center gap-1 ${
-                      on ? tagClass(t) : "bg-background text-muted-foreground hover:text-foreground border-border"
-                    }`}
-                  >
-                    {on && <Check className="h-3 w-3" />}
-                    {t}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="space-y-2">
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Custom tags</div>
-              <div className="flex flex-wrap gap-1.5">
-                {draftTags.filter((t) => !PRESET_TAGS.includes(t as typeof PRESET_TAGS[number])).map((t) => (
-                  <span key={t} className={`text-xs px-2 py-1 rounded-full border inline-flex items-center gap-1 ${tagClass(t)}`}>
-                    {t}
-                    <button type="button" onClick={() => toggle(t)} aria-label={`Remove ${t}`}>
-                      <X className="h-3 w-3" />
-                    </button>
-                  </span>
-                ))}
-                {draftTags.filter((t) => !PRESET_TAGS.includes(t as typeof PRESET_TAGS[number])).length === 0 && (
-                  <span className="text-[11px] text-muted-foreground">None yet.</span>
-                )}
-              </div>
-              <div className="flex gap-1">
-                <Input
-                  value={newTag}
-                  onChange={(e) => setNewTag(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addNewTag(); } }}
-                  placeholder="Add custom tag…"
-                  className="h-8 text-xs"
+          <div className="flex-1 min-w-0 bg-[repeating-conic-gradient(#f3f4f6_0_25%,#ffffff_0_50%)] bg-[length:24px_24px]">
+            {image ? (
+              <div
+                className="w-full h-full overflow-auto grid place-items-center p-6"
+                onClick={onClose}
+                role="button"
+                aria-label="Close preview"
+              >
+                <img
+                  src={item.url}
+                  alt={item.name}
+                  onClick={(e) => e.stopPropagation()}
+                  style={{ transform: `scale(${zoom})`, transformOrigin: "center" }}
+                  className="max-w-full max-h-full object-contain shadow-elegant transition-transform cursor-default"
                 />
-                <Button type="button" size="icon" variant="outline" className="h-8 w-8 shrink-0" onClick={addNewTag} aria-label="Add tag">
-                  <Plus className="h-4 w-4" />
+              </div>
+            ) : (
+              <iframe
+                src={item.url}
+                title={item.name}
+                className="w-full h-full border-0 bg-white"
+              />
+            )}
+          </div>
+          <aside className="hidden md:flex flex-col w-72 shrink-0 border-l bg-background overflow-y-auto">
+            <div className="p-4 space-y-4">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <TagIcon className="h-3.5 w-3.5" /> Tags
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Categorise this file so you can filter it quickly.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5">
+                {PRESET_TAGS.map((t) => {
+                  const on = draftTags.includes(t);
+                  return (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => toggle(t)}
+                      className={`text-xs px-2 py-1 rounded-full border transition inline-flex items-center gap-1 ${
+                        on
+                          ? tagClass(t)
+                          : "bg-background text-muted-foreground hover:text-foreground border-border"
+                      }`}
+                    >
+                      {on && <Check className="h-3 w-3" />}
+                      {t}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  Custom tags
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {draftTags
+                    .filter((t) => !PRESET_TAGS.includes(t as (typeof PRESET_TAGS)[number]))
+                    .map((t) => (
+                      <span
+                        key={t}
+                        className={`text-xs px-2 py-1 rounded-full border inline-flex items-center gap-1 ${tagClass(t)}`}
+                      >
+                        {t}
+                        <button type="button" onClick={() => toggle(t)} aria-label={`Remove ${t}`}>
+                          <X className="h-3 w-3" />
+                        </button>
+                      </span>
+                    ))}
+                  {draftTags.filter((t) => !PRESET_TAGS.includes(t as (typeof PRESET_TAGS)[number]))
+                    .length === 0 && (
+                    <span className="text-[11px] text-muted-foreground">None yet.</span>
+                  )}
+                </div>
+                <div className="flex gap-1">
+                  <Input
+                    value={newTag}
+                    onChange={(e) => setNewTag(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        addNewTag();
+                      }
+                    }}
+                    placeholder="Add custom tag…"
+                    className="h-8 text-xs"
+                  />
+                  <Button
+                    type="button"
+                    size="icon"
+                    variant="outline"
+                    className="h-8 w-8 shrink-0"
+                    onClick={addNewTag}
+                    aria-label="Add tag"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="flex gap-2 pt-1">
+                <Button
+                  size="sm"
+                  className="flex-1"
+                  onClick={commit}
+                  disabled={!dirty || savingTags}
+                >
+                  {savingTags ? "Saving…" : "Save tags"}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setDraftTags(item.tags)}
+                  disabled={!dirty || savingTags}
+                >
+                  Reset
                 </Button>
               </div>
             </div>
-
-            <div className="flex gap-2 pt-1">
-              <Button size="sm" className="flex-1" onClick={commit} disabled={!dirty || savingTags}>
-                {savingTags ? "Saving…" : "Save tags"}
-              </Button>
-              <Button size="sm" variant="outline" onClick={() => setDraftTags(item.tags)} disabled={!dirty || savingTags}>
-                Reset
-              </Button>
-            </div>
-          </div>
-        </aside>
+          </aside>
         </div>
 
         <div className="border-t px-4 py-2 bg-muted/30 shrink-0">

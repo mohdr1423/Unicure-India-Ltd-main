@@ -2,7 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { FacilityMap } from "@/components/site/FacilityMap";
-import { Mail, Phone, CheckCircle2, ArrowRight, Send, Loader2, AlertCircle, Youtube, Linkedin, ShoppingBag, Star } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  CheckCircle2,
+  ArrowRight,
+  Send,
+  Loader2,
+  AlertCircle,
+  Youtube,
+  Linkedin,
+  ShoppingBag,
+  Star,
+} from "lucide-react";
 import { useState, useRef } from "react";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { useSiteSetting } from "@/hooks/use-site-setting";
@@ -172,8 +184,7 @@ function ContactPage() {
     {
       name: "Unit-I",
       heading: "Manufacturing Unit",
-      address:
-        "C-21, 22 & 23 Sector-3, Noida-201301, Distt. Gautam Buddha Nagar (U.P.)",
+      address: "C-21, 22 & 23 Sector-3, Noida-201301, Distt. Gautam Buddha Nagar (U.P.)",
       email: "unicure@unicureindia.com",
       phone: "0120-4786786",
     },
@@ -323,9 +334,7 @@ function ContactPage() {
                   </div>
                   <div>
                     <div className="text-sm font-semibold">{ch.title}</div>
-                    <div className="text-sm text-muted-foreground mt-1">
-                      {ch.value}
-                    </div>
+                    <div className="text-sm text-muted-foreground mt-1">{ch.value}</div>
                   </div>
                 </div>
               ))}
@@ -398,8 +407,7 @@ function ContactPage() {
                     onClick={resetForm}
                     className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                   >
-                    Send another inquiry{" "}
-                    <ArrowRight className="h-4 w-4" />
+                    Send another inquiry <ArrowRight className="h-4 w-4" />
                   </button>
                 </motion.div>
               ) : (
@@ -513,10 +521,7 @@ function ContactPage() {
                       rows={5}
                       value={form.message}
                       onChange={(e) =>
-                        updateField(
-                          "message",
-                          e.target.value.slice(0, MAX_MESSAGE_LENGTH),
-                        )
+                        updateField("message", e.target.value.slice(0, MAX_MESSAGE_LENGTH))
                       }
                       onBlur={() => handleBlur("message")}
                       className={`mt-2 w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
@@ -606,8 +611,7 @@ function Field({
         htmlFor={id}
         className="text-xs font-semibold uppercase tracking-widest text-muted-foreground"
       >
-        {label}{" "}
-        {required && <span className="text-destructive">*</span>}
+        {label} {required && <span className="text-destructive">*</span>}
       </label>
       <input
         id={id}

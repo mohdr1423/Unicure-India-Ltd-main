@@ -38,7 +38,10 @@ export const listRoleAssignments = createServerFn({ method: "GET" })
     for (const r of roles ?? []) {
       const role = r.role as ManageableRole;
       if (!ALLOWED_ROLES.includes(role)) continue;
-      const entry = grouped.get(r.user_id) ?? { roles: new Set<ManageableRole>(), created_at: r.created_at };
+      const entry = grouped.get(r.user_id) ?? {
+        roles: new Set<ManageableRole>(),
+        created_at: r.created_at,
+      };
       entry.roles.add(role);
       if (r.created_at && (!entry.created_at || r.created_at < entry.created_at)) {
         entry.created_at = r.created_at;
@@ -84,7 +87,10 @@ async function resolveUser(identifier: string) {
     let page = 1;
     const perPage = 200;
     while (page <= 20) {
-      const { data: list, error } = await (supabaseAdmin as any).auth.admin.listUsers({ page, perPage });
+      const { data: list, error } = await (supabaseAdmin as any).auth.admin.listUsers({
+        page,
+        perPage,
+      });
       if (error) throw new Error(error.message);
       const users = list?.users ?? [];
       const found = users.find((u: any) => (u.email ?? "").toLowerCase() === target);

@@ -12,7 +12,9 @@ import { logAdminAuthEvent } from "@/lib/auth-audit.functions";
 
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
-  head: () => ({ meta: [{ title: "Admin Sign in — Unicure India Ltd" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({
+    meta: [{ title: "Admin Sign in — Unicure India Ltd" }, { name: "robots", content: "noindex" }],
+  }),
 });
 
 function AuthPage() {
@@ -37,7 +39,10 @@ function AuthPage() {
     setError(null);
     setInfo(null);
 
-    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (signInError) {
       setBusy(false);
       void logAdminAuthEvent({
@@ -50,7 +55,9 @@ function AuthPage() {
         },
       }).catch(() => {});
       if (/confirm/i.test(signInError.message) || /not confirmed/i.test(signInError.message)) {
-        return setError("Please confirm your email address before signing in. Check your inbox for the confirmation link.");
+        return setError(
+          "Please confirm your email address before signing in. Check your inbox for the confirmation link.",
+        );
       }
       return setError(signInError.message);
     }
@@ -105,7 +112,9 @@ function AuthPage() {
       setInfo("Account created! Redirecting to setup...");
       navigate({ to: "/request-admin" });
     } else {
-      setInfo("Account created! If email confirmation is enabled on Supabase, please check your inbox to confirm your email, then sign in.");
+      setInfo(
+        "Account created! If email confirmation is enabled on Supabase, please check your inbox to confirm your email, then sign in.",
+      );
     }
   }
 
@@ -139,15 +148,19 @@ function AuthPage() {
           event: "password_reset_requested",
           email,
           success: result.sent,
-          reason: result.sent ? null : (result as { reason?: string }).reason ?? null,
+          reason: result.sent ? null : ((result as { reason?: string }).reason ?? null),
           userAgent: navigator.userAgent,
         },
       }).catch(() => {});
       if (result.sent) {
-        return setInfo("If this email belongs to an admin account, a password reset link has been sent. Check your inbox and spam folder.");
+        return setInfo(
+          "If this email belongs to an admin account, a password reset link has been sent. Check your inbox and spam folder.",
+        );
       }
       if (result.reason === "not_admin") {
-        return setInfo("If this email belongs to an admin account, a password reset link has been sent. Check your inbox and spam folder.");
+        return setInfo(
+          "If this email belongs to an admin account, a password reset link has been sent. Check your inbox and spam folder.",
+        );
       }
       if (result.reason === "send_failed") {
         return setError("We couldn't send the reset email. Please try again in a moment.");
@@ -168,14 +181,22 @@ function AuthPage() {
             <div className="flex rounded-lg bg-muted p-1 text-xs">
               <button
                 type="button"
-                onClick={() => { setMode("auth"); setError(null); setInfo(null); }}
+                onClick={() => {
+                  setMode("auth");
+                  setError(null);
+                  setInfo(null);
+                }}
                 className={`px-3 py-1 rounded font-medium transition ${mode === "auth" ? "bg-white shadow-sm text-foreground" : "text-muted-foreground"}`}
               >
                 Sign In
               </button>
               <button
                 type="button"
-                onClick={() => { setMode("signup"); setError(null); setInfo(null); }}
+                onClick={() => {
+                  setMode("signup");
+                  setError(null);
+                  setInfo(null);
+                }}
                 className={`px-3 py-1 rounded font-medium transition ${mode === "signup" ? "bg-white shadow-sm text-foreground" : "text-muted-foreground"}`}
               >
                 Sign Up
@@ -186,8 +207,8 @@ function AuthPage() {
             {mode === "signup"
               ? "Register a new email and password to access admin tools."
               : mode === "forgot"
-              ? "Enter your email to receive a password reset link."
-              : "Enter your registered email and password."}
+                ? "Enter your email to receive a password reset link."
+                : "Enter your registered email and password."}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -195,14 +216,25 @@ function AuthPage() {
             <form className="space-y-3 mt-2" onSubmit={forgotPassword}>
               <div>
                 <Label>Email</Label>
-                <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
               {info && <p className="text-sm text-green-600">{info}</p>}
-              <Button className="w-full" disabled={busy}>{busy ? "…" : "Send reset link"}</Button>
+              <Button className="w-full" disabled={busy}>
+                {busy ? "…" : "Send reset link"}
+              </Button>
               <button
                 type="button"
-                onClick={() => { setMode("auth"); setError(null); setInfo(null); }}
+                onClick={() => {
+                  setMode("auth");
+                  setError(null);
+                  setInfo(null);
+                }}
                 className="text-sm text-muted-foreground hover:text-foreground w-full text-center"
               >
                 ← Back to sign in
@@ -233,10 +265,16 @@ function AuthPage() {
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
               {info && <p className="text-sm text-green-600">{info}</p>}
-              <Button className="w-full" disabled={busy}>{busy ? "…" : "Create Account & Continue"}</Button>
+              <Button className="w-full" disabled={busy}>
+                {busy ? "…" : "Create Account & Continue"}
+              </Button>
               <button
                 type="button"
-                onClick={() => { setMode("auth"); setError(null); setInfo(null); }}
+                onClick={() => {
+                  setMode("auth");
+                  setError(null);
+                  setInfo(null);
+                }}
                 className="text-sm text-muted-foreground hover:text-foreground w-full text-center"
               >
                 Already have an account? Sign in
@@ -269,7 +307,9 @@ function AuthPage() {
               </label>
               {error && <p className="text-sm text-destructive">{error}</p>}
               {info && <p className="text-sm text-green-600">{info}</p>}
-              <Button className="w-full" disabled={busy}>{busy ? "…" : "Sign in"}</Button>
+              <Button className="w-full" disabled={busy}>
+                {busy ? "…" : "Sign in"}
+              </Button>
               <div className="flex flex-col gap-2 pt-2 text-center text-sm">
                 <button
                   type="button"
@@ -280,7 +320,11 @@ function AuthPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => { setMode("forgot"); setError(null); setInfo(null); }}
+                  onClick={() => {
+                    setMode("forgot");
+                    setError(null);
+                    setInfo(null);
+                  }}
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Forgot password?
@@ -310,7 +354,9 @@ function AuthPage() {
           </div>
 
           <div className="mt-4 text-center text-sm">
-            <Link to="/" className="text-muted-foreground hover:text-foreground">← Back to site</Link>
+            <Link to="/" className="text-muted-foreground hover:text-foreground">
+              ← Back to site
+            </Link>
           </div>
         </CardContent>
       </Card>

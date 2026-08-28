@@ -7,7 +7,9 @@ export const requestAdminRole = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const { data: userInfo, error: userErr } = await supabaseAdmin.auth.admin.getUserById(context.userId);
+    const { data: userInfo, error: userErr } = await supabaseAdmin.auth.admin.getUserById(
+      context.userId,
+    );
     if (userErr || !userInfo.user) throw new Error("Could not verify your account.");
 
     const user = userInfo.user;

@@ -104,8 +104,7 @@ const missionValues = [
   },
   {
     title: "Innovation",
-    description:
-      "Continuously improving our products, processes and capabilities.",
+    description: "Continuously improving our products, processes and capabilities.",
     icon: Sparkles,
     color: "text-amber-600 bg-amber-50 border-amber-100",
   },
@@ -148,7 +147,8 @@ function AboutPage() {
                       Established 1984
                     </div>
                     <p className="text-sm font-medium text-white/90">
-                      Four decades of dedicated pharmaceutical innovation and manufacturing excellence.
+                      Four decades of dedicated pharmaceutical innovation and manufacturing
+                      excellence.
                     </p>
                   </div>
                 </div>
@@ -167,13 +167,23 @@ function AboutPage() {
                 </h2>
                 <div className="mt-4 space-y-4 text-muted-foreground leading-relaxed text-base">
                   <p>
-                    What began in 1984 as a vision by our Managing Director, Mr. Abdul Mateen, has grown into one of India's most respected pharmaceutical manufacturing enterprises. From the outset, Unicure India was established with a singular commitment: to serve the country and mankind at large with uncompromised integrity and ingenuity.
+                    What began in 1984 as a vision by our Managing Director, Mr. Abdul Mateen, has
+                    grown into one of India's most respected pharmaceutical manufacturing
+                    enterprises. From the outset, Unicure India was established with a singular
+                    commitment: to serve the country and mankind at large with uncompromised
+                    integrity and ingenuity.
                   </p>
                   <p>
-                    Today, Unicure India operates three state-of-the-art manufacturing facilities in North India, employing over 600 dedicated team members including more than 100 qualified scientists, formulation chemists, microbiologists, and regulatory experts.
+                    Today, Unicure India operates three state-of-the-art manufacturing facilities in
+                    North India, employing over 600 dedicated team members including more than 100
+                    qualified scientists, formulation chemists, microbiologists, and regulatory
+                    experts.
                   </p>
                   <p>
-                    Our operations span high-volume oral solids, liquid orals, dry syrups, sterile parenterals, and topical formulations — delivering quality medicines to institutional buyers, multinational co-manufacturing partners, and healthcare distribution networks across 20+ international markets.
+                    Our operations span high-volume oral solids, liquid orals, dry syrups, sterile
+                    parenterals, and topical formulations — delivering quality medicines to
+                    institutional buyers, multinational co-manufacturing partners, and healthcare
+                    distribution networks across 20+ international markets.
                   </p>
                 </div>
 
@@ -181,15 +191,21 @@ function AboutPage() {
                 <div className="mt-8 grid grid-cols-3 gap-4 pt-6 border-t border-border">
                   <div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-primary">1984</div>
-                    <div className="text-xs text-muted-foreground mt-0.5 font-medium">Year Established</div>
+                    <div className="text-xs text-muted-foreground mt-0.5 font-medium">
+                      Year Established
+                    </div>
                   </div>
                   <div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-primary">3 Plants</div>
-                    <div className="text-xs text-muted-foreground mt-0.5 font-medium">Modern Facilities</div>
+                    <div className="text-xs text-muted-foreground mt-0.5 font-medium">
+                      Modern Facilities
+                    </div>
                   </div>
                   <div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-primary">20+</div>
-                    <div className="text-xs text-muted-foreground mt-0.5 font-medium">Export Countries</div>
+                    <div className="text-xs text-muted-foreground mt-0.5 font-medium">
+                      Export Countries
+                    </div>
                   </div>
                 </div>
               </ScrollReveal>
@@ -213,7 +229,9 @@ function AboutPage() {
                 Our Journey Continues
               </h2>
               <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-                From our beginnings in 1984 to our continued growth today, Unicure India has remained committed to pharmaceutical quality, innovation and serving healthcare needs.
+                From our beginnings in 1984 to our continued growth today, Unicure India has
+                remained committed to pharmaceutical quality, innovation and serving healthcare
+                needs.
               </p>
               <div className="mt-5 mx-auto h-1 w-20 rounded-full bg-gradient-brand" />
             </ScrollReveal>
@@ -241,7 +259,10 @@ function AboutPage() {
                         isEven ? "sm:text-right" : "sm:text-left"
                       }`}
                     >
-                      <ScrollReveal variant={isEven ? "slide-left" : "slide-right"} delay={idx * 0.1}>
+                      <ScrollReveal
+                        variant={isEven ? "slide-left" : "slide-right"}
+                        delay={idx * 0.1}
+                      >
                         <div
                           className={`rounded-3xl border ${
                             m.highlight
@@ -326,7 +347,7 @@ function AboutPage() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--brand-blue-dark)]/90 via-transparent to-transparent" />
-                  
+
                   {/* Overlay Badge */}
                   <div className="absolute bottom-6 left-6 right-6 text-white space-y-2">
                     <div className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-white border border-white/30">
@@ -354,7 +375,10 @@ function AboutPage() {
                 {/* Main Mission Statement (Verbatim Required Copy) */}
                 <div className="mt-6 rounded-2xl bg-secondary/50 border-l-4 border-primary p-6 sm:p-7 shadow-sm">
                   <p className="text-lg sm:text-xl font-semibold text-foreground/90 leading-relaxed italic">
-                    "Our mission is to serve healthcare needs through high-quality pharmaceutical products and reliable manufacturing solutions, while continuously improving our capabilities, upholding integrity and building lasting trust with our customers and partners."
+                    "Our mission is to serve healthcare needs through high-quality pharmaceutical
+                    products and reliable manufacturing solutions, while continuously improving our
+                    capabilities, upholding integrity and building lasting trust with our customers
+                    and partners."
                   </p>
                 </div>
 
@@ -370,7 +394,9 @@ function AboutPage() {
                         className="rounded-2xl border border-border bg-white p-5 shadow-card hover:shadow-elegant hover:border-primary/40 transition-all duration-300"
                       >
                         <div className="flex items-center gap-3">
-                          <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border ${val.color}`}>
+                          <div
+                            className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border ${val.color}`}
+                          >
                             <val.icon className="h-5 w-5" />
                           </div>
                           <h4 className="text-base font-bold text-foreground">{val.title}</h4>
@@ -402,7 +428,8 @@ function AboutPage() {
                 Our Executive Leadership
               </h2>
               <p className="mt-3 text-muted-foreground text-base">
-                Guided by experienced pharmaceutical pioneers driving innovation, compliance, and global reach.
+                Guided by experienced pharmaceutical pioneers driving innovation, compliance, and
+                global reach.
               </p>
               <div className="mt-4 mx-auto h-1 w-16 rounded-full bg-gradient-brand" />
             </ScrollReveal>
@@ -435,7 +462,8 @@ function AboutPage() {
                         to={leader.href as any}
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary/80 transition"
                       >
-                        Read Full Profile <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                        Read Full Profile{" "}
+                        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   </div>
@@ -461,7 +489,7 @@ function AboutPage() {
           <div className="relative overflow-hidden rounded-3xl bg-[color:var(--brand-blue-dark)] p-10 md:p-16 text-white shadow-2xl text-center border border-white/10">
             <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#C8102E]/30 blur-3xl" />
             <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
-            
+
             <div className="relative max-w-2xl mx-auto space-y-6">
               <span className="inline-flex items-center gap-2 rounded-full bg-[#C8102E] px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-md">
                 Partner With Unicure India
@@ -470,7 +498,8 @@ function AboutPage() {
                 Ready to collaborate on your pharmaceutical needs?
               </h2>
               <p className="text-white/85 text-base sm:text-lg leading-relaxed">
-                Connect with our business development and manufacturing teams for third-party contract manufacturing, institutional supply, or international export distribution.
+                Connect with our business development and manufacturing teams for third-party
+                contract manufacturing, institutional supply, or international export distribution.
               </p>
               <div className="pt-4 flex flex-wrap justify-center gap-4">
                 <Link

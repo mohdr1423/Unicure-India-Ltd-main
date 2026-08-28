@@ -20,7 +20,9 @@ export function useSiteSetting<T = Record<string, unknown>>(key: string): T | nu
       if (v) cache.set(key, v);
       setValue(v);
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [key]);
 
   return value;

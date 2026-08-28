@@ -126,7 +126,10 @@ const dosageFormsData: DosageItem[] = [
       "Automated bottle washing, nitrogen purging, filling, capping & labeling lines",
       "Online visual inspection and weight verification",
     ],
-    packaging: ["PET / Amber glass bottles with measuring caps", "Pilfer-proof ROPP & screw closures"],
+    packaging: [
+      "PET / Amber glass bottles with measuring caps",
+      "Pilfer-proof ROPP & screw closures",
+    ],
   },
   {
     id: "dry-syrups",
@@ -217,7 +220,9 @@ function DosageFormsPage() {
   const filteredForms =
     activeTab === "all"
       ? dosageFormsData
-      : dosageFormsData.filter((item) => item.category.toLowerCase().includes(activeTab.toLowerCase()));
+      : dosageFormsData.filter((item) =>
+          item.category.toLowerCase().includes(activeTab.toLowerCase()),
+        );
 
   return (
     <SiteLayout>
@@ -264,8 +269,12 @@ function DosageFormsPage() {
         <div className="container-x">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-12">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-primary">Capabilities</span>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mt-1">Dosage Form Portfolio</h2>
+              <span className="text-xs font-bold uppercase tracking-widest text-primary">
+                Capabilities
+              </span>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground mt-1">
+                Dosage Form Portfolio
+              </h2>
             </div>
 
             <div className="flex flex-wrap gap-2 rounded-2xl bg-muted/50 p-1.5 border border-border">
@@ -308,7 +317,9 @@ function DosageFormsPage() {
                             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                               {item.category}
                             </span>
-                            <h3 className="text-2xl md:text-3xl font-bold text-foreground">{item.name}</h3>
+                            <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+                              {item.name}
+                            </h3>
                           </div>
                         </div>
 
@@ -325,7 +336,10 @@ function DosageFormsPage() {
                           </h4>
                           <div className="grid gap-2 sm:grid-cols-2">
                             {item.variants.map((v) => (
-                              <div key={v} className="flex items-center gap-2 text-sm text-foreground/90">
+                              <div
+                                key={v}
+                                className="flex items-center gap-2 text-sm text-foreground/90"
+                              >
                                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
                                 <span>{v}</span>
                               </div>
@@ -369,8 +383,12 @@ function DosageFormsPage() {
 
                         <div className="rounded-2xl border border-border bg-card p-6 flex items-center justify-between">
                           <div>
-                            <div className="text-sm font-bold text-foreground">Need Contract Manufacturing?</div>
-                            <div className="text-xs text-muted-foreground">Request batch quotation or technical dossier</div>
+                            <div className="text-sm font-bold text-foreground">
+                              Need Contract Manufacturing?
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              Request batch quotation or technical dossier
+                            </div>
                           </div>
                           <Link
                             to="/contract-manufacturing"
@@ -397,7 +415,9 @@ function DosageFormsPage() {
             Partner With a Leading Pharmaceutical Manufacturer
           </h2>
           <p className="mt-4 text-white/85 text-base md:text-lg leading-relaxed">
-            With 40+ years of manufacturing pedigree, Unicure India Ltd. delivers exceptional batch consistency, regulatory compliance, and rapid turnaround for domestic and international partners.
+            With 40+ years of manufacturing pedigree, Unicure India Ltd. delivers exceptional batch
+            consistency, regulatory compliance, and rapid turnaround for domestic and international
+            partners.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link

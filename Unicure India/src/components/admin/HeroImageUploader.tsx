@@ -4,8 +4,20 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Upload, ImageIcon, Trash2, Crop as CropIcon } from "lucide-react";
 import { toast } from "sonner";
 
@@ -27,7 +39,12 @@ type Props = {
   maxWidth?: number;
 };
 
-export function HeroImageUploader({ value, onChange, defaultAspect = 16 / 9, maxWidth = 1920 }: Props) {
+export function HeroImageUploader({
+  value,
+  onChange,
+  defaultAspect = 16 / 9,
+  maxWidth = 1920,
+}: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [srcData, setSrcData] = useState<string | null>(null);
   const [aspect, setAspect] = useState(defaultAspect);
@@ -71,11 +88,21 @@ export function HeroImageUploader({ value, onChange, defaultAspect = 16 / 9, max
       ctx.imageSmoothingQuality = "high";
       ctx.drawImage(
         img,
-        croppedArea.x, croppedArea.y, croppedArea.width, croppedArea.height,
-        0, 0, targetW, targetH,
+        croppedArea.x,
+        croppedArea.y,
+        croppedArea.width,
+        croppedArea.height,
+        0,
+        0,
+        targetW,
+        targetH,
       );
       const blob: Blob = await new Promise((resolve, reject) =>
-        canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("Compression failed"))), "image/jpeg", quality),
+        canvas.toBlob(
+          (b) => (b ? resolve(b) : reject(new Error("Compression failed"))),
+          "image/jpeg",
+          quality,
+        ),
       );
       const path = `hero/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
       const { error: upErr } = await supabase.storage
@@ -125,7 +152,8 @@ export function HeroImageUploader({ value, onChange, defaultAspect = 16 / 9, max
             </Button>
           )}
           <p className="text-xs text-muted-foreground max-w-xs">
-            Drop-in image gets cropped, resized to your chosen width, and compressed to JPEG before upload.
+            Drop-in image gets cropped, resized to your chosen width, and compressed to JPEG before
+            upload.
           </p>
         </div>
       </div>
@@ -154,10 +182,14 @@ export function HeroImageUploader({ value, onChange, defaultAspect = 16 / 9, max
             <div className="space-y-1.5">
               <Label>Aspect ratio</Label>
               <Select value={String(aspect)} onValueChange={(v) => setAspect(Number(v))}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   {ASPECTS.map((a) => (
-                    <SelectItem key={a.label} value={String(a.value)}>{a.label}</SelectItem>
+                    <SelectItem key={a.label} value={String(a.value)}>
+                      {a.label}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -165,18 +197,32 @@ export function HeroImageUploader({ value, onChange, defaultAspect = 16 / 9, max
             <div className="space-y-1.5">
               <Label>Output width: {outWidth}px</Label>
               <Slider
-                min={640} max={2400} step={80}
+                min={640}
+                max={2400}
+                step={80}
                 value={[outWidth]}
                 onValueChange={([v]) => setOutWidth(v)}
               />
             </div>
             <div className="space-y-1.5">
               <Label>Zoom: {zoom.toFixed(2)}×</Label>
-              <Slider min={1} max={4} step={0.05} value={[zoom]} onValueChange={([v]) => setZoom(v)} />
+              <Slider
+                min={1}
+                max={4}
+                step={0.05}
+                value={[zoom]}
+                onValueChange={([v]) => setZoom(v)}
+              />
             </div>
             <div className="space-y-1.5">
               <Label>Quality: {Math.round(quality * 100)}%</Label>
-              <Slider min={0.5} max={0.95} step={0.05} value={[quality]} onValueChange={([v]) => setQuality(v)} />
+              <Slider
+                min={0.5}
+                max={0.95}
+                step={0.05}
+                value={[quality]}
+                onValueChange={([v]) => setQuality(v)}
+              />
             </div>
           </div>
           <DialogFooter>

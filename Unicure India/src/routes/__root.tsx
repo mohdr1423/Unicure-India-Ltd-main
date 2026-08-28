@@ -144,10 +144,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               slogan: "Pharmaceutical Manufacturing Excellence",
               description:
                 "WHO-GMP certified pharmaceutical manufacturer with 40+ years of excellence, 500+ products, contract manufacturing, and exports to 20+ countries.",
-              medicalSpecialty: [
-                "PharmacySpecialty",
-                "Pharmacy",
-              ],
+              medicalSpecialty: ["PharmacySpecialty", "Pharmacy"],
               knowsAbout: [
                 "Pharmaceutical Manufacturing",
                 "Contract Manufacturing",
@@ -278,9 +275,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                   },
                 },
               ],
-              sameAs: [
-                "https://www.unicureindia.com",
-              ],
+              sameAs: ["https://www.unicureindia.com"],
             },
             {
               "@type": "WebSite",

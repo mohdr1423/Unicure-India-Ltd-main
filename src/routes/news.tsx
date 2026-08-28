@@ -8,7 +8,11 @@ export const Route = createFileRoute("/news")({
   head: () => ({
     meta: [
       { title: "Media Gallery — Unicure India Ltd" },
-      { name: "description", content: "Photos, videos and events from Unicure India Ltd's manufacturing units and corporate life." },
+      {
+        name: "description",
+        content:
+          "Photos, videos and events from Unicure India Ltd's manufacturing units and corporate life.",
+      },
       { property: "og:title", content: "Media — Unicure India Ltd" },
       { property: "og:description", content: "Photos, videos and events." },
       { property: "og:url", content: "/news" },
@@ -30,9 +34,17 @@ function NewsPage() {
         <div className="container-x">
           <StaggerGrid className="grid gap-6 md:grid-cols-3">
             {[
-              { i: Image, t: "Photos", d: "Manufacturing floor, R&D labs and quality operations across three units." },
+              {
+                i: Image,
+                t: "Photos",
+                d: "Manufacturing floor, R&D labs and quality operations across three units.",
+              },
               { i: Video, t: "Videos", d: "Facility walk-throughs and process highlights." },
-              { i: CalendarDays, t: "Events", d: "Industry meets, exhibitions and internal celebrations." },
+              {
+                i: CalendarDays,
+                t: "Events",
+                d: "Industry meets, exhibitions and internal celebrations.",
+              },
             ].map((v) => (
               <StaggerItem key={v.t}>
                 <div className="rounded-2xl border border-border bg-white p-8 shadow-card hover:shadow-elegant transition-all h-full">

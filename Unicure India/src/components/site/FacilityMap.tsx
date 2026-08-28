@@ -72,7 +72,8 @@ export function FacilityMap() {
               Interactive Facility Map
             </h2>
             <p className="mt-4 text-muted-foreground text-base sm:text-lg">
-              Explore our three WHO-GMP certified manufacturing sites across Noida, Roorkee, and Greater Noida.
+              Explore our three WHO-GMP certified manufacturing sites across Noida, Roorkee, and
+              Greater Noida.
             </p>
           </div>
         </ScrollReveal>

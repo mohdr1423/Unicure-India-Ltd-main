@@ -7,8 +7,22 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Plus, Pencil, Trash2, RotateCw } from "lucide-react";
 import { toast } from "sonner";
 import type { JobOpening } from "../api/careers";
@@ -49,7 +63,10 @@ function CareersAdmin() {
       }
 
       // 2. Fallback to Supabase
-      const { data, error } = await supabase.from("job_openings").select("*").order("created_at", { ascending: false });
+      const { data, error } = await supabase
+        .from("job_openings")
+        .select("*")
+        .order("created_at", { ascending: false });
       if (!error && data) {
         setRows(data as Job[]);
       }
@@ -135,17 +152,26 @@ function CareersAdmin() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Careers Management</h1>
-          <p className="text-xs text-muted-foreground mt-0.5">Manage live job listings displayed on the public careers portal</p>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Manage live job listings displayed on the public careers portal
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" onClick={load} disabled={loading}>
             <RotateCw className={`h-3.5 w-3.5 mr-1.5 ${loading ? "animate-spin" : ""}`} />
             Refresh
           </Button>
-          <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) setEditing(empty); }}>
+          <Dialog
+            open={open}
+            onOpenChange={(o) => {
+              setOpen(o);
+              if (!o) setEditing(empty);
+            }}
+          >
             <DialogTrigger asChild>
               <Button onClick={() => setEditing(empty)}>
-                <Plus className="h-4 w-4 mr-2" />Add Job Opening
+                <Plus className="h-4 w-4 mr-2" />
+                Add Job Opening
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto">
@@ -257,9 +283,13 @@ function CareersAdmin() {
                   <TableCell>{r.location}</TableCell>
                   <TableCell>{r.experience || "—"}</TableCell>
                   <TableCell>
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
-                      r.is_open ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"
-                    }`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
+                        r.is_open
+                          ? "bg-emerald-100 text-emerald-800"
+                          : "bg-slate-100 text-slate-700"
+                      }`}
+                    >
                       {r.is_open ? "Open" : "Closed"}
                     </span>
                   </TableCell>
@@ -285,7 +315,9 @@ function CareersAdmin() {
               {rows.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center text-sm text-muted-foreground py-6">
-                    {loading ? "Loading listings..." : "No jobs found. Click 'Add Job Opening' to create one."}
+                    {loading
+                      ? "Loading listings..."
+                      : "No jobs found. Click 'Add Job Opening' to create one."}
                   </TableCell>
                 </TableRow>
               )}

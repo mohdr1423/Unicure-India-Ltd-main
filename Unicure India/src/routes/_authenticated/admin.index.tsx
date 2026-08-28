@@ -2,8 +2,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  Palette, Menu, PanelBottom, Package, Newspaper, Briefcase, Download,
-  UserPlus, ExternalLink, CheckCircle2, Circle, Sparkles, ArrowRight,
+  Palette,
+  Menu,
+  PanelBottom,
+  Package,
+  Newspaper,
+  Briefcase,
+  Download,
+  UserPlus,
+  ExternalLink,
+  CheckCircle2,
+  Circle,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
@@ -11,11 +22,36 @@ export const Route = createFileRoute("/_authenticated/admin/")({
 });
 
 const quickStart = [
-  { to: "/admin/branding", title: "Set your brand", desc: "Colors, site name, phone & email.", icon: Palette },
-  { to: "/admin/navigation", title: "Choose top menu links", desc: "What visitors see in the header.", icon: Menu },
-  { to: "/admin/footer", title: "Fill in the footer", desc: "Link columns, socials, copyright.", icon: PanelBottom },
-  { to: "/admin/products", title: "Add your first product", desc: "Show what you sell.", icon: Package },
-  { to: "/admin/promote", title: "Invite another admin", desc: "Let a teammate help edit.", icon: UserPlus },
+  {
+    to: "/admin/branding",
+    title: "Set your brand",
+    desc: "Colors, site name, phone & email.",
+    icon: Palette,
+  },
+  {
+    to: "/admin/navigation",
+    title: "Choose top menu links",
+    desc: "What visitors see in the header.",
+    icon: Menu,
+  },
+  {
+    to: "/admin/footer",
+    title: "Fill in the footer",
+    desc: "Link columns, socials, copyright.",
+    icon: PanelBottom,
+  },
+  {
+    to: "/admin/products",
+    title: "Add your first product",
+    desc: "Show what you sell.",
+    icon: Package,
+  },
+  {
+    to: "/admin/promote",
+    title: "Invite another admin",
+    desc: "Let a teammate help edit.",
+    icon: UserPlus,
+  },
 ];
 
 const sections = [
@@ -36,9 +72,10 @@ function Dashboard() {
           <div className="flex-1">
             <h1 className="text-2xl font-semibold">Welcome to your website admin</h1>
             <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
-              This is where you change what people see on your website — the logo, colors, menu links,
-              products, and more. Nothing goes live until you press <span className="font-medium text-foreground">Save & Publish</span>,
-              and every change can be undone from <span className="font-medium text-foreground">History</span>.
+              This is where you change what people see on your website — the logo, colors, menu
+              links, products, and more. Nothing goes live until you press{" "}
+              <span className="font-medium text-foreground">Save & Publish</span>, and every change
+              can be undone from <span className="font-medium text-foreground">History</span>.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <a href="/" target="_blank" rel="noreferrer">
@@ -59,7 +96,9 @@ function Dashboard() {
       <section className="space-y-3">
         <div>
           <h2 className="text-lg font-semibold">Quick-start checklist</h2>
-          <p className="text-sm text-muted-foreground">Do these five things and your site will feel yours.</p>
+          <p className="text-sm text-muted-foreground">
+            Do these five things and your site will feel yours.
+          </p>
         </div>
         <ol className="rounded-lg border divide-y bg-background">
           {quickStart.map((s, i) => (
@@ -111,8 +150,14 @@ function Dashboard() {
             <div className="font-medium">Tips as you go</div>
             <ul className="list-disc pl-5 mt-1 space-y-1 text-muted-foreground">
               <li>Every editor autosaves as you type — you won't lose work.</li>
-              <li>Click <span className="font-medium text-foreground">Live preview</span> in any editor to see how the site will look before publishing.</li>
-              <li>Click <span className="font-medium text-foreground">History</span> to roll back to any earlier published version.</li>
+              <li>
+                Click <span className="font-medium text-foreground">Live preview</span> in any
+                editor to see how the site will look before publishing.
+              </li>
+              <li>
+                Click <span className="font-medium text-foreground">History</span> to roll back to
+                any earlier published version.
+              </li>
               <li>Use the search box in the sidebar to find any section quickly.</li>
             </ul>
           </div>

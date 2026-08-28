@@ -20,7 +20,11 @@ export function useAdmin() {
       const uid = userData.user?.id ?? null;
       if (!mounted) return;
       setUserId(uid);
-      if (!uid) { setIsAdmin(false); setLoading(false); return; }
+      if (!uid) {
+        setIsAdmin(false);
+        setLoading(false);
+        return;
+      }
       const { data } = await supabase
         .from("user_roles")
         .select("role")
@@ -31,7 +35,9 @@ export function useAdmin() {
       setIsAdmin(!!data);
       setLoading(false);
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return { loading, isAdmin, userId };

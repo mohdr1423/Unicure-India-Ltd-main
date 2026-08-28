@@ -73,10 +73,22 @@ const FALLBACK: PublicSiteContent = {
       },
     ],
     social: [
-      { label: "LinkedIn", url: "https://www.linkedin.com/company/unicure-india-ltd/", icon: "linkedin" },
-      { label: "YouTube", url: "https://youtube.com/@unicureindialtd9851?si=iPi8Tic09i2XwITk", icon: "youtube" },
+      {
+        label: "LinkedIn",
+        url: "https://www.linkedin.com/company/unicure-india-ltd/",
+        icon: "linkedin",
+      },
+      {
+        label: "YouTube",
+        url: "https://youtube.com/@unicureindialtd9851?si=iPi8Tic09i2XwITk",
+        icon: "youtube",
+      },
       { label: "IndiaMART", url: "https://www.indiamart.com/company/2819872/", icon: "indiamart" },
-      { label: "Justdial", url: "https://www.justdial.com/Noida/Unicure-India-Pvt-Ltd-Near-Uco-Bank-Noida-Sector-3/011PXX11-XX11-000772394792-T8E2_BZDET", icon: "justdial" },
+      {
+        label: "Justdial",
+        url: "https://www.justdial.com/Noida/Unicure-India-Pvt-Ltd-Near-Uco-Bank-Noida-Sector-3/011PXX11-XX11-000772394792-T8E2_BZDET",
+        icon: "justdial",
+      },
     ],
     legal: [
       { label: "Privacy Policy", url: "#" },

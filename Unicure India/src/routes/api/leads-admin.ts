@@ -7,11 +7,7 @@ import {
   PRIMARY_ADMIN_EMAIL,
   type ServerInquiryRecord,
 } from "@/lib/server-email";
-import {
-  getLocalJobOpenings,
-  saveLocalJobOpenings,
-  type JobOpening,
-} from "./careers";
+import { getLocalJobOpenings, saveLocalJobOpenings, type JobOpening } from "./careers";
 import { safeWriteJsonFile } from "@/lib/storage-helper";
 
 function getEnv(key: string): string | undefined {
@@ -23,7 +19,10 @@ function getEnv(key: string): string | undefined {
       for (const line of lines) {
         const trimmed = line.trim();
         if (trimmed.startsWith(`${key}=`)) {
-          return trimmed.slice(key.length + 1).trim().replace(/^["']|["']$/g, "");
+          return trimmed
+            .slice(key.length + 1)
+            .trim()
+            .replace(/^["']|["']$/g, "");
         }
       }
     }
@@ -36,7 +35,9 @@ const DEFAULT_SECRET = "unicure_leads_secret_key_2026_x89a7f3c1";
 function signToken(username: string): string {
   const secret = getEnv("SESSION_SECRET") || DEFAULT_SECRET;
   const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
-  const payload = Buffer.from(JSON.stringify({ u: username, exp: expiresAt })).toString("base64url");
+  const payload = Buffer.from(JSON.stringify({ u: username, exp: expiresAt })).toString(
+    "base64url",
+  );
   const signature = crypto.createHmac("sha256", secret).update(payload).digest("base64url");
   return `${payload}.${signature}`;
 }
@@ -53,7 +54,10 @@ function verifyToken(token: string | undefined): { valid: boolean; username?: st
   const expectedSignature = crypto.createHmac("sha256", secret).update(payload).digest("base64url");
   if (signature !== expectedSignature) {
     // Check fallback with default secret just in case
-    const fallbackSig = crypto.createHmac("sha256", DEFAULT_SECRET).update(payload).digest("base64url");
+    const fallbackSig = crypto
+      .createHmac("sha256", DEFAULT_SECRET)
+      .update(payload)
+      .digest("base64url");
     if (signature !== fallbackSig) return { valid: false };
   }
 
@@ -74,10 +78,10 @@ export const Route = createFileRoute("/api/leads-admin")({
         try {
           body = await request.json();
         } catch {
-          return new Response(
-            JSON.stringify({ success: false, message: "Invalid JSON payload" }),
-            { status: 400, headers: { "Content-Type": "application/json" } }
-          );
+          return new Response(JSON.stringify({ success: false, message: "Invalid JSON payload" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          });
         }
 
         const action = body.action || "get-leads";
@@ -96,7 +100,8 @@ export const Route = createFileRoute("/api/leads-admin")({
             username.toLowerCase() === expectedUser.toLowerCase() ||
             username.toLowerCase() === "admin" ||
             username.toLowerCase() === "unicure";
-          const passMatch = password === expectedPass || password === "admin123" || password === "U10@10uurr";
+          const passMatch =
+            password === expectedPass || password === "admin123" || password === "U10@10uurr";
 
           if (userMatch && passMatch) {
             const token = signToken(username);
@@ -107,7 +112,7 @@ export const Route = createFileRoute("/api/leads-admin")({
                 token,
                 user: username,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -118,7 +123,7 @@ export const Route = createFileRoute("/api/leads-admin")({
               success: false,
               message: "Invalid username or password. Access denied.",
             }),
-            { status: 401, headers: { "Content-Type": "application/json" } }
+            { status: 401, headers: { "Content-Type": "application/json" } },
           );
         }
 
@@ -134,7 +139,7 @@ export const Route = createFileRoute("/api/leads-admin")({
               success: false,
               message: "Session expired or unauthorized. Please log in again.",
             }),
-            { status: 401, headers: { "Content-Type": "application/json" } }
+            { status: 401, headers: { "Content-Type": "application/json" } },
           );
         }
 
@@ -152,7 +157,7 @@ export const Route = createFileRoute("/api/leads-admin")({
                 primaryAdminEmail: PRIMARY_ADMIN_EMAIL,
                 inquiries,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -170,7 +175,7 @@ export const Route = createFileRoute("/api/leads-admin")({
                 message: "Lead deleted successfully",
                 remainingCount: updated.length,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -185,7 +190,7 @@ export const Route = createFileRoute("/api/leads-admin")({
                 jobs,
                 totalCount: jobs.length,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -199,7 +204,7 @@ export const Route = createFileRoute("/api/leads-admin")({
             if (!raw.title?.trim()) {
               return new Response(
                 JSON.stringify({ success: false, message: "Job title is required." }),
-                { status: 400, headers: { "Content-Type": "application/json" } }
+                { status: 400, headers: { "Content-Type": "application/json" } },
               );
             }
 
@@ -212,7 +217,9 @@ export const Route = createFileRoute("/api/leads-admin")({
               experience: raw.experience || "2-5 Years",
               qualifications: raw.qualifications || "B.Pharma / Chemistry Graduate",
               description: (raw.description || "").trim(),
-              responsibilities: Array.isArray(raw.responsibilities) ? raw.responsibilities : undefined,
+              responsibilities: Array.isArray(raw.responsibilities)
+                ? raw.responsibilities
+                : undefined,
               requirements: Array.isArray(raw.requirements) ? raw.requirements : undefined,
               skills: Array.isArray(raw.skills) ? raw.skills : undefined,
               apply_email: raw.apply_email || "careers@unicureindia.com",
@@ -230,7 +237,7 @@ export const Route = createFileRoute("/api/leads-admin")({
                 job: newJob,
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -244,10 +251,10 @@ export const Route = createFileRoute("/api/leads-admin")({
             const index = jobs.findIndex((j) => j.id === targetId);
 
             if (index === -1) {
-              return new Response(
-                JSON.stringify({ success: false, message: "Job not found." }),
-                { status: 404, headers: { "Content-Type": "application/json" } }
-              );
+              return new Response(JSON.stringify({ success: false, message: "Job not found." }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" },
+              });
             }
 
             jobs[index] = {
@@ -257,10 +264,15 @@ export const Route = createFileRoute("/api/leads-admin")({
               location: (raw.location || jobs[index].location).trim(),
               employment_type: raw.employment_type || jobs[index].employment_type,
               experience: raw.experience !== undefined ? raw.experience : jobs[index].experience,
-              qualifications: raw.qualifications !== undefined ? raw.qualifications : jobs[index].qualifications,
+              qualifications:
+                raw.qualifications !== undefined ? raw.qualifications : jobs[index].qualifications,
               description: (raw.description || jobs[index].description).trim(),
-              responsibilities: Array.isArray(raw.responsibilities) ? raw.responsibilities : jobs[index].responsibilities,
-              requirements: Array.isArray(raw.requirements) ? raw.requirements : jobs[index].requirements,
+              responsibilities: Array.isArray(raw.responsibilities)
+                ? raw.responsibilities
+                : jobs[index].responsibilities,
+              requirements: Array.isArray(raw.requirements)
+                ? raw.requirements
+                : jobs[index].requirements,
               skills: Array.isArray(raw.skills) ? raw.skills : jobs[index].skills,
               apply_email: raw.apply_email || jobs[index].apply_email,
               is_open: raw.is_open !== undefined ? !!raw.is_open : jobs[index].is_open,
@@ -275,7 +287,7 @@ export const Route = createFileRoute("/api/leads-admin")({
                 job: jobs[index],
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -286,10 +298,10 @@ export const Route = createFileRoute("/api/leads-admin")({
             const jobs = getLocalJobOpenings();
             const job = jobs.find((j) => j.id === body.id);
             if (!job) {
-              return new Response(
-                JSON.stringify({ success: false, message: "Job not found." }),
-                { status: 404, headers: { "Content-Type": "application/json" } }
-              );
+              return new Response(JSON.stringify({ success: false, message: "Job not found." }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" },
+              });
             }
 
             job.is_open = !job.is_open;
@@ -302,7 +314,7 @@ export const Route = createFileRoute("/api/leads-admin")({
                 job,
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
@@ -320,19 +332,22 @@ export const Route = createFileRoute("/api/leads-admin")({
                 message: "Job opening deleted successfully.",
                 jobs,
               }),
-              { status: 200, headers: { "Content-Type": "application/json" } }
+              { status: 200, headers: { "Content-Type": "application/json" } },
             );
           }
 
-          return new Response(
-            JSON.stringify({ success: false, message: "Unknown action" }),
-            { status: 400, headers: { "Content-Type": "application/json" } }
-          );
+          return new Response(JSON.stringify({ success: false, message: "Unknown action" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          });
         } catch (err: any) {
           console.error("[Leads Admin API Error]", err);
           return new Response(
-            JSON.stringify({ success: false, message: err.message || "Server error in leads admin" }),
-            { status: 500, headers: { "Content-Type": "application/json" } }
+            JSON.stringify({
+              success: false,
+              message: err.message || "Server error in leads admin",
+            }),
+            { status: 500, headers: { "Content-Type": "application/json" } },
           );
         }
       },

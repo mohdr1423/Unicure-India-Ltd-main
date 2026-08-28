@@ -79,10 +79,22 @@ const FOOTER_DEFAULT = {
     },
   ],
   social: [
-    { label: "LinkedIn", url: "https://www.linkedin.com/company/unicure-india-ltd/", icon: "linkedin" },
-    { label: "YouTube", url: "https://youtube.com/@unicureindialtd9851?si=iPi8Tic09i2XwITk", icon: "youtube" },
+    {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/company/unicure-india-ltd/",
+      icon: "linkedin",
+    },
+    {
+      label: "YouTube",
+      url: "https://youtube.com/@unicureindialtd9851?si=iPi8Tic09i2XwITk",
+      icon: "youtube",
+    },
     { label: "IndiaMART", url: "https://www.indiamart.com/company/2819872/", icon: "indiamart" },
-    { label: "Justdial", url: "https://www.justdial.com/Noida/Unicure-India-Pvt-Ltd-Near-Uco-Bank-Noida-Sector-3/011PXX11-XX11-000772394792-T8E2_BZDET", icon: "justdial" },
+    {
+      label: "Justdial",
+      url: "https://www.justdial.com/Noida/Unicure-India-Pvt-Ltd-Near-Uco-Bank-Noida-Sector-3/011PXX11-XX11-000772394792-T8E2_BZDET",
+      icon: "justdial",
+    },
   ],
   legal: [
     { label: "Privacy Policy", url: "#" },
@@ -131,7 +143,9 @@ export const getPublicSiteChrome = createServerFn({ method: "GET" }).handler(
 
       const res = await Promise.race([dbPromise, timeoutPromise]);
       if (!res || !("data" in res) || res.error || !res.data) {
-        return memoryCache ?? { branding: BRANDING_DEFAULT, nav: NAV_DEFAULT, footer: FOOTER_DEFAULT };
+        return (
+          memoryCache ?? { branding: BRANDING_DEFAULT, nav: NAV_DEFAULT, footer: FOOTER_DEFAULT }
+        );
       }
 
       const map = new Map((res.data ?? []).map((r: any) => [r.key, r.published]));
@@ -145,7 +159,9 @@ export const getPublicSiteChrome = createServerFn({ method: "GET" }).handler(
       lastCacheTime = now;
       return result;
     } catch {
-      return memoryCache ?? { branding: BRANDING_DEFAULT, nav: NAV_DEFAULT, footer: FOOTER_DEFAULT };
+      return (
+        memoryCache ?? { branding: BRANDING_DEFAULT, nav: NAV_DEFAULT, footer: FOOTER_DEFAULT }
+      );
     }
   },
 );

@@ -99,13 +99,17 @@ function HomepageEditor() {
       render={({ value, setValue }) => (
         <div className="space-y-8">
           {/* HERO */}
-          <Section title="Hero section" subtitle="The first thing visitors see at the top of your homepage.">
-            <Field label="Hero image" hint="Upload a photo — crop, resize and compress it in place.">
+          <Section
+            title="Hero section"
+            subtitle="The first thing visitors see at the top of your homepage."
+          >
+            <Field
+              label="Hero image"
+              hint="Upload a photo — crop, resize and compress it in place."
+            >
               <HeroImageUploader
                 value={value.hero.image_url}
-                onChange={(url) =>
-                  setValue((p) => ({ ...p, hero: { ...p.hero, image_url: url } }))
-                }
+                onChange={(url) => setValue((p) => ({ ...p, hero: { ...p.hero, image_url: url } }))}
               />
             </Field>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -197,13 +201,18 @@ function HomepageEditor() {
             <div className="space-y-3">
               {value.stats.map((s, i) => (
                 <div key={i} className="grid gap-2 sm:grid-cols-[1fr_100px_2fr_auto] items-end">
-                  <Field label={i === 0 ? "Number" : ""} hint={i === 0 ? "Digits only." : undefined}>
+                  <Field
+                    label={i === 0 ? "Number" : ""}
+                    hint={i === 0 ? "Digits only." : undefined}
+                  >
                     <Input
                       value={s.value}
                       onChange={(e) =>
                         setValue((p) => ({
                           ...p,
-                          stats: p.stats.map((x, j) => (j === i ? { ...x, value: e.target.value } : x)),
+                          stats: p.stats.map((x, j) =>
+                            j === i ? { ...x, value: e.target.value } : x,
+                          ),
                         }))
                       }
                     />
@@ -214,7 +223,9 @@ function HomepageEditor() {
                       onChange={(e) =>
                         setValue((p) => ({
                           ...p,
-                          stats: p.stats.map((x, j) => (j === i ? { ...x, suffix: e.target.value } : x)),
+                          stats: p.stats.map((x, j) =>
+                            j === i ? { ...x, suffix: e.target.value } : x,
+                          ),
                         }))
                       }
                     />
@@ -225,7 +236,9 @@ function HomepageEditor() {
                       onChange={(e) =>
                         setValue((p) => ({
                           ...p,
-                          stats: p.stats.map((x, j) => (j === i ? { ...x, label: e.target.value } : x)),
+                          stats: p.stats.map((x, j) =>
+                            j === i ? { ...x, label: e.target.value } : x,
+                          ),
                         }))
                       }
                     />
@@ -370,7 +383,10 @@ function ItemList({
   return (
     <div className="space-y-3">
       {items.map((it, i) => (
-        <div key={i} className="grid gap-2 sm:grid-cols-[1fr_2fr_auto] items-end rounded-md border p-3">
+        <div
+          key={i}
+          className="grid gap-2 sm:grid-cols-[1fr_2fr_auto] items-end rounded-md border p-3"
+        >
           <Field label={i === 0 ? "Title" : ""}>
             <Input
               value={it.title}

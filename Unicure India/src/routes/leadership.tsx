@@ -162,9 +162,7 @@ function LeadershipPage() {
                         />
                       </div>
                       <div className="mt-4 h-1 w-20 rounded-full bg-[#C8102E]" />
-                      <h2 className="mt-4 text-2xl font-bold text-foreground">
-                        {mateen.name}
-                      </h2>
+                      <h2 className="mt-4 text-2xl font-bold text-foreground">{mateen.name}</h2>
                       <div className="text-sm font-semibold text-primary mt-1">
                         {mateen.designation}
                       </div>
@@ -201,20 +199,18 @@ function LeadershipPage() {
                       {/* Complete Untruncated Quote with Proper Paragraph Spacing */}
                       <blockquote className="space-y-4 text-base sm:text-lg leading-relaxed text-foreground/85 border-l-4 border-primary/30 pl-5 sm:pl-6 my-4 italic">
                         <p>
-                          "When I look back upon the last 4 decades, I feel proud to observe
-                          the heights Unicure as a Company has achieved in the field of
-                          pharmaceuticals manufacturing and innovations. With joint dedicated
-                          endeavours from our team, we have realized the sole aim with which
-                          the company was established - to serve the country and mankind at
-                          large."
+                          "When I look back upon the last 4 decades, I feel proud to observe the
+                          heights Unicure as a Company has achieved in the field of pharmaceuticals
+                          manufacturing and innovations. With joint dedicated endeavours from our
+                          team, we have realized the sole aim with which the company was established
+                          - to serve the country and mankind at large."
                         </p>
                         <p>
-                          "Integrity and ingenuity are the strength and core values of
-                          Unicure. By upholding these principles throughout the decades, we
-                          simultaneously function for the growth and value creation of our
-                          stakeholders. Working aggressively towards exports, Unicure is
-                          marching forward steadfastly into a brighter and wider horizon
-                          beyond the bounds of our Country."
+                          "Integrity and ingenuity are the strength and core values of Unicure. By
+                          upholding these principles throughout the decades, we simultaneously
+                          function for the growth and value creation of our stakeholders. Working
+                          aggressively towards exports, Unicure is marching forward steadfastly into
+                          a brighter and wider horizon beyond the bounds of our Country."
                         </p>
                       </blockquote>
 
@@ -258,9 +254,7 @@ function LeadershipPage() {
                         />
                       </div>
                       <div className="mt-4 h-1 w-20 rounded-full bg-primary" />
-                      <h2 className="mt-4 text-2xl font-bold text-foreground">
-                        {amin.name}
-                      </h2>
+                      <h2 className="mt-4 text-2xl font-bold text-foreground">{amin.name}</h2>
                       <div className="text-sm font-semibold text-primary mt-1">
                         {amin.designation}
                       </div>
@@ -310,11 +304,11 @@ function LeadershipPage() {
                       {/* Complete Exact Quote — Untruncated */}
                       <blockquote className="text-base sm:text-lg leading-relaxed text-foreground/85 border-l-4 border-primary/30 pl-5 sm:pl-6 my-4 italic">
                         <p>
-                          "Don't stress about not having it all figured out. Social media can
-                          make us think that we're the only one not 'trending up and to the
-                          right.' Focus intently on where you are now and use this as leverage
-                          while everyone else is focused on projecting where they want to be
-                          rather than where they actually are."
+                          "Don't stress about not having it all figured out. Social media can make
+                          us think that we're the only one not 'trending up and to the right.' Focus
+                          intently on where you are now and use this as leverage while everyone else
+                          is focused on projecting where they want to be rather than where they
+                          actually are."
                         </p>
                       </blockquote>
 
@@ -326,9 +320,14 @@ function LeadershipPage() {
                           "Turnkey Third-Party Formulation Partnerships",
                           "Transparent Stakeholder & Client Collaboration",
                         ].map((item, i) => (
-                          <div key={i} className="flex items-center gap-3 rounded-xl bg-secondary/40 p-3.5 border border-border/50">
+                          <div
+                            key={i}
+                            className="flex items-center gap-3 rounded-xl bg-secondary/40 p-3.5 border border-border/50"
+                          >
                             <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
-                            <span className="text-xs sm:text-sm font-medium text-foreground/90">{item}</span>
+                            <span className="text-xs sm:text-sm font-medium text-foreground/90">
+                              {item}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -360,9 +359,7 @@ function LeadershipPage() {
                         />
                       </div>
                       <div className="mt-4 h-1 w-20 rounded-full bg-emerald-600" />
-                      <h2 className="mt-4 text-2xl font-bold text-foreground">
-                        {kashish.name}
-                      </h2>
+                      <h2 className="mt-4 text-2xl font-bold text-foreground">{kashish.name}</h2>
                       <div className="text-sm font-semibold text-emerald-700 mt-1">
                         {kashish.designation}
                       </div>
@@ -412,12 +409,12 @@ function LeadershipPage() {
                       {/* Complete Exact Quote — Untruncated */}
                       <blockquote className="text-base sm:text-lg leading-relaxed text-foreground/85 border-l-4 border-emerald-600/50 pl-5 sm:pl-6 my-4 italic">
                         <p>
-                          "The entire pharmaceutical industry has a lot of work to do to
-                          restore public health. Quality is never an accident; it is always
-                          the result of high intention, sincere effort, intelligent direction
-                          and skillful execution. It represents the wise choice of many
-                          alternatives. Only a healthy horse can pull a sturdy wagon. Hence,
-                          my coherent message to team Unicure is: Quality or Quit!"
+                          "The entire pharmaceutical industry has a lot of work to do to restore
+                          public health. Quality is never an accident; it is always the result of
+                          high intention, sincere effort, intelligent direction and skillful
+                          execution. It represents the wise choice of many alternatives. Only a
+                          healthy horse can pull a sturdy wagon. Hence, my coherent message to team
+                          Unicure is: Quality or Quit!"
                         </p>
                       </blockquote>
 
@@ -469,7 +466,8 @@ function LeadershipPage() {
               </h2>
               <div className="mt-3 mx-auto h-1 w-16 rounded-full bg-gradient-brand" />
               <p className="mt-3 text-sm sm:text-base text-muted-foreground">
-                Decades of specialized pharmaceutical expertise guiding production, quality, and commercial partnerships.
+                Decades of specialized pharmaceutical expertise guiding production, quality, and
+                commercial partnerships.
               </p>
             </div>
           </ScrollReveal>

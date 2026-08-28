@@ -122,8 +122,7 @@ export function getLocalBellaResponse(userMessage: string): { reply: string } {
     lower.startsWith("hello ")
   ) {
     return {
-      reply:
-        "Hi! I'm Bella, the Unicure India Assistant. How can I help you today?",
+      reply: "Hi! I'm Bella, the Unicure India Assistant. How can I help you today?",
     };
   }
 

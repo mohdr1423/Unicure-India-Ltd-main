@@ -147,7 +147,8 @@ export const listSiteContentVersions = createServerFn({ method: "GET" })
 export const restoreSiteContentVersion = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: { versionId: string }) => {
-    if (!input?.versionId || typeof input.versionId !== "string") throw new Error("Invalid version");
+    if (!input?.versionId || typeof input.versionId !== "string")
+      throw new Error("Invalid version");
     return input;
   })
   .handler(async ({ data, context }) => {

@@ -7,7 +7,9 @@ import { createServerFn } from "@tanstack/react-start";
  */
 export const requestAdminPasswordReset = createServerFn({ method: "POST" })
   .inputValidator((input: { email: string; redirectTo: string }) => {
-    const email = String(input?.email ?? "").trim().toLowerCase();
+    const email = String(input?.email ?? "")
+      .trim()
+      .toLowerCase();
     const redirectTo = String(input?.redirectTo ?? "");
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) throw new Error("Enter a valid email address.");
     if (!/^https?:\/\//.test(redirectTo)) throw new Error("Invalid redirect URL.");

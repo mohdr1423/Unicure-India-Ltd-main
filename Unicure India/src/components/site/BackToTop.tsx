@@ -13,8 +13,7 @@ export function BackToTop() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollUp = () =>
-    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  const scrollUp = () => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
 
   return (
     <AnimatePresence>

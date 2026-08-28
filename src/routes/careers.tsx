@@ -217,9 +217,7 @@ const DEFAULT_OPENINGS: JobOpening[] = [
       "Perform machine changeovers and primary leak testing for blister packs.",
       "Verify batch coding, MRP, and expiry date printing on secondary cartons.",
     ],
-    requirements: [
-      "ITI Certificate or Diploma with 1-3 years in pharma packaging operations.",
-    ],
+    requirements: ["ITI Certificate or Diploma with 1-3 years in pharma packaging operations."],
     skills: ["Blister Packing", "Alu-Alu", "Batch Coding", "Line Clearance"],
     is_open: true,
   },
@@ -333,9 +331,7 @@ function CareersPage() {
     }
   }, [openingsList]);
 
-  const departments = Array.from(
-    new Set(openingsList.map((j) => j.department).filter(Boolean))
-  );
+  const departments = Array.from(new Set(openingsList.map((j) => j.department).filter(Boolean)));
 
   const filteredOpenings = openingsList.filter((job) => {
     if (activeDeptFilter !== "all" && job.department !== activeDeptFilter) return false;
@@ -448,13 +444,13 @@ function CareersPage() {
       } else {
         setSubmitError(
           result.message ||
-            "Unable to submit application at this time. You can email your CV directly to careers@unicureindia.com."
+            "Unable to submit application at this time. You can email your CV directly to careers@unicureindia.com.",
         );
       }
     } catch (err) {
       console.error("[Careers Form] Submission error:", err);
       setSubmitError(
-        "Network connection error. Please try again or email careers@unicureindia.com."
+        "Network connection error. Please try again or email careers@unicureindia.com.",
       );
     } finally {
       setIsSubmitting(false);
@@ -480,9 +476,7 @@ function CareersPage() {
                   <v.icon className="h-6 w-6" />
                 </div>
                 <div className="mt-5 text-xl font-bold text-foreground">{v.title}</div>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  {v.desc}
-                </p>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
               </div>
             </StaggerItem>
           ))}
@@ -533,7 +527,8 @@ function CareersPage() {
               Current Opportunities
             </h2>
             <p className="mt-3 text-muted-foreground text-base sm:text-lg">
-              Click on any position to review detailed responsibilities and submit your candidate application with CV.
+              Click on any position to review detailed responsibilities and submit your candidate
+              application with CV.
             </p>
           </div>
 
@@ -657,7 +652,8 @@ function CareersPage() {
                 Don't see your specific designation listed?
               </h3>
               <p className="text-xs text-muted-foreground max-w-xl">
-                Submit a general profile and upload your CV to our talent database. We regularly recruit across technical, formulation, quality, and commercial disciplines.
+                Submit a general profile and upload your CV to our talent database. We regularly
+                recruit across technical, formulation, quality, and commercial disciplines.
               </p>
             </div>
             <button
@@ -668,7 +664,8 @@ function CareersPage() {
                   department: "General / All Departments",
                   location: "Corporate Office & Plants",
                   employment_type: "Full-time",
-                  description: "General candidate registration for upcoming pharmaceutical openings.",
+                  description:
+                    "General candidate registration for upcoming pharmaceutical openings.",
                   is_open: true,
                 })
               }
@@ -692,7 +689,8 @@ function CareersPage() {
               Why professionals choose Unicure
             </h2>
             <p className="mt-3 text-muted-foreground text-lg">
-              We empower our team with modern pharmaceutical facilities, continuous skill development, and strong employee welfare.
+              We empower our team with modern pharmaceutical facilities, continuous skill
+              development, and strong employee welfare.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -705,9 +703,7 @@ function CareersPage() {
                   <b.icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-foreground">{b.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  {b.desc}
-                </p>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
               </div>
             ))}
           </div>
@@ -725,7 +721,8 @@ function CareersPage() {
                 Have questions about working with us?
               </h2>
               <p className="text-white/85 text-base sm:text-lg leading-relaxed">
-                Reach out directly to our Human Resources leadership. We are always looking for passionate talent to join our manufacturing plants and corporate offices.
+                Reach out directly to our Human Resources leadership. We are always looking for
+                passionate talent to join our manufacturing plants and corporate offices.
               </p>
               <div className="pt-4 flex flex-wrap justify-center gap-3">
                 <a
@@ -788,10 +785,12 @@ function CareersPage() {
                   <MapPin className="h-3.5 w-3.5 text-primary" /> {selectedDetailsJob.location}
                 </span>
                 <span className="flex items-center gap-1 font-medium text-foreground">
-                  <Clock className="h-3.5 w-3.5 text-primary" /> Exp: {selectedDetailsJob.experience || "2+ Years"}
+                  <Clock className="h-3.5 w-3.5 text-primary" /> Exp:{" "}
+                  {selectedDetailsJob.experience || "2+ Years"}
                 </span>
                 <span className="flex items-center gap-1 font-medium text-foreground">
-                  <GraduationCap className="h-3.5 w-3.5 text-primary" /> {selectedDetailsJob.qualifications || "Pharma Graduate"}
+                  <GraduationCap className="h-3.5 w-3.5 text-primary" />{" "}
+                  {selectedDetailsJob.qualifications || "Pharma Graduate"}
                 </span>
               </div>
             </div>
@@ -807,21 +806,22 @@ function CareersPage() {
             </div>
 
             {/* Responsibilities */}
-            {selectedDetailsJob.responsibilities && selectedDetailsJob.responsibilities.length > 0 && (
-              <div className="space-y-2.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
-                  Key Responsibilities:
-                </h4>
-                <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
-                  {selectedDetailsJob.responsibilities.map((resp, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{resp}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {selectedDetailsJob.responsibilities &&
+              selectedDetailsJob.responsibilities.length > 0 && (
+                <div className="space-y-2.5">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                    Key Responsibilities:
+                  </h4>
+                  <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
+                    {selectedDetailsJob.responsibilities.map((resp, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{resp}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
             {/* Requirements */}
             {selectedDetailsJob.requirements && selectedDetailsJob.requirements.length > 0 && (
@@ -915,14 +915,21 @@ function CareersPage() {
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Thank you, <strong>{fullName}</strong>! Your application and CV for{" "}
-                    <strong>{applyingJob.title}</strong> have been securely delivered directly to our Human Resources team.
+                    <strong>{applyingJob.title}</strong> have been securely delivered directly to
+                    our Human Resources team.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-secondary/50 border border-border text-xs text-muted-foreground max-w-md mx-auto space-y-1">
-                  <div><strong>Application ID:</strong> UNICURE-APP-{Date.now().toString().slice(-6)}</div>
-                  <div><strong>Confirmation Email:</strong> {email}</div>
-                  <div><strong>Resume File:</strong> {resumeFileName || "Profile Recorded"}</div>
+                  <div>
+                    <strong>Application ID:</strong> UNICURE-APP-{Date.now().toString().slice(-6)}
+                  </div>
+                  <div>
+                    <strong>Confirmation Email:</strong> {email}
+                  </div>
+                  <div>
+                    <strong>Resume File:</strong> {resumeFileName || "Profile Recorded"}
+                  </div>
                 </div>
 
                 <div className="pt-4 flex justify-center">
@@ -1071,8 +1078,12 @@ function CareersPage() {
                         <option value="B.Pharma">B.Pharma (Bachelor of Pharmacy)</option>
                         <option value="M.Pharma">M.Pharma (Master of Pharmacy)</option>
                         <option value="B.Sc Chemistry">B.Sc (Chemistry / Life Sciences)</option>
-                        <option value="M.Sc Chemistry / Analytical">M.Sc (Chemistry / Analytical)</option>
-                        <option value="Diploma in Pharma Tech">Diploma in Pharma Tech / D.Pharma</option>
+                        <option value="M.Sc Chemistry / Analytical">
+                          M.Sc (Chemistry / Analytical)
+                        </option>
+                        <option value="Diploma in Pharma Tech">
+                          Diploma in Pharma Tech / D.Pharma
+                        </option>
                         <option value="ITI / Technical">ITI / Technical Certificate</option>
                         <option value="B.Tech / Engineering">B.Tech / Chemical / Biotech</option>
                         <option value="Graduate / MBA">Graduate / MBA / Commercial</option>
@@ -1128,7 +1139,10 @@ function CareersPage() {
 
                 {/* Resume / CV Upload Section */}
                 <div className="space-y-2">
-                  <label htmlFor={fileInputId} className="block text-xs font-bold uppercase tracking-wider text-muted-foreground border-b border-border pb-1">
+                  <label
+                    htmlFor={fileInputId}
+                    className="block text-xs font-bold uppercase tracking-wider text-muted-foreground border-b border-border pb-1"
+                  >
                     3. Upload CV / Resume (PDF / Word)
                   </label>
 

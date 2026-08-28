@@ -16,24 +16,26 @@ type AuditEvent = (typeof EVENTS)[number];
  * strings are accepted; free-text `reason` is truncated.
  */
 export const logAdminAuthEvent = createServerFn({ method: "POST" })
-  .inputValidator((input: {
-    event: AuditEvent;
-    email?: string | null;
-    userId?: string | null;
-    success: boolean;
-    reason?: string | null;
-    userAgent?: string | null;
-  }) => {
-    if (!EVENTS.includes(input?.event)) throw new Error("Invalid event type.");
-    return {
-      event: input.event,
-      email: input.email ? String(input.email).slice(0, 320) : null,
-      userId: input.userId ? String(input.userId).slice(0, 64) : null,
-      success: Boolean(input.success),
-      reason: input.reason ? String(input.reason).slice(0, 500) : null,
-      userAgent: input.userAgent ? String(input.userAgent).slice(0, 500) : null,
-    };
-  })
+  .inputValidator(
+    (input: {
+      event: AuditEvent;
+      email?: string | null;
+      userId?: string | null;
+      success: boolean;
+      reason?: string | null;
+      userAgent?: string | null;
+    }) => {
+      if (!EVENTS.includes(input?.event)) throw new Error("Invalid event type.");
+      return {
+        event: input.event,
+        email: input.email ? String(input.email).slice(0, 320) : null,
+        userId: input.userId ? String(input.userId).slice(0, 64) : null,
+        success: Boolean(input.success),
+        reason: input.reason ? String(input.reason).slice(0, 500) : null,
+        userAgent: input.userAgent ? String(input.userAgent).slice(0, 500) : null,
+      };
+    },
+  )
   .handler(async ({ data }) => {
     try {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -68,13 +70,16 @@ export type AdminAuthAuditRow = {
  */
 export const listAdminAuthAudit = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: { limit?: number; event?: AuditEvent | "all"; search?: string } | undefined) => ({
-    limit: Math.min(Math.max(Number(input?.limit ?? 200), 1), 500),
-    event: input?.event && input.event !== "all" && EVENTS.includes(input.event as AuditEvent)
-      ? (input.event as AuditEvent)
-      : null,
-    search: input?.search ? String(input.search).trim().slice(0, 200) : "",
-  }))
+  .inputValidator(
+    (input: { limit?: number; event?: AuditEvent | "all"; search?: string } | undefined) => ({
+      limit: Math.min(Math.max(Number(input?.limit ?? 200), 1), 500),
+      event:
+        input?.event && input.event !== "all" && EVENTS.includes(input.event as AuditEvent)
+          ? (input.event as AuditEvent)
+          : null,
+      search: input?.search ? String(input.search).trim().slice(0, 200) : "",
+    }),
+  )
   .handler(async ({ data, context }) => {
     const { data: isAdmin, error: roleErr } = await context.supabase.rpc("has_role", {
       _user_id: context.userId,

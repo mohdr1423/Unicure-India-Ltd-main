@@ -41,37 +41,68 @@ function BrandingEditor() {
       render={({ value, setValue }) => (
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Site name" hint="Shown in the top-left of every page.">
-            <Input value={value.site_name} onChange={(e) => setValue((p) => ({ ...p, site_name: e.target.value }))} />
+            <Input
+              value={value.site_name}
+              onChange={(e) => setValue((p) => ({ ...p, site_name: e.target.value }))}
+            />
           </Field>
           <Field label="Tagline" hint="The small line under your site name.">
-            <Input value={value.tagline} onChange={(e) => setValue((p) => ({ ...p, tagline: e.target.value }))} />
+            <Input
+              value={value.tagline}
+              onChange={(e) => setValue((p) => ({ ...p, tagline: e.target.value }))}
+            />
           </Field>
           <Field label="Company name" hint="Used in the footer's copyright line.">
-            <Input value={value.company_name} onChange={(e) => setValue((p) => ({ ...p, company_name: e.target.value }))} />
+            <Input
+              value={value.company_name}
+              onChange={(e) => setValue((p) => ({ ...p, company_name: e.target.value }))}
+            />
           </Field>
           <Field label="Phone" hint="Visitors can click this to call you.">
-            <Input value={value.phone} onChange={(e) => setValue((p) => ({ ...p, phone: e.target.value }))} />
+            <Input
+              value={value.phone}
+              onChange={(e) => setValue((p) => ({ ...p, phone: e.target.value }))}
+            />
           </Field>
           <Field label="Email" hint="Contact form and footer use this address.">
-            <Input type="email" value={value.email} onChange={(e) => setValue((p) => ({ ...p, email: e.target.value }))} />
+            <Input
+              type="email"
+              value={value.email}
+              onChange={(e) => setValue((p) => ({ ...p, email: e.target.value }))}
+            />
           </Field>
           <Field label="Address" hint="Your office or headquarters address.">
-            <Input value={value.address} onChange={(e) => setValue((p) => ({ ...p, address: e.target.value }))} />
+            <Input
+              value={value.address}
+              onChange={(e) => setValue((p) => ({ ...p, address: e.target.value }))}
+            />
           </Field>
           <Field label="Primary color" hint="The main brand color — used for buttons and headings.">
             <div className="flex gap-2">
-              <Input type="color" className="h-10 w-14 p-1" value={value.primary_color}
-                onChange={(e) => setValue((p) => ({ ...p, primary_color: e.target.value }))} />
-              <Input value={value.primary_color}
-                onChange={(e) => setValue((p) => ({ ...p, primary_color: e.target.value }))} />
+              <Input
+                type="color"
+                className="h-10 w-14 p-1"
+                value={value.primary_color}
+                onChange={(e) => setValue((p) => ({ ...p, primary_color: e.target.value }))}
+              />
+              <Input
+                value={value.primary_color}
+                onChange={(e) => setValue((p) => ({ ...p, primary_color: e.target.value }))}
+              />
             </div>
           </Field>
           <Field label="Accent color" hint="A second color used for links and highlights.">
             <div className="flex gap-2">
-              <Input type="color" className="h-10 w-14 p-1" value={value.accent_color}
-                onChange={(e) => setValue((p) => ({ ...p, accent_color: e.target.value }))} />
-              <Input value={value.accent_color}
-                onChange={(e) => setValue((p) => ({ ...p, accent_color: e.target.value }))} />
+              <Input
+                type="color"
+                className="h-10 w-14 p-1"
+                value={value.accent_color}
+                onChange={(e) => setValue((p) => ({ ...p, accent_color: e.target.value }))}
+              />
+              <Input
+                value={value.accent_color}
+                onChange={(e) => setValue((p) => ({ ...p, accent_color: e.target.value }))}
+              />
             </div>
           </Field>
         </div>

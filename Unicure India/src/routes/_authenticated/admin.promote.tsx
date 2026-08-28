@@ -12,7 +12,9 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/promote")({
   component: PromotePage,
-  head: () => ({ meta: [{ title: "Promote admin — Unicure India Ltd" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({
+    meta: [{ title: "Promote admin — Unicure India Ltd" }, { name: "robots", content: "noindex" }],
+  }),
 });
 
 function PromotePage() {

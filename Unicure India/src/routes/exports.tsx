@@ -169,7 +169,9 @@ function ExportsPage() {
                     }`}
                     aria-pressed={active}
                   >
-                    <Globe2 className={`h-3.5 w-3.5 ${active ? "text-white" : "text-primary/70"}`} />
+                    <Globe2
+                      className={`h-3.5 w-3.5 ${active ? "text-white" : "text-primary/70"}`}
+                    />
                     <span>{r.name}</span>
                     {r.id !== "ALL" && (
                       <span
@@ -286,17 +288,19 @@ function ExportsPage() {
             <div className="rounded-3xl bg-[color:var(--brand-blue-dark)] p-8 sm:p-12 md:p-16 text-white shadow-elegant text-center relative overflow-hidden">
               <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
               <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
-              
+
               <div className="relative max-w-2xl mx-auto space-y-4">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold text-white/90 backdrop-blur">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Global Partnership Inquiries
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Global Partnership
+                  Inquiries
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
                   Looking to import pharmaceutical products from India?
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg text-white/80 leading-relaxed">
                   Our international business team handles product registrations, CTD/ACTD dossier
-                  preparation, customized packaging, and global logistics for distributors worldwide.
+                  preparation, customized packaging, and global logistics for distributors
+                  worldwide.
                 </p>
                 <div className="pt-4">
                   <Link

@@ -5,14 +5,34 @@ import { useAdmin } from "@/hooks/use-admin";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  LayoutDashboard, Package, Newspaper, Briefcase, Download, Settings,
-  LogOut, Images, UserCheck, ShieldCheck, UserPlus, Palette, Menu,
-  PanelBottom, Search, HelpCircle, ExternalLink, Home, Info, Mail, Factory,
+  LayoutDashboard,
+  Package,
+  Newspaper,
+  Briefcase,
+  Download,
+  Settings,
+  LogOut,
+  Images,
+  UserCheck,
+  ShieldCheck,
+  UserPlus,
+  Palette,
+  Menu,
+  PanelBottom,
+  Search,
+  HelpCircle,
+  ExternalLink,
+  Home,
+  Info,
+  Mail,
+  Factory,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminLayout,
-  head: () => ({ meta: [{ title: "Admin — Unicure India Ltd" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({
+    meta: [{ title: "Admin — Unicure India Ltd" }, { name: "robots", content: "noindex" }],
+  }),
 });
 
 type NavItem = { to: string; label: string; icon: any; exact?: boolean; hint?: string };
@@ -23,15 +43,30 @@ const groups: NavGroup[] = [
     label: "Overview",
     items: [
       { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true, hint: "Start here" },
-      { to: "/admin/inquiries", label: "Inquiries & Leads", icon: Mail, hint: "All website leads & dispatch logs" },
+      {
+        to: "/admin/inquiries",
+        label: "Inquiries & Leads",
+        icon: Mail,
+        hint: "All website leads & dispatch logs",
+      },
     ],
   },
   {
     label: "Look & feel",
     items: [
-      { to: "/admin/branding", label: "Branding & colors", icon: Palette, hint: "Logo name, colors, contact" },
+      {
+        to: "/admin/branding",
+        label: "Branding & colors",
+        icon: Palette,
+        hint: "Logo name, colors, contact",
+      },
       { to: "/admin/navigation", label: "Top menu", icon: Menu, hint: "Header links & button" },
-      { to: "/admin/homepage", label: "Homepage", icon: Home, hint: "Hero, stats, capabilities, why us" },
+      {
+        to: "/admin/homepage",
+        label: "Homepage",
+        icon: Home,
+        hint: "Hero, stats, capabilities, why us",
+      },
       { to: "/admin/footer", label: "Footer", icon: PanelBottom, hint: "Bottom of every page" },
     ],
   },
@@ -39,8 +74,18 @@ const groups: NavGroup[] = [
     label: "Pages",
     items: [
       { to: "/admin/about", label: "About page", icon: Info, hint: "Story, values, timeline" },
-      { to: "/admin/services", label: "Services page", icon: Factory, hint: "Manufacturing capacities & units" },
-      { to: "/admin/contact", label: "Contact page", icon: Mail, hint: "Addresses & inquiry section" },
+      {
+        to: "/admin/services",
+        label: "Services page",
+        icon: Factory,
+        hint: "Manufacturing capacities & units",
+      },
+      {
+        to: "/admin/contact",
+        label: "Contact page",
+        icon: Mail,
+        hint: "Addresses & inquiry section",
+      },
     ],
   },
   {
@@ -57,16 +102,19 @@ const groups: NavGroup[] = [
     label: "People & access",
     items: [
       { to: "/admin/requests", label: "Access requests", icon: UserCheck },
-      { to: "/admin/roles", label: "Roles & permissions", icon: ShieldCheck, hint: "Grant admin or editor access" },
+      {
+        to: "/admin/roles",
+        label: "Roles & permissions",
+        icon: ShieldCheck,
+        hint: "Grant admin or editor access",
+      },
       { to: "/admin/promote", label: "Add an admin", icon: UserPlus },
       { to: "/admin/audit", label: "Sign-in history", icon: ShieldCheck },
     ],
   },
   {
     label: "Settings",
-    items: [
-      { to: "/admin/settings", label: "Site settings", icon: Settings },
-    ],
+    items: [{ to: "/admin/settings", label: "Site settings", icon: Settings }],
   },
 ];
 
@@ -84,7 +132,9 @@ function AdminLayout() {
   }
 
   if (loading) {
-    return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
+    return (
+      <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>
+    );
   }
 
   if (!isAdmin) {
@@ -93,12 +143,16 @@ function AdminLayout() {
         <div className="max-w-lg text-center space-y-4">
           <h1 className="text-2xl font-semibold">You're signed in but not an admin</h1>
           <p className="text-sm text-muted-foreground">
-            Your user ID is <code className="rounded bg-muted px-1.5 py-0.5">{userId}</code>. Ask an existing admin — or run this once in the Cloud SQL editor to promote yourself:
+            Your user ID is <code className="rounded bg-muted px-1.5 py-0.5">{userId}</code>. Ask an
+            existing admin — or run this once in the Cloud SQL editor to promote yourself:
           </p>
           <pre className="text-left text-xs bg-muted p-3 rounded overflow-x-auto">
-{`INSERT INTO public.user_roles (user_id, role) VALUES ('${userId}', 'admin');`}
+            {`INSERT INTO public.user_roles (user_id, role) VALUES ('${userId}', 'admin');`}
           </pre>
-          <Button variant="outline" onClick={signOut}><LogOut className="h-4 w-4 mr-2" />Sign out</Button>
+          <Button variant="outline" onClick={signOut}>
+            <LogOut className="h-4 w-4 mr-2" />
+            Sign out
+          </Button>
         </div>
       </div>
     );
@@ -114,10 +168,7 @@ function AdminShell({ pathname, onSignOut }: { pathname: string; onSignOut: () =
     .map((g) => ({
       ...g,
       items: g.items.filter(
-        (i) =>
-          !q ||
-          i.label.toLowerCase().includes(q) ||
-          (i.hint ?? "").toLowerCase().includes(q),
+        (i) => !q || i.label.toLowerCase().includes(q) || (i.hint ?? "").toLowerCase().includes(q),
       ),
     }))
     .filter((g) => g.items.length);

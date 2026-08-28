@@ -10,7 +10,11 @@ export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Product List — Unicure India Pharmaceutical Catalogue" },
-      { name: "description", content: "Browse Unicure India's product list — tablets, capsules and formulations manufactured to IP, BP and USP pharmacopeial standards." },
+      {
+        name: "description",
+        content:
+          "Browse Unicure India's product list — tablets, capsules and formulations manufactured to IP, BP and USP pharmacopeial standards.",
+      },
       { property: "og:title", content: "Products — Unicure India" },
       { property: "og:description", content: "Browse our full pharmaceutical product list." },
       { property: "og:url", content: "/products" },
@@ -34,9 +38,7 @@ function ProductsPage() {
   const filtered = useMemo(() => {
     setPage(1); // reset on filter change
     return products.filter(
-      (p) =>
-        (cat === "All" || p.cat === cat) &&
-        p.name.toLowerCase().includes(q.toLowerCase()),
+      (p) => (cat === "All" || p.cat === cat) && p.name.toLowerCase().includes(q.toLowerCase()),
     );
   }, [q, cat]);
 
@@ -93,16 +95,23 @@ function ProductsPage() {
               Showing <span className="font-semibold text-foreground">{paginated.length}</span> of{" "}
               {filtered.length} products
               {totalPages > 1 && (
-                <span className="ml-1">(page {page} of {totalPages})</span>
+                <span className="ml-1">
+                  (page {page} of {totalPages})
+                </span>
               )}
             </span>
           </div>
 
-          <StaggerGrid className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" key={`${cat}-${q}-${page}`}>
+          <StaggerGrid
+            className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            key={`${cat}-${q}-${page}`}
+          >
             {paginated.map((p) => (
               <StaggerItem key={p.name}>
                 <div className="group rounded-2xl border border-border bg-white p-6 shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition">
-                  <div className="text-xs font-semibold uppercase tracking-widest text-primary">{p.cat}</div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                    {p.cat}
+                  </div>
                   <h3 className="mt-3 text-base font-semibold leading-snug">{p.name}</h3>
                   <a
                     href="/contact"
@@ -114,7 +123,9 @@ function ProductsPage() {
               </StaggerItem>
             ))}
             {paginated.length === 0 && (
-              <div className="col-span-full py-16 text-center text-muted-foreground">No products match your search.</div>
+              <div className="col-span-full py-16 text-center text-muted-foreground">
+                No products match your search.
+              </div>
             )}
           </StaggerGrid>
 
@@ -131,7 +142,10 @@ function ProductsPage() {
               </button>
               {getPageNumbers(page, totalPages).map((p, i) =>
                 p === "..." ? (
-                  <span key={`dots-${i}`} className="px-1 sm:px-2 text-xs sm:text-sm text-muted-foreground">
+                  <span
+                    key={`dots-${i}`}
+                    className="px-1 sm:px-2 text-xs sm:text-sm text-muted-foreground"
+                  >
                     …
                   </span>
                 ) : (

@@ -14,14 +14,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ShieldCheck, PencilLine, Trash2, UserCog } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/roles")({
   component: RolesPage,
   head: () => ({
-    meta: [{ title: "Roles & permissions — Unicure India Ltd" }, { name: "robots", content: "noindex" }],
+    meta: [
+      { title: "Roles & permissions — Unicure India Ltd" },
+      { name: "robots", content: "noindex" },
+    ],
   }),
 });
 
@@ -85,7 +94,8 @@ function RolesPage() {
       <div>
         <h1 className="text-2xl font-semibold">Roles & permissions</h1>
         <p className="text-sm text-muted-foreground">
-          Grant editor access to teammates so they can update site content without full admin controls.
+          Grant editor access to teammates so they can update site content without full admin
+          controls.
         </p>
       </div>
 
@@ -114,7 +124,10 @@ function RolesPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-[1fr_180px_auto] sm:items-end">
+          <form
+            onSubmit={onSubmit}
+            className="grid gap-4 sm:grid-cols-[1fr_180px_auto] sm:items-end"
+          >
             <div className="space-y-2">
               <Label htmlFor="identifier">User email or ID</Label>
               <Input
@@ -130,7 +143,9 @@ function RolesPage() {
             <div className="space-y-2">
               <Label>Role</Label>
               <Select value={role} onValueChange={(v) => setRole(v as ManageableRole)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="editor">Editor</SelectItem>
                   <SelectItem value="admin">Admin</SelectItem>
@@ -172,13 +187,21 @@ function RolesPage() {
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
                     {row.roles.map((r) => (
-                      <Badge key={r} variant={r === "admin" ? "default" : "secondary"} className="gap-1">
+                      <Badge
+                        key={r}
+                        variant={r === "admin" ? "default" : "secondary"}
+                        className="gap-1"
+                      >
                         {ROLE_META[r].label}
                         <button
                           type="button"
                           className="ml-1 inline-flex text-muted-foreground hover:text-destructive"
                           onClick={() => {
-                            if (confirm(`Remove ${ROLE_META[r].label} role from ${row.email ?? row.user_id}?`)) {
+                            if (
+                              confirm(
+                                `Remove ${ROLE_META[r].label} role from ${row.email ?? row.user_id}?`,
+                              )
+                            ) {
                               revokeMut.mutate({ userId: row.user_id, role: r });
                             }
                           }}

@@ -66,7 +66,10 @@ export function saveInquiryToLocalLedger(record: ServerInquiryRecord): void {
 
 export function getLocalInquiriesLedger(): ServerInquiryRecord[] {
   try {
-    const list = safeReadJsonFile<ServerInquiryRecord[]>("server-inquiries.json", inMemoryInquiries);
+    const list = safeReadJsonFile<ServerInquiryRecord[]>(
+      "server-inquiries.json",
+      inMemoryInquiries,
+    );
     if (list.length > 0) inMemoryInquiries = list;
     return inMemoryInquiries;
   } catch (err) {
@@ -222,7 +225,10 @@ ${record.email}
       // If failed due to unverified domain in fromAddress, auto-fallback to onboarding@resend.dev
       if (!res.ok && fromAddress !== "Unicure India Inquiries <onboarding@resend.dev>") {
         const errText = await res.text();
-        console.warn("[ServerInquiry] Resend custom fromAddress failed, retrying with onboarding@resend.dev:", errText);
+        console.warn(
+          "[ServerInquiry] Resend custom fromAddress failed, retrying with onboarding@resend.dev:",
+          errText,
+        );
         res = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -245,7 +251,11 @@ ${record.email}
         return { success: true, provider: `Resend (ID: ${json.id || "ok"})` };
       }
       const errText = await res.text();
-      console.warn("[ServerInquiry] Resend API Error, proceeding to fallback:", res.status, errText);
+      console.warn(
+        "[ServerInquiry] Resend API Error, proceeding to fallback:",
+        res.status,
+        errText,
+      );
     } catch (err: any) {
       console.warn("[ServerInquiry] Resend fetch exception, proceeding to fallback:", err);
     }
@@ -292,7 +302,12 @@ ${record.email}
           "api-key": brevoKey,
         },
         body: JSON.stringify({
-          sender: { name: "Unicure India Ltd", email: fromAddress.includes("<") ? fromAddress.match(/<([^>]+)>/)?.[1] || "inquiries@unicureindia.com" : fromAddress },
+          sender: {
+            name: "Unicure India Ltd",
+            email: fromAddress.includes("<")
+              ? fromAddress.match(/<([^>]+)>/)?.[1] || "inquiries@unicureindia.com"
+              : fromAddress,
+          },
           to: [{ email: targetEmail, name: "Unicure Administrator" }],
           replyTo: { email: record.email, name: record.name },
           subject: emailSubject,

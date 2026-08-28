@@ -66,12 +66,12 @@
   --header-height: 108px;
   --radius: 0.875rem;
   /* Unicure brand palette — Medical Red */
-  --brand-blue: oklch(0.52 0.22 25);        /* #C8102E deep medical red */
-  --brand-blue-dark: oklch(0.22 0 0);       /* #222222 charcoal */
-  --brand-green: oklch(0.58 0.24 28);       /* accent red */
-  --brand-soft: oklch(0.975 0 0);           /* #F7F7F7 */
+  --brand-blue: oklch(0.52 0.22 25); /* #C8102E deep medical red */
+  --brand-blue-dark: oklch(0.22 0 0); /* #222222 charcoal */
+  --brand-green: oklch(0.58 0.24 28); /* accent red */
+  --brand-soft: oklch(0.975 0 0); /* #F7F7F7 */
   --brand-mist: oklch(0.955 0 0);
-  --brand-blue-glow: oklch(0.62 0.24 22);   /* brighter red glow */
+  --brand-blue-glow: oklch(0.62 0.24 22); /* brighter red glow */
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.22 0 0);
@@ -93,7 +93,12 @@
   --input: oklch(0.92 0 0);
   --ring: var(--brand-blue);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.22 0 0 / 0.92) 0%, oklch(0.35 0.15 25 / 0.75) 55%, oklch(0.52 0.22 25 / 0.55) 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    oklch(0.22 0 0 / 0.92) 0%,
+    oklch(0.35 0.15 25 / 0.75) 55%,
+    oklch(0.52 0.22 25 / 0.55) 100%
+  );
   --gradient-brand: linear-gradient(120deg, var(--brand-blue) 0%, var(--brand-blue-glow) 100%);
   --gradient-soft: linear-gradient(180deg, #ffffff 0%, var(--brand-soft) 100%);
   --shadow-card: 0 10px 30px -12px oklch(0.22 0 0 / 0.15);
@@ -178,7 +183,7 @@
     position: relative;
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
+    font-family: "Inter", "Helvetica Neue", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     touch-action: pan-y;
   }
@@ -199,8 +204,12 @@
     max-width: 100%;
   }
 
-  h1, h2, h3, h4, h5 {
-    font-family: 'Sora', 'Inter', system-ui, sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Sora", "Inter", system-ui, sans-serif;
     letter-spacing: -0.02em;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -213,8 +222,12 @@
   margin-inline: auto;
   padding-inline: 1rem;
   box-sizing: border-box;
-  @media (min-width: 640px) { padding-inline: 1.5rem; }
-  @media (min-width: 768px) { padding-inline: 2rem; }
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
 }
 
 @utility text-gradient {
@@ -255,8 +268,12 @@
 
 /* Infinite marquee animation for client logo strip */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 @utility animate-marquee {
   animation: marquee 30s linear infinite;

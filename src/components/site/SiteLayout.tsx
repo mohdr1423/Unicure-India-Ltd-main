@@ -6,7 +6,7 @@ import { MobileCTA } from "./MobileCTA";
 import { SiteChromeProvider, useSiteChrome } from "./SiteChromeContext";
 
 const AiChatWidget = lazy(() =>
-  import("./AiChatWidget").then((m) => ({ default: m.AiChatWidget }))
+  import("./AiChatWidget").then((m) => ({ default: m.AiChatWidget })),
 );
 
 function SiteLayoutInner({ children }: { children: ReactNode }) {

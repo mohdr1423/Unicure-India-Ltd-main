@@ -54,9 +54,7 @@ export const Route = createFileRoute("/api/chat")({
         const clean: ChatMessage[] = messages
           .filter(
             (m) =>
-              m &&
-              (m.role === "user" || m.role === "assistant") &&
-              typeof m.content === "string",
+              m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
           )
           .slice(-20)
           .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }));
@@ -78,7 +76,8 @@ export const Route = createFileRoute("/api/chat")({
         }
 
         try {
-          const endpoint = process.env.AI_API_ENDPOINT || "https://api.openai.com/v1/chat/completions";
+          const endpoint =
+            process.env.AI_API_ENDPOINT || "https://api.openai.com/v1/chat/completions";
           const model = process.env.AI_MODEL || "gpt-4o-mini";
 
           const upstream = await fetch(endpoint, {

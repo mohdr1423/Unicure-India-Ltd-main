@@ -37,11 +37,7 @@ interface CertificateViewerModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function CertificateViewerModal({
-  cert,
-  open,
-  onOpenChange,
-}: CertificateViewerModalProps) {
+export function CertificateViewerModal({ cert, open, onOpenChange }: CertificateViewerModalProps) {
   if (!cert) return null;
 
   const handleDownload = () => {

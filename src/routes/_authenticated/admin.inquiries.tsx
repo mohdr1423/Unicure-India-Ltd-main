@@ -181,7 +181,8 @@ function AdminInquiriesPage() {
             Received Inquiries ({filtered.length})
           </CardTitle>
           <CardDescription>
-            All submitted enquiries are stored permanently in the audit ledger and dispatched to humanrealityofficial@gmail.com.
+            All submitted enquiries are stored permanently in the audit ledger and dispatched to
+            humanrealityofficial@gmail.com.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -204,7 +205,10 @@ function AdminInquiriesPage() {
             >
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <Badge variant="outline" className="font-semibold bg-secondary/50 text-foreground">
+                  <Badge
+                    variant="outline"
+                    className="font-semibold bg-secondary/50 text-foreground"
+                  >
                     {inq.source}
                   </Badge>
                   <Badge className="bg-primary text-white text-xs">{inq.inquiry_type}</Badge>
@@ -264,9 +268,14 @@ function AdminInquiriesPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border border-emerald-300 bg-emerald-50/70 p-3 text-xs">
                   <div className="flex items-center gap-2 text-emerald-900 font-medium">
                     <FileText className="h-4 w-4 text-emerald-600 shrink-0" />
-                    <span>Attached CV: <strong>{String(inq.metadata?.resumeFileName || "Resume.pdf")}</strong></span>
+                    <span>
+                      Attached CV:{" "}
+                      <strong>{String(inq.metadata?.resumeFileName || "Resume.pdf")}</strong>
+                    </span>
                     {inq.metadata?.resumeFileSize && (
-                      <span className="text-emerald-700 font-mono">({inq.metadata.resumeFileSize})</span>
+                      <span className="text-emerald-700 font-mono">
+                        ({inq.metadata.resumeFileSize})
+                      </span>
                     )}
                   </div>
                   {inq.metadata?.resumeDataUrl && (
@@ -303,7 +312,9 @@ function AdminInquiriesPage() {
                     disabled={retryingId === inq.id}
                     className="h-8 text-xs gap-1"
                   >
-                    <RotateCw className={`h-3.5 w-3.5 ${retryingId === inq.id ? "animate-spin" : ""}`} />
+                    <RotateCw
+                      className={`h-3.5 w-3.5 ${retryingId === inq.id ? "animate-spin" : ""}`}
+                    />
                     Retry Email Dispatch
                   </Button>
                   <a

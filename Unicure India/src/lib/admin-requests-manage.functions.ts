@@ -36,8 +36,10 @@ export const listAdminRequests = createServerFn({ method: "GET" })
 export const decideAdminRequest = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: { requestId: string; decision: "approve" | "reject" }) => {
-    if (!input?.requestId || typeof input.requestId !== "string") throw new Error("Invalid requestId");
-    if (input.decision !== "approve" && input.decision !== "reject") throw new Error("Invalid decision");
+    if (!input?.requestId || typeof input.requestId !== "string")
+      throw new Error("Invalid requestId");
+    if (input.decision !== "approve" && input.decision !== "reject")
+      throw new Error("Invalid decision");
     return input;
   })
   .handler(async ({ data, context }) => {

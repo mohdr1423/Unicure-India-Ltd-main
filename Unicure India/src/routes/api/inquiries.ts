@@ -30,7 +30,10 @@ const MAX_FIELD_LEN = 500;
 
 function sanitize(str: string | undefined, max = MAX_FIELD_LEN): string {
   if (!str) return "";
-  return str.replace(/<[^>]*>/g, "").trim().slice(0, max);
+  return str
+    .replace(/<[^>]*>/g, "")
+    .trim()
+    .slice(0, max);
 }
 
 // In-memory rate limiting: 30 inquiries per 5 minutes per IP
@@ -102,10 +105,10 @@ export const Route = createFileRoute("/api/inquiries")({
           const inquiries = getLocalInquiriesLedger();
           const record = inquiries.find((r) => r.id === body.id);
           if (!record) {
-            return new Response(
-              JSON.stringify({ success: false, message: "Inquiry not found." }),
-              { status: 404, headers: { "Content-Type": "application/json" } },
-            );
+            return new Response(JSON.stringify({ success: false, message: "Inquiry not found." }), {
+              status: 404,
+              headers: { "Content-Type": "application/json" },
+            });
           }
 
           const result = await dispatchInquiryEmail(record);
@@ -128,10 +131,10 @@ export const Route = createFileRoute("/api/inquiries")({
 
         // Honeypot check
         if (body.website && body.website.trim().length > 0) {
-          return new Response(
-            JSON.stringify({ success: false, message: "Invalid submission." }),
-            { status: 400, headers: { "Content-Type": "application/json" } },
-          );
+          return new Response(JSON.stringify({ success: false, message: "Invalid submission." }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          });
         }
 
         // Field Sanitization & Validation
@@ -159,7 +162,10 @@ export const Route = createFileRoute("/api/inquiries")({
         }
         if (!cleanMessage) {
           return new Response(
-            JSON.stringify({ success: false, message: "Please describe your requirement or message." }),
+            JSON.stringify({
+              success: false,
+              message: "Please describe your requirement or message.",
+            }),
             { status: 400, headers: { "Content-Type": "application/json" } },
           );
         }
@@ -188,7 +194,9 @@ export const Route = createFileRoute("/api/inquiries")({
         saveInquiryToLocalLedger(record);
         await saveInquiryToSupabase(record);
 
-        console.log(`[Lead Intake] New Lead Captured: ${inquiryId} (${cleanName} - ${cleanType}) -> Leads Portal`);
+        console.log(
+          `[Lead Intake] New Lead Captured: ${inquiryId} (${cleanName} - ${cleanType}) -> Leads Portal`,
+        );
 
         return new Response(
           JSON.stringify({

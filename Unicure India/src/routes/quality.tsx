@@ -77,9 +77,9 @@ function QualityPage() {
                 <p className="mt-4 text-muted-foreground leading-relaxed">
                   Quality Assurance involves the process of designing and includes the drafting and
                   implementation of SOPs (Standard Operating Procedures). It ensures the procedures
-                  are in-line with prescribed guidelines and the end result is safe and effective. It
-                  is a process-oriented step, and the team stays vigilant throughout — from the time
-                  of validation of the product till the final output.
+                  are in-line with prescribed guidelines and the end result is safe and effective.
+                  It is a process-oriented step, and the team stays vigilant throughout — from the
+                  time of validation of the product till the final output.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-border/60 text-xs font-semibold text-primary">
@@ -97,8 +97,9 @@ function QualityPage() {
                 <p className="mt-4 text-muted-foreground leading-relaxed">
                   Quality Control is the process of inspection carried out at every level — starting
                   from raw material procurement till the final product is packed for the market. It
-                  involves conducting tests as per applicable Pharmacopoeias (IP, BP, USP) and checking
-                  whether the in-process goods and final batches pass all prescribed parameters.
+                  involves conducting tests as per applicable Pharmacopoeias (IP, BP, USP) and
+                  checking whether the in-process goods and final batches pass all prescribed
+                  parameters.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-border/60 text-xs font-semibold text-primary">
@@ -163,7 +164,9 @@ function QualityPage() {
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700">
                     Framework
                   </span>
-                  <h3 className="mt-1 text-2xl font-bold text-foreground">Our Quality Principles</h3>
+                  <h3 className="mt-1 text-2xl font-bold text-foreground">
+                    Our Quality Principles
+                  </h3>
                 </div>
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -205,8 +208,8 @@ function QualityPage() {
               </div>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 Our Regulatory Affairs department completes rigorous validation protocols, stability
-                studies, and registration dossiers. We maintain ready CTDs / ACTDs / Dossiers for most
-                of our molecules — including Cardio, NSAIDs, CNS, Anti-Infectives and more.
+                studies, and registration dossiers. We maintain ready CTDs / ACTDs / Dossiers for
+                most of our molecules — including Cardio, NSAIDs, CNS, Anti-Infectives and more.
               </p>
             </div>
           </ScrollReveal>
