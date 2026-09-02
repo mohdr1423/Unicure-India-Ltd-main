@@ -29,15 +29,34 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
   };
 }
 
-function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to process.env for SSR (server-side rendering)
-  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
-  const SUPABASE_PUBLISHABLE_KEY =
-    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
+const FALLBACK_SUPABASE_URL = "https://qhvlfzahkjoixfscenru.supabase.co";
+const FALLBACK_SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFodmxmemFoa2pvaXhmc2NlbnJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNTU2NjAsImV4cCI6MjA5ODYzMTY2MH0.sLDvrLx5rJqN5pXwfpm7uu5DnC8kZsgidPNeA0vVpB8";
 
-  const url = SUPABASE_URL || "https://placeholder-unicure.supabase.co";
-  const key = SUPABASE_PUBLISHABLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder";
+function createSupabaseClient() {
+  // Check import.meta.env for client-side (Vite build-time replacement)
+  // and process.env for SSR / server runtime
+  const SUPABASE_URL =
+    (typeof import.meta !== "undefined" && (import.meta.env?.VITE_SUPABASE_URL || import.meta.env?.SUPABASE_URL)) ||
+    (typeof process !== "undefined" && (process.env?.VITE_SUPABASE_URL || process.env?.SUPABASE_URL));
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    (typeof import.meta !== "undefined" &&
+      (import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env?.SUPABASE_PUBLISHABLE_KEY)) ||
+    (typeof process !== "undefined" &&
+      (process.env?.VITE_SUPABASE_PUBLISHABLE_KEY || process.env?.SUPABASE_PUBLISHABLE_KEY));
+
+  const isPlaceholderUrl = !SUPABASE_URL || SUPABASE_URL.includes("placeholder");
+  const isPlaceholderKey = !SUPABASE_PUBLISHABLE_KEY || SUPABASE_PUBLISHABLE_KEY.includes("placeholder");
+
+  if (isPlaceholderUrl || isPlaceholderKey) {
+    console.warn(
+      "[Supabase Client] VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY were not injected at build time. Using production project fallback.",
+    );
+  }
+
+  const url = !isPlaceholderUrl ? SUPABASE_URL! : FALLBACK_SUPABASE_URL;
+  const key = !isPlaceholderKey ? SUPABASE_PUBLISHABLE_KEY! : FALLBACK_SUPABASE_ANON_KEY;
 
   return createClient<Database>(url, key, {
     global: {

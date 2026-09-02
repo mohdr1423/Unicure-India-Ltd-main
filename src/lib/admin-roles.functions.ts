@@ -25,54 +25,62 @@ async function requireAdmin(context: { supabase: any; userId: string }) {
 export const listRoleAssignments = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<RoleRow[]> => {
-    await requireAdmin(context);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    try {
+      await requireAdmin(context);
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const { data: roles, error } = await supabaseAdmin
-      .from("user_roles")
-      .select("user_id, role, created_at")
-      .in("role", ALLOWED_ROLES);
-    if (error) throw new Error(error.message);
-
-    const grouped = new Map<string, { roles: Set<ManageableRole>; created_at: string | null }>();
-    for (const r of roles ?? []) {
-      const role = r.role as ManageableRole;
-      if (!ALLOWED_ROLES.includes(role)) continue;
-      const entry = grouped.get(r.user_id) ?? {
-        roles: new Set<ManageableRole>(),
-        created_at: r.created_at,
-      };
-      entry.roles.add(role);
-      if (r.created_at && (!entry.created_at || r.created_at < entry.created_at)) {
-        entry.created_at = r.created_at;
+      const { data: roles, error } = await supabaseAdmin
+        .from("user_roles")
+        .select("user_id, role, created_at")
+        .in("role", ALLOWED_ROLES);
+      if (error) {
+        console.error("[listRoleAssignments] Error fetching user roles:", error);
+        return [];
       }
-      grouped.set(r.user_id, entry);
-    }
 
-    const userIds = [...grouped.keys()];
-    if (userIds.length === 0) return [];
-
-    const { data: profiles } = await supabaseAdmin
-      .from("profiles")
-      .select("id, email, full_name")
-      .in("id", userIds);
-    const profileMap = new Map<string, { email: string | null; full_name: string | null }>(
-      (profiles ?? []).map((p: any) => [p.id, { email: p.email, full_name: p.full_name }]),
-    );
-
-    return userIds
-      .map((uid) => {
-        const g = grouped.get(uid)!;
-        const p = profileMap.get(uid) ?? { email: null, full_name: null };
-        return {
-          user_id: uid,
-          email: p.email,
-          full_name: p.full_name,
-          roles: [...g.roles].sort(),
-          created_at: g.created_at,
+      const grouped = new Map<string, { roles: Set<ManageableRole>; created_at: string | null }>();
+      for (const r of roles ?? []) {
+        const role = r.role as ManageableRole;
+        if (!ALLOWED_ROLES.includes(role)) continue;
+        const entry = grouped.get(r.user_id) ?? {
+          roles: new Set<ManageableRole>(),
+          created_at: r.created_at,
         };
-      })
-      .sort((a, b) => (a.email ?? a.user_id).localeCompare(b.email ?? b.user_id));
+        entry.roles.add(role);
+        if (r.created_at && (!entry.created_at || r.created_at < entry.created_at)) {
+          entry.created_at = r.created_at;
+        }
+        grouped.set(r.user_id, entry);
+      }
+
+      const userIds = [...grouped.keys()];
+      if (userIds.length === 0) return [];
+
+      const { data: profiles } = await supabaseAdmin
+        .from("profiles")
+        .select("id, email, full_name")
+        .in("id", userIds);
+      const profileMap = new Map<string, { email: string | null; full_name: string | null }>(
+        (profiles ?? []).map((p: any) => [p.id, { email: p.email, full_name: p.full_name }]),
+      );
+
+      return userIds
+        .map((uid) => {
+          const g = grouped.get(uid)!;
+          const p = profileMap.get(uid) ?? { email: null, full_name: null };
+          return {
+            user_id: uid,
+            email: p.email,
+            full_name: p.full_name,
+            roles: [...g.roles].sort(),
+            created_at: g.created_at,
+          };
+        })
+        .sort((a, b) => (a.email ?? a.user_id).localeCompare(b.email ?? b.user_id));
+    } catch (err) {
+      console.error("[listRoleAssignments] Exception listing role assignments:", err);
+      return [];
+    }
   });
 
 async function resolveUser(identifier: string) {

@@ -117,13 +117,22 @@ export const getPublicSiteChrome = createServerFn({ method: "GET" }).handler(
     }
 
     try {
-      if (!process.env.SUPABASE_URL || !process.env.SUPABASE_PUBLISHABLE_KEY) {
+      const supabaseUrl =
+        process.env.SUPABASE_URL ||
+        process.env.VITE_SUPABASE_URL ||
+        "https://qhvlfzahkjoixfscenru.supabase.co";
+      const supabaseKey =
+        process.env.SUPABASE_PUBLISHABLE_KEY ||
+        process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFodmxmemFoa2pvaXhmc2NlbnJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNTU2NjAsImV4cCI6MjA5ODYzMTY2MH0.sLDvrLx5rJqN5pXwfpm7uu5DnC8kZsgidPNeA0vVpB8";
+
+      if (!supabaseUrl || !supabaseKey) {
         return { branding: BRANDING_DEFAULT, nav: NAV_DEFAULT, footer: FOOTER_DEFAULT };
       }
 
       const supabase = createClient<Database>(
-        process.env.SUPABASE_URL,
-        process.env.SUPABASE_PUBLISHABLE_KEY,
+        supabaseUrl,
+        supabaseKey,
         {
           auth: {
             storage: undefined,

@@ -32,16 +32,31 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
   };
 }
 
+const FALLBACK_SUPABASE_URL = "https://qhvlfzahkjoixfscenru.supabase.co";
+const FALLBACK_SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFodmxmemFoa2pvaXhmc2NlbnJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNTU2NjAsImV4cCI6MjA5ODYzMTY2MH0.sLDvrLx5rJqN5pXwfpm7uu5DnC8kZsgidPNeA0vVpB8";
+
 function createSupabaseAdminClient() {
-  const SUPABASE_URL = process.env.SUPABASE_URL;
-  const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const SUPABASE_URL =
+    process.env.SUPABASE_URL ||
+    process.env.VITE_SUPABASE_URL ||
+    FALLBACK_SUPABASE_URL;
 
-  const url = SUPABASE_URL || "https://placeholder-unicure.supabase.co";
-  const key = SUPABASE_SERVICE_ROLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder";
+  const SUPABASE_KEY =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    FALLBACK_SUPABASE_KEY;
 
-  return createClient<Database>(url, key, {
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.warn(
+      "[Supabase Admin] SUPABASE_SERVICE_ROLE_KEY is not set in environment. Falling back to publishable/anon key.",
+    );
+  }
+
+  return createClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
     global: {
-      fetch: createSupabaseFetch(key),
+      fetch: createSupabaseFetch(SUPABASE_KEY),
     },
     auth: {
       storage: undefined,

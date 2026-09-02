@@ -10,15 +10,24 @@ export function useSiteSetting<T = Record<string, unknown>>(key: string): T | nu
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const { data } = await supabase
-        .from("site_settings")
-        .select("value")
-        .eq("key", key)
-        .maybeSingle();
-      if (!mounted) return;
-      const v = (data?.value as T) ?? null;
-      if (v) cache.set(key, v);
-      setValue(v);
+      try {
+        const { data, error } = await supabase
+          .from("site_settings")
+          .select("value")
+          .eq("key", key)
+          .maybeSingle();
+
+        if (error) {
+          console.error(`[useSiteSetting] Error loading setting for "${key}":`, error);
+        }
+
+        if (!mounted) return;
+        const v = (data?.value as T) ?? null;
+        if (v) cache.set(key, v);
+        setValue(v);
+      } catch (err) {
+        console.error(`[useSiteSetting] Exception loading setting for "${key}":`, err);
+      }
     })();
     return () => {
       mounted = false;

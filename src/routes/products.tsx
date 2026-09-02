@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { Search, Download, ChevronLeft, ChevronRight } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ScrollReveal, StaggerGrid, StaggerItem } from "@/components/site/ScrollReveal";
 import productData from "@/data/products.json";
 
@@ -13,10 +13,13 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "Browse Unicure India's product list — tablets, capsules and formulations manufactured to IP, BP and USP pharmacopeial standards.",
+          "Explore Unicure India's extensive pharmaceutical product portfolio covering 500+ formulations across oral solids, liquids, dry syrups and topical preparations.",
       },
-      { property: "og:title", content: "Products — Unicure India" },
-      { property: "og:description", content: "Browse our full pharmaceutical product list." },
+      { property: "og:title", content: "Product List — Unicure India Pharmaceutical Catalogue" },
+      {
+        property: "og:description",
+        content: "500+ generic and branded formulations manufactured to WHO-GMP standards.",
+      },
       { property: "og:url", content: "/products" },
     ],
     links: [{ rel: "canonical", href: "/products" }],
@@ -24,8 +27,15 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-type Product = { name: string; cat: string };
-const products = productData as Product[];
+type Product = {
+  cat: string;
+  name: string;
+  comp: string;
+  form: string;
+  pack?: string;
+};
+
+const products: Product[] = productData as Product[];
 const categories = ["All", ...Array.from(new Set(products.map((p) => p.cat)))];
 
 const PAGE_SIZE = 24;
@@ -35,8 +45,12 @@ function ProductsPage() {
   const [cat, setCat] = useState("All");
   const [page, setPage] = useState(1);
 
+  // Reset pagination when search query or category changes
+  useEffect(() => {
+    setPage(1);
+  }, [q, cat]);
+
   const filtered = useMemo(() => {
-    setPage(1); // reset on filter change
     return products.filter(
       (p) => (cat === "All" || p.cat === cat) && p.name.toLowerCase().includes(q.toLowerCase()),
     );

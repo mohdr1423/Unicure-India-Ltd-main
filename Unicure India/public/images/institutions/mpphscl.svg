@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-  <circle cx="60" cy="60" r="56" fill="#005A9C" stroke="#DAA520" stroke-width="4"/>
-  <circle cx="60" cy="60" r="48" fill="#ffffff"/>
-  <!-- MP 24 Stupa Petals & Banyan Tree Motif -->
-  <circle cx="60" cy="50" r="20" fill="none" stroke="#005A9C" stroke-width="2.5" stroke-dasharray="4,2"/>
-  <path d="M60 34 C54 40 48 45 48 54 C48 62 54 66 60 66 C66 66 72 62 72 54 C72 45 66 40 60 34 Z" fill="#008000"/>
-  <circle cx="60" cy="52" r="5" fill="#DAA520"/>
-  <text x="60" y="104" font-family="Arial, sans-serif" font-size="9" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">MPPHSCL</text>
-</svg>

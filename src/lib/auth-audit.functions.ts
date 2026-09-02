@@ -81,22 +81,33 @@ export const listAdminAuthAudit = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data, context }) => {
-    const { data: isAdmin, error: roleErr } = await context.supabase.rpc("has_role", {
-      _user_id: context.userId,
-      _role: "admin",
-    });
-    if (roleErr || !isAdmin) throw new Error("Forbidden");
+    try {
+      const { data: isAdmin, error: roleErr } = await context.supabase.rpc("has_role", {
+        _user_id: context.userId,
+        _role: "admin",
+      });
+      if (roleErr || !isAdmin) {
+        console.warn("[listAdminAuthAudit] Forbidden: user is not admin");
+        return [];
+      }
 
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    let q = supabaseAdmin
-      .from("admin_auth_audit")
-      .select("id,event,email,user_id,success,reason,user_agent,created_at")
-      .order("created_at", { ascending: false })
-      .limit(data.limit);
-    if (data.event) q = q.eq("event", data.event);
-    if (data.search) q = q.ilike("email", `%${data.search}%`);
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      let q = supabaseAdmin
+        .from("admin_auth_audit")
+        .select("id,event,email,user_id,success,reason,user_agent,created_at")
+        .order("created_at", { ascending: false })
+        .limit(data.limit);
+      if (data.event) q = q.eq("event", data.event);
+      if (data.search) q = q.ilike("email", `%${data.search}%`);
 
-    const { data: rows, error } = await q;
-    if (error) throw new Error(error.message);
-    return (rows ?? []) as AdminAuthAuditRow[];
+      const { data: rows, error } = await q;
+      if (error) {
+        console.error("[listAdminAuthAudit] Query error:", error);
+        return [];
+      }
+      return (rows ?? []) as AdminAuthAuditRow[];
+    } catch (err) {
+      console.error("[listAdminAuthAudit] Exception listing audit events:", err);
+      return [];
+    }
   });

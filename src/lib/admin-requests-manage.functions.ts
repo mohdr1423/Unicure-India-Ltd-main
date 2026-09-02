@@ -24,13 +24,21 @@ export type AdminRequestRow = {
 export const listAdminRequests = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<AdminRequestRow[]> => {
-    await assertAdmin(context);
-    const { data, error } = await context.supabase
-      .from("admin_requests")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (error) throw new Error(error.message);
-    return (data ?? []) as AdminRequestRow[];
+    try {
+      await assertAdmin(context);
+      const { data, error } = await context.supabase
+        .from("admin_requests")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) {
+        console.error("[listAdminRequests] Error fetching admin requests:", error);
+        return [];
+      }
+      return (data ?? []) as AdminRequestRow[];
+    } catch (err) {
+      console.error("[listAdminRequests] Exception listing admin requests:", err);
+      return [];
+    }
   });
 
 export const decideAdminRequest = createServerFn({ method: "POST" })
@@ -43,39 +51,44 @@ export const decideAdminRequest = createServerFn({ method: "POST" })
     return input;
   })
   .handler(async ({ data, context }) => {
-    await assertAdmin(context);
+    try {
+      await assertAdmin(context);
 
-    const { data: req, error: reqErr } = await context.supabase
-      .from("admin_requests")
-      .select("id, user_id, status")
-      .eq("id", data.requestId)
-      .maybeSingle();
-    if (reqErr) throw new Error(reqErr.message);
-    if (!req) throw new Error("Request not found");
-    if (req.status !== "pending") throw new Error("Request already decided");
+      const { data: req, error: reqErr } = await context.supabase
+        .from("admin_requests")
+        .select("id, user_id, status")
+        .eq("id", data.requestId)
+        .maybeSingle();
+      if (reqErr) throw new Error(reqErr.message);
+      if (!req) throw new Error("Request not found");
+      if (req.status !== "pending") throw new Error("Request already decided");
 
-    const nextStatus = data.decision === "approve" ? "approved" : "rejected";
+      const nextStatus = data.decision === "approve" ? "approved" : "rejected";
 
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    if (data.decision === "approve") {
-      const { error: insertErr } = await supabaseAdmin
-        .from("user_roles")
-        .insert({ user_id: req.user_id, role: "admin" });
-      if (insertErr && !/duplicate|unique/i.test(insertErr.message)) {
-        throw new Error(insertErr.message);
+      if (data.decision === "approve") {
+        const { error: insertErr } = await supabaseAdmin
+          .from("user_roles")
+          .insert({ user_id: req.user_id, role: "admin" });
+        if (insertErr && !/duplicate|unique/i.test(insertErr.message)) {
+          throw new Error(insertErr.message);
+        }
       }
+
+      const { error: updateErr } = await supabaseAdmin
+        .from("admin_requests")
+        .update({
+          status: nextStatus,
+          decided_by: context.userId,
+          decided_at: new Date().toISOString(),
+        })
+        .eq("id", req.id);
+      if (updateErr) throw new Error(updateErr.message);
+
+      return { ok: true as const, status: nextStatus };
+    } catch (err: any) {
+      console.error(`[decideAdminRequest] Exception deciding request "${data?.requestId}":`, err);
+      throw err;
     }
-
-    const { error: updateErr } = await supabaseAdmin
-      .from("admin_requests")
-      .update({
-        status: nextStatus,
-        decided_by: context.userId,
-        decided_at: new Date().toISOString(),
-      })
-      .eq("id", req.id);
-    if (updateErr) throw new Error(updateErr.message);
-
-    return { ok: true as const, status: nextStatus };
   });
