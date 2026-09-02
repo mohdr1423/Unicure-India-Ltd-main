@@ -68,6 +68,7 @@ export const Route = createFileRoute("/api/inquiries")({
             { status: 200, headers: { "Content-Type": "application/json" } },
           );
         } catch (err: any) {
+          console.error("[Inquiries GET API Error]", err);
           return new Response(
             JSON.stringify({ success: false, message: err.message, inquiries: [] }),
             { status: 500, headers: { "Content-Type": "application/json" } },
@@ -75,138 +76,149 @@ export const Route = createFileRoute("/api/inquiries")({
         }
       },
       POST: async ({ request }) => {
-        const ip =
-          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-          request.headers.get("cf-connecting-ip") ||
-          "127.0.0.1";
-
-        if (isRateLimited(ip)) {
-          return new Response(
-            JSON.stringify({
-              success: false,
-              message: "Too many submissions. Please wait a few minutes and try again.",
-            }),
-            { status: 429, headers: { "Content-Type": "application/json" } },
-          );
-        }
-
-        let body: InquiriesRequestBody;
         try {
-          body = await request.json();
-        } catch {
-          return new Response(
-            JSON.stringify({ success: false, message: "Invalid request payload." }),
-            { status: 400, headers: { "Content-Type": "application/json" } },
-          );
-        }
+          const ip =
+            request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+            request.headers.get("cf-connecting-ip") ||
+            "127.0.0.1";
 
-        // Handle Admin Retry Action
-        if (body.action === "retry" && body.id) {
-          const inquiries = getLocalInquiriesLedger();
-          const record = inquiries.find((r) => r.id === body.id);
-          if (!record) {
-            return new Response(JSON.stringify({ success: false, message: "Inquiry not found." }), {
-              status: 404,
+          if (isRateLimited(ip)) {
+            return new Response(
+              JSON.stringify({
+                success: false,
+                message: "Too many submissions. Please wait a few minutes and try again.",
+              }),
+              { status: 429, headers: { "Content-Type": "application/json" } },
+            );
+          }
+
+          let body: InquiriesRequestBody;
+          try {
+            body = await request.json();
+          } catch {
+            return new Response(
+              JSON.stringify({ success: false, message: "Invalid request payload." }),
+              { status: 400, headers: { "Content-Type": "application/json" } },
+            );
+          }
+
+          // Handle Admin Retry Action
+          if (body.action === "retry" && body.id) {
+            const inquiries = getLocalInquiriesLedger();
+            const record = inquiries.find((r) => r.id === body.id);
+            if (!record) {
+              return new Response(JSON.stringify({ success: false, message: "Inquiry not found." }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" },
+              });
+            }
+
+            const result = await dispatchInquiryEmail(record);
+            record.email_status = result.success ? "sent" : "failed";
+            record.email_provider = result.provider;
+            record.error_log = result.error;
+            saveInquiryToLocalLedger(record);
+
+            return new Response(
+              JSON.stringify({
+                success: result.success,
+                message: result.success
+                  ? `Email successfully delivered to ${PRIMARY_ADMIN_EMAIL} via ${result.provider}`
+                  : `Delivery unfulfilled: ${result.error}`,
+                record,
+              }),
+              { status: 200, headers: { "Content-Type": "application/json" } },
+            );
+          }
+
+          // Honeypot check
+          if (body.website && body.website.trim().length > 0) {
+            return new Response(JSON.stringify({ success: false, message: "Invalid submission." }), {
+              status: 400,
               headers: { "Content-Type": "application/json" },
             });
           }
 
-          const result = await dispatchInquiryEmail(record);
-          record.email_status = result.success ? "sent" : "failed";
-          record.email_provider = result.provider;
-          record.error_log = result.error;
+          // Field Sanitization & Validation
+          const cleanName = sanitize(body.name);
+          const cleanEmail = sanitize(body.email).toLowerCase();
+          const cleanMessage = sanitize(body.message, MAX_MESSAGE_LEN);
+          const cleanCompany = sanitize(body.company);
+          const cleanPhone = sanitize(body.phone);
+          const cleanCountry = sanitize(body.country);
+          const cleanType = sanitize(body.inquiryType) || "General Business Inquiry";
+          const cleanSource = sanitize(body.source) || "Website Inquiry Form";
+          const cleanPageUrl = sanitize(body.pageUrl) || "/";
+
+          if (!cleanName) {
+            return new Response(
+              JSON.stringify({ success: false, message: "Full name is required." }),
+              { status: 400, headers: { "Content-Type": "application/json" } },
+            );
+          }
+          if (!cleanEmail || !EMAIL_RE.test(cleanEmail)) {
+            return new Response(
+              JSON.stringify({ success: false, message: "A valid email address is required." }),
+              { status: 400, headers: { "Content-Type": "application/json" } },
+            );
+          }
+          if (!cleanMessage) {
+            return new Response(
+              JSON.stringify({
+                success: false,
+                message: "Please describe your requirement or message.",
+              }),
+              { status: 400, headers: { "Content-Type": "application/json" } },
+            );
+          }
+
+          const inquiryId = `inq_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+          const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+
+          const record: ServerInquiryRecord = {
+            id: inquiryId,
+            created_at: timestamp,
+            name: cleanName,
+            email: cleanEmail,
+            company: cleanCompany,
+            phone: cleanPhone,
+            country: cleanCountry,
+            message: cleanMessage,
+            inquiry_type: cleanType,
+            source: cleanSource,
+            page_url: cleanPageUrl,
+            email_status: "recorded",
+            email_provider: "Leads Portal Direct Intake",
+            metadata: body.metadata,
+          };
+
+          // Persist directly to local JSON ledger & Supabase (Visible immediately in /leads-portal)
           saveInquiryToLocalLedger(record);
+          await saveInquiryToSupabase(record);
+
+          console.log(
+            `[Lead Intake] New Lead Captured: ${inquiryId} (${cleanName} - ${cleanType}) -> Leads Portal`,
+          );
 
           return new Response(
             JSON.stringify({
-              success: result.success,
-              message: result.success
-                ? `Email successfully delivered to ${PRIMARY_ADMIN_EMAIL} via ${result.provider}`
-                : `Delivery unfulfilled: ${result.error}`,
-              record,
+              success: true,
+              message:
+                "Thank you! Your enquiry has been received. Our team will review your request and get back to you.",
+              inquiryId,
             }),
             { status: 200, headers: { "Content-Type": "application/json" } },
           );
-        }
-
-        // Honeypot check
-        if (body.website && body.website.trim().length > 0) {
-          return new Response(JSON.stringify({ success: false, message: "Invalid submission." }), {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-          });
-        }
-
-        // Field Sanitization & Validation
-        const cleanName = sanitize(body.name);
-        const cleanEmail = sanitize(body.email).toLowerCase();
-        const cleanMessage = sanitize(body.message, MAX_MESSAGE_LEN);
-        const cleanCompany = sanitize(body.company);
-        const cleanPhone = sanitize(body.phone);
-        const cleanCountry = sanitize(body.country);
-        const cleanType = sanitize(body.inquiryType) || "General Business Inquiry";
-        const cleanSource = sanitize(body.source) || "Website Inquiry Form";
-        const cleanPageUrl = sanitize(body.pageUrl) || "/";
-
-        if (!cleanName) {
-          return new Response(
-            JSON.stringify({ success: false, message: "Full name is required." }),
-            { status: 400, headers: { "Content-Type": "application/json" } },
-          );
-        }
-        if (!cleanEmail || !EMAIL_RE.test(cleanEmail)) {
-          return new Response(
-            JSON.stringify({ success: false, message: "A valid email address is required." }),
-            { status: 400, headers: { "Content-Type": "application/json" } },
-          );
-        }
-        if (!cleanMessage) {
+        } catch (err: any) {
+          console.error("[Inquiries API Error]", err);
           return new Response(
             JSON.stringify({
               success: false,
-              message: "Please describe your requirement or message.",
+              message: err.message || "Internal server error processing inquiry",
             }),
-            { status: 400, headers: { "Content-Type": "application/json" } },
+            { status: 500, headers: { "Content-Type": "application/json" } },
           );
         }
-
-        const inquiryId = `inq_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-        const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-
-        const record: ServerInquiryRecord = {
-          id: inquiryId,
-          created_at: timestamp,
-          name: cleanName,
-          email: cleanEmail,
-          company: cleanCompany,
-          phone: cleanPhone,
-          country: cleanCountry,
-          message: cleanMessage,
-          inquiry_type: cleanType,
-          source: cleanSource,
-          page_url: cleanPageUrl,
-          email_status: "recorded",
-          email_provider: "Leads Portal Direct Intake",
-          metadata: body.metadata,
-        };
-
-        // Persist directly to local JSON ledger & Supabase (Visible immediately in /leads-portal)
-        saveInquiryToLocalLedger(record);
-        await saveInquiryToSupabase(record);
-
-        console.log(
-          `[Lead Intake] New Lead Captured: ${inquiryId} (${cleanName} - ${cleanType}) -> Leads Portal`,
-        );
-
-        return new Response(
-          JSON.stringify({
-            success: true,
-            message:
-              "Thank you! Your enquiry has been received. Our team will review your request and get back to you.",
-            inquiryId,
-          }),
-          { status: 200, headers: { "Content-Type": "application/json" } },
-        );
       },
     },
   },

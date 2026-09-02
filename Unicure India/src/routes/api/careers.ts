@@ -267,6 +267,7 @@ export const Route = createFileRoute("/api/careers")({
             headers: { "Content-Type": "application/json" },
           });
         } catch (err: any) {
+          console.error("[Careers GET API Error]", err);
           return new Response(
             JSON.stringify({
               success: false,
@@ -426,6 +427,7 @@ export const Route = createFileRoute("/api/careers")({
             headers: { "Content-Type": "application/json" },
           });
         } catch (err: any) {
+          console.error("[Careers POST API Error]", err);
           return new Response(
             JSON.stringify({
               success: false,
