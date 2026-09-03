@@ -22,7 +22,9 @@ export const Route = createFileRoute("/contract-manufacturing")({
       },
       { property: "og:url", content: "https://unicureindialtd.vercel.app/contract-manufacturing" },
     ],
-    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/contract-manufacturing" }],
+    links: [
+      { rel: "canonical", href: "https://unicureindialtd.vercel.app/contract-manufacturing" },
+    ],
   }),
   component: CoMfgPage,
 });

@@ -206,7 +206,10 @@ export const restoreSiteContentVersion = createServerFn({ method: "POST" })
         .eq("id", data.versionId)
         .maybeSingle();
       if (error) {
-        console.error(`[restoreSiteContentVersion] Error finding version "${data.versionId}":`, error);
+        console.error(
+          `[restoreSiteContentVersion] Error finding version "${data.versionId}":`,
+          error,
+        );
         return { ok: false, error: error.message, key: "" };
       }
       if (!v) return { ok: false, error: "Version not found", key: "" };

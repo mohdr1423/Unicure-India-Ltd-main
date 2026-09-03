@@ -40,7 +40,6 @@ function PrivacyPolicyPage() {
       <div className="container-x py-12 lg:py-16 max-w-4xl mx-auto">
         <ScrollReveal>
           <div className="bg-card border border-border/80 rounded-2xl p-6 sm:p-10 shadow-sm space-y-10 text-foreground/90 leading-relaxed">
-            
             {/* Header info */}
             <div className="border-b border-border/60 pb-6">
               <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
@@ -48,7 +47,17 @@ function PrivacyPolicyPage() {
                 <span>Effective Date: September 2024 • Last Updated: September 2026</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                This Privacy Policy outlines how <strong>Unicure India Ltd</strong> (&ldquo;Unicure&rdquo;, &ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) collects, uses, protects, and discloses personal and organizational information collected through our official website (<a href="https://unicureindialtd.vercel.app" className="text-primary hover:underline">unicureindialtd.vercel.app</a>) and related digital services.
+                This Privacy Policy outlines how <strong>Unicure India Ltd</strong>{" "}
+                (&ldquo;Unicure&rdquo;, &ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;)
+                collects, uses, protects, and discloses personal and organizational information
+                collected through our official website (
+                <a
+                  href="https://unicureindialtd.vercel.app"
+                  className="text-primary hover:underline"
+                >
+                  unicureindialtd.vercel.app
+                </a>
+                ) and related digital services.
               </p>
             </div>
 
@@ -59,13 +68,30 @@ function PrivacyPolicyPage() {
                 1. Information We Collect
               </h2>
               <p className="text-sm">
-                We collect information necessary to facilitate pharmaceutical manufacturing partnerships, institutional inquiries, job applications, and regulatory drug safety reporting:
+                We collect information necessary to facilitate pharmaceutical manufacturing
+                partnerships, institutional inquiries, job applications, and regulatory drug safety
+                reporting:
               </p>
               <ul className="list-disc list-inside text-sm space-y-1.5 pl-2 text-muted-foreground">
-                <li><strong>Business & Inquiry Data:</strong> Contact details, organization name, dosage form interests, and inquiry requirements submitted via our contact and contract manufacturing forms.</li>
-                <li><strong>Career Applications:</strong> Résumés, employment background, educational qualifications, and contact information submitted through our Careers portal.</li>
-                <li><strong>Pharmacovigilance & Adverse Drug Event Data:</strong> Patient initials, reporter contact, suspect medication batch numbers, and adverse event descriptions required by pharmaceutical regulatory authorities.</li>
-                <li><strong>Technical & Log Data:</strong> Anonymized browser type, IP address, referral sources, and interaction timestamps utilized for site performance, security monitoring, and cyber-defense.</li>
+                <li>
+                  <strong>Business & Inquiry Data:</strong> Contact details, organization name,
+                  dosage form interests, and inquiry requirements submitted via our contact and
+                  contract manufacturing forms.
+                </li>
+                <li>
+                  <strong>Career Applications:</strong> Résumés, employment background, educational
+                  qualifications, and contact information submitted through our Careers portal.
+                </li>
+                <li>
+                  <strong>Pharmacovigilance & Adverse Drug Event Data:</strong> Patient initials,
+                  reporter contact, suspect medication batch numbers, and adverse event descriptions
+                  required by pharmaceutical regulatory authorities.
+                </li>
+                <li>
+                  <strong>Technical & Log Data:</strong> Anonymized browser type, IP address,
+                  referral sources, and interaction timestamps utilized for site performance,
+                  security monitoring, and cyber-defense.
+                </li>
               </ul>
             </section>
 
@@ -76,12 +102,24 @@ function PrivacyPolicyPage() {
                 2. Advanced Data Security & Protection
               </h2>
               <p className="text-sm">
-                As a WHO-GMP certified manufacturer, data integrity and confidentiality are integral to our operations. We maintain multi-layered technical safeguards:
+                As a WHO-GMP certified manufacturer, data integrity and confidentiality are integral
+                to our operations. We maintain multi-layered technical safeguards:
               </p>
               <ul className="list-disc list-inside text-sm space-y-1.5 pl-2 text-muted-foreground">
-                <li><strong>256-Bit SSL/TLS Encryption:</strong> All data transmitted between your browser and our servers is secured with end-to-end transport encryption.</li>
-                <li><strong>Anti-Scraping & Asset Protection:</strong> Proprietary formulations, technical dossiers, and client specifications are shielded with perimeter defense headers and anti-scraping controls.</li>
-                <li><strong>Access Governance:</strong> Administrative databases are protected by strict role-based access control (RBAC), multi-factor authentication, and encrypted backups.</li>
+                <li>
+                  <strong>256-Bit SSL/TLS Encryption:</strong> All data transmitted between your
+                  browser and our servers is secured with end-to-end transport encryption.
+                </li>
+                <li>
+                  <strong>Anti-Scraping & Asset Protection:</strong> Proprietary formulations,
+                  technical dossiers, and client specifications are shielded with perimeter defense
+                  headers and anti-scraping controls.
+                </li>
+                <li>
+                  <strong>Access Governance:</strong> Administrative databases are protected by
+                  strict role-based access control (RBAC), multi-factor authentication, and
+                  encrypted backups.
+                </li>
               </ul>
             </section>
 
@@ -92,7 +130,15 @@ function PrivacyPolicyPage() {
                 3. Pharmacovigilance & Drug Safety Reporting
               </h2>
               <p className="text-sm text-muted-foreground">
-                Information submitted through our <Link to="/pharmacovigilance" className="text-primary hover:underline font-medium">Pharmacovigilance</Link> portal is processed in strict compliance with the Central Drugs Standard Control Organisation (CDSCO), Pharmacovigilance Programme of India (PvPI), and international Good Pharmacovigilance Practices (GVP). Patient identifiers are pseudonymized, and safety records are preserved solely for public health vigilance and statutory regulatory filings.
+                Information submitted through our{" "}
+                <Link to="/pharmacovigilance" className="text-primary hover:underline font-medium">
+                  Pharmacovigilance
+                </Link>{" "}
+                portal is processed in strict compliance with the Central Drugs Standard Control
+                Organisation (CDSCO), Pharmacovigilance Programme of India (PvPI), and international
+                Good Pharmacovigilance Practices (GVP). Patient identifiers are pseudonymized, and
+                safety records are preserved solely for public health vigilance and statutory
+                regulatory filings.
               </p>
             </section>
 
@@ -103,7 +149,9 @@ function PrivacyPolicyPage() {
                 4. Cookies & Usage Analytics
               </h2>
               <p className="text-sm text-muted-foreground">
-                We use essential cookies to ensure secure navigation, remember your preferences, and maintain session authenticity. We do not sell, rent, or lease personal visitor data to third-party data brokers or advertising networks.
+                We use essential cookies to ensure secure navigation, remember your preferences, and
+                maintain session authenticity. We do not sell, rent, or lease personal visitor data
+                to third-party data brokers or advertising networks.
               </p>
             </section>
 
@@ -114,7 +162,10 @@ function PrivacyPolicyPage() {
                 5. Legal Compliance & Rights under DPDP Act
               </h2>
               <p className="text-sm text-muted-foreground">
-                In compliance with the Digital Personal Data Protection Act (DPDP) and international privacy frameworks, you hold the right to review, update, or request the deletion of your personal data submitted through non-statutory channels (e.g. sales inquiries or employment applications).
+                In compliance with the Digital Personal Data Protection Act (DPDP) and international
+                privacy frameworks, you hold the right to review, update, or request the deletion of
+                your personal data submitted through non-statutory channels (e.g. sales inquiries or
+                employment applications).
               </p>
             </section>
 
@@ -125,15 +176,28 @@ function PrivacyPolicyPage() {
                 6. Contact Our Grievance & Compliance Officer
               </h2>
               <p className="text-sm text-muted-foreground">
-                For questions regarding this policy, data rights, or pharmacovigilance record handling, please reach out to our corporate office:
+                For questions regarding this policy, data rights, or pharmacovigilance record
+                handling, please reach out to our corporate office:
               </p>
               <div className="bg-muted/40 p-4 rounded-xl border border-border/60 text-sm space-y-1">
-                <p className="font-semibold text-foreground">Unicure India Ltd — Corporate Grievance Officer</p>
-                <p className="text-muted-foreground">C-21, 22 &amp; 23, Sector-3, Noida, Uttar Pradesh — 201301, India</p>
-                <p className="text-muted-foreground">Email: <a href="mailto:unicure@unicureindia.com" className="text-primary hover:underline">unicure@unicureindia.com</a> | Tel: +91-120-4786786</p>
+                <p className="font-semibold text-foreground">
+                  Unicure India Ltd — Corporate Grievance Officer
+                </p>
+                <p className="text-muted-foreground">
+                  C-21, 22 &amp; 23, Sector-3, Noida, Uttar Pradesh — 201301, India
+                </p>
+                <p className="text-muted-foreground">
+                  Email:{" "}
+                  <a
+                    href="mailto:unicure@unicureindia.com"
+                    className="text-primary hover:underline"
+                  >
+                    unicure@unicureindia.com
+                  </a>{" "}
+                  | Tel: +91-120-4786786
+                </p>
               </div>
             </section>
-
           </div>
         </ScrollReveal>
       </div>

@@ -37,17 +37,21 @@ function createSupabaseClient() {
   // Check import.meta.env for client-side (Vite build-time replacement)
   // and process.env for SSR / server runtime
   const SUPABASE_URL =
-    (typeof import.meta !== "undefined" && (import.meta.env?.VITE_SUPABASE_URL || import.meta.env?.SUPABASE_URL)) ||
-    (typeof process !== "undefined" && (process.env?.VITE_SUPABASE_URL || process.env?.SUPABASE_URL));
+    (typeof import.meta !== "undefined" &&
+      (import.meta.env?.VITE_SUPABASE_URL || import.meta.env?.SUPABASE_URL)) ||
+    (typeof process !== "undefined" &&
+      (process.env?.VITE_SUPABASE_URL || process.env?.SUPABASE_URL));
 
   const SUPABASE_PUBLISHABLE_KEY =
     (typeof import.meta !== "undefined" &&
-      (import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env?.SUPABASE_PUBLISHABLE_KEY)) ||
+      (import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY ||
+        import.meta.env?.SUPABASE_PUBLISHABLE_KEY)) ||
     (typeof process !== "undefined" &&
       (process.env?.VITE_SUPABASE_PUBLISHABLE_KEY || process.env?.SUPABASE_PUBLISHABLE_KEY));
 
   const isPlaceholderUrl = !SUPABASE_URL || SUPABASE_URL.includes("placeholder");
-  const isPlaceholderKey = !SUPABASE_PUBLISHABLE_KEY || SUPABASE_PUBLISHABLE_KEY.includes("placeholder");
+  const isPlaceholderKey =
+    !SUPABASE_PUBLISHABLE_KEY || SUPABASE_PUBLISHABLE_KEY.includes("placeholder");
 
   if (isPlaceholderUrl || isPlaceholderKey) {
     console.warn(

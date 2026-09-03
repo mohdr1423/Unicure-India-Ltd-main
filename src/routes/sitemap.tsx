@@ -44,9 +44,21 @@ const SITEMAP_SECTIONS = [
     icon: Building2,
     links: [
       { label: "Home Page", path: "/", desc: "Overview of Unicure India Ltd and highlights" },
-      { label: "About Us", path: "/about", desc: "40+ years history from 1984, mission, and vision" },
-      { label: "Executive Leadership", path: "/leadership", desc: "Our board, founders, and technical directors" },
-      { label: "Managing Director's Message", path: "/md-message", desc: "Address by Mr. Abdul Mateen, Founder & MD" },
+      {
+        label: "About Us",
+        path: "/about",
+        desc: "40+ years history from 1984, mission, and vision",
+      },
+      {
+        label: "Executive Leadership",
+        path: "/leadership",
+        desc: "Our board, founders, and technical directors",
+      },
+      {
+        label: "Managing Director's Message",
+        path: "/md-message",
+        desc: "Address by Mr. Abdul Mateen, Founder & MD",
+      },
       { label: "News & Media", path: "/news", desc: "Company updates, achievements, and gallery" },
     ],
   },
@@ -54,47 +66,117 @@ const SITEMAP_SECTIONS = [
     title: "Manufacturing & Capabilities",
     icon: Factory,
     links: [
-      { label: "Manufacturing Facilities", path: "/manufacturing", desc: "Infrastructure across Noida, Roorkee, Greater Noida" },
-      { label: "Dosage Forms", path: "/dosage-forms", desc: "Oral solids, liquids, dry syrups, and injectables" },
-      { label: "Contract Manufacturing", path: "/contract-manufacturing", desc: "Third-party, loan license, and OEM manufacturing" },
-      { label: "Global Exports", path: "/exports", desc: "Worldwide supply chain spanning 20+ countries" },
+      {
+        label: "Manufacturing Facilities",
+        path: "/manufacturing",
+        desc: "Infrastructure across Noida, Roorkee, Greater Noida",
+      },
+      {
+        label: "Dosage Forms",
+        path: "/dosage-forms",
+        desc: "Oral solids, liquids, dry syrups, and injectables",
+      },
+      {
+        label: "Contract Manufacturing",
+        path: "/contract-manufacturing",
+        desc: "Third-party, loan license, and OEM manufacturing",
+      },
+      {
+        label: "Global Exports",
+        path: "/exports",
+        desc: "Worldwide supply chain spanning 20+ countries",
+      },
     ],
   },
   {
     title: "Products & Catalogue",
     icon: Pill,
     links: [
-      { label: "Product Catalogue", path: "/products", desc: "500+ commercial formulations and active ingredients" },
-      { label: "Product Downloads", path: "/downloads", desc: "Product brochures, dossiers, and spec sheets" },
+      {
+        label: "Product Catalogue",
+        path: "/products",
+        desc: "500+ commercial formulations and active ingredients",
+      },
+      {
+        label: "Product Downloads",
+        path: "/downloads",
+        desc: "Product brochures, dossiers, and spec sheets",
+      },
     ],
   },
   {
     title: "Quality & Regulatory",
     icon: ShieldCheck,
     links: [
-      { label: "Quality Assurance & R&D", path: "/quality", desc: "Testing laboratories, analytical QC, and compliance" },
-      { label: "Certifications", path: "/certifications", desc: "WHO-GMP, ISO 9001/14001, Form 25, 26, 28 licences" },
-      { label: "Pharmacovigilance", path: "/pharmacovigilance", desc: "Adverse drug event reporting and patient safety" },
+      {
+        label: "Quality Assurance & R&D",
+        path: "/quality",
+        desc: "Testing laboratories, analytical QC, and compliance",
+      },
+      {
+        label: "Certifications",
+        path: "/certifications",
+        desc: "WHO-GMP, ISO 9001/14001, Form 25, 26, 28 licences",
+      },
+      {
+        label: "Pharmacovigilance",
+        path: "/pharmacovigilance",
+        desc: "Adverse drug event reporting and patient safety",
+      },
     ],
   },
   {
     title: "Partnerships & Careers",
     icon: Users,
     links: [
-      { label: "Institutional Clients", path: "/clients", desc: "AIIMS, BPPI, state corporations, and top pharma brands" },
-      { label: "Careers Portal", path: "/careers", desc: "Life at Unicure, career pathways, and team culture" },
-      { label: "Job Openings & Apply", path: "/careers/apply", desc: "Submit your CV for current vacancies" },
-      { label: "Contact Us", path: "/contact", desc: "Get in touch with sales, exports, or corporate teams" },
+      {
+        label: "Institutional Clients",
+        path: "/clients",
+        desc: "AIIMS, BPPI, state corporations, and top pharma brands",
+      },
+      {
+        label: "Careers Portal",
+        path: "/careers",
+        desc: "Life at Unicure, career pathways, and team culture",
+      },
+      {
+        label: "Job Openings & Apply",
+        path: "/careers/apply",
+        desc: "Submit your CV for current vacancies",
+      },
+      {
+        label: "Contact Us",
+        path: "/contact",
+        desc: "Get in touch with sales, exports, or corporate teams",
+      },
     ],
   },
   {
     title: "Legal & Digital Governance",
     icon: Globe2,
     links: [
-      { label: "Privacy Policy", path: "/privacy-policy", desc: "Data protection standards and DPDP compliance" },
-      { label: "Terms of Service", path: "/terms-of-service", desc: "Intellectual property rules and anti-scraping policy" },
-      { label: "XML Sitemap (Machine Feed)", path: "/sitemap.xml", desc: "Official XML sitemap for search crawlers", external: true },
-      { label: "AI Factsheet (llms.txt)", path: "/llms.txt", desc: "Structured knowledge for AI answer engines", external: true },
+      {
+        label: "Privacy Policy",
+        path: "/privacy-policy",
+        desc: "Data protection standards and DPDP compliance",
+      },
+      {
+        label: "Terms of Service",
+        path: "/terms-of-service",
+        desc: "Intellectual property rules and anti-scraping policy",
+      },
+      {
+        label: "XML Sitemap (Machine Feed)",
+        path: "/sitemap.xml",
+        desc: "Official XML sitemap for search crawlers",
+        external: true,
+      },
+      {
+        label: "AI Factsheet (llms.txt)",
+        path: "/llms.txt",
+        desc: "Structured knowledge for AI answer engines",
+        external: true,
+      },
     ],
   },
 ];
@@ -166,8 +248,12 @@ function SitemapPage() {
             <div className="flex items-center gap-3 text-sm">
               <FileCode className="w-5 h-5 text-primary shrink-0" />
               <div>
-                <p className="font-semibold text-foreground">Looking for machine-readable formats?</p>
-                <p className="text-xs text-muted-foreground">Access our official XML sitemap and AI LLM context documents.</p>
+                <p className="font-semibold text-foreground">
+                  Looking for machine-readable formats?
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Access our official XML sitemap and AI LLM context documents.
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-3">

@@ -101,7 +101,7 @@ export function ScrollReveal({
       {
         threshold: Math.min(threshold, 0.1),
         rootMargin: "60px 0px",
-      }
+      },
     );
 
     observer.observe(element);
@@ -207,7 +207,7 @@ export function StaggerGrid({
       {
         threshold: Math.min(threshold, 0.1),
         rootMargin: "60px 0px",
-      }
+      },
     );
 
     observer.observe(element);
@@ -271,4 +271,3 @@ export function StaggerItem({
     </div>
   );
 }
-

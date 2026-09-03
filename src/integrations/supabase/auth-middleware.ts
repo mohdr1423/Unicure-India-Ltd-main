@@ -43,7 +43,8 @@ export const requireSupabaseAuth = createMiddleware({ type: "function" }).server
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFodmxmemFoa2pvaXhmc2NlbnJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNTU2NjAsImV4cCI6MjA5ODYzMTY2MH0.sLDvrLx5rJqN5pXwfpm7uu5DnC8kZsgidPNeA0vVpB8";
 
     if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-      const message = "Missing Supabase environment variables (SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)";
+      const message =
+        "Missing Supabase environment variables (SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)";
       console.error(`[Supabase Auth Middleware] ${message}`);
       throw new Error(message);
     }

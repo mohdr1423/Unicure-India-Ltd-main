@@ -130,17 +130,13 @@ export const getPublicSiteChrome = createServerFn({ method: "GET" }).handler(
         return { branding: BRANDING_DEFAULT, nav: NAV_DEFAULT, footer: FOOTER_DEFAULT };
       }
 
-      const supabase = createClient<Database>(
-        supabaseUrl,
-        supabaseKey,
-        {
-          auth: {
-            storage: undefined,
-            persistSession: false,
-            autoRefreshToken: false,
-          },
+      const supabase = createClient<Database>(supabaseUrl, supabaseKey, {
+        auth: {
+          storage: undefined,
+          persistSession: false,
+          autoRefreshToken: false,
         },
-      );
+      });
 
       // Max 400ms timeout race so SSR never freezes on slow DB
       const dbPromise = supabase

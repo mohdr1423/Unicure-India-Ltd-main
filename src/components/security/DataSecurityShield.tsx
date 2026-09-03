@@ -3,14 +3,14 @@ import { ShieldAlert, Lock } from "lucide-react";
 
 /**
  * DataSecurityShield — Advanced Anti-Scraping, Anti-Theft & IP Protection System
- * 
+ *
  * Protects Unicure India Ltd's proprietary designs, formulations, media, and datasets from:
  * 1. Unauthorized right-click saving / image theft.
  * 2. Automated browser scraping and source viewing (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S).
  * 3. Asset drag-and-drop extraction.
  * 4. Bulk clipboard harvesting (injects cryptographic provenance & copyright watermarks).
  * 5. Console tampering & headless crawler probing.
- * 
+ *
  * Note: Transparently preserves full form usability (inputs, textareas, admin forms remain fully interactive).
  */
 export function DataSecurityShield() {
@@ -39,7 +39,7 @@ export function DataSecurityShield() {
       console.log("%c🛡️ UNICURE INDIA LTD — DATA SECURITY & IP SHIELD", bannerHeader);
       console.log(
         "%cAll formulations, technical dossiers, design systems, and digital assets on this website are the legally registered intellectual property of Unicure India Ltd.\n\nUnauthorized automated scraping, asset extraction, reverse engineering, or ingestion into unauthorized AI training corpora is strictly monitored and legally actionable under the Indian Copyright Act (1957), Information Technology Act (2000), and international WIPO conventions.",
-        bannerBody
+        bannerBody,
       );
     } catch {
       // Ignore console restrictions
@@ -63,7 +63,7 @@ export function DataSecurityShield() {
 
       e.preventDefault();
       showSecurityNotice(
-        "Protected Asset: Unicure India Ltd design layouts, images, and pharmaceutical databases are legally protected."
+        "Protected Asset: Unicure India Ltd design layouts, images, and pharmaceutical databases are legally protected.",
       );
     };
 
@@ -73,7 +73,9 @@ export function DataSecurityShield() {
         // In form inputs, allow normal typing, but still block F12 / View Source shortcuts
         if (e.key === "F12" || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "u")) {
           e.preventDefault();
-          showSecurityNotice("Inspection tools and source downloading are restricted on this domain.");
+          showSecurityNotice(
+            "Inspection tools and source downloading are restricted on this domain.",
+          );
         }
         return;
       }
@@ -106,7 +108,9 @@ export function DataSecurityShield() {
       // Ctrl+S (Save Page HTML)
       if (isCtrlOrMeta && key === "s") {
         e.preventDefault();
-        showSecurityNotice("Full page archiving is restricted. Please refer to official brochures in Downloads.");
+        showSecurityNotice(
+          "Full page archiving is restricted. Please refer to official brochures in Downloads.",
+        );
         return;
       }
     };
@@ -139,13 +143,15 @@ export function DataSecurityShield() {
       // If user copied substantial content, inject attribution & legal notice
       if (selectedText.length > 20) {
         const provenanceWatermark = `\n\n— [Source: Unicure India Ltd (WHO-GMP Certified). Proprietary formulations and specifications. Official Verification: https://unicureindialtd.vercel.app]`;
-        
+
         // If clipboardData is accessible, augment with provenance
         if (e.clipboardData) {
           e.preventDefault();
           const cleanCopy = selectedText + provenanceWatermark;
           e.clipboardData.setData("text/plain", cleanCopy);
-          showSecurityNotice("Content copied with authenticated Unicure India Ltd provenance watermark.");
+          showSecurityNotice(
+            "Content copied with authenticated Unicure India Ltd provenance watermark.",
+          );
         }
       }
     };

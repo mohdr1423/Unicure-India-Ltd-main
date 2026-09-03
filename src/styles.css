@@ -313,7 +313,9 @@
    ========================================================================== */
 
 /* Prevent browser drag-and-drop asset extraction */
-img, svg, video {
+img,
+svg,
+video {
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;

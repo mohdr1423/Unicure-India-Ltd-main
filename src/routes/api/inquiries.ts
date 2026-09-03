@@ -107,10 +107,13 @@ export const Route = createFileRoute("/api/inquiries")({
             const inquiries = getLocalInquiriesLedger();
             const record = inquiries.find((r) => r.id === body.id);
             if (!record) {
-              return new Response(JSON.stringify({ success: false, message: "Inquiry not found." }), {
-                status: 404,
-                headers: { "Content-Type": "application/json" },
-              });
+              return new Response(
+                JSON.stringify({ success: false, message: "Inquiry not found." }),
+                {
+                  status: 404,
+                  headers: { "Content-Type": "application/json" },
+                },
+              );
             }
 
             const result = await dispatchInquiryEmail(record);
@@ -133,10 +136,13 @@ export const Route = createFileRoute("/api/inquiries")({
 
           // Honeypot check
           if (body.website && body.website.trim().length > 0) {
-            return new Response(JSON.stringify({ success: false, message: "Invalid submission." }), {
-              status: 400,
-              headers: { "Content-Type": "application/json" },
-            });
+            return new Response(
+              JSON.stringify({ success: false, message: "Invalid submission." }),
+              {
+                status: 400,
+                headers: { "Content-Type": "application/json" },
+              },
+            );
           }
 
           // Field Sanitization & Validation

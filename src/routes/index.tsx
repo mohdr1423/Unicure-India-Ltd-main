@@ -81,7 +81,10 @@ export const Route = createFileRoute("/")({
           "40+ years of pharmaceutical manufacturing excellence. 500+ formulations, 3 world-class plants, contract manufacturing & exports to 20+ countries.",
       },
       { property: "og:url", content: "https://unicureindialtd.vercel.app/" },
-      { property: "og:image", content: "https://unicureindialtd.vercel.app/images/dron-pic-unit3.webp" },
+      {
+        property: "og:image",
+        content: "https://unicureindialtd.vercel.app/images/dron-pic-unit3.webp",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       {
@@ -93,7 +96,10 @@ export const Route = createFileRoute("/")({
         content:
           "WHO-GMP certified manufacturer with 40+ years of excellence, 500+ formulations, and global exports.",
       },
-      { name: "twitter:image", content: "https://unicureindialtd.vercel.app/images/dron-pic-unit3.webp" },
+      {
+        name: "twitter:image",
+        content: "https://unicureindialtd.vercel.app/images/dron-pic-unit3.webp",
+      },
     ],
     links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/" }],
   }),
