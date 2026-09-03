@@ -415,10 +415,10 @@ function HomePage() {
               {heroC?.badge ?? "WHO-GMP Certified Pharmaceutical Manufacturer • Est. 1984"}
             </span>
 
-            <h1 className="mt-6 text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight">
+            <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               {heroC?.headline_line1 ?? "Pursuing Excellence"}
               <br />
-              <span className="text-gradient bg-[linear-gradient(90deg,#38bdf8,#34d399)] bg-clip-text text-transparent">
+              <span className="inline-block text-gradient bg-[linear-gradient(90deg,#38bdf8,#34d399)] bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 {heroC?.headline_highlight ?? "In Healthcare"}
               </span>
             </h1>
@@ -495,7 +495,11 @@ function HomePage() {
             Trusted by Leading Pharmaceutical Companies
           </span>
         </div>
-        <div className="relative" aria-label="Our clients" role="marquee">
+        <div
+          className="relative [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+          aria-label="Our clients"
+          role="marquee"
+        >
           <div className="flex animate-marquee gap-12 items-center">
             {clientLogos.map((c) => (
               <div
@@ -644,7 +648,7 @@ function HomePage() {
                     constantly evolve and fulfil our vision.
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-border/60 flex items-center text-xs font-semibold text-primary">
+                <div className="mt-6 pt-4 border-t border-border/60 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                   Advanced High-Speed Lines
                 </div>
               </div>
@@ -665,7 +669,7 @@ function HomePage() {
                     conducted safely at all times.
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-border/60 flex items-center text-xs font-semibold text-primary">
+                <div className="mt-6 pt-4 border-t border-border/60 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                   Class 100,000 Cleanrooms & BMS HVAC
                 </div>
               </div>
@@ -686,7 +690,7 @@ function HomePage() {
                     healthcare supplies and sensitive drugs.
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-border/60 flex items-center text-xs font-semibold text-primary">
+                <div className="mt-6 pt-4 border-t border-border/60 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                   Dedicated Airlocks & Containment
                 </div>
               </div>
@@ -866,7 +870,7 @@ function HomePage() {
               </h2>
             </div>
           </ScrollReveal>
-          <StaggerGrid className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          <StaggerGrid className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
             {certs.map((c) => (
               <StaggerItem key={c}>
                 <Link
@@ -876,8 +880,8 @@ function HomePage() {
                   <span className="block font-bold text-sm text-[color:var(--brand-blue-dark)] group-hover:text-primary transition-colors">
                     {c}
                   </span>
-                  <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-primary/80 group-hover:text-primary transition-colors">
-                    View Certificate <ChevronRight className="h-3 w-3" />
+                  <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-1.5 transition-all">
+                    View Certificate <ChevronRight className="h-3.5 w-3.5" />
                   </span>
                 </Link>
               </StaggerItem>
@@ -1116,8 +1120,8 @@ function HomePage() {
 function SectionEyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
   return (
     <span
-      className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] ${
-        light ? "text-white/70" : "text-primary"
+      className={`inline-flex items-center gap-2 text-xs font-semibold tracking-wider ${
+        light ? "text-white/80" : "text-primary"
       }`}
     >
       <span className={`h-px w-8 ${light ? "bg-white/40" : "bg-primary/40"}`} />

@@ -42,7 +42,7 @@ export function AiChatWidget() {
               <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6 text-white group-hover:scale-110 transition-transform" />
               <span className="absolute -top-1 -right-1 flex h-4 w-4">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8102E] opacity-75" />
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#C8102E] text-[9px] font-bold text-white items-center justify-center">
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#C8102E] text-xs font-bold text-white items-center justify-center">
                   AI
                 </span>
               </span>

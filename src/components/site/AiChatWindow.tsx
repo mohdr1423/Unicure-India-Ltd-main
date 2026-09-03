@@ -170,12 +170,12 @@ export default function AiChatWindow({ onClose }: { onClose: () => void }) {
               <h3 className="font-bold text-sm sm:text-base tracking-tight leading-none truncate">
                 Bella
               </h3>
-              <span className="rounded bg-[#C8102E] px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-white shrink-0">
+              <span className="rounded bg-[#C8102E] px-1.5 py-0.5 text-xs font-extrabold uppercase tracking-wider text-white shrink-0">
                 AI
               </span>
             </div>
-            <div className="text-[11px] text-white/80 mt-0.5 truncate">Unicure India Assistant</div>
-            <div className="text-[10px] text-emerald-300 font-medium mt-0.5 flex items-center gap-1 truncate">
+            <div className="text-xs text-white/80 mt-0.5 truncate">Unicure India Assistant</div>
+            <div className="text-xs text-emerald-300 font-medium mt-0.5 flex items-center gap-1 truncate">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <span className="truncate">Ask me anything about Unicure India</span>
             </div>
@@ -260,7 +260,7 @@ export default function AiChatWindow({ onClose }: { onClose: () => void }) {
             key={q}
             disabled={busy}
             onClick={() => sendMessage(q)}
-            className="whitespace-nowrap rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] sm:text-xs font-medium text-slate-700 hover:border-primary hover:text-primary active:bg-slate-100 transition shadow-xs disabled:opacity-50 cursor-pointer"
+            className="whitespace-nowrap rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 hover:border-primary hover:text-primary active:bg-slate-100 transition shadow-xs disabled:opacity-50 cursor-pointer"
           >
             {q}
           </button>

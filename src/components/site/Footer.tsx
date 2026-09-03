@@ -221,7 +221,7 @@ export function Footer() {
                 <div className="font-bold text-white text-lg leading-tight">
                   {branding?.company_name ?? "Unicure India Ltd"}
                 </div>
-                <div className="text-[11px] uppercase tracking-[0.15em] text-white/50 mt-0.5">
+                <div className="text-xs uppercase tracking-wider text-white/60 mt-0.5">
                   {footer?.since ?? "Since 1984"}
                 </div>
               </div>
