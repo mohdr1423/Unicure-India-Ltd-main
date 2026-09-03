@@ -49,11 +49,48 @@ const clientLogos = [
 ];
 
 const facilityImages = [
-  { src: "/images/dron-pic-unit3.webp", alt: "Unicure India Ltd – Greater Noida plant" },
-  { src: "/images/plant.webp", alt: "Unicure India Ltd – Noida facility" },
-  { src: "/images/admin-office.webp", alt: "Unicure India Ltd – Corporate Office" },
-  { src: "/images/plant-2.webp", alt: "Unicure India Ltd – Roorkee unit" },
+  { src: "/images/dron-pic-unit3.webp", alt: "Unicure India Ltd – Unit III (Greater Noida plant)" },
+  { src: "/images/plant.webp", alt: "Unicure India Ltd – Unit I (Noida facility)" },
+  { src: "/images/plant-2.webp", alt: "Unicure India Ltd – Unit II (Roorkee unit)" },
 ];
+
+function CapsuleIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" />
+      <path d="m8.5 8.5 7 7" />
+    </svg>
+  );
+}
+
+function DrySyrupIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M10 2v4" />
+      <path d="M14 2v4" />
+      <path d="M8 2h8" />
+      <path d="M6 9a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V9Z" />
+      <path d="M9 13h6" />
+      <path d="M12 17h.01" />
+    </svg>
+  );
+}
 
 import { EXECUTIVE_LEADERS } from "@/data/leadership";
 
@@ -177,7 +214,7 @@ function Stat({
   );
 }
 
-const capabilityIcons = [Pill, Package, Droplets, FlaskConical, Sparkles, Droplets];
+const capabilityIcons = [Pill, CapsuleIcon, Droplets, DrySyrupIcon, FlaskConical, Sparkles];
 const capabilitiesDefault = [
   {
     icon: Pill,
@@ -185,7 +222,7 @@ const capabilitiesDefault = [
     desc: "High-speed compression, film, sugar & enteric coating.",
   },
   {
-    icon: Package,
+    icon: CapsuleIcon,
     title: "Capsules (1,200M/yr)",
     desc: "Hard gelatin & vegetarian capsule filling with pellets/powders.",
   },
@@ -195,7 +232,7 @@ const capabilitiesDefault = [
     desc: "Closed-loop syrup mixing, suspension & liquid filling.",
   },
   {
-    icon: Droplets,
+    icon: DrySyrupIcon,
     title: "Dry Syrups (3.6M/yr)",
     desc: "Beta-Lactam and pediatric antibiotic dry powders.",
   },
@@ -401,13 +438,13 @@ function HomePage() {
               </Link>
               <Link
                 to="/dosage-forms"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 glass-dark px-6 sm:px-7 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/10 transition text-center"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/70 bg-black/30 backdrop-blur-md px-6 sm:px-7 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/20 transition text-center shadow-sm"
               >
                 Dosage Forms & Capacities
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 glass-dark px-6 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/10 transition text-center"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/70 bg-black/30 backdrop-blur-md px-6 py-3.5 sm:py-4 text-sm font-semibold text-white hover:bg-white/20 transition text-center shadow-sm"
               >
                 {heroC?.cta_secondary_label ?? "Contact Us"}
               </Link>
@@ -416,20 +453,20 @@ function HomePage() {
         </div>
 
         {/* Video Control Bar */}
-        <div className="absolute top-28 right-4 sm:right-6 md:right-12 z-20 flex items-center gap-2">
+        <div className="absolute top-28 right-4 sm:right-6 md:right-12 z-20 flex items-center gap-2.5">
           <button
             onClick={togglePlay}
             aria-label={isPlaying ? "Pause background video" : "Play background video"}
-            className="grid h-9 w-9 place-items-center rounded-full glass-dark text-white/80 hover:text-white hover:bg-white/20 transition shadow-sm border border-white/15 cursor-pointer"
+            className="grid h-11 w-11 place-items-center rounded-full bg-black/75 text-white hover:bg-black transition shadow-md border border-white/40 cursor-pointer focus-visible:ring-2 focus-visible:ring-white"
           >
-            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+            {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
           </button>
           <button
             onClick={toggleMute}
             aria-label={isMuted ? "Unmute video" : "Mute video"}
-            className="grid h-9 w-9 place-items-center rounded-full glass-dark text-white/80 hover:text-white hover:bg-white/20 transition shadow-sm border border-white/15 cursor-pointer"
+            className="grid h-11 w-11 place-items-center rounded-full bg-black/75 text-white hover:bg-black transition shadow-md border border-white/40 cursor-pointer focus-visible:ring-2 focus-visible:ring-white"
           >
-            {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+            {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
           </button>
         </div>
 
@@ -454,8 +491,8 @@ function HomePage() {
       {/* CLIENT LOGO MARQUEE */}
       <section className="py-12 border-b border-border bg-secondary/30 overflow-hidden">
         <div className="container-x mb-6 text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-            Trusted by leading pharmaceutical companies
+          <span className="text-xs font-semibold tracking-wider text-muted-foreground">
+            Trusted by Leading Pharmaceutical Companies
           </span>
         </div>
         <div className="relative" aria-label="Our clients" role="marquee">
@@ -598,7 +635,7 @@ function HomePage() {
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <FlaskConical className="h-7 w-7" />
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-foreground">
+                  <h3 className="mt-6 text-xl font-bold text-foreground min-h-[3.5rem] flex items-center">
                     A Leading Healthcare Manufacturer
                   </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
@@ -619,7 +656,7 @@ function HomePage() {
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <Building2 className="h-7 w-7" />
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-foreground">
+                  <h3 className="mt-6 text-xl font-bold text-foreground min-h-[3.5rem] flex items-center">
                     Safe Manufacturing Units
                   </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
@@ -640,7 +677,7 @@ function HomePage() {
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <ShieldAlert className="h-7 w-7" />
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-foreground">
+                  <h3 className="mt-6 text-xl font-bold text-foreground min-h-[3.5rem] flex items-center">
                     Separate Space for Sensitive Materials
                   </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
@@ -681,9 +718,9 @@ function HomePage() {
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link
                 to="/manufacturing"
-                className="rounded-full bg-white px-8 py-4 text-sm font-bold text-[color:var(--brand-blue-dark)] shadow-lg hover:bg-white/95 transition hover:scale-105"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-bold text-[color:var(--brand-blue-dark)] shadow-lg hover:bg-white/95 transition hover:scale-105"
               >
-                Explore Facilities
+                Explore Facilities <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/pharmacovigilance"
@@ -735,8 +772,8 @@ function HomePage() {
                   </div>
                   <h3 className="mt-6 text-xl font-bold text-foreground">{c.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-                  <div className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:gap-2 gap-1 transition-all">
-                    Technical Specifications <ChevronRight className="h-4 w-4" />
+                  <div className="mt-4 inline-flex items-center text-sm font-semibold text-primary group-hover:gap-2 gap-1 transition-all">
+                    Explore Dosage Form <ChevronRight className="h-4 w-4" />
                   </div>
                 </Link>
               </StaggerItem>
@@ -834,9 +871,14 @@ function HomePage() {
               <StaggerItem key={c}>
                 <Link
                   to="/certifications"
-                  className="block rounded-2xl bg-white border border-border py-6 text-center font-bold text-[color:var(--brand-blue-dark)] shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition"
+                  className="group block rounded-2xl bg-white border border-border/80 p-5 text-center shadow-card hover:border-primary/50 hover:shadow-elegant hover:-translate-y-1 transition-all"
                 >
-                  {c}
+                  <span className="block font-bold text-sm text-[color:var(--brand-blue-dark)] group-hover:text-primary transition-colors">
+                    {c}
+                  </span>
+                  <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-primary/80 group-hover:text-primary transition-colors">
+                    View Certificate <ChevronRight className="h-3 w-3" />
+                  </span>
                 </Link>
               </StaggerItem>
             ))}
@@ -884,14 +926,14 @@ function HomePage() {
             </div>
           </ScrollReveal>
           <ScrollReveal variant="slide-right" delay={0.1}>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3.5">
               {facilityImages.map((img, i) => (
                 <img
                   key={img.src}
                   src={img.src}
                   alt={img.alt}
-                  className={`rounded-2xl shadow-elegant w-full h-full object-cover aspect-[4/3] ${
-                    i === 0 ? "col-span-2 aspect-[16/9]" : ""
+                  className={`rounded-2xl shadow-elegant w-full h-full object-cover ${
+                    i === 0 ? "col-span-2 aspect-[16/9]" : "col-span-1 aspect-[4/3]"
                   }`}
                   loading="lazy"
                 />
@@ -1032,10 +1074,10 @@ function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="pt-16 pb-8 md:pt-20 md:pb-12">
         <div className="container-x">
           <ScrollReveal variant="scale">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-brand p-10 md:p-16 shadow-elegant">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-brand p-8 md:p-12 shadow-elegant">
               <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
               <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[color:var(--brand-green)]/40 blur-3xl" />
               <div className="relative grid md:grid-cols-[1fr_auto] items-center gap-8">

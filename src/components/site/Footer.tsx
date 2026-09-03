@@ -145,7 +145,7 @@ function FooterAccordion({
         className="flex w-full items-center justify-between py-3 lg:pointer-events-none lg:pb-4 lg:pt-0"
         aria-expanded={open}
       >
-        <h4 className="text-white font-semibold text-sm uppercase tracking-wider">{title}</h4>
+        <h3 className="text-white font-semibold text-sm tracking-normal">{title}</h3>
         <ChevronDown
           className={`h-4 w-4 text-white/50 transition-transform lg:hidden ${open ? "rotate-180" : ""}`}
         />
@@ -245,7 +245,7 @@ export function Footer() {
                     title={s.title ?? s.label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid h-10 w-10 place-items-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                    className="grid h-10 w-10 place-items-center rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors"
                   >
                     <IconComponent className="h-4 w-4" />
                   </a>
@@ -260,31 +260,31 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Contact info row */}
+        {/* Contact info row: aligned with 5-column grid above */}
         <div className="mt-10 pt-8 border-t border-white/10">
-          <div className="flex flex-col sm:flex-row gap-6 text-sm">
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr] text-sm items-center">
             {branding?.address && (
-              <div className="flex gap-3 items-start">
-                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/50" />
-                <span className="text-white/70">{branding.address}</span>
+              <div className="flex gap-3 items-start lg:col-span-2">
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/70" />
+                <span className="text-white/80">{branding.address}</span>
               </div>
             )}
             {branding?.phone && (
               <a
                 href={`tel:${branding.phone.replace(/[^+\d]/g, "")}`}
-                className="flex gap-3 items-center hover:text-white transition-colors"
+                className="flex gap-3 items-center hover:text-white transition-colors text-white/80"
               >
-                <Phone className="h-4 w-4 shrink-0 text-white/50" />
-                <span className="text-white/70">{branding.phone}</span>
+                <Phone className="h-4 w-4 shrink-0 text-white/70" />
+                <span>{branding.phone}</span>
               </a>
             )}
             {branding?.email && (
               <a
                 href={`mailto:${branding.email}`}
-                className="flex gap-3 items-center hover:text-white transition-colors"
+                className="flex gap-3 items-center hover:text-white transition-colors text-white/80 lg:col-span-2"
               >
-                <Mail className="h-4 w-4 shrink-0 text-white/50" />
-                <span className="text-white/70">{branding.email}</span>
+                <Mail className="h-4 w-4 shrink-0 text-white/70" />
+                <span>{branding.email}</span>
               </a>
             )}
           </div>
