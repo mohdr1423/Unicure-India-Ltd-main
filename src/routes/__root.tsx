@@ -16,6 +16,7 @@ import {
   markTabAlive,
   shouldDropEphemeralSession,
 } from "@/lib/remember-me";
+import { DataSecurityShield } from "@/components/security/DataSecurityShield";
 
 function NotFoundComponent() {
   return (
@@ -85,18 +86,46 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Unicure India is a WHO-GMP certified pharmaceutical manufacturer with 40+ years of excellence — 500+ products, 20+ export countries, and world-class R&D.",
       },
-      { name: "author", content: "Unicure India" },
+      {
+        name: "keywords",
+        content:
+          "pharmaceutical manufacturer India, WHO-GMP certified pharma, contract manufacturing, third party pharma manufacturing, tablets capsules syrups injectables, pharmaceutical exports, Noida pharma company",
+      },
+      { name: "author", content: "Unicure India Ltd" },
+      {
+        name: "robots",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+      {
+        name: "googlebot",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+      {
+        name: "bingbot",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
       { property: "og:title", content: "Unicure India — Pharmaceutical Manufacturing Excellence" },
       {
         property: "og:description",
         content:
           "WHO-GMP certified pharmaceutical manufacturing with global reach. Tablets, capsules, injectables, syrups and more.",
       },
-      { property: "og:site_name", content: "Unicure India" },
+      { property: "og:site_name", content: "Unicure India Ltd" },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      {
+        rel: "canonical",
+        href: "https://unicureindialtd.vercel.app/",
+      },
+      {
+        rel: "alternate",
+        type: "text/plain",
+        href: "/llms.txt",
+        title: "LLM Context (llms.txt)",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -125,17 +154,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@graph": [
             {
               "@type": ["Organization", "MedicalOrganization"],
-              "@id": "/#organization",
+              "@id": "https://unicureindialtd.vercel.app/#organization",
               name: "Unicure India Ltd",
               alternateName: "Unicure India",
-              url: "/",
+              url: "https://unicureindialtd.vercel.app",
               logo: {
                 "@type": "ImageObject",
-                url: "/images/logo.svg",
+                url: "https://unicureindialtd.vercel.app/images/logo.svg",
                 width: 512,
                 height: 512,
               },
-              image: "/images/logo.svg",
+              image: "https://unicureindialtd.vercel.app/images/logo.svg",
               foundingDate: "1984",
               foundingLocation: {
                 "@type": "Place",
@@ -279,16 +308,62 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             },
             {
               "@type": "WebSite",
-              "@id": "/#website",
-              url: "/",
+              "@id": "https://unicureindialtd.vercel.app/#website",
+              url: "https://unicureindialtd.vercel.app",
               name: "Unicure India Ltd",
-              publisher: { "@id": "/#organization" },
+              publisher: { "@id": "https://unicureindialtd.vercel.app/#organization" },
               inLanguage: "en-IN",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "/products?query={search_term_string}",
+                target: "https://unicureindialtd.vercel.app/products?query={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
+            },
+            {
+              "@type": "FAQPage",
+              "@id": "https://unicureindialtd.vercel.app/#faq",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "Who is Unicure India Ltd and what do they do?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Unicure India Ltd is a premier WHO-GMP certified pharmaceutical manufacturer established in 1984 in Noida, India. With 40+ years of operational excellence, Unicure operates 3 state-of-the-art manufacturing units, producing over 500 formulations across tablets, capsules, oral liquids, dry syrups, and topicals for domestic markets and exports to over 20 countries.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What certifications and regulatory licenses does Unicure India hold?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Unicure India Ltd holds WHO-GMP certification, ISO 9001:2015 Quality Management System, ISO 14001:2015 Environmental Management System, and statutory Drug Manufacturing Licenses (Form 25, Form 26, Form 28) issued by the State Licensing Authority and FDA India.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Does Unicure India offer pharmaceutical contract manufacturing and third-party manufacturing?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes, Unicure India is a leading contract development and manufacturing partner (CDMO/OEM) for top Indian and multinational pharma brands, offering custom formulation R&D, commercial batch production, packaging, and CTD/ACTD regulatory dossier preparation.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Where are Unicure India's manufacturing facilities located?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Unicure India operates three facilities in India: Unit I at Sector-3, Noida (Uttar Pradesh); Unit II at Roorkee (Uttarakhand); and Unit III at Greater Noida (Uttar Pradesh).",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What pharmaceutical dosage forms does Unicure India manufacture?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Unicure India manufactures oral solid dosages (uncoated, film-coated, enteric-coated tablets and hard gelatin capsules), oral liquids (syrups, suspensions), dry syrups for pediatric reconstitution, topical preparations (creams, ointments, gels), and sterile injectables.",
+                  },
+                },
+              ],
             },
           ],
         }),
@@ -307,13 +382,14 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="overflow-x-hidden max-w-full">
+      <body className="overflow-x-hidden max-w-full selection:bg-red-500/20 selection:text-red-900 dark:selection:text-red-100">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-elegant"
         >
           Skip to main content
         </a>
+        <DataSecurityShield />
         {children}
         <Scripts />
       </body>

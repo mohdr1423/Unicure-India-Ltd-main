@@ -32,9 +32,9 @@ export const Route = createFileRoute("/leadership")({
         content:
           "Guided by integrity, ingenuity, and an uncompromising commitment to patient safety and medicine quality.",
       },
-      { property: "og:url", content: "/leadership" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/leadership" },
     ],
-    links: [{ rel: "canonical", href: "/leadership" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/leadership" }],
   }),
   component: LeadershipPage,
 });

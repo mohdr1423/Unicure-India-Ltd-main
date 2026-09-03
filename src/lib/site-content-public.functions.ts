@@ -97,9 +97,9 @@ const FOOTER_DEFAULT = {
     },
   ],
   legal: [
-    { label: "Privacy Policy", url: "#" },
-    { label: "Terms of Service", url: "#" },
-    { label: "Sitemap", url: "#" },
+    { label: "Privacy Policy", url: "/privacy-policy" },
+    { label: "Terms of Service", url: "/terms-of-service" },
+    { label: "Sitemap", url: "/sitemap" },
   ],
   copyright: "Unicure India. All rights reserved.",
 };

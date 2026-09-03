@@ -35,9 +35,9 @@ export const Route = createFileRoute("/pharmacovigilance")({
         property: "og:description",
         content: "Submit adverse event reports and product safety inquiries.",
       },
-      { property: "og:url", content: "/pharmacovigilance" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/pharmacovigilance" },
     ],
-    links: [{ rel: "canonical", href: "/pharmacovigilance" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/pharmacovigilance" }],
   }),
   component: PharmacovigilancePage,
 });

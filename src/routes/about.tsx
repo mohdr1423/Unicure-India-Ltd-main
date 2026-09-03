@@ -34,9 +34,9 @@ export const Route = createFileRoute("/about")({
         content:
           "Established in 1984, Unicure India provides high-quality pharmaceutical manufacturing, co-manufacturing, and global exports.",
       },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/about" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/about" }],
   }),
   component: AboutPage,
 });

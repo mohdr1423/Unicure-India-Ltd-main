@@ -299,11 +299,36 @@ export function Footer() {
             {footer?.copyright ?? "Unicure India. All rights reserved."}
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            {legal.map((l, i) => (
-              <a key={i} href={l.url} className="hover:text-white transition-colors">
-                {l.label}
-              </a>
-            ))}
+            {legal.map((l, i) => {
+              let href = l.url;
+              if (!href || href === "#" || href === "/#") {
+                const lower = l.label.toLowerCase();
+                if (lower.includes("privacy")) href = "/privacy-policy";
+                else if (lower.includes("terms")) href = "/terms-of-service";
+                else if (lower.includes("sitemap")) href = "/sitemap";
+                else href = "/";
+              }
+
+              if (href.startsWith("/")) {
+                return (
+                  <Link key={i} to={href as any} className="hover:text-white transition-colors">
+                    {l.label}
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={i}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  {l.label}
+                </a>
+              );
+            })}
             <Link
               to={"/leads-portal" as any}
               className="hover:text-emerald-400 text-white/40 transition-colors inline-flex items-center gap-1"

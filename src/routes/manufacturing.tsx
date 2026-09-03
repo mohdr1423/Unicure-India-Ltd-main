@@ -26,9 +26,9 @@ export const Route = createFileRoute("/manufacturing")({
       },
       { property: "og:title", content: "Manufacturing at Unicure India" },
       { property: "og:description", content: "End-to-end pharmaceutical dosage form expertise." },
-      { property: "og:url", content: "/manufacturing" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/manufacturing" },
     ],
-    links: [{ rel: "canonical", href: "/manufacturing" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/manufacturing" }],
   }),
   component: ManufacturingPage,
 });

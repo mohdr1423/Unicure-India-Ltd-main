@@ -307,3 +307,38 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Data Security & Anti-Theft Protection Styles
+   ========================================================================== */
+
+/* Prevent browser drag-and-drop asset extraction */
+img, svg, video {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* Protected Asset utility */
+.protected-asset {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Print Extraction Protection: inject legal watermark and prevent silent headless PDF dumps */
+@media print {
+  body::before {
+    content: "CONFIDENTIAL & PROPRIETARY — UNICURE INDIA LTD. ALL RIGHTS RESERVED. UNAUTHORIZED REPRODUCTION, AUTOMATED SCRAPING, OR COMMERCIAL USE IS PROHIBITED BY LAW. VERIFICATION: HTTPS://UNICUREINDIALTD.VERCEL.APP";
+    display: block;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #c8102e;
+    text-align: center;
+    padding: 12px;
+    border: 2px dashed #c8102e;
+    margin-bottom: 24px;
+  }
+}

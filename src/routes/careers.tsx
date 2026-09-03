@@ -52,9 +52,9 @@ export const Route = createFileRoute("/careers")({
         property: "og:description",
         content: "Build your pharmaceutical career with Unicure India.",
       },
-      { property: "og:url", content: "/careers" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/careers" },
     ],
-    links: [{ rel: "canonical", href: "/careers" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/careers" }],
   }),
   component: CareersPage,
 });

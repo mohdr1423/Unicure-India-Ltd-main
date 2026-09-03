@@ -25,9 +25,9 @@ export const Route = createFileRoute("/quality")({
       },
       { property: "og:title", content: "Quality & R&D — Unicure India Ltd" },
       { property: "og:description", content: "Science-led pharmaceutical quality and compliance." },
-      { property: "og:url", content: "/quality" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/quality" },
     ],
-    links: [{ rel: "canonical", href: "/quality" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/quality" }],
   }),
   component: QualityPage,
 });

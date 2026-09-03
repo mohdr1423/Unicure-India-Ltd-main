@@ -40,9 +40,9 @@ export const Route = createFileRoute("/careers/apply")({
         property: "og:description",
         content: "Submit your CV and explore career growth at Unicure India Ltd.",
       },
-      { property: "og:url", content: "/careers/apply" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/careers/apply" },
     ],
-    links: [{ rel: "canonical", href: "/careers/apply" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/careers/apply" }],
   }),
   component: CareersApplyPage,
 });

@@ -34,9 +34,9 @@ export const Route = createFileRoute("/contact")({
       },
       { property: "og:title", content: "Contact Unicure India" },
       { property: "og:description", content: "Sales, exports, and partnership inquiries." },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/contact" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/contact" }],
   }),
   component: ContactPage,
 });

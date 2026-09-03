@@ -20,9 +20,9 @@ export const Route = createFileRoute("/md-message")({
         content:
           "A personal message from Mr. Abdul Mateen, Founder & Managing Director of Unicure India Ltd.",
       },
-      { property: "og:url", content: "/md-message" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/md-message" },
     ],
-    links: [{ rel: "canonical", href: "/md-message" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/md-message" }],
   }),
   component: MDMessagePage,
 });

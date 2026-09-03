@@ -18,9 +18,9 @@ export const Route = createFileRoute("/certifications")({
         property: "og:description",
         content: "Our accreditations across all three manufacturing units.",
       },
-      { property: "og:url", content: "/certifications" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/certifications" },
     ],
-    links: [{ rel: "canonical", href: "/certifications" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/certifications" }],
   }),
   component: CertificationsPage,
 });

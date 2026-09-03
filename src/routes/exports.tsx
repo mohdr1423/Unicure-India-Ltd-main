@@ -22,9 +22,9 @@ export const Route = createFileRoute("/exports")({
         content:
           "Global pharmaceutical exports and distribution networks across 20+ countries worldwide.",
       },
-      { property: "og:url", content: "/exports" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/exports" },
     ],
-    links: [{ rel: "canonical", href: "/exports" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/exports" }],
   }),
   component: ExportsPage,
 });

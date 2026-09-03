@@ -1,0 +1,42 @@
+# Unicure India Ltd — Pharmaceutical Manufacturing Excellence
+
+> Unicure India Ltd is a premier WHO-GMP certified pharmaceutical manufacturing enterprise established in 1984. With 40+ years of operational excellence, 3 high-capacity manufacturing units in India, a portfolio exceeding 500+ formulations, and distribution in 20+ countries worldwide, Unicure is a trusted contract manufacturing partner to top Indian and multinational pharma brands.
+
+## Canonical Website & Contact
+- **Website**: https://unicureindialtd.vercel.app
+- **Official Domain**: https://www.unicureindia.com
+- **Corporate Office**: C-21, 22 & 23, Sector-3, Noida, Uttar Pradesh, 201301, India
+- **Phone**: +91-120-4786786
+- **Sales & Business Inquiries**: inquiries@unicureindia.com
+- **Corporate Inquiries**: unicure@unicureindia.com
+
+## Core Accreditations & Quality Certifications
+- **WHO-GMP Certified**: World Health Organization Good Manufacturing Practices compliance across manufacturing lines.
+- **ISO 9001:2015**: Quality Management System Certification.
+- **ISO 14001:2015**: Environmental Management System Certification.
+- **Drug Licences**: State FDA Approved Form 25 (non-biologicals), Form 28 (biological/schedule C/C1), and Form 26.
+- **Regulatory Dossiers**: CTD and ACTD dossier support for international regulatory submissions.
+
+## Manufacturing Infrastructure (3 Units)
+- **Unit I (Noida Sector-3, UP)**: Mother plant established in 1984. Specializes in oral solids (tablets & capsules), oral liquids, dry syrups, and topical formulations.
+- **Unit II (Roorkee, Uttarakhand)**: Dedicated high-volume pharmaceutical manufacturing unit serving domestic and global markets.
+- **Unit III (Greater Noida, UP)**: State-of-the-art facility engineered to cGMP standards for large-scale contract manufacturing and sterile formulations.
+
+## Product Formulations & Dosage Forms
+- **Oral Solid Dosage**: Uncoated tablets, film-coated tablets, enteric-coated tablets, chewable tablets, dispersible tablets, effervescent tablets, hard gelatin capsules.
+- **Oral Liquid Dosage**: Suspensions, syrups, oral solutions, dry syrups for pediatric reconstitution.
+- **Topical Preparations**: Ointments, creams, gels, lotions.
+- **Specialty Forms**: Eye/Ear drops, oral rehydration sachets, nutraceuticals, injectables.
+
+## Business Verticals
+- **Contract & Third-Party Manufacturing**: Turnkey formulation, bulk production, custom packaging, batch testing, and regulatory filing for third-party brands.
+- **Global Pharmaceutical Exports**: Supplying finished dosages to over 20 countries in Africa, Southeast Asia, CIS, Latin America, and the Middle East.
+- **Institutional & Government Supplies**: Qualified vendor for government healthcare tenders and international health organizations.
+
+## Core Pages & References
+- [Products Catalogue](https://unicureindialtd.vercel.app/products): Browse 500+ commercial formulations.
+- [Dosage Forms](https://unicureindialtd.vercel.app/dosage-forms): Detailed production capabilities and specifications.
+- [Contract Manufacturing](https://unicureindialtd.vercel.app/contract-manufacturing): Partnering guide and OEM services.
+- [Certifications](https://unicureindialtd.vercel.app/certifications): Download and verify WHO-GMP and FDA licences.
+- [Pharmacovigilance](https://unicureindialtd.vercel.app/pharmacovigilance): Drug safety and adverse reaction reporting.
+- [Full Context Document](https://unicureindialtd.vercel.app/llms-full.txt): Detailed factsheet for AI agents and models.

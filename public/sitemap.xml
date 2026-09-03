@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Home Page -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Product Portfolio -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/products</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Dosage Forms & Capabilities -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/dosage-forms</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Contract & Third-Party Manufacturing -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/contract-manufacturing</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- About Company & History -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/about</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Manufacturing Facilities & Infrastructure -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/manufacturing</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Global Exports & International Markets -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/exports</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Quality Assurance & Compliance -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/quality</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- WHO-GMP & Regulatory Certifications -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/certifications</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Pharmacovigilance & Drug Safety -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/pharmacovigilance</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Corporate Contact & Business Inquiries -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/contact</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Client Partnerships & Global Brands -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/clients</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Executive Leadership -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/leadership</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Managing Director's Message -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/md-message</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Product Catalogues & Certificate Downloads -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/downloads</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- News & Announcements -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/news</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Careers & Job Opportunities -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/careers</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Website Directory & Sitemap -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/sitemap</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/privacy-policy</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://unicureindialtd.vercel.app/terms-of-service</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+</urlset>
+

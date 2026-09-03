@@ -32,9 +32,9 @@ export const Route = createFileRoute("/dosage-forms")({
         property: "og:description",
         content: "High capacity WHO-GMP certified dosage form manufacturing capabilities.",
       },
-      { property: "og:url", content: "/dosage-forms" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/dosage-forms" },
     ],
-    links: [{ rel: "canonical", href: "/dosage-forms" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/dosage-forms" }],
   }),
   component: DosageFormsPage,
 });

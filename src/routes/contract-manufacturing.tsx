@@ -20,9 +20,9 @@ export const Route = createFileRoute("/contract-manufacturing")({
         content:
           "Partnering with industry leaders to deliver quality pharmaceutical solutions across tablets, capsules, liquids, and dry syrups.",
       },
-      { property: "og:url", content: "/contract-manufacturing" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/contract-manufacturing" },
     ],
-    links: [{ rel: "canonical", href: "/contract-manufacturing" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/contract-manufacturing" }],
   }),
   component: CoMfgPage,
 });

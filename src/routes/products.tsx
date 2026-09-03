@@ -20,9 +20,9 @@ export const Route = createFileRoute("/products")({
         property: "og:description",
         content: "500+ generic and branded formulations manufactured to WHO-GMP standards.",
       },
-      { property: "og:url", content: "/products" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/products" },
     ],
-    links: [{ rel: "canonical", href: "/products" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/products" }],
   }),
   component: ProductsPage,
 });

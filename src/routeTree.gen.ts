@@ -27,10 +27,13 @@ import { Route as ManufacturingRouteImport } from './routes/manufacturing'
 import { Route as MdMessageRouteImport } from './routes/md-message'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as PharmacovigilanceRouteImport } from './routes/pharmacovigilance'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as QualityRouteImport } from './routes/quality'
 import { Route as RequestAdminRouteImport } from './routes/request-admin'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SitemapRouteImport } from './routes/sitemap'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ApiCareersRouteImport } from './routes/api/careers'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -147,6 +150,11 @@ const PharmacovigilanceRoute = PharmacovigilanceRouteImport.update({
   path: '/pharmacovigilance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
@@ -165,6 +173,16 @@ const RequestAdminRoute = RequestAdminRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -329,10 +347,13 @@ export interface FileRoutesByFullPath {
   '/md-message': typeof MdMessageRoute
   '/news': typeof NewsRoute
   '/pharmacovigilance': typeof PharmacovigilanceRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/products': typeof ProductsRoute
   '/quality': typeof QualityRoute
   '/request-admin': typeof RequestAdminRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap': typeof SitemapRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/api/careers': typeof ApiCareersRoute
   '/api/chat': typeof ApiChatRoute
@@ -378,10 +399,13 @@ export interface FileRoutesByTo {
   '/md-message': typeof MdMessageRoute
   '/news': typeof NewsRoute
   '/pharmacovigilance': typeof PharmacovigilanceRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/products': typeof ProductsRoute
   '/quality': typeof QualityRoute
   '/request-admin': typeof RequestAdminRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap': typeof SitemapRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/api/careers': typeof ApiCareersRoute
   '/api/chat': typeof ApiChatRoute
   '/api/inquiries': typeof ApiInquiriesRoute
@@ -428,10 +452,13 @@ export interface FileRoutesById {
   '/md-message': typeof MdMessageRoute
   '/news': typeof NewsRoute
   '/pharmacovigilance': typeof PharmacovigilanceRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/products': typeof ProductsRoute
   '/quality': typeof QualityRoute
   '/request-admin': typeof RequestAdminRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap': typeof SitemapRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/api/careers': typeof ApiCareersRoute
   '/api/chat': typeof ApiChatRoute
@@ -479,10 +506,13 @@ export interface FileRouteTypes {
     | '/md-message'
     | '/news'
     | '/pharmacovigilance'
+    | '/privacy-policy'
     | '/products'
     | '/quality'
     | '/request-admin'
     | '/reset-password'
+    | '/sitemap'
+    | '/terms-of-service'
     | '/admin'
     | '/api/careers'
     | '/api/chat'
@@ -528,10 +558,13 @@ export interface FileRouteTypes {
     | '/md-message'
     | '/news'
     | '/pharmacovigilance'
+    | '/privacy-policy'
     | '/products'
     | '/quality'
     | '/request-admin'
     | '/reset-password'
+    | '/sitemap'
+    | '/terms-of-service'
     | '/api/careers'
     | '/api/chat'
     | '/api/inquiries'
@@ -577,10 +610,13 @@ export interface FileRouteTypes {
     | '/md-message'
     | '/news'
     | '/pharmacovigilance'
+    | '/privacy-policy'
     | '/products'
     | '/quality'
     | '/request-admin'
     | '/reset-password'
+    | '/sitemap'
+    | '/terms-of-service'
     | '/_authenticated/admin'
     | '/api/careers'
     | '/api/chat'
@@ -628,10 +664,13 @@ export interface RootRouteChildren {
   MdMessageRoute: typeof MdMessageRoute
   NewsRoute: typeof NewsRoute
   PharmacovigilanceRoute: typeof PharmacovigilanceRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProductsRoute: typeof ProductsRoute
   QualityRoute: typeof QualityRoute
   RequestAdminRoute: typeof RequestAdminRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SitemapRoute: typeof SitemapRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   ApiCareersRoute: typeof ApiCareersRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiInquiriesRoute: typeof ApiInquiriesRoute
@@ -767,6 +806,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PharmacovigilanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products': {
       id: '/products'
       path: '/products'
@@ -793,6 +839,20 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -1068,10 +1128,13 @@ const rootRouteChildren: RootRouteChildren = {
   MdMessageRoute: MdMessageRoute,
   NewsRoute: NewsRoute,
   PharmacovigilanceRoute: PharmacovigilanceRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProductsRoute: ProductsRoute,
   QualityRoute: QualityRoute,
   RequestAdminRoute: RequestAdminRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SitemapRoute: SitemapRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   ApiCareersRoute: ApiCareersRoute,
   ApiChatRoute: ApiChatRoute,
   ApiInquiriesRoute: ApiInquiriesRoute,

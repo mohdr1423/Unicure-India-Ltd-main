@@ -34,9 +34,9 @@ export const Route = createFileRoute("/downloads")({
         content:
           "Official downloadable company brochure, manufacturing licences, and regulatory certifications.",
       },
-      { property: "og:url", content: "/downloads" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/downloads" },
     ],
-    links: [{ rel: "canonical", href: "/downloads" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/downloads" }],
   }),
   component: DownloadsPage,
 });

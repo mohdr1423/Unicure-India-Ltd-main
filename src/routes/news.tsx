@@ -15,9 +15,9 @@ export const Route = createFileRoute("/news")({
       },
       { property: "og:title", content: "Media — Unicure India Ltd" },
       { property: "og:description", content: "Photos, videos and events." },
-      { property: "og:url", content: "/news" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/news" },
     ],
-    links: [{ rel: "canonical", href: "/news" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/news" }],
   }),
   component: NewsPage,
 });

@@ -58,6 +58,45 @@ const facilityImages = [
 import { EXECUTIVE_LEADERS } from "@/data/leadership";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Unicure India Ltd — WHO-GMP Pharmaceutical Manufacturing Excellence" },
+      {
+        name: "description",
+        content:
+          "Unicure India Ltd is a WHO-GMP certified pharmaceutical manufacturer established in 1984. 3 state-of-the-art plants in Noida & Roorkee, 500+ formulations, contract manufacturing & global exports.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Unicure India Ltd, pharmaceutical manufacturer India, WHO GMP pharma plant Noida, pharma contract manufacturing, tablets capsules syrups manufacturer, pharma exports India",
+      },
+      {
+        property: "og:title",
+        content: "Unicure India Ltd — WHO-GMP Pharmaceutical Manufacturing Excellence",
+      },
+      {
+        property: "og:description",
+        content:
+          "40+ years of pharmaceutical manufacturing excellence. 500+ formulations, 3 world-class plants, contract manufacturing & exports to 20+ countries.",
+      },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/" },
+      { property: "og:image", content: "https://unicureindialtd.vercel.app/images/dron-pic-unit3.webp" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "Unicure India Ltd — Pharmaceutical Manufacturing Excellence",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "WHO-GMP certified manufacturer with 40+ years of excellence, 500+ formulations, and global exports.",
+      },
+      { name: "twitter:image", content: "https://unicureindialtd.vercel.app/images/dron-pic-unit3.webp" },
+    ],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/" }],
+  }),
   component: HomePage,
 });
 

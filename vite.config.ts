@@ -4,6 +4,9 @@ export default defineConfig({
   nitro: {
     preset: "vercel",
   },
+  build: {
+    sourcemap: false,
+  },
   define: {
     "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(
       process.env.VITE_SUPABASE_URL ||

@@ -175,9 +175,9 @@ export const Route = createFileRoute("/clients")({
         content:
           "Trusted supply partner to leading medical colleges, hospital networks, and state medical corporations across India.",
       },
-      { property: "og:url", content: "/clients" },
+      { property: "og:url", content: "https://unicureindialtd.vercel.app/clients" },
     ],
-    links: [{ rel: "canonical", href: "/clients" }],
+    links: [{ rel: "canonical", href: "https://unicureindialtd.vercel.app/clients" }],
   }),
   component: ClientsPage,
 });
